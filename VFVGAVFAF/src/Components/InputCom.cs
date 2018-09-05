@@ -26,14 +26,16 @@ namespace VFVGAVFAF.src.Components
 
 			var state = Keyboard.GetState();
 
+			float speed = 500 * (float)deltaTime;
+
 			if (state.IsKeyDown(Keys.Right))
-				position.X += 10;
+				position.X += speed;
 			if (state.IsKeyDown(Keys.Left))
-				position.X -= 10;
+				position.X -= speed;
 			if (state.IsKeyDown(Keys.Up))
-				position.Y -= 10;
+				position.Y -= speed;
 			if (state.IsKeyDown(Keys.Down))
-				position.Y += 10;
+				position.Y += speed;
 
 			_componentManager.GetComponent<IPostionComponet>(_posComID).Postion = position;
 		}

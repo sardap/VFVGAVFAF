@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Content;
 
 namespace VFVGAVFAF.src
 {
@@ -17,7 +18,7 @@ namespace VFVGAVFAF.src
 		private GameObjectFactory _gameObjectFactory;
 
 		public SpriteBatch SpriteBatch { get; set; }
-		public Texture2D PlayerTexture { get; set; }
+		public ContentManager Content { get; set; }
 
 		public void Initialse()
 		{
@@ -34,7 +35,8 @@ namespace VFVGAVFAF.src
 				ComponentManager = _componentManager,
 				RenderManager = _renderManager,
 				EntityManager = _entityManager,
-				InputManger = _inputManger
+				InputManger = _inputManger,
+				Content = Content
 			};
 
 			SetupPlayer();
@@ -57,7 +59,7 @@ namespace VFVGAVFAF.src
 
 		private void SetupPlayer()
 		{
-			_gameObjectFactory.CreatePlayer(PlayerTexture, SpriteBatch);
+			_gameObjectFactory.CreatePlayer(SpriteBatch);
 		}
 	}
 }

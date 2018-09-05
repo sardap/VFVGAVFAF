@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,18 @@ namespace VFVGAVFAF.src
 		public EntityManager EntityManager { get; set; }
 		public RenderManager RenderManager { get; set; }
 		public InputManger InputManger { get; set; }
+		public ContentManager Content { get; set; }
 
-		public GameObject CreatePlayer(Texture2D texture, SpriteBatch spriteBatch)
+		public GameObject CreatePlayer(SpriteBatch spriteBatch)
 		{
 			var entID = EntityManager.CreateEntity(new GameObject());
 
 			var rectPos = new RectPosCom();
 			var rectPosID = ComponentManager.CreateComponet(entID, rectPos);
-			rectPos.Rectangle = new Rectangle(0, 0, 100, 100);
 
 			var rectRend = new RectRendCom(ComponentManager, rectPosID)
 			{
-				Texture = texture,
+				Texture = Content.Load<Texture2D>("Images/player"),
 				SpriteBatch = spriteBatch,
 				Color = Color.Black
 			};

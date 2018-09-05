@@ -25,3 +25,10 @@
 /processorParam:TextureFormat=Color
 /build:Images/player.png
 
+#begin Fonts/score.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/score.spritefont
+

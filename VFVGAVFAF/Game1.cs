@@ -10,11 +10,11 @@ namespace VFVGAVFAF
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-		private Texture2D player;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 		private ECS _ecs;
+		private FrameCounter _frameCounter = new FrameCounter();
+		private SpriteFont _font;
 
 		public Game1()
         {
@@ -31,6 +31,8 @@ namespace VFVGAVFAF
         protected override void Initialize()
         {
 			_ecs = new ECS();
+			graphics.SynchronizeWithVerticalRetrace = false;
+			IsFixedTimeStep = false;
 
 			base.Initialize();
         }
@@ -44,10 +46,9 @@ namespace VFVGAVFAF
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			player = Content.Load<Texture2D>("Images/player");
-
-			_ecs.PlayerTexture = player;
 			_ecs.SpriteBatch = spriteBatch;
+			_ecs.Content = Content;
+			_font = Content.Load<SpriteFont>("Fonts/score");
 
 			_ecs.Initialse();
 		}
@@ -71,7 +72,7 @@ namespace VFVGAVFAF
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-			_ecs.Step(0);
+			_ecs.Step(gameTime.ElapsedGameTime.TotalSeconds);
 
 			base.Update(gameTime);
         }
@@ -85,8 +86,17 @@ namespace VFVGAVFAF
             GraphicsDevice.Clear(Color.White);
 
 			spriteBatch.Begin();
-			_ecs.Render(0);
+			_ecs.Render(gameTime.ElapsedGameTime.TotalSeconds);
+			var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+			_frameCounter.Update(deltaTime);
+
+			var fps = string.Format("FPS: {0}", _frameCounter.AverageFramesPerSecond);
+
+			spriteBatch.DrawString(_font, fps, new Vector2(1, 1), Color.Red);
+
 			spriteBatch.End();
+
 
 
 			base.Draw(gameTime);

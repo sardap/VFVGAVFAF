@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FrameCounter.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +64,10 @@
     <Compile Include="src\Components\IRenderableComponent.cs" />
     <Compile Include="src\Managers\InputManger.cs" />
     <Compile Include="src\Managers\RenderManager.cs" />
+    <Compile Include="src\Sence\ISenceData.cs" />
+    <Compile Include="src\Sence\ISenceManger.cs" />
+    <Compile Include="src\Sence\RegsiteredElements.cs" />
+    <Compile Include="src\Sence\SenceManger.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

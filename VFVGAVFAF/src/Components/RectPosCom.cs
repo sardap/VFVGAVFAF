@@ -9,23 +9,8 @@ namespace VFVGAVFAF.src.Components
 {
 	class RectPosCom : IPostionComponet
 	{
-		public Vector2 Postion
-		{
-			get
-			{
-				return new Vector2 { X = Rectangle.X, Y = Rectangle.Y };
-			}
-			set
-			{
-				var newRect = Rectangle;
-
-				newRect.X = (int)value.X;
-				newRect.Y = (int)value.Y;
-
-				Rectangle = newRect;
-			}
-		}
-
-		public Rectangle Rectangle { get; set; }
+		public Vector2 Postion { get; set; }
+		
+		public Rectangle Rectangle { get { return new Rectangle((int)Postion.X, (int)Postion.Y, 100, 100); } }
 	}
 }
