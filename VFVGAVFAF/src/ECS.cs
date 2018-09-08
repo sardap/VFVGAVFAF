@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
+using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src
 {
@@ -15,6 +16,8 @@ namespace VFVGAVFAF.src
 		private ComponentManager _componentManager;
 		private RenderManager _renderManager;
 		private InputManger _inputManger;
+		private ColssionComManger _colssionManger;
+		private TextureManager _textureManager;
 		private GameObjectFactory _gameObjectFactory;
 
 		public SpriteBatch SpriteBatch { get; set; }
@@ -29,6 +32,14 @@ namespace VFVGAVFAF.src
 				ComponentManager = _componentManager
 			};
 			_inputManger = new InputManger(_componentManager);
+			_colssionManger = new ColssionComManger
+			{
+				ComponentManager = _componentManager
+			};
+			_textureManager = new TextureManager
+			{
+				Content = Content
+			};
 
 			_gameObjectFactory = new GameObjectFactory
 			{
@@ -36,6 +47,8 @@ namespace VFVGAVFAF.src
 				RenderManager = _renderManager,
 				EntityManager = _entityManager,
 				InputManger = _inputManger,
+				ColssionManger = _colssionManger,
+				TextureManager = _textureManager,
 				Content = Content
 			};
 
@@ -45,6 +58,7 @@ namespace VFVGAVFAF.src
 		public void Step(double deltaTime)
 		{
 			_inputManger.Update(deltaTime);
+			_colssionManger.Check();
 		}
 
 		public void Render(double deltaTime)
@@ -60,6 +74,7 @@ namespace VFVGAVFAF.src
 		private void SetupPlayer()
 		{
 			_gameObjectFactory.CreatePlayer(SpriteBatch);
+			_gameObjectFactory.NormalEnemy(SpriteBatch);
 		}
 	}
 }

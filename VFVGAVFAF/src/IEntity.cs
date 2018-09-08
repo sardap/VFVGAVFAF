@@ -10,5 +10,7 @@ namespace VFVGAVFAF.src
 	{
 		int TypeID { get; }
 		long GetID { get; }
+
+		void SetID(long id);
 	}
 }

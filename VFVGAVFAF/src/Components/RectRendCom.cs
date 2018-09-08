@@ -20,7 +20,7 @@ namespace VFVGAVFAF.src.Components
 		public RectRendCom(ComponentManager componentManager, long rectangleComponetID)
 		{
 			_componentManager = componentManager;
-			rectangleComponetID = _rectangleComponetID;
+			_rectangleComponetID = rectangleComponetID;
 		}
 
 		public void Render(double deltaTime)

@@ -9,8 +9,13 @@ namespace VFVGAVFAF.src.Components
 {
 	class RectPosCom : IPostionComponet
 	{
-		public Vector2 Postion { get; set; }
+		public Postion2D Postion { get; set; }
 		
 		public Rectangle Rectangle { get { return new Rectangle((int)Postion.X, (int)Postion.Y, 100, 100); } }
+
+		public RectPosCom()
+		{
+			Postion = new Postion2D();
+		}
 	}
 }

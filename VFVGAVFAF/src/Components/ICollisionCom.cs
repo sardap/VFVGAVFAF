@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface IPostionComponet : IComponent
+	interface ICollisionCom : IComponent
 	{
-		Postion2D Postion { get; set; }
+		Rectangle GetHitBox { get; }
+
+		void Check(long otherID);
 	}
 }

@@ -8,6 +8,8 @@ namespace VFVGAVFAF.src
 {
 	class GameObject : Entity<GameObject>
 	{
-
+		public GameObject(ComponentManager componentManager) : base(componentManager)
+		{
+		}
 	}
 }

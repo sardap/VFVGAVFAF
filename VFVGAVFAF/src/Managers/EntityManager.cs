@@ -28,6 +28,7 @@ namespace VFVGAVFAF.src
 			}
 
 			_entityTable.Add(newID, entity);
+			entity.SetID(newID);
 			return newID;
 		}
 

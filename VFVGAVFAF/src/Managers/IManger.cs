@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Sence
+namespace VFVGAVFAF.src
 {
-	interface ISenceData
+	interface IManger
 	{
-		IRegsiteredElements Renderables { get; }
+		void Regsiter(long id);
+
+		void UnRegsiter(long id);
 	}
 }

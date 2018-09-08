@@ -49,7 +49,6 @@ namespace VFVGAVFAF
 			_ecs.SpriteBatch = spriteBatch;
 			_ecs.Content = Content;
 			_font = Content.Load<SpriteFont>("Fonts/score");
-
 			_ecs.Initialse();
 		}
 
@@ -85,8 +84,10 @@ namespace VFVGAVFAF
         {
             GraphicsDevice.Clear(Color.White);
 
+
 			spriteBatch.Begin();
 			_ecs.Render(gameTime.ElapsedGameTime.TotalSeconds);
+
 			var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 			_frameCounter.Update(deltaTime);

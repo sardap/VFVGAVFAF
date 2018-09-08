@@ -7,26 +7,35 @@ using VFVGAVFAF.src.Exception;
 
 namespace VFVGAVFAF.src
 {
-	class RenderManager
+	class RenderManager : IManger
 	{
-		private List<long> _renderList = new List<long>();
+		private ISet<long> _renderList = new HashSet<long>();
 
 		public ComponentManager ComponentManager { get; set;}
 
 		public void Render(double deltaTime)
 		{
-			_renderList.ForEach(i => ComponentManager.GetComponent<IRenderableComponent>(i).Render(deltaTime));
+			foreach (var renderable in _renderList)
+			{
+				ComponentManager.GetComponent<IRenderableComponent>(renderable).Render(deltaTime);
+			}
+
 		}
 
-		public void RegsiterRendable<T>(long comID) where T : IRenderableComponent
+		public void Regsiter(long comID)
 		{
-			if(ComponentManager.GetComponent<IRenderableComponent>(comID) != null)
+			if (ComponentManager.GetComponent<IRenderableComponent>(comID) != null)
 			{
 				_renderList.Add(comID);
 				return;
 			}
 
 			throw new MissmatchComponetException();
+		}
+
+		public void UnRegsiter(long id)
+		{
+			_renderList.Remove(id);
 		}
 	}
 }

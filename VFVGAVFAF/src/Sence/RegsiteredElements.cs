@@ -9,5 +9,7 @@ namespace VFVGAVFAF.src.Sence
 	interface IRegsiteredElements
 	{
 		List<long> RegisteredElements { get; }
+
+		IManger Manger { get; }
 	}
 }

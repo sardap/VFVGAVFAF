@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Sence
+namespace VFVGAVFAF.src.Components
 {
-	interface ISenceData
+	interface IGameEventCom : IComponent
 	{
-		IRegsiteredElements Renderables { get; }
+		void Action();
 	}
 }

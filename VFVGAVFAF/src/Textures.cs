@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Sence
+namespace VFVGAVFAF.src
 {
-	interface ISenceData
+	class Textures
 	{
-		IRegsiteredElements Renderables { get; }
+		public const string BLOCK = "Images/player";
 	}
 }
