@@ -34,6 +34,10 @@ namespace VFVGAVFAF
 			graphics.SynchronizeWithVerticalRetrace = false;
 			IsFixedTimeStep = false;
 
+			graphics.PreferredBackBufferWidth = 800;  // set this value to the desired width of your window
+			graphics.PreferredBackBufferHeight = 600;   // set this value to the desired height of your window
+			graphics.ApplyChanges();
+
 			base.Initialize();
         }
 

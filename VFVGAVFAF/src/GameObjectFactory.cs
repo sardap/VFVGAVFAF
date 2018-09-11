@@ -26,10 +26,35 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var rectPos = new RectPosCom
+
+			var constrantBox = new RectConstrantCom(ComponentManager,
+				gameObject.AddComponent(
+					new RectPosCom(ComponentManager, new Rectangle(0, 0, 800, 600))
+				)
+			)
 			{
-				Postion = new Postion2D(100, 100)
+				Inside = true
 			};
+			var constrantID = gameObject.AddComponent(constrantBox);
+
+			var border2 = gameObject.AddComponent(new RectPosCom(ComponentManager, new Rectangle(400, 0, 400, 600)));
+			var constrantID2 = gameObject.AddComponent(new RectConstrantCom(ComponentManager,  border2)
+			{
+				Inside = false,
+				Type = RectConstrantCom.CheckType.Overlapping
+			});
+			
+			gameObject.RegsiterToManager(gameObject.AddComponent(new RectRendCom(ComponentManager, border2)
+			{
+				Texture = TextureManager.GetTexture(Textures.BLOCK),
+				SpriteBatch = spriteBatch,
+				Color = Color.Red
+			}), RenderManager);
+
+			var rectPos = new RectPosCom(ComponentManager, new Rectangle(100, 100, 100, 100));
+
+			rectPos.PostionConstrantComs.Add(constrantID);
+			rectPos.PostionConstrantComs.Add(constrantID2);
 			var rectPosID = gameObject.AddComponent(rectPos);
 
 			var rectRend = new RectRendCom(ComponentManager, rectPosID)
@@ -46,7 +71,7 @@ namespace VFVGAVFAF.src
 			gameObject.RegsiterToManager(inputComID, InputManger);
 
 			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, rectPosID));
-			gameObject.RegsiterToManager(colssionComID, ColssionManger);
+			gameObject.RegsiterToManager(colssionComID, ColssionManger); 
 
 			return EntityManager.GetEntiy<GameObject>(entID);
 		}
@@ -56,9 +81,7 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var rectPos = new RectPosCom();
-			rectPos.Postion.X = 300;
-			rectPos.Postion.Y = 100;
+			var rectPos = new RectPosCom(ComponentManager, new Rectangle(300, 100, 20, 20));
 			var rectPosID = gameObject.AddComponent(rectPos);
 
 			var texture = TextureManager.GetTexture(Textures.BLOCK);

@@ -12,8 +12,6 @@ namespace VFVGAVFAF.src.Components
 		private ComponentManager _componentManager;
 		private long _posComID;
 
-		public bool BorderStop { get; set; }
-
 		public KeyboardInputCom(ComponentManager componentManager, long posComID)
 		{
 			_posComID = posComID;
@@ -22,7 +20,8 @@ namespace VFVGAVFAF.src.Components
 
 		public void Update(double deltaTime)
 		{
-			var position = _componentManager.GetComponent<IPostionComponet>(_posComID).Postion;
+			var position = _componentManager.GetComponent<IPostionComponet>(_posComID).GetPostion();
+			var oldPostion = new Postion2D(position.X, position.Y);
 
 			var state = Keyboard.GetState();
 
@@ -37,7 +36,8 @@ namespace VFVGAVFAF.src.Components
 			if (state.IsKeyDown(Keys.Down))
 				position.Y += speed;
 
-			_componentManager.GetComponent<IPostionComponet>(_posComID).Postion = position;
+			if(position.X != oldPostion.X || position.Y != oldPostion.Y)
+				_componentManager.GetComponent<IPostionComponet>(_posComID).SetPostion(position);
 		}
 	}
 }

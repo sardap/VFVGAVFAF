@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface IPostionComponet : IComponent
+	interface IPostionConstrantCom : IComponent
 	{
-		// Not using Get and set prop becuase i was running into debuging issues
-		void SetPostion(Postion2D postion2D);
-		Postion2D GetPostion();
+		bool Check(Rectangle hitBox);
 	}
 }

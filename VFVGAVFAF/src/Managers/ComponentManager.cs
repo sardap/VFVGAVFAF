@@ -22,6 +22,7 @@ namespace VFVGAVFAF.src
 		public long CreateComponet<T>(long entiyID, T com) where T : IComponent
 		{
 			var nextID = _nextIDS.Pop();
+			Console.WriteLine(nextID);
 
 			if (nextID == _lastOrderedID)
 			{

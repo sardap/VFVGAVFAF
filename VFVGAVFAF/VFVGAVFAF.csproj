@@ -49,12 +49,14 @@
     <Compile Include="src\Components\GoalReachedCom.cs" />
     <Compile Include="src\Components\ICollisionCom.cs" />
     <Compile Include="src\Components\IGameEvent.cs" />
+    <Compile Include="src\Components\IPostionConstrantCom.cs" />
+    <Compile Include="src\Components\RectConstrantCom.cs" />
     <Compile Include="src\Components\RectCollisionCom.cs" />
     <Compile Include="src\Managers\ColssionComManger.cs" />
     <Compile Include="src\Textures.cs" />
     <Compile Include="src\Managers\ComponentManager.cs" />
     <Compile Include="src\Components\IContolerCom.cs" />
-    <Compile Include="src\Components\InputCom.cs" />
+    <Compile Include="src\Components\KeyboardInputCom.cs" />
     <Compile Include="src\Components\IPostionComponet.cs" />
     <Compile Include="src\Components\RectPosCom.cs" />
     <Compile Include="src\Components\RectRendCom.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="src\Sence\ISenceManger.cs" />
     <Compile Include="src\Sence\RegsiteredElements.cs" />
     <Compile Include="src\Sence\SenceManger.cs" />
+    <Compile Include="src\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
