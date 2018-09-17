@@ -32,7 +32,7 @@ namespace VFVGAVFAF.src
 
 		public Rectangle ToRectangle(int width, int height)
 		{
-			return new Rectangle((int)Math.Floor(X), (int)Math.Floor(Y), width, height);
+			return new Rectangle((int)Math.Round(X), (int)Math.Round(Y), width, height);
 		}
 	}
 }

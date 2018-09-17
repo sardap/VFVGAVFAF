@@ -9,14 +9,14 @@ namespace VFVGAVFAF.src.Components
 {
 	class RectPosCom : IPostionComponet
 	{
-		private Rectangle _rectangle = new Rectangle();
+		private Paultangle _rectangle = new Paultangle();
 		private ComponentManager _componentManager;
-
+	
 		public void SetPostion(Postion2D postion2D)
 		{
-			var oldPostion = new Postion2D(_rectangle.X, _rectangle.Y);
-			_rectangle.X = (int)postion2D.X;
-			_rectangle.Y = (int)postion2D.Y;
+			var oldPostion = new Postion2D(_rectangle.Postion2D);
+			_rectangle.Postion2D.X = postion2D.X;
+			_rectangle.Postion2D.Y = postion2D.Y;
 
 			bool result = true;
 
@@ -27,32 +27,25 @@ namespace VFVGAVFAF.src.Components
 
 			if(!result)
 			{
-				_rectangle.X = (int)oldPostion.X;
-				_rectangle.Y = (int)oldPostion.Y;
+				_rectangle.Postion2D.X = oldPostion.X;
+				_rectangle.Postion2D.Y = oldPostion.Y;
 			}
-
-			/*
-			if (!PostionConstrantComs.TrueForAll(i => _componentManager.GetComponent<IPostionConstrantCom>(i).Check(Rectangle)))
-			{
-				_postion = oldPostion;
-			}
-			*/
 		}
 
 		public Postion2D GetPostion()
 		{
-			return new Postion2D(_rectangle);
+			return new Postion2D(_rectangle.Postion2D);
 		}
 		
 		public List<long> PostionConstrantComs { get; set; }
 
-		public Rectangle Rectangle { get { return _rectangle; } }
+		public Rectangle Rectangle { get { return _rectangle.ToMonoGameRectangle(); } }
 
 		public RectPosCom(ComponentManager componentManager, Rectangle rectangle)
 		{
 			_componentManager = componentManager;
 			PostionConstrantComs = new List<long>();
-			_rectangle = rectangle;
+			_rectangle = new Paultangle(rectangle);
 		}
 
 		public RectPosCom(ComponentManager componentManager, Postion2D postion2D) : this(componentManager, postion2D.ToRectangle(0, 0))

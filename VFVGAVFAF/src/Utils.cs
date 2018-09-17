@@ -35,5 +35,12 @@ namespace VFVGAVFAF.src
 			}
 		}
 
+		public static Random Random = new Random();
+
+		public static double GetRandomDouble(double minimum, double maximum)
+		{
+			return Random.NextDouble() * (maximum - minimum) + minimum;
+		}
+
 	}
 }

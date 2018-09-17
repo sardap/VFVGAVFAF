@@ -50,7 +50,28 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
+			var rectConstBoxID = gameObject.AddComponent(
+				new RectPosCom(ComponentManager, new Rectangle(0, 0, 200, 600))
+			);
+
+			var constrantBox = new RectConstrantCom(ComponentManager, rectConstBoxID)
+			{
+				Inside = false
+			};
+			var constrantBoxID = gameObject.AddComponent(constrantBox);
+
+			var rectRendConstrant = gameObject.AddComponent(
+				new RectRendCom(ComponentManager, rectConstBoxID)
+				{
+					Texture = TextureManager.GetTexture(Textures.BLOCK),
+					SpriteBatch = SpriteBatch,
+					Color = Color.Red
+				}
+			);
+			gameObject.RegsiterToManager(rectRendConstrant, RenderManager);
+
 			var rectPos = new RectPosCom(ComponentManager, new Rectangle(300, 100, 20, 20));
+			rectPos.PostionConstrantComs.Add(constrantBoxID);
 			var rectPosID = gameObject.AddComponent(rectPos);
 
 			var texture = TextureManager.GetTexture(Textures.BLOCK);
@@ -80,6 +101,15 @@ namespace VFVGAVFAF.src
 				GameEventComs = new List<long>() { gameEvenetID, gameObject.AddComponent(new LoadMiniGameCom(SenceManger, new SenceData())) }
 			});
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
+
+			var goalContComID = gameObject.AddComponent
+			(
+				new RandomMovementContolerCom(ComponentManager, rectPosID)
+				{
+					Speed = 100
+				}
+			);
+			gameObject.RegsiterToManager(goalContComID, InputManger);
 
 			return entID;
 		}
