@@ -18,8 +18,6 @@ namespace VFVGAVFAF.src.Components
 			_posComID = posComID;
 			_componentManager = componentManager;
 		}
-
-		
 		public void Update(double deltaTime)
 		{
 			var curSpeed = Speed * deltaTime;
@@ -28,7 +26,6 @@ namespace VFVGAVFAF.src.Components
 			newPos.Y += GetSpeedIncrement(curSpeed);
 			_componentManager.GetComponent<IPostionComponet>(_posComID).SetPostion(newPos);
 		}
-
 		private double GetSpeedIncrement(double curSpeed)
 		{
 			var result = Utils.GetRandomDouble(-curSpeed, curSpeed);

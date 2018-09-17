@@ -54,6 +54,7 @@
     <Compile Include="src\Components\RandomMovementContolerCom.cs" />
     <Compile Include="src\Components\RectConstrantCom.cs" />
     <Compile Include="src\Components\RectCollisionCom.cs" />
+    <Compile Include="src\Components\RectOutlineRendCom.cs" />
     <Compile Include="src\Managers\ColssionComManger.cs" />
     <Compile Include="src\Paultangle.cs" />
     <Compile Include="src\Sence\SenceData.cs" />

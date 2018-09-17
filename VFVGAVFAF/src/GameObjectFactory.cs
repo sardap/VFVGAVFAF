@@ -51,27 +51,38 @@ namespace VFVGAVFAF.src
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
 			var rectConstBoxID = gameObject.AddComponent(
-				new RectPosCom(ComponentManager, new Rectangle(0, 0, 200, 600))
+				new RectPosCom(ComponentManager, new Rectangle(0, 0, 300, 600))
 			);
 
-			var constrantBox = new RectConstrantCom(ComponentManager, rectConstBoxID)
-			{
-				Inside = false
-			};
-			var constrantBoxID = gameObject.AddComponent(constrantBox);
+			var screenBoundsID = gameObject.AddComponent(
+				new RectPosCom(ComponentManager, new Rectangle(0, 0, 400, 600))
+			);
 
 			var rectRendConstrant = gameObject.AddComponent(
-				new RectRendCom(ComponentManager, rectConstBoxID)
+				new RectOutlineRendCom(ComponentManager, rectConstBoxID)
 				{
 					Texture = TextureManager.GetTexture(Textures.BLOCK),
 					SpriteBatch = SpriteBatch,
-					Color = Color.Red
+					Color = Color.Red,
+					LineWidth = 1
 				}
 			);
 			gameObject.RegsiterToManager(rectRendConstrant, RenderManager);
 
 			var rectPos = new RectPosCom(ComponentManager, new Rectangle(300, 100, 20, 20));
-			rectPos.PostionConstrantComs.Add(constrantBoxID);
+			rectPos.PostionConstrantComs.Add(gameObject.AddComponent(
+				new RectConstrantCom(ComponentManager, rectConstBoxID)
+				{
+					Inside = false,
+					Type = RectConstrantCom.CheckType.Overlapping
+				}
+			));
+			rectPos.PostionConstrantComs.Add(gameObject.AddComponent(
+				new RectConstrantCom(ComponentManager, screenBoundsID)
+				{
+					Inside = true
+				}
+			));
 			var rectPosID = gameObject.AddComponent(rectPos);
 
 			var texture = TextureManager.GetTexture(Textures.BLOCK);
@@ -106,7 +117,7 @@ namespace VFVGAVFAF.src
 			(
 				new RandomMovementContolerCom(ComponentManager, rectPosID)
 				{
-					Speed = 100
+					Speed = 1000
 				}
 			);
 			gameObject.RegsiterToManager(goalContComID, InputManger);
