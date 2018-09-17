@@ -8,5 +8,10 @@ namespace VFVGAVFAF.src.Sence
 {
 	interface ISenceManger
 	{
+		GameObjectFactory GameObjectFactory { get; set; }
+
+		void Load(ISenceData senceData);
+
+		void UnloadCurrent();
 	}
 }

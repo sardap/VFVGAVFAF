@@ -8,6 +8,7 @@ namespace VFVGAVFAF.src.Sence
 {
 	interface ISenceData
 	{
-		IRegsiteredElements Renderables { get; }
+		IList<GameObjectFactory.GameObjects> ToCreate { get; }
+		IList<long> CreatedEntites { get; }
 	}
 }

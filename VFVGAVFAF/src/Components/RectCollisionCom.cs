@@ -34,7 +34,7 @@ namespace VFVGAVFAF.src.Components
 			var otherHitBox = _componentManager.GetComponent<ICollisionCom>(otherID);
 			if (hitBox.Rectangle.Intersects(otherHitBox.GetHitBox))
 			{
-				GameEventComs.ForEach(i => _componentManager.GetComponent<GoalReachedCom>(i).Action());
+				GameEventComs.ForEach(i => _componentManager.GetComponent<IGameEventCom>(i).Action());
 			}
 		}
 	}

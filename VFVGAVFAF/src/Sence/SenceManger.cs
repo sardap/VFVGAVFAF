@@ -8,21 +8,46 @@ namespace VFVGAVFAF.src.Sence
 {
 	class SenceManger : ISenceManger
 	{
+		private EntityManager _entityManager;
 		private ISenceData _currentSence;
 
-		public void LoadSence(ISenceData senceData)
+		public GameObjectFactory GameObjectFactory { get; set; }
+
+		public SenceManger(EntityManager entityManager)
 		{
-			if(_currentSence != null)
+			_entityManager = entityManager;
+		}
+
+		public void Load(ISenceData senceData)
+		{
+			if (_currentSence != null)
 			{
-				UnloadSence(_currentSence);
+				UnloadCurrent();
 			}
 
+			_currentSence = senceData;
+			LoadSence(_currentSence);
+		}
 
+		public void UnloadCurrent()
+		{
+			UnloadSence(_currentSence);
+		}
+
+		private void LoadSence(ISenceData senceData)
+		{
+			foreach(var toCreate in senceData.ToCreate)
+			{
+				senceData.CreatedEntites.Add(GameObjectFactory.CreateObjectOfType(toCreate));
+			}
 		}
 
 		private void UnloadSence(ISenceData senceData)
 		{
-
+			foreach(var created in senceData.CreatedEntites)
+			{
+				_entityManager.RegsiterToDestory(created);
+			}
 		}
 	}
 }

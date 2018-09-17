@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using VFVGAVFAF.src.Managers;
+using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src
 {
@@ -19,6 +20,7 @@ namespace VFVGAVFAF.src
 		private ColssionComManger _colssionManger;
 		private TextureManager _textureManager;
 		private GameObjectFactory _gameObjectFactory;
+		private ISenceManger _senceManger;
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
@@ -40,6 +42,7 @@ namespace VFVGAVFAF.src
 			{
 				Content = Content
 			};
+			_senceManger = new SenceManger(_entityManager);
 
 			_gameObjectFactory = new GameObjectFactory
 			{
@@ -49,8 +52,12 @@ namespace VFVGAVFAF.src
 				InputManger = _inputManger,
 				ColssionManger = _colssionManger,
 				TextureManager = _textureManager,
+				SpriteBatch = SpriteBatch,
+				SenceManger = _senceManger,
 				Content = Content
 			};
+
+			_senceManger.GameObjectFactory = _gameObjectFactory;
 
 			SetupPlayer();
 		}
@@ -59,6 +66,7 @@ namespace VFVGAVFAF.src
 		{
 			_inputManger.Update(deltaTime);
 			_colssionManger.Check();
+			_entityManager.Step();
 		}
 
 		public void Render(double deltaTime)
@@ -73,8 +81,10 @@ namespace VFVGAVFAF.src
 
 		private void SetupPlayer()
 		{
-			_gameObjectFactory.CreatePlayer(SpriteBatch);
-			_gameObjectFactory.NormalEnemy(SpriteBatch);
+			ISenceData senceData = new SenceData();
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaureGoal);
+			_senceManger.Load(senceData);
 		}
 	}
 }

@@ -62,6 +62,7 @@ namespace VFVGAVFAF.src
 
 		public T GetComponent<T>() where T : IComponent
 		{
+			throw new NotImplementedException();
 			return _componentManager.GetComponent<T>(_entiyID);
 		}
 

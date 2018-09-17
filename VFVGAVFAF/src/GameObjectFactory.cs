@@ -8,11 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using VFVGAVFAF.src.Components;
 using VFVGAVFAF.src.Managers;
+using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src
 {
 	class GameObjectFactory
 	{
+		public enum GameObjects
+		{
+			SqaurePlayer,
+			SqaureGoal
+		}
+
+		private delegate long CreateGameObject();
+
+		private Dictionary<GameObjects, CreateGameObject> _gameObjectCreators = new Dictionary<GameObjects, CreateGameObject>();
+
 		public ComponentManager ComponentManager { get; set; }
 		public EntityManager EntityManager { get; set; }
 		public RenderManager RenderManager { get; set; }
@@ -20,63 +31,21 @@ namespace VFVGAVFAF.src
 		public ColssionComManger ColssionManger { get; set; }
 		public TextureManager TextureManager { get; set; }
 		public ContentManager Content { get; set; }
+		public ISenceManger SenceManger { get; set; }
+		public SpriteBatch SpriteBatch { get; set; }
 
-		public GameObject CreatePlayer(SpriteBatch spriteBatch)
+		public GameObjectFactory()
 		{
-			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
-
-
-			var constrantBox = new RectConstrantCom(ComponentManager,
-				gameObject.AddComponent(
-					new RectPosCom(ComponentManager, new Rectangle(0, 0, 800, 600))
-				)
-			)
-			{
-				Inside = true
-			};
-			var constrantID = gameObject.AddComponent(constrantBox);
-
-			var border2 = gameObject.AddComponent(new RectPosCom(ComponentManager, new Rectangle(400, 0, 400, 600)));
-			var constrantID2 = gameObject.AddComponent(new RectConstrantCom(ComponentManager,  border2)
-			{
-				Inside = false,
-				Type = RectConstrantCom.CheckType.Overlapping
-			});
-			
-			gameObject.RegsiterToManager(gameObject.AddComponent(new RectRendCom(ComponentManager, border2)
-			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK),
-				SpriteBatch = spriteBatch,
-				Color = Color.Red
-			}), RenderManager);
-
-			var rectPos = new RectPosCom(ComponentManager, new Rectangle(100, 100, 100, 100));
-
-			rectPos.PostionConstrantComs.Add(constrantID);
-			rectPos.PostionConstrantComs.Add(constrantID2);
-			var rectPosID = gameObject.AddComponent(rectPos);
-
-			var rectRend = new RectRendCom(ComponentManager, rectPosID)
-			{
-				Texture =  TextureManager.GetTexture(Textures.BLOCK),
-				SpriteBatch = spriteBatch,
-				Color = Color.Black
-			};
-			long rectRendID = gameObject.AddComponent(rectRend);
-			gameObject.RegsiterToManager(rectRendID, RenderManager);
-			
-			var inputCom = new KeyboardInputCom(ComponentManager, rectPosID);
-			long inputComID = gameObject.AddComponent(inputCom);
-			gameObject.RegsiterToManager(inputComID, InputManger);
-
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, rectPosID));
-			gameObject.RegsiterToManager(colssionComID, ColssionManger); 
-
-			return EntityManager.GetEntiy<GameObject>(entID);
+			_gameObjectCreators.Add(GameObjects.SqaurePlayer, new CreateGameObject(CreateSqaurePlayer));
+			_gameObjectCreators.Add(GameObjects.SqaureGoal, new CreateGameObject(CreateSqaureGoal));
 		}
 
-		public GameObject NormalEnemy(SpriteBatch spriteBatch)
+		public long CreateObjectOfType(GameObjects gameObjects)
+		{
+			return _gameObjectCreators[gameObjects]();
+		}
+
+		private long CreateSqaureGoal()
 		{
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
@@ -98,7 +67,7 @@ namespace VFVGAVFAF.src
 			var rectRend = new RectRendCom(ComponentManager, rectPosID)
 			{
 				Texture = texture,
-				SpriteBatch = spriteBatch,
+				SpriteBatch = SpriteBatch,
 				Color = Color.Red
 			};
 			long rectRendID = gameObject.AddComponent(rectRend);
@@ -108,11 +77,50 @@ namespace VFVGAVFAF.src
 
 			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, rectPosID)
 			{
-				GameEventComs = new List<long>() { gameEvenetID }
+				GameEventComs = new List<long>() { gameEvenetID, gameObject.AddComponent(new LoadMiniGameCom(SenceManger, new SenceData())) }
 			});
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
 
-			return gameObject;
+			return entID;
+		}
+
+		private long CreateSqaurePlayer()
+		{
+			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
+			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+
+			var constrantBox = new RectConstrantCom(ComponentManager,
+				gameObject.AddComponent(
+					new RectPosCom(ComponentManager, new Rectangle(0, 0, 800, 600))
+				)
+			)
+			{
+				Inside = true
+			};
+			var constrantID = gameObject.AddComponent(constrantBox);
+
+			var rectPos = new RectPosCom(ComponentManager, new Rectangle(100, 100, 100, 100));
+
+			rectPos.PostionConstrantComs.Add(constrantID);
+			var rectPosID = gameObject.AddComponent(rectPos);
+
+			var rectRend = new RectRendCom(ComponentManager, rectPosID)
+			{
+				Texture = TextureManager.GetTexture(Textures.BLOCK),
+				SpriteBatch = SpriteBatch,
+				Color = Color.Black
+			};
+			long rectRendID = gameObject.AddComponent(rectRend);
+			gameObject.RegsiterToManager(rectRendID, RenderManager);
+
+			var inputCom = new KeyboardInputCom(ComponentManager, rectPosID);
+			long inputComID = gameObject.AddComponent(inputCom);
+			gameObject.RegsiterToManager(inputComID, InputManger);
+
+			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, rectPosID));
+			gameObject.RegsiterToManager(colssionComID, ColssionManger);
+
+			return entID;
 		}
 	}
 }

@@ -12,5 +12,7 @@ namespace VFVGAVFAF.src
 		long GetID { get; }
 
 		void SetID(long id);
+
+		void UnregstierComsFromMangers();
 	}
 }
