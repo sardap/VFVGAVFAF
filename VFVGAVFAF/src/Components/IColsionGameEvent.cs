@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class GoalReachedCom : IGameEventCom
+	interface IColsionGameEventCom : IGameEventCom
 	{
-		public double TimeToComeplte { get; set; }
+		long ColliedWith { get; set; }
 
-		public void Action()
-		{
-			Console.WriteLine("You won");
-		}
 	}
 }

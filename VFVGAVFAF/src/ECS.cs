@@ -21,6 +21,8 @@ namespace VFVGAVFAF.src
 		private TextureManager _textureManager;
 		private GameObjectFactory _gameObjectFactory;
 		private ISenceManger _senceManger;
+		private IStepManager _stepManager;
+		private IGameEvenetPostMaster _gameEvenetPostMaster;
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
@@ -43,6 +45,8 @@ namespace VFVGAVFAF.src
 				Content = Content
 			};
 			_senceManger = new SenceManger(_entityManager);
+			_stepManager = new StepManager() { ComponentManager = _componentManager };
+			_gameEvenetPostMaster = new GameEvenetPostMaster(_componentManager);
 
 			_gameObjectFactory = new GameObjectFactory
 			{
@@ -51,10 +55,12 @@ namespace VFVGAVFAF.src
 				EntityManager = _entityManager,
 				InputManger = _inputManger,
 				ColssionManger = _colssionManger,
+				StepManager = _stepManager,
 				TextureManager = _textureManager,
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,
-				Content = Content
+				Content = Content,
+				GameEvenetPostMaster = _gameEvenetPostMaster
 			};
 
 			_senceManger.GameObjectFactory = _gameObjectFactory;
@@ -64,8 +70,10 @@ namespace VFVGAVFAF.src
 
 		public void Step(double deltaTime)
 		{
+			_gameEvenetPostMaster.Step(deltaTime);
 			_inputManger.Update(deltaTime);
 			_colssionManger.Check();
+			_stepManager.Step(deltaTime);
 			_entityManager.Step();
 		}
 
@@ -83,7 +91,8 @@ namespace VFVGAVFAF.src
 		{
 			ISenceData senceData = new SenceData();
 			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaureGoal);
+			//senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaureGoal);
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
 			_senceManger.Load(senceData);
 		}
 	}

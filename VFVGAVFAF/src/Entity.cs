@@ -10,6 +10,7 @@ namespace VFVGAVFAF.src
 	{
 		private ComponentManager _componentManager;
 		private Dictionary<long, IManger> _comMangers = new Dictionary<long, IManger>();
+		private Dictionary<long, Type> _ownedComs = new Dictionary<long, Type>();
 
 		private bool _alreadySet = false;
 		private long _entiyID;
@@ -60,19 +61,24 @@ namespace VFVGAVFAF.src
 			}
 		}
 
-		public T GetComponent<T>() where T : IComponent
+		public IList<long> GetComponent<ComT>() where ComT : IComponent
 		{
-			throw new NotImplementedException();
-			return _componentManager.GetComponent<T>(_entiyID);
+			var result = new List<long>();
+			var foundComs = _ownedComs.ToList().FindAll(i => i.Value == typeof(ComT));
+			foundComs.ForEach(i => result.Add(i.Key));
+			return result;
 		}
 
-		public long AddComponent<T>(T com) where T : IComponent
+		public long AddComponent<ComT>(ComT com) where ComT : IComponent
 		{
-			return _componentManager.CreateComponet(_entiyID, com);
+			var id = _componentManager.CreateComponet(_entiyID, com);
+			_ownedComs.Add(id, typeof(ComT));
+			return id;
 		}
 
-		public bool RemoveComponet<T>(long comID) where T : IComponent
+		public bool RemoveComponet<ComT>(long comID) where ComT : IComponent
 		{
+			_ownedComs.Remove(comID);
 			return _componentManager.RemoveComponent(_entiyID, comID);
 		}
 

@@ -12,5 +12,6 @@ namespace VFVGAVFAF.src.Components
 		// Not using Get and set prop becuase i was running into debuging issues
 		void SetPostion(Postion2D postion2D);
 		Postion2D GetPostion();
+		void ResetPostion();
 	}
 }

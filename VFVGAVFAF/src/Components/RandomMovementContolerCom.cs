@@ -29,7 +29,6 @@ namespace VFVGAVFAF.src.Components
 		private double GetSpeedIncrement(double curSpeed)
 		{
 			var result = Utils.GetRandomDouble(-curSpeed, curSpeed);
-			Console.WriteLine(result);
 			return result;
 		}
 	}

@@ -15,18 +15,19 @@ namespace VFVGAVFAF.src
 
 		public int Height { get; set; }
 
-		public Paultangle(Rectangle rectangle)
-		{
-			Postion2D = new Postion2D(rectangle);
-			Width = rectangle.Width;
-			Height = rectangle.Height;
-		}
-
 		public Paultangle(Postion2D postion2D, int width, int height)
 		{
 			Postion2D = new Postion2D(postion2D);
 			Width = width;
 			Height = height;
+		}
+
+		public Paultangle(Rectangle rectangle) : this(new Postion2D(rectangle), rectangle.Width, rectangle.Height)
+		{
+		}
+
+		public Paultangle(Paultangle paultangle) : this(paultangle.Postion2D, paultangle.Width, paultangle.Height)
+		{
 		}
 
 		public Paultangle() : this(new Postion2D(0, 0), 0, 0)

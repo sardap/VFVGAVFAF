@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Components
+namespace VFVGAVFAF.src
 {
-	interface IGameEventCom : IComponent
+	interface IPostData
 	{
-		double TimeToComeplte { get; }
+		double TimeToComplete { get; set; }
 
-		void Action();
+		long GameEventID { get; }
 	}
 }

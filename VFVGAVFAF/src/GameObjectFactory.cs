@@ -17,7 +17,8 @@ namespace VFVGAVFAF.src
 		public enum GameObjects
 		{
 			SqaurePlayer,
-			SqaureGoal
+			SqaureGoal,
+			EnemeySqaure
 		}
 
 		private delegate long CreateGameObject();
@@ -29,20 +30,83 @@ namespace VFVGAVFAF.src
 		public RenderManager RenderManager { get; set; }
 		public InputManger InputManger { get; set; }
 		public ColssionComManger ColssionManger { get; set; }
+		public IStepManager StepManager { get; set; }
 		public TextureManager TextureManager { get; set; }
 		public ContentManager Content { get; set; }
 		public ISenceManger SenceManger { get; set; }
 		public SpriteBatch SpriteBatch { get; set; }
+		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
 		public GameObjectFactory()
 		{
 			_gameObjectCreators.Add(GameObjects.SqaurePlayer, new CreateGameObject(CreateSqaurePlayer));
 			_gameObjectCreators.Add(GameObjects.SqaureGoal, new CreateGameObject(CreateSqaureGoal));
+			_gameObjectCreators.Add(GameObjects.EnemeySqaure, new CreateGameObject(CreateEnemeySqaure));
 		}
 
 		public long CreateObjectOfType(GameObjects gameObjects)
 		{
 			return _gameObjectCreators[gameObjects]();
+		}
+
+		private long CreateSqaure(Rectangle rectangle)
+		{
+			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
+			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+
+			var rectPos = gameObject.AddComponent(new RectPosCom(ComponentManager, rectangle));
+			var rectRendCom = gameObject.AddComponent(new RectRendCom(ComponentManager, rectPos)
+			{
+				Texture = TextureManager.GetTexture(Textures.BLOCK),
+				SpriteBatch = SpriteBatch,
+				Color = Color.Red
+			});
+			gameObject.RegsiterToManager(rectRendCom, RenderManager);
+
+			return entID;
+		}
+
+		private long _healthComID;
+		private long _playerColsionCom;
+		private long _speed = 100;
+		private int _damage = -10;
+		private Rectangle _nextRectSize = new Rectangle(300, 300, 50, 50);
+
+		private long CreateEnemeySqaure()
+		{
+			var entID = CreateSqaure(_nextRectSize);
+			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+
+			var posCom = gameObject.GetComponent<RectPosCom>().First();
+
+			var col = new RectCollisionCom(ComponentManager, GameEvenetPostMaster, posCom)
+			{
+				GameEventComs = new List<long>()
+				{
+					gameObject.AddComponent
+					(
+						new DamageCom(ComponentManager, _healthComID)
+						{
+							CanBeTriggered = new List<long> { _playerColsionCom },
+							Damage = _damage,
+							TimeToComeplte = 1
+						}
+					)
+				}
+			};
+			var colID = gameObject.AddComponent(col);
+			gameObject.RegsiterToManager(colID, ColssionManger);
+
+			var contID = gameObject.AddComponent(
+				new RandomMovementContolerCom(ComponentManager, posCom)
+				{
+					Speed = _speed
+				}
+			);
+
+			gameObject.RegsiterToManager(contID, InputManger);
+
+			return entID;
 		}
 
 		private long CreateSqaureGoal()
@@ -63,7 +127,7 @@ namespace VFVGAVFAF.src
 				{
 					Texture = TextureManager.GetTexture(Textures.BLOCK),
 					SpriteBatch = SpriteBatch,
-					Color = Color.Red,
+					Color = Color.Green,
 					LineWidth = 1
 				}
 			);
@@ -98,7 +162,7 @@ namespace VFVGAVFAF.src
 
 			var rectRend = new RectRendCom(ComponentManager, rectPosID)
 			{
-				Texture = texture,
+				Texture = TextureManager.GetTexture(Textures.BLOCK),
 				SpriteBatch = SpriteBatch,
 				Color = Color.Red
 			};
@@ -107,7 +171,7 @@ namespace VFVGAVFAF.src
 
 			long gameEvenetID = gameObject.AddComponent(new GoalReachedCom());
 
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, rectPosID)
+			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, GameEvenetPostMaster, rectPosID)
 			{
 				GameEventComs = new List<long>() { gameEvenetID, gameObject.AddComponent(new LoadMiniGameCom(SenceManger, new SenceData())) }
 			});
@@ -130,15 +194,14 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var constrantBox = new RectConstrantCom(ComponentManager,
-				gameObject.AddComponent(
-					new RectPosCom(ComponentManager, new Rectangle(0, 0, 800, 600))
-				)
-			)
+			var gameRectPosID = gameObject.AddComponent(new RectPosCom(ComponentManager, new Rectangle(0, 0, 800, 600)));
+
+			var constrantID = gameObject.AddComponent(
+			new RectConstrantCom(ComponentManager, gameRectPosID)
 			{
 				Inside = true
-			};
-			var constrantID = gameObject.AddComponent(constrantBox);
+			}
+			);
 
 			var rectPos = new RectPosCom(ComponentManager, new Rectangle(100, 100, 100, 100));
 
@@ -158,8 +221,24 @@ namespace VFVGAVFAF.src
 			long inputComID = gameObject.AddComponent(inputCom);
 			gameObject.RegsiterToManager(inputComID, InputManger);
 
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, rectPosID));
+			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, GameEvenetPostMaster, rectPosID));
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
+			_playerColsionCom = colssionComID;
+
+			var playerHPCom = gameObject.AddComponent(new HealthCom(ComponentManager, 100, 100, 100));
+			gameObject.RegsiterToManager(playerHPCom, StepManager);
+			_healthComID = playerHPCom;
+
+			var respwanComID = gameObject.AddComponent(new RespawnCom(ComponentManager, rectPosID, playerHPCom));
+
+			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
+				new HealthCom.HPTrigger()
+				{
+					Opreator = HealthCom.HPOps.Less,
+					Value = 0,
+					GameEvents = new List<long>() { respwanComID }
+				}
+			);
 
 			return entID;
 		}

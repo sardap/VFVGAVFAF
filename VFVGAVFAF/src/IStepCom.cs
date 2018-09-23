@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Components
+namespace VFVGAVFAF.src
 {
-	interface IGameEventCom : IComponent
+	interface IStepCom : IComponent
 	{
-		double TimeToComeplte { get; }
-
-		void Action();
+		void Step(double deltaTime);
 	}
 }

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Components
+namespace VFVGAVFAF.src.Managers
 {
-	interface IGameEventCom : IComponent
+	interface IStepManager : IManger
 	{
-		double TimeToComeplte { get; }
-
-		void Action();
+		void Step(double deltaTime);
 	}
 }

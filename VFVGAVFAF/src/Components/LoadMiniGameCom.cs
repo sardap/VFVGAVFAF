@@ -12,6 +12,8 @@ namespace VFVGAVFAF.src.Components
 		ISenceManger _senceManger;
 		ISenceData _nextSence;
 
+		public double TimeToComeplte { get { return 0; } }
+
 		public LoadMiniGameCom(ISenceManger senceManger, ISenceData senceData)
 		{
 			_senceManger = senceManger;

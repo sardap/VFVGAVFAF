@@ -11,6 +11,7 @@ namespace VFVGAVFAF.src.Components
 	{
 		private Paultangle _rectangle = new Paultangle();
 		private ComponentManager _componentManager;
+		private Paultangle _startingPostion;
 	
 		public void SetPostion(Postion2D postion2D)
 		{
@@ -36,6 +37,11 @@ namespace VFVGAVFAF.src.Components
 		{
 			return new Postion2D(_rectangle.Postion2D);
 		}
+
+		public void ResetPostion()
+		{
+			SetPostion(new Postion2D(100, 100));
+		}
 		
 		public List<long> PostionConstrantComs { get; set; }
 
@@ -46,6 +52,7 @@ namespace VFVGAVFAF.src.Components
 			_componentManager = componentManager;
 			PostionConstrantComs = new List<long>();
 			_rectangle = new Paultangle(rectangle);
+			_startingPostion = new Paultangle(_rectangle);
 		}
 
 		public RectPosCom(ComponentManager componentManager, Postion2D postion2D) : this(componentManager, postion2D.ToRectangle(0, 0))

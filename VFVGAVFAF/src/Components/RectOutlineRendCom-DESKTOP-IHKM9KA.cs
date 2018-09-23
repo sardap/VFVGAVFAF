@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class GoalReachedCom : IGameEventCom
+	class RectOutlineRendCom
 	{
-		public double TimeToComeplte { get; set; }
 
-		public void Action()
-		{
-			Console.WriteLine("You won");
-		}
 	}
 }
