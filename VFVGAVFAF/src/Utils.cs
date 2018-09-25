@@ -11,14 +11,14 @@ namespace VFVGAVFAF.src
 {
 	static class Utils
 	{
-		public static bool AInsideB(Rectangle a, Rectangle b)
+		public static bool AInsideB(Paultangle a, Paultangle b)
 		{
 			bool result = a.Right < b.Right && a.Left > b.Left && a.Top > b.Top && a.Bottom < b.Bottom;
 
 			return result;
 		}
 
-		public static bool AOverlapB(Rectangle a, Rectangle b)
+		public static bool AOverlapB(Paultangle a, Paultangle b)
 		{
 			return a.Intersects(b);
 		}
@@ -42,5 +42,11 @@ namespace VFVGAVFAF.src
 			return Random.NextDouble() * (maximum - minimum) + minimum;
 		}
 
+		public static Postion2D RandomPostionInBounds(Rectangle rectangle)
+		{
+			double x = Random.NextDouble() * (rectangle.Right - rectangle.Left) + rectangle.Left;
+			double y = Random.NextDouble() * (rectangle.Bottom - rectangle.Top) + rectangle.Top;
+			return new Postion2D(x, y);
+		}
 	}
 }

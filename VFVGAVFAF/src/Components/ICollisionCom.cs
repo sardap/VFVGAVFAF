@@ -9,7 +9,7 @@ namespace VFVGAVFAF.src.Components
 {
 	interface ICollisionCom : IComponent
 	{
-		Rectangle GetHitBox { get; }
+		Paultangle GetHitBox { get; }
 
 		void Check(long otherID);
 	}

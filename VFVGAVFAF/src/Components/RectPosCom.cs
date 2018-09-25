@@ -45,7 +45,7 @@ namespace VFVGAVFAF.src.Components
 		
 		public List<long> PostionConstrantComs { get; set; }
 
-		public Rectangle Rectangle { get { return _rectangle.ToMonoGameRectangle(); } }
+		public Paultangle Rectangle { get { return _rectangle; } }
 
 		public RectPosCom(ComponentManager componentManager, Rectangle rectangle)
 		{

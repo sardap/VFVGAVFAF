@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,5 @@ namespace VFVGAVFAF.src.Components
 	interface IColsionGameEventCom : IGameEventCom
 	{
 		long ColliedWith { get; set; }
-
 	}
 }

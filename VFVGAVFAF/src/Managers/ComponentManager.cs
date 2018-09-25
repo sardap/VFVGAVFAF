@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace VFVGAVFAF.src
 {
 	class ComponentManager
 	{
-		private Dictionary<long, IComponent> _comTable = new Dictionary<long, IComponent>();
-		private Dictionary<long, List<IComponent>> _enityComponets = new Dictionary<long, List<IComponent>>();
+		private ConcurrentDictionary<long, IComponent> _comTable = new ConcurrentDictionary<long, IComponent>();
+		private ConcurrentDictionary<long, List<IComponent>> _enityComponets = new ConcurrentDictionary<long, List<IComponent>>();
 
 		private Stack<long> _nextIDS = new Stack<long>();
 		private long _lastOrderedID = 0;
@@ -30,13 +31,13 @@ namespace VFVGAVFAF.src
 				_nextIDS.Push(_lastOrderedID);
 			}
 
-			_comTable.Add(nextID, com);
+			_comTable.TryAdd(nextID, com);
 
 			List<IComponent> components;
 
 			if (!_enityComponets.ContainsKey(entiyID))
 			{
-				_enityComponets.Add(entiyID, new List<IComponent>());
+				_enityComponets.TryAdd(entiyID, new List<IComponent>());
 				components = _enityComponets[entiyID];
 			}
 			else
@@ -65,7 +66,7 @@ namespace VFVGAVFAF.src
 		{
 			var com = _comTable[comID];
 
-			_comTable.Remove(comID);
+			_comTable.TryRemove(comID, out _);
 
 			_nextIDS.Push(comID);
 

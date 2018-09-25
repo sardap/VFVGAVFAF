@@ -11,26 +11,24 @@ namespace VFVGAVFAF.src.Managers
 	class ColssionComManger : IManger
 	{
 		private IList<long> _toCheck = new List<long>();
+		private QuadTree _quadTree;
+		private ComponentManager _componentManager { get; set; }
 
-		public ComponentManager ComponentManager { get; set; }
+		public ColssionComManger(ComponentManager componentManager)
+		{
+			_componentManager = componentManager;
+			_quadTree = new QuadTree(_componentManager, 0, new Microsoft.Xna.Framework.Rectangle(0, 0, 300, 600));
+		}
+
 
 		public void Check()
 		{
-			foreach (var i in _toCheck)
-			{
-				foreach (var j in _toCheck)
-				{
-					if(i != j)
-					{
-						ComponentManager.GetComponent<ICollisionCom>(i).Check(j);
-					}
-				}
-			}
+			_quadTree.Process(_toCheck);
 		}
 
 		public void Regsiter(long comID)
 		{
-			if (ComponentManager.GetComponent<ICollisionCom>(comID) != null)
+			if (_componentManager.GetComponent<ICollisionCom>(comID) != null)
 			{
 				_toCheck.Add(comID);
 				return;

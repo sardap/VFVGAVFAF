@@ -13,7 +13,7 @@ namespace VFVGAVFAF.src.Components
 		private ComponentManager _componentManager;
 		private long _rectPosComID;
 
-		public Rectangle GetHitBox
+		public Paultangle GetHitBox
 		{
 			get
 			{
@@ -33,8 +33,9 @@ namespace VFVGAVFAF.src.Components
 		public void Check(long otherID)
 		{
 			var hitBox = _componentManager.GetComponent<RectPosCom>(_rectPosComID);
-			var otherHitBox = _componentManager.GetComponent<ICollisionCom>(otherID);
-			if (hitBox.Rectangle.Intersects(otherHitBox.GetHitBox))
+			var otherCom = _componentManager.GetComponent<ICollisionCom>(otherID);
+			var otherHitBox = otherCom.GetHitBox;
+			if (hitBox.Rectangle.Intersects(otherHitBox))
 			{
 				foreach(var gameEventID in GameEventComs)
 				{

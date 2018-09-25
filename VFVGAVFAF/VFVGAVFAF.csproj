@@ -73,6 +73,7 @@
     <Compile Include="src\Paultangle.cs" />
     <Compile Include="src\Post\IPostData.cs" />
     <Compile Include="src\Post\PostData.cs" />
+    <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\Sence\SenceData.cs" />
     <Compile Include="src\SongsEnum.cs" />
     <Compile Include="src\Textures.cs" />

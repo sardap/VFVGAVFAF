@@ -9,7 +9,7 @@ namespace VFVGAVFAF.src.Components
 {
 	class RectConstrantCom : IPostionConstrantCom
 	{
-		private delegate bool CheckCon(Rectangle a, Rectangle B);
+		private delegate bool CheckCon(Paultangle a, Paultangle B);
 
 		public enum CheckType
 		{
@@ -31,7 +31,7 @@ namespace VFVGAVFAF.src.Components
 		}
 
 
-		public bool Check(Rectangle hitBox)
+		public bool Check(Paultangle hitBox)
 		{
 			//TODO this is a brain fart i don't know the right way
 			var constrant = _componentManager.GetComponent<RectPosCom>(_constrantID).Rectangle;

@@ -15,11 +15,26 @@ namespace VFVGAVFAF.src
 
 		public int Height { get; set; }
 
-		public Paultangle(Postion2D postion2D, int width, int height)
+		public double X { get { return Postion2D.X; } }
+		public double Y { get { return Postion2D.Y; } }
+
+		public double Top { get { return Postion2D.Y; } }
+
+		public double Bottom { get { return Postion2D.Y+ Height; } }
+
+		public double Left { get { return Postion2D.X; } }
+
+		public double Right { get { return Postion2D.X + Width; } }
+
+		public Paultangle(double x, double y, int width, int height)
 		{
-			Postion2D = new Postion2D(postion2D);
+			Postion2D = new Postion2D(x, y);
 			Width = width;
 			Height = height;
+		}
+
+		public Paultangle(Postion2D postion2D, int width, int height) : this(postion2D.X, postion2D.Y, width, height)
+		{
 		}
 
 		public Paultangle(Rectangle rectangle) : this(new Postion2D(rectangle), rectangle.Width, rectangle.Height)
@@ -32,6 +47,14 @@ namespace VFVGAVFAF.src
 
 		public Paultangle() : this(new Postion2D(0, 0), 0, 0)
 		{
+		}
+
+		public bool Intersects(Paultangle other)
+		{
+			return !(Left > other.Right ||
+			 other.Right < Left ||
+			 other.Top > Bottom ||
+			 other.Bottom < Top);
 		}
 
 		public Rectangle ToMonoGameRectangle()

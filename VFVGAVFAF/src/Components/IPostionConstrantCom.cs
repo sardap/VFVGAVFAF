@@ -9,6 +9,6 @@ namespace VFVGAVFAF.src.Components
 {
 	interface IPostionConstrantCom : IComponent
 	{
-		bool Check(Rectangle hitBox);
+		bool Check(Paultangle hitBox);
 	}
 }

@@ -69,18 +69,33 @@ namespace VFVGAVFAF.src
 
 		private long _healthComID;
 		private long _playerColsionCom;
-		private long _speed = 100;
+		private long _speed = 500;
 		private int _damage = -10;
-		private Rectangle _nextRectSize = new Rectangle(300, 300, 50, 50);
+		private Rectangle _nextRectSize = new Rectangle(300, 300, 5, 5);
+		private Rectangle _bounds = new Rectangle(0, 0, 800, 600);
 
 		private long CreateEnemeySqaure()
 		{
+			_nextRectSize = new Paultangle(Utils.RandomPostionInBounds(_bounds), 5, 5).ToMonoGameRectangle();
+
 			var entID = CreateSqaure(_nextRectSize);
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var posCom = gameObject.GetComponent<RectPosCom>().First();
+			var gameBoundsComID = gameObject.AddComponent(new RectPosCom(ComponentManager, _bounds));
 
-			var col = new RectCollisionCom(ComponentManager, GameEvenetPostMaster, posCom)
+			var constrantID = gameObject.AddComponent(
+				new RectConstrantCom(ComponentManager, gameBoundsComID)
+				{
+					Inside = true
+				}
+			);
+
+			var posComID = gameObject.GetComponent<RectPosCom>().First();
+
+			var posCom = ComponentManager.GetComponent<RectPosCom>(posComID);
+			posCom.PostionConstrantComs.Add(constrantID);
+
+			var col = new RectCollisionCom(ComponentManager, GameEvenetPostMaster, posComID)
 			{
 				GameEventComs = new List<long>()
 				{
@@ -99,7 +114,7 @@ namespace VFVGAVFAF.src
 			gameObject.RegsiterToManager(colID, ColssionManger);
 
 			var contID = gameObject.AddComponent(
-				new RandomMovementContolerCom(ComponentManager, posCom)
+				new RandomMovementContolerCom(ComponentManager, posComID)
 				{
 					Speed = _speed
 				}

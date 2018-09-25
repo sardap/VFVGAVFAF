@@ -26,7 +26,7 @@ namespace VFVGAVFAF.src.Components
 		public void Render(double deltaTime)
 		{
 			var rect = _componentManager.GetComponent<RectPosCom>(_rectangleComponetID);
-			SpriteBatch.Draw(Texture, rect.Rectangle, Color);
+			SpriteBatch.Draw(Texture, rect.Rectangle.ToMonoGameRectangle(), Color);
 		}
 	}
 }

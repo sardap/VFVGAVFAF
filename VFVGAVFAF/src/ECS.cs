@@ -37,10 +37,7 @@ namespace VFVGAVFAF.src
 				ComponentManager = _componentManager
 			};
 			_inputManger = new InputManger(_componentManager);
-			_colssionManger = new ColssionComManger
-			{
-				ComponentManager = _componentManager
-			};
+			_colssionManger = new ColssionComManger(_componentManager);
 			_textureManager = new TextureManager
 			{
 				Content = Content
@@ -93,9 +90,8 @@ namespace VFVGAVFAF.src
 		private void SetupPlayer()
 		{
 			ISenceData senceData = new SenceData();
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
-			//senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaureGoal);
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
+			for(int i = 0; i < 1000; i++)
+				senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
 			_senceManger.Load(senceData);
 		}
 	}
