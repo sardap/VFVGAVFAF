@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,11 +51,19 @@ namespace VFVGAVFAF.src
 
 		private void CheckCollsions(IList<long> collisions)
 		{
-			foreach (long i in collisions)
+			ConcurrentStack<long> stack =  new ConcurrentStack<long>();
+
+			foreach(var i in collisions)
 			{
-				foreach (long j in Retrieve(i))
+				stack.Push(i);
+			}
+
+			foreach(var id in stack)
+			{
+				foreach(var otherID in Retrieve(id))
 				{
-					_componentManager.GetComponent<ICollisionCom>(i).Check(j);
+					_componentManager.GetComponent<ICollisionCom>(id).Check(otherID);
+
 				}
 			}
 		}
@@ -115,7 +124,7 @@ namespace VFVGAVFAF.src
 			}
 		}
 
-		private List<long> Retrieve(HashSet<long> returnedObjs, long obj)
+		private ConcurrentStack<long> Retrieve(HashSet<long> returnedObjs, long obj)
 		{
 			if (_nodes[0] != null)
 			{
@@ -133,15 +142,17 @@ namespace VFVGAVFAF.src
 				}
 			}
 
+			ConcurrentStack<long> result = new ConcurrentStack<long>();
+
 			foreach (long i in _objects)
 			{
-				returnedObjs.Add(i);
+				result.Push(i);
 			}
 
-			return returnedObjs.ToList();
+			return result;
 		}
 
-		private List<long> Retrieve(long pRect)
+		private ConcurrentStack<long> Retrieve(long pRect)
 		{
 			return Retrieve(new HashSet<long>(), pRect);
 		}
