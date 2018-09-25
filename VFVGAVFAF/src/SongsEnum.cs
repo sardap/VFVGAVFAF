@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Components
+namespace VFVGAVFAF.src
 {
-	interface IGameEventCom : IComponent
+	class Songs
 	{
-		double TimeInbetweenRuns { get; }
-
-		void Action();
+		public const string DAMAGE_TAKEN = "Sounds/dmgt";
 	}
 }

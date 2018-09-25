@@ -13,7 +13,7 @@ namespace VFVGAVFAF.src.Components
 
 		public IList<long> CanBeTriggered { get; set; }
 		public long ColliedWith { get; set; }
-		public double TimeToComeplte { get; set; }
+		public double TimeInbetweenRuns { get; set; }
 		public int Damage { get; set; }
 
 		public DamageCom(ComponentManager componentManager, long healthComID)

@@ -30,7 +30,7 @@ namespace VFVGAVFAF.src
 
 			if(_counts[id] < numberOfInstances)
 			{
-				_posts.Add(new PostData { TimeToComplete = gameEvenet.TimeToComeplte, GameEventID = id});
+				_posts.Add(new PostData { TimeToComplete = gameEvenet.TimeInbetweenRuns, GameEventID = id});
 				_counts[id]++;
 			}
 		}
@@ -55,7 +55,6 @@ namespace VFVGAVFAF.src
 			{
 				_counts[toRemove.Peek().GameEventID]--;
 				_posts.Remove(toRemove.Pop());
-
 			}
 		}
 	}

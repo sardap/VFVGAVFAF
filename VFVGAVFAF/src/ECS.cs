@@ -19,6 +19,7 @@ namespace VFVGAVFAF.src
 		private InputManger _inputManger;
 		private ColssionComManger _colssionManger;
 		private TextureManager _textureManager;
+		private SoundManager _soundManager;
 		private GameObjectFactory _gameObjectFactory;
 		private ISenceManger _senceManger;
 		private IStepManager _stepManager;
@@ -44,6 +45,7 @@ namespace VFVGAVFAF.src
 			{
 				Content = Content
 			};
+			_soundManager = new SoundManager(Content);
 			_senceManger = new SenceManger(_entityManager);
 			_stepManager = new StepManager() { ComponentManager = _componentManager };
 			_gameEvenetPostMaster = new GameEvenetPostMaster(_componentManager);
@@ -57,6 +59,7 @@ namespace VFVGAVFAF.src
 				ColssionManger = _colssionManger,
 				StepManager = _stepManager,
 				TextureManager = _textureManager,
+				SoundManager = _soundManager,
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,
 				Content = Content,

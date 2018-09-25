@@ -32,6 +32,7 @@ namespace VFVGAVFAF.src
 		public ColssionComManger ColssionManger { get; set; }
 		public IStepManager StepManager { get; set; }
 		public TextureManager TextureManager { get; set; }
+		public SoundManager SoundManager { get; set; }
 		public ContentManager Content { get; set; }
 		public ISenceManger SenceManger { get; set; }
 		public SpriteBatch SpriteBatch { get; set; }
@@ -89,7 +90,7 @@ namespace VFVGAVFAF.src
 						{
 							CanBeTriggered = new List<long> { _playerColsionCom },
 							Damage = _damage,
-							TimeToComeplte = 1
+							TimeInbetweenRuns = 1
 						}
 					)
 				}
@@ -225,20 +226,30 @@ namespace VFVGAVFAF.src
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
 			_playerColsionCom = colssionComID;
 
-			var playerHPCom = gameObject.AddComponent(new HealthCom(ComponentManager, 100, 100, 100));
+			var playerHPCom = gameObject.AddComponent(new HealthCom(ComponentManager, GameEvenetPostMaster, 100, 100, 100));
 			gameObject.RegsiterToManager(playerHPCom, StepManager);
 			_healthComID = playerHPCom;
 
 			var respwanComID = gameObject.AddComponent(new RespawnCom(ComponentManager, rectPosID, playerHPCom));
 
 			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
-				new HealthCom.HPTrigger()
+				new HealthCom.HPOpTrigger()
 				{
 					Opreator = HealthCom.HPOps.Less,
 					Value = 0,
 					GameEvents = new List<long>() { respwanComID }
 				}
 			);
+
+			var soundCom = gameObject.AddComponent(new PlaySoundEventCom(SoundManager, Songs.DAMAGE_TAKEN));
+
+			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
+				new HealthCom.HPChangeTrigger()
+				{
+					GameEvents = new List<long>() { soundCom }
+				}
+			);
+
 
 			return entID;
 		}

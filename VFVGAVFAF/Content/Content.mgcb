@@ -32,3 +32,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/score.spritefont
 
+#begin Sounds/dmgt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/dmgt.wav
+

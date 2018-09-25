@@ -12,7 +12,7 @@ namespace VFVGAVFAF.src.Components
 		private long _posComID;
 		private long _healthComID;
 
-		public double TimeToComeplte { get; set; }
+		public double TimeInbetweenRuns { get; set; }
 
 		public RespawnCom(ComponentManager componentManager, long posComID, long healthComID)
 		{

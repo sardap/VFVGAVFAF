@@ -15,57 +15,79 @@ namespace VFVGAVFAF.src.Components
 			Less
 		}
 
-		public struct HPTrigger
+		public interface IHPTrigger
+		{
+			bool Resolve(HealthCom healthCom);
+			IList<long> GameEvents { get; }
+
+		}
+
+		public class HPChangeTrigger : IHPTrigger
+		{
+			private int _oldVal;
+			public IList<long> GameEvents { get; set; }
+
+			public bool Resolve(HealthCom healthCom)
+			{
+				int oldVal = _oldVal;
+				_oldVal = healthCom.HP;
+				return oldVal != healthCom.HP;
+			}
+		}
+
+		public class HPOpTrigger : IHPTrigger
 		{
 			public HPOps Opreator { get; set; }
 			public int Value { get; set; }
 			public IList<long> GameEvents { get; set; }
+
+			public bool Resolve(HealthCom healthCom)
+			{
+				switch (Opreator)
+				{
+					case HPOps.Equal:
+						return healthCom.HP == Value;
+					case HPOps.Greater:
+						return healthCom.HP > Value;
+					case HPOps.Less:
+						return healthCom.HP < Value;
+				}
+
+				throw new NotImplementedException();
+			}
 		}
 
 		private ComponentManager _componentManager;
+		private IGameEvenetPostMaster _gameEvenetPostMaster;
 
 		public int HP { get; set; }
 		public int MaxHP { get; set; }
 		public int StartingHP { get; set; }
 
-		public IList<HPTrigger> Evenets { get; set; }
+		public IList<IHPTrigger> Evenets { get; set; }
 
-		public HealthCom(ComponentManager componentManager, int hp, int maxHP, int startingHP)
+		public HealthCom(ComponentManager componentManager, IGameEvenetPostMaster gameEvenetPostMaster, int hp, int maxHP, int startingHP)
 		{
 			_componentManager = componentManager;
+			_gameEvenetPostMaster = gameEvenetPostMaster;
 			HP = HP;
 			MaxHP = maxHP;
 			StartingHP = startingHP;
-			Evenets = new List<HPTrigger>();
+			Evenets = new List<IHPTrigger>();
 		}
 
 		public void Step(double deltaTime)
 		{
 			foreach(var hpTrigger in Evenets)
 			{
-				if(ResolveOp(hpTrigger.Opreator, hpTrigger.Value))
+				if(hpTrigger.Resolve(this))
 				{
 					foreach(var gameEventID in hpTrigger.GameEvents)
 					{
-						_componentManager.GetComponent<IGameEventCom>(gameEventID).Action();
+						_gameEvenetPostMaster.Add(gameEventID);
 					}
 				}
 			}
-		}
-
-		private bool ResolveOp(HPOps op, int value)
-		{
-			switch(op)
-			{
-				case HPOps.Equal:
-					return HP == value;
-				case HPOps.Greater:
-					return HP > value;
-				case HPOps.Less:
-					return HP < value;
-			}
-
-			throw new NotImplementedException();
 		}
 	}
 }

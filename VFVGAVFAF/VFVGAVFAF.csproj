@@ -55,7 +55,9 @@
     <Compile Include="src\Components\IGameEvent.cs" />
     <Compile Include="src\Components\IHealthCom.cs" />
     <Compile Include="src\Components\IPostionConstrantCom.cs" />
+    <Compile Include="src\Components\ISoundEventCom.cs" />
     <Compile Include="src\Components\LoadMiniGameCom.cs" />
+    <Compile Include="src\Components\PlaySoundEventCom.cs" />
     <Compile Include="src\Components\RandomMovementContolerCom.cs" />
     <Compile Include="src\Components\RectConstrantCom.cs" />
     <Compile Include="src\Components\RectCollisionCom.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="src\Components\RespawnCom.cs" />
     <Compile Include="src\IStepCom.cs" />
     <Compile Include="src\Managers\ColssionComManger.cs" />
+    <Compile Include="src\Managers\SoundManager.cs" />
     <Compile Include="src\Post\GameEvenetPostMaster.cs" />
     <Compile Include="src\Post\IGameEvenetPostMaster.cs" />
     <Compile Include="src\Managers\IStepManager.cs" />
@@ -71,6 +74,7 @@
     <Compile Include="src\Post\IPostData.cs" />
     <Compile Include="src\Post\PostData.cs" />
     <Compile Include="src\Sence\SenceData.cs" />
+    <Compile Include="src\SongsEnum.cs" />
     <Compile Include="src\Textures.cs" />
     <Compile Include="src\Managers\ComponentManager.cs" />
     <Compile Include="src\Components\IContolerCom.cs" />
