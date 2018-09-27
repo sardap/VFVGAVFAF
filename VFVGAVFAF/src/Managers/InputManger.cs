@@ -21,7 +21,10 @@ namespace VFVGAVFAF.src
 
 		public void Update(double deltaTime)
 		{
-			_regssiteredIDs.ForEach(i => _componentManager.GetComponent<IContolerCom>(i).Update(deltaTime));
+			foreach(var i in _regssiteredIDs)
+			{
+				_componentManager.GetComponent<IContolerCom>(i).Update(deltaTime);
+			}
 		}
 
 		public void Regsiter(long comID)

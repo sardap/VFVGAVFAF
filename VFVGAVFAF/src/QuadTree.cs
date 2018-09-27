@@ -51,21 +51,13 @@ namespace VFVGAVFAF.src
 
 		private void CheckCollsions(IList<long> collisions)
 		{
-			ConcurrentStack<long> stack =  new ConcurrentStack<long>();
-
-			foreach(var i in collisions)
+			Parallel.ForEach(collisions, id => 
 			{
-				stack.Push(i);
-			}
-
-			foreach(var id in stack)
-			{
-				foreach(var otherID in Retrieve(id))
+				foreach (var otherID in Retrieve(id))
 				{
 					_componentManager.GetComponent<ICollisionCom>(id).Check(otherID);
-
 				}
-			}
+			});
 		}
 
 		private void Clear()

@@ -32,16 +32,16 @@ namespace VFVGAVFAF.src.Components
 
 		public void Check(long otherID)
 		{
-			var hitBox = _componentManager.GetComponent<RectPosCom>(_rectPosComID);
-			var otherCom = _componentManager.GetComponent<ICollisionCom>(otherID);
-			var otherHitBox = otherCom.GetHitBox;
-			if (hitBox.Rectangle.Intersects(otherHitBox))
+			var hitBox = _componentManager.GetComponent<RectPosCom>(_rectPosComID); // Safe
+			var otherCom = _componentManager.GetComponent<ICollisionCom>(otherID); // Safe
+			var otherHitBox = otherCom.GetHitBox; // Not Safe
+			if (hitBox.Rectangle.Intersects(otherHitBox)) // Note Safe
 			{
 				foreach(var gameEventID in GameEventComs)
 				{
 					if(_componentManager.GetComponent<IGameEventCom>(gameEventID) is IColsionGameEventCom)
 					{
-						_componentManager.GetComponent<IColsionGameEventCom>(gameEventID).ColliedWith = otherID;
+						_componentManager.GetComponent<IColsionGameEventCom>(gameEventID).ColliedWith.Push(otherID);
 					}
 
 					_gameEvenetPostMaster.Add(gameEventID);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,8 @@ namespace VFVGAVFAF.src
 	class GameEvenetPostMaster : IGameEvenetPostMaster
 	{
 		private ComponentManager _componentManager;
-		private IList<IPostData> _posts = new List<IPostData>();
-		private IDictionary<long, int> _counts = new Dictionary<long, int>();
+		private ConcurrentStack<IPostData> _posts = new ConcurrentStack<IPostData>();
+		private ConcurrentDictionary<long, int> _counts = new ConcurrentDictionary<long, int>();
 
 		public GameEvenetPostMaster(ComponentManager componentManager)
 		{
@@ -25,19 +26,19 @@ namespace VFVGAVFAF.src
 
 			if(!_counts.ContainsKey(id))
 			{
-				_counts.Add(id, 0);
+				_counts.TryAdd(id, 0);
 			}
 
 			if(_counts[id] < numberOfInstances)
 			{
-				_posts.Add(new PostData { TimeToComplete = gameEvenet.TimeInbetweenRuns, GameEventID = id});
+				_posts.Push(new PostData { TimeToComplete = gameEvenet.TimeInbetweenRuns, GameEventID = id});
 				_counts[id]++;
 			}
 		}
 
 		public void Step(double deltaTime)
 		{
-			Stack<IPostData> toRemove = new Stack<IPostData>();
+			ConcurrentStack<IPostData> nextStack = new ConcurrentStack<IPostData>();
 
 			foreach(var post in _posts)
 			{
@@ -47,15 +48,15 @@ namespace VFVGAVFAF.src
 				{
 					Console.WriteLine("RUNNING ID: {0}", post.GameEventID);
 					_componentManager.GetComponent<IGameEventCom>(post.GameEventID).Action();
-					toRemove.Push(post);
+					_counts[post.GameEventID]--;
+				}
+				else
+				{
+					nextStack.Push(post);
 				}
 			}
 
-			while(toRemove.Count > 0)
-			{
-				_counts[toRemove.Peek().GameEventID]--;
-				_posts.Remove(toRemove.Pop());
-			}
+			_posts = nextStack;
 		}
 	}
 }

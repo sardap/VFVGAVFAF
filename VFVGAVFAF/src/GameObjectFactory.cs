@@ -69,7 +69,7 @@ namespace VFVGAVFAF.src
 
 		private long _healthComID;
 		private long _playerColsionCom;
-		private long _speed = 500;
+		private long _speed = 50;
 		private int _damage = -10;
 		private Rectangle _nextRectSize = new Rectangle(300, 300, 5, 5);
 		private Rectangle _bounds = new Rectangle(0, 0, 800, 600);
@@ -113,7 +113,8 @@ namespace VFVGAVFAF.src
 			var colID = gameObject.AddComponent(col);
 			gameObject.RegsiterToManager(colID, ColssionManger);
 
-			var contID = gameObject.AddComponent(
+			var contID = gameObject.AddComponent
+			(
 				new RandomMovementContolerCom(ComponentManager, posComID)
 				{
 					Speed = _speed
