@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace VFVGAVFAF.src
 		private ComponentManager _componentManager;
 		private Dictionary<long, IManger> _comMangers = new Dictionary<long, IManger>();
 		private Dictionary<long, Type> _ownedComs = new Dictionary<long, Type>();
+		private ConcurrentDictionary<Type, IList<long>> _ownedComsTypes = new ConcurrentDictionary<Type, IList<long>>();
 
 		private bool _alreadySet = false;
 		private long _entiyID;
@@ -61,23 +63,66 @@ namespace VFVGAVFAF.src
 			}
 		}
 
-		public IList<long> GetComponent<ComT>() where ComT : IComponent
+		public ComT GetComponent<ComT>(long id) where ComT : IComponent
 		{
-			var result = new List<long>();
-			var foundComs = _ownedComs.ToList().FindAll(i => i.Value == typeof(ComT));
-			foundComs.ForEach(i => result.Add(i.Key));
-			return result;
+			if(!_ownedComs.ContainsKey(id))
+			{
+				throw new KeyNotFoundException("Entiy does not own this com");
+			}
+
+			return _componentManager.GetComponent<ComT>(id);
+		}
+
+		public long GetFirstComponentID<ComT>() where ComT : IComponent
+		{
+			return _ownedComsTypes[typeof(ComT)][0];
+		}
+
+		public ComT GetFirstComponent<ComT>() where ComT : IComponent
+		{
+			return GetComponent<ComT>().First();
+		}
+
+		public IList<ComT> GetComponent<ComT>() where ComT : IComponent
+		{
+			var result = new List<ComT>();
+
+			List<ComT> foundComs = new List<ComT>();
+			foreach (var enty in _ownedComs)
+			{
+				var toFindType = typeof(ComT);
+				if (Utils.ImplementsInterface(enty.Value, toFindType))
+				{
+					foundComs.Add(_componentManager.GetComponent<ComT>(enty.Key));
+				}
+			}
+
+			return foundComs;
+		}
+
+		public bool HasComType<ComT>() where ComT : IComponent
+		{
+			return GetComponent<ComT>().Count > 0;
 		}
 
 		public long AddComponent<ComT>(ComT com) where ComT : IComponent
 		{
 			var id = _componentManager.CreateComponet(_entiyID, com);
 			_ownedComs.Add(id, typeof(ComT));
+
+			if(!_ownedComsTypes.ContainsKey(typeof(ComT)))
+			{
+				_ownedComsTypes.TryAdd(typeof(ComT), new List<long>());
+			}
+
+			_ownedComsTypes[typeof(ComT)].Add(id);
+
 			return id;
 		}
 
 		public bool RemoveComponet<ComT>(long comID) where ComT : IComponent
 		{
+			_ownedComsTypes[typeof(ComT)].Remove(comID);
 			_ownedComs.Remove(comID);
 			return _componentManager.RemoveComponent(_entiyID, comID);
 		}

@@ -55,8 +55,8 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var rectPos = gameObject.AddComponent(new RectPosCom(ComponentManager, rectangle));
-			var rectRendCom = gameObject.AddComponent(new RectRendCom(ComponentManager, rectPos)
+			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle));
+			var rectRendCom = gameObject.AddComponent(new RectRendCom(entID, EntityManager, rectPos)
 			{
 				Texture = TextureManager.GetTexture(Textures.BLOCK),
 				SpriteBatch = SpriteBatch,
@@ -71,39 +71,38 @@ namespace VFVGAVFAF.src
 		private long _playerColsionCom;
 		private long _speed = 50;
 		private int _damage = -10;
-		private Rectangle _nextRectSize = new Rectangle(300, 300, 5, 5);
+		private Rectangle _nextRectSize;
 		private Rectangle _bounds = new Rectangle(0, 0, 800, 600);
 
 		private long CreateEnemeySqaure()
 		{
-			_nextRectSize = new Paultangle(Utils.RandomPostionInBounds(_bounds), 5, 5).ToMonoGameRectangle();
+			_nextRectSize = new Paultangle(Utils.RandomPostionInBounds(_bounds), 25, 25).ToMonoGameRectangle();
 
 			var entID = CreateSqaure(_nextRectSize);
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var gameBoundsComID = gameObject.AddComponent(new RectPosCom(ComponentManager, _bounds));
+			var gameBoundsComID = gameObject.AddComponent(new RectPosCom(entID, EntityManager, _bounds));
 
 			var constrantID = gameObject.AddComponent(
-				new RectConstrantCom(ComponentManager, gameBoundsComID)
+				new RectConstrantCom(entID, EntityManager, gameBoundsComID)
 				{
 					Inside = true
 				}
 			);
 
-			var posComID = gameObject.GetComponent<RectPosCom>().First();
+			var posComID = gameObject.GetFirstComponentID<RectPosCom>();
 
 			var posCom = ComponentManager.GetComponent<RectPosCom>(posComID);
 			posCom.PostionConstrantComs.Add(constrantID);
 
-			var col = new RectCollisionCom(ComponentManager, GameEvenetPostMaster, posComID)
+			var col = new RectCollisionCom(entID, EntityManager, GameEvenetPostMaster, posComID)
 			{
 				GameEventComs = new List<long>()
 				{
 					gameObject.AddComponent
 					(
-						new DamageCom(ComponentManager, _healthComID)
+						new DamageCom(entID, EntityManager, _healthComID)
 						{
-							CanBeTriggered = new List<long> { _playerColsionCom },
 							Damage = _damage,
 							TimeInbetweenRuns = 1
 						}
@@ -115,7 +114,7 @@ namespace VFVGAVFAF.src
 
 			var contID = gameObject.AddComponent
 			(
-				new RandomMovementContolerCom(ComponentManager, posComID)
+				new RandomMovementContolerCom(entID, EntityManager, posComID)
 				{
 					Speed = _speed
 				}
@@ -132,15 +131,15 @@ namespace VFVGAVFAF.src
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
 			var rectConstBoxID = gameObject.AddComponent(
-				new RectPosCom(ComponentManager, new Rectangle(0, 0, 300, 600))
+				new RectPosCom(entID, EntityManager, new Rectangle(0, 0, 300, 600))
 			);
 
 			var screenBoundsID = gameObject.AddComponent(
-				new RectPosCom(ComponentManager, new Rectangle(0, 0, 400, 600))
+				new RectPosCom(entID, EntityManager, new Rectangle(0, 0, 400, 600))
 			);
 
 			var rectRendConstrant = gameObject.AddComponent(
-				new RectOutlineRendCom(ComponentManager, rectConstBoxID)
+				new RectOutlineRendCom(entID, EntityManager, rectConstBoxID)
 				{
 					Texture = TextureManager.GetTexture(Textures.BLOCK),
 					SpriteBatch = SpriteBatch,
@@ -150,16 +149,16 @@ namespace VFVGAVFAF.src
 			);
 			gameObject.RegsiterToManager(rectRendConstrant, RenderManager);
 
-			var rectPos = new RectPosCom(ComponentManager, new Rectangle(300, 100, 20, 20));
+			var rectPos = new RectPosCom(entID, EntityManager, new Rectangle(300, 100, 20, 20));
 			rectPos.PostionConstrantComs.Add(gameObject.AddComponent(
-				new RectConstrantCom(ComponentManager, rectConstBoxID)
+				new RectConstrantCom(entID, EntityManager, rectConstBoxID)
 				{
 					Inside = false,
 					Type = RectConstrantCom.CheckType.Overlapping
 				}
 			));
 			rectPos.PostionConstrantComs.Add(gameObject.AddComponent(
-				new RectConstrantCom(ComponentManager, screenBoundsID)
+				new RectConstrantCom(entID, EntityManager, screenBoundsID)
 				{
 					Inside = true
 				}
@@ -177,7 +176,7 @@ namespace VFVGAVFAF.src
 
 			texture.SetData(tcolor);
 
-			var rectRend = new RectRendCom(ComponentManager, rectPosID)
+			var rectRend = new RectRendCom(entID, EntityManager, rectPosID)
 			{
 				Texture = TextureManager.GetTexture(Textures.BLOCK),
 				SpriteBatch = SpriteBatch,
@@ -186,17 +185,17 @@ namespace VFVGAVFAF.src
 			long rectRendID = gameObject.AddComponent(rectRend);
 			gameObject.RegsiterToManager(rectRendID, RenderManager);
 
-			long gameEvenetID = gameObject.AddComponent(new GoalReachedCom());
+			long gameEvenetID = gameObject.AddComponent(new GoalReachedCom(entID));
 
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, GameEvenetPostMaster, rectPosID)
+			var colssionComID = gameObject.AddComponent(new RectCollisionCom(entID, EntityManager, GameEvenetPostMaster, rectPosID)
 			{
-				GameEventComs = new List<long>() { gameEvenetID, gameObject.AddComponent(new LoadMiniGameCom(SenceManger, new SenceData())) }
+				GameEventComs = new List<long>() { gameEvenetID, gameObject.AddComponent(new LoadMiniGameCom(entID, SenceManger, new SenceData())) }
 			});
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
 
 			var goalContComID = gameObject.AddComponent
 			(
-				new RandomMovementContolerCom(ComponentManager, rectPosID)
+				new RandomMovementContolerCom(entID, EntityManager, rectPosID)
 				{
 					Speed = 1000
 				}
@@ -211,21 +210,21 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var gameRectPosID = gameObject.AddComponent(new RectPosCom(ComponentManager, new Rectangle(0, 0, 800, 600)));
+			var gameRectPosID = gameObject.AddComponent(new RectPosCom(entID, EntityManager, new Rectangle(0, 0, 800, 600)));
 
 			var constrantID = gameObject.AddComponent(
-			new RectConstrantCom(ComponentManager, gameRectPosID)
+			new RectConstrantCom(entID, EntityManager, gameRectPosID)
 			{
 				Inside = true
 			}
 			);
 
-			var rectPos = new RectPosCom(ComponentManager, new Rectangle(100, 100, 100, 100));
+			var rectPos = new RectPosCom(entID, EntityManager, new Rectangle(100, 100, 100, 100));
 
 			rectPos.PostionConstrantComs.Add(constrantID);
 			var rectPosID = gameObject.AddComponent(rectPos);
 
-			var rectRend = new RectRendCom(ComponentManager, rectPosID)
+			var rectRend = new RectRendCom(entID, EntityManager, rectPosID)
 			{
 				Texture = TextureManager.GetTexture(Textures.BLOCK),
 				SpriteBatch = SpriteBatch,
@@ -234,19 +233,19 @@ namespace VFVGAVFAF.src
 			long rectRendID = gameObject.AddComponent(rectRend);
 			gameObject.RegsiterToManager(rectRendID, RenderManager);
 
-			var inputCom = new KeyboardInputCom(ComponentManager, rectPosID);
+			var inputCom = new KeyboardInputCom(entID, EntityManager, rectPosID);
 			long inputComID = gameObject.AddComponent(inputCom);
 			gameObject.RegsiterToManager(inputComID, InputManger);
 
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(ComponentManager, GameEvenetPostMaster, rectPosID));
+			var colssionComID = gameObject.AddComponent(new RectCollisionCom(entID, EntityManager, GameEvenetPostMaster, rectPosID));
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
 			_playerColsionCom = colssionComID;
 
-			var playerHPCom = gameObject.AddComponent(new HealthCom(ComponentManager, GameEvenetPostMaster, 100, 100, 100));
+			var playerHPCom = gameObject.AddComponent(new HealthCom(entID, GameEvenetPostMaster, 100, 100, 100));
 			gameObject.RegsiterToManager(playerHPCom, StepManager);
 			_healthComID = playerHPCom;
 
-			var respwanComID = gameObject.AddComponent(new RespawnCom(ComponentManager, rectPosID, playerHPCom));
+			var respwanComID = gameObject.AddComponent(new RespawnCom(entID, EntityManager, rectPosID));
 
 			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
 				new HealthCom.HPOpTrigger()
@@ -257,7 +256,7 @@ namespace VFVGAVFAF.src
 				}
 			);
 
-			var soundCom = gameObject.AddComponent(new PlaySoundEventCom(SoundManager, Songs.DAMAGE_TAKEN));
+			var soundCom = gameObject.AddComponent(new PlaySoundEventCom(entID, SoundManager, Songs.DAMAGE_TAKEN));
 
 			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
 				new HealthCom.HPChangeTrigger()

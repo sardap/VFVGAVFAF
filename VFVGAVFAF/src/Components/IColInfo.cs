@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src
 {
-	interface IComponent
+	interface IColInfo
 	{
 		long EntID { get; }
 	}

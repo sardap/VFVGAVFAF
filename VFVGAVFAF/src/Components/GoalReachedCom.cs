@@ -10,6 +10,13 @@ namespace VFVGAVFAF.src.Components
 	{
 		public double TimeInbetweenRuns { get; set; }
 
+		public long EntID { get; set; }
+
+		public GoalReachedCom(long entID)
+		{
+			EntID = entID;
+		}
+
 		public void Action()
 		{
 			Console.WriteLine("You won");

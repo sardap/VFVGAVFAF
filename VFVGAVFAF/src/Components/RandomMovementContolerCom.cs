@@ -8,23 +8,26 @@ namespace VFVGAVFAF.src.Components
 {
 	class RandomMovementContolerCom : IContolerCom
 	{
-		private ComponentManager _componentManager;
+		private EntityManager _entityManager;
 		private long _posComID;
 
+		public long EntID { get; set; }
 		public double Speed { get; set; }
 
-		public RandomMovementContolerCom(ComponentManager componentManager, long posComID)
+		public RandomMovementContolerCom(long entID, EntityManager entityManager, long posComID)
 		{
+			EntID = entID;
+			_entityManager = entityManager;
 			_posComID = posComID;
-			_componentManager = componentManager;
 		}
 		public void Update(double deltaTime)
 		{
 			var curSpeed = Speed * deltaTime;
-			Postion2D newPos = _componentManager.GetComponent<IPostionComponet>(_posComID).GetPostion();
+			var ent = _entityManager.GetEntiy<GameObject>(EntID);
+			Postion2D newPos = ent.GetComponent<IPostionComponet>(_posComID).GetPostion();
 			newPos.X += GetSpeedIncrement(curSpeed);
 			newPos.Y += GetSpeedIncrement(curSpeed);
-			_componentManager.GetComponent<IPostionComponet>(_posComID).SetPostion(newPos);
+			_entityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(_posComID).SetPostion(newPos);
 		}
 		private double GetSpeedIncrement(double curSpeed)
 		{

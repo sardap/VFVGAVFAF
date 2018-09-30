@@ -12,10 +12,12 @@ namespace VFVGAVFAF.src.Components
 		ISenceManger _senceManger;
 		ISenceData _nextSence;
 
+		public long EntID { get; set; }
 		public double TimeInbetweenRuns { get { return 0; } }
 
-		public LoadMiniGameCom(ISenceManger senceManger, ISenceData senceData)
+		public LoadMiniGameCom(long entID, ISenceManger senceManger, ISenceData senceData)
 		{
+			EntID = entID;
 			_senceManger = senceManger;
 			_nextSence = senceData;
 		}

@@ -48,5 +48,23 @@ namespace VFVGAVFAF.src
 			double y = Random.NextDouble() * (rectangle.Bottom - rectangle.Top) + rectangle.Top;
 			return new Postion2D(x, y);
 		}
+
+		public static bool ImplementsInterface(Type subject, Type inter)
+		{
+			var subjectInterfaces = subject.GetInterfaces();
+			if(subjectInterfaces.Any(i => i == inter))
+			{
+				return true;
+			}
+			else
+			{
+				foreach(var type in subjectInterfaces)
+				{
+					return ImplementsInterface(type, inter);
+				}
+
+				return false;
+			}
+		}
 	}
 }

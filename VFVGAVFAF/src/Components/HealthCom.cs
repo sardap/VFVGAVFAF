@@ -57,18 +57,18 @@ namespace VFVGAVFAF.src.Components
 			}
 		}
 
-		private ComponentManager _componentManager;
 		private IGameEvenetPostMaster _gameEvenetPostMaster;
 
+		public long EntID { get; set; }
 		public int HP { get; set; }
 		public int MaxHP { get; set; }
 		public int StartingHP { get; set; }
 
 		public IList<IHPTrigger> Evenets { get; set; }
 
-		public HealthCom(ComponentManager componentManager, IGameEvenetPostMaster gameEvenetPostMaster, int hp, int maxHP, int startingHP)
+		public HealthCom(long entID, IGameEvenetPostMaster gameEvenetPostMaster, int hp, int maxHP, int startingHP)
 		{
-			_componentManager = componentManager;
+			EntID = entID;
 			_gameEvenetPostMaster = gameEvenetPostMaster;
 			HP = HP;
 			MaxHP = maxHP;

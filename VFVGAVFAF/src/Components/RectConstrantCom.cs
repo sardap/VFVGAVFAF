@@ -17,16 +17,19 @@ namespace VFVGAVFAF.src.Components
 			Overlapping
 		}
 
-		private ComponentManager _componentManager;
+		private EntityManager _entityManager;
 		private long _constrantID;
 
 		public bool Inside { get; set; }
 
 		public CheckType Type { get; set; }
 
-		public RectConstrantCom(ComponentManager componentManager, long constrantID)
+		public long EntID { get; set; }
+
+		public RectConstrantCom(long entID, EntityManager entityManager, long constrantID)
 		{
-			_componentManager = componentManager;
+			EntID = entID;
+			_entityManager = entityManager;
 			_constrantID = constrantID;
 		}
 
@@ -34,7 +37,7 @@ namespace VFVGAVFAF.src.Components
 		public bool Check(Paultangle hitBox)
 		{
 			//TODO this is a brain fart i don't know the right way
-			var constrant = _componentManager.GetComponent<RectPosCom>(_constrantID).Rectangle;
+			var constrant = _entityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(_constrantID).Rectangle;
 
 			CheckCon d;
 

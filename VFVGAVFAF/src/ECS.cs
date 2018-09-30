@@ -90,8 +90,14 @@ namespace VFVGAVFAF.src
 		private void SetupPlayer()
 		{
 			ISenceData senceData = new SenceData();
-			for(int i = 0; i < 1000; i++)
+
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
+
+			for (int i = 0; i < 1; i++)
+			{
 				senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
+			}
+
 			_senceManger.Load(senceData);
 		}
 	}

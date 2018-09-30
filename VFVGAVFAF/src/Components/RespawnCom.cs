@@ -8,23 +8,24 @@ namespace VFVGAVFAF.src.Components
 {
 	class RespawnCom : IGameEventCom
 	{
-		private ComponentManager _componentManager;
+		private EntityManager _entityManger;
 		private long _posComID;
-		private long _healthComID;
 
+		public long EntID { get; set; }
 		public double TimeInbetweenRuns { get; set; }
 
-		public RespawnCom(ComponentManager componentManager, long posComID, long healthComID)
+		public RespawnCom(long entID, EntityManager entityManger, long posComID)
 		{
+			EntID = entID;
 			_posComID = posComID;
-			_healthComID = healthComID;
-			_componentManager = componentManager;
+			_entityManger = entityManger;
 		}
 
 		public void Action()
 		{
-			_componentManager.GetComponent<IPostionComponet>(_posComID).ResetPostion();
-			var healthCom = _componentManager.GetComponent<IHealthCom>(_healthComID);
+			var ent = _entityManger.GetEntiy<GameObject>(EntID);
+			ent.GetComponent<IPostionComponet>(_posComID).ResetPostion();
+			var healthCom = ent.GetFirstComponent<IHealthCom>();
 			healthCom.HP = healthCom.StartingHP;
 		}
 	}

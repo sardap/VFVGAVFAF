@@ -9,29 +9,33 @@ namespace VFVGAVFAF.src.Components
 {
 	class DamageCom : IColsionGameEventCom
 	{
-		private ComponentManager _componentManager;
+		private EntityManager _entityManager;
 		private long _healthComID;
 
-		public IList<long> CanBeTriggered { get; set; }
-		public ConcurrentStack<long> ColliedWith { get; set; }
+		public long EntID { get; }
+		public ConcurrentStack<IColInfo> ColliedWith { get; set; }
 		public double TimeInbetweenRuns { get; set; }
 		public int Damage { get; set; }
 
-		public DamageCom(ComponentManager componentManager, long healthComID)
+		public DamageCom(long entID, EntityManager entityManager, long healthComID)
 		{
-			CanBeTriggered = new List<long>();
+			_entityManager = entityManager;
 			_healthComID = healthComID;
-			_componentManager = componentManager;
-			ColliedWith = new ConcurrentStack<long>();
+			ColliedWith = new ConcurrentStack<IColInfo>();
 		}
 
 		public void Action()
 		{
-			if(ColliedWith.Any(i => CanBeTriggered.Contains(i)))
+			while(ColliedWith.Count > 0)
 			{
-				_componentManager.GetComponent<IHealthCom>(_healthComID).HP += Damage;
+				ColliedWith.TryPop(out IColInfo next);
+				var otherEnt = _entityManager.GetEntiy<GameObject>(next.EntID);
+
+				if (otherEnt.HasComType<IHealthCom>())
+				{
+					otherEnt.GetFirstComponent<IHealthCom>().HP += Damage;
+				}
 			}
 		}
-
 	}
 }

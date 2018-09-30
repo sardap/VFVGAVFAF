@@ -15,8 +15,11 @@ namespace VFVGAVFAF.src.Components
 
 		public double TimeInbetweenRuns { get; set; }
 
-		public PlaySoundEventCom(SoundManager soundManager, string song)
+		public long EntID { get; set; }
+
+		public PlaySoundEventCom(long entID, SoundManager soundManager, string song)
 		{
+			EntID = entID;
 			_song = song;
 			_soundManager = soundManager;
 		}

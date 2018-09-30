@@ -10,38 +10,42 @@ namespace VFVGAVFAF.src.Components
 	class RectCollisionCom : ICollisionCom
 	{
 		private IGameEvenetPostMaster _gameEvenetPostMaster;
-		private ComponentManager _componentManager;
+		private EntityManager _entityManager;
 		private long _rectPosComID;
 
+		public long EntID { get; set; }
 		public Paultangle GetHitBox
 		{
 			get
 			{
-				return _componentManager.GetComponent<RectPosCom>(_rectPosComID).Rectangle;
+				return _entityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(_rectPosComID).Rectangle;
 			}
 		}
 		public List<long> GameEventComs { get; set; }
 
-		public RectCollisionCom(ComponentManager componentManager, IGameEvenetPostMaster gameEvenetPostMaster, long rectPosComID)
+		public RectCollisionCom(long entID, EntityManager entityManager, IGameEvenetPostMaster gameEvenetPostMaster, long rectPosComID)
 		{
-			_componentManager = componentManager;
+			EntID = entID;
+			_entityManager = entityManager;
 			_gameEvenetPostMaster = gameEvenetPostMaster;
 			_rectPosComID = rectPosComID;
 			GameEventComs = new List<long>();
 		}
 
-		public void Check(long otherID)
+		public void Check(long otherEntID, long otherID)
 		{
-			var hitBox = _componentManager.GetComponent<RectPosCom>(_rectPosComID); // Safe
-			var otherCom = _componentManager.GetComponent<ICollisionCom>(otherID); // Safe
+			var ent = _entityManager.GetEntiy<GameObject>(EntID);
+			var hitBox = ent.GetComponent<RectPosCom>(_rectPosComID); // Safe
+			var otherEnt = _entityManager.GetEntiy<GameObject>(otherEntID);
+			var otherCom = otherEnt.GetComponent<ICollisionCom>(otherID); // Safe
 			var otherHitBox = otherCom.GetHitBox; // Not Safe
 			if (hitBox.Rectangle.Intersects(otherHitBox)) // Note Safe
 			{
 				foreach(var gameEventID in GameEventComs)
 				{
-					if(_componentManager.GetComponent<IGameEventCom>(gameEventID) is IColsionGameEventCom)
+					if(ent.GetComponent<IGameEventCom>(gameEventID) is IColsionGameEventCom)
 					{
-						_componentManager.GetComponent<IColsionGameEventCom>(gameEventID).ColliedWith.Push(otherID);
+						ent.GetComponent<IColsionGameEventCom>(gameEventID).ColliedWith.Push(new ColInfo(otherEntID));
 					}
 
 					_gameEvenetPostMaster.Add(gameEventID);

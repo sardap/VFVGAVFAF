@@ -10,9 +10,25 @@ namespace VFVGAVFAF.src.Components
 	class RectPosCom : IPostionComponet
 	{
 		private Paultangle _rectangle = new Paultangle();
-		private ComponentManager _componentManager;
+		private EntityManager _entityManager;
 		private Paultangle _startingPostion;
-	
+
+		public long EntID { get; set; }
+
+		public RectPosCom(long entID, EntityManager entityManager, Rectangle rectangle)
+		{
+			EntID = entID;
+			_entityManager = entityManager;
+			PostionConstrantComs = new List<long>();
+			_rectangle = new Paultangle(rectangle);
+			_startingPostion = new Paultangle(_rectangle);
+		}
+
+		public RectPosCom(long entID, EntityManager componentManager, Postion2D postion2D) : this(entID, componentManager, postion2D.ToRectangle(0, 0))
+		{
+		}
+
+
 		public void SetPostion(Postion2D postion2D)
 		{
 			var oldPostion = new Postion2D(_rectangle.Postion2D);
@@ -21,9 +37,11 @@ namespace VFVGAVFAF.src.Components
 
 			bool result = true;
 
+			var ent = _entityManager.GetEntiy<GameObject>(EntID);
+
 			foreach(var i in PostionConstrantComs)
 			{
-				result = result && _componentManager.GetComponent<IPostionConstrantCom>(i).Check(Rectangle);
+				result = result && ent.GetComponent<IPostionConstrantCom>(i).Check(Rectangle);
 			}
 
 			if(!result)
@@ -46,17 +64,5 @@ namespace VFVGAVFAF.src.Components
 		public List<long> PostionConstrantComs { get; set; }
 
 		public Paultangle Rectangle { get { return _rectangle; } }
-
-		public RectPosCom(ComponentManager componentManager, Rectangle rectangle)
-		{
-			_componentManager = componentManager;
-			PostionConstrantComs = new List<long>();
-			_rectangle = new Paultangle(rectangle);
-			_startingPostion = new Paultangle(_rectangle);
-		}
-
-		public RectPosCom(ComponentManager componentManager, Postion2D postion2D) : this(componentManager, postion2D.ToRectangle(0, 0))
-		{
-		}
 	}
 }

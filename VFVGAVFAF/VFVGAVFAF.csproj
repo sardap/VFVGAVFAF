@@ -48,9 +48,11 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ColInfo.cs" />
     <Compile Include="src\Components\GoalReachedCom.cs" />
     <Compile Include="src\Components\HealthCom.cs" />
     <Compile Include="src\Components\DamageCom.cs" />
+    <Compile Include="src\Components\IColInfo.cs" />
     <Compile Include="src\Components\ICollisionCom.cs" />
     <Compile Include="src\Components\IColsionGameEvent.cs" />
     <Compile Include="src\Components\IGameEvent.cs" />

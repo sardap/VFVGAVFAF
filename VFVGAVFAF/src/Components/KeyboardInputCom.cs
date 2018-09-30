@@ -9,18 +9,22 @@ namespace VFVGAVFAF.src.Components
 {
 	class KeyboardInputCom : IContolerCom
 	{
-		private ComponentManager _componentManager;
+		private EntityManager _entityManager;
 		private long _posComID;
 
-		public KeyboardInputCom(ComponentManager componentManager, long posComID)
+		public long EntID { get; set; }
+
+		public KeyboardInputCom(long entID, EntityManager entityManager, long posComID)
 		{
+			EntID = entID;
 			_posComID = posComID;
-			_componentManager = componentManager;
+			_entityManager = entityManager;
 		}
 
 		public void Update(double deltaTime)
 		{
-			var position = _componentManager.GetComponent<IPostionComponet>(_posComID).GetPostion();
+			var posCom = _entityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(_posComID);
+			var position = posCom.GetPostion();
 			var oldPostion = new Postion2D(position.X, position.Y);
 
 			var state = Keyboard.GetState();
@@ -37,7 +41,7 @@ namespace VFVGAVFAF.src.Components
 				position.Y += speed;
 
 			if(position.X != oldPostion.X || position.Y != oldPostion.Y)
-				_componentManager.GetComponent<IPostionComponet>(_posComID).SetPostion(position);
+				posCom.SetPostion(position);
 		}
 	}
 }

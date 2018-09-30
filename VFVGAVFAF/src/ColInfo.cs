@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src
 {
-	interface IComponent
+	class ColInfo : IColInfo
 	{
-		long EntID { get; }
+		public long EntID { get; set; }
+
+		public ColInfo(long entID)
+		{
+			EntID = entID;
+		}
 	}
 }

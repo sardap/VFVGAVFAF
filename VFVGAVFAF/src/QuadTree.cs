@@ -51,6 +51,16 @@ namespace VFVGAVFAF.src
 
 		private void CheckCollsions(IList<long> collisions)
 		{
+			foreach(var id in collisions)
+			{
+				foreach (var otherID in Retrieve(id))
+				{
+					var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
+					_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID);
+				}
+			}
+
+			/*
 			Parallel.ForEach(collisions, id => 
 			{
 				foreach (var otherID in Retrieve(id))
@@ -58,6 +68,7 @@ namespace VFVGAVFAF.src
 					_componentManager.GetComponent<ICollisionCom>(id).Check(otherID);
 				}
 			});
+			*/
 		}
 
 		private void Clear()
