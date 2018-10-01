@@ -12,7 +12,8 @@ namespace VFVGAVFAF.src.Components
 		private long _posComID;
 
 		public long EntID { get; set; }
-		public double TimeInbetweenRuns { get; set; }
+		public double TimeToComplete { get; set; }
+		public double Cooldown { get; set; }
 
 		public RespawnCom(long entID, EntityManager entityManger, long posComID)
 		{

@@ -93,12 +93,14 @@ namespace VFVGAVFAF.src
 
 			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
 
-			for (int i = 0; i < 1; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
 			}
 
-			_senceManger.Load(senceData);
+			senceData.SaveFile("sence.json");
+
+			_senceManger.Load(Utils.LoadSenceDataFromFile("sence.json").GetAwaiter().GetResult());
 		}
 	}
 }

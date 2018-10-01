@@ -104,7 +104,8 @@ namespace VFVGAVFAF.src
 						new DamageCom(EntityManager, _healthComID)
 						{
 							Damage = _damage,
-							TimeInbetweenRuns = 1
+							TimeToComplete = 0,
+							Cooldown = 1
 						}
 					)
 				}

@@ -14,7 +14,8 @@ namespace VFVGAVFAF.src.Components
 
 		public long EntID { get; set; }
 		public IColInfo ColliedWith { get; set; }
-		public double TimeInbetweenRuns { get; set; }
+		public double TimeToComplete { get; set; }
+		public double Cooldown { get; set; }
 		public int Damage { get; set; }
 
 		public DamageCom(EntityManager entityManager, long healthComID)

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using VFVGAVFAF.src.Sence;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace VFVGAVFAF.src
 {
@@ -65,6 +67,18 @@ namespace VFVGAVFAF.src
 
 				return false;
 			}
+		}
+
+		public async static Task<ISenceData> LoadSenceDataFromFile(string file)
+		{
+			SenceData senceData = null;
+
+			using (StreamReader streamReader = new StreamReader(file))
+			{
+				senceData = JsonConvert.DeserializeObject<SenceData>(await streamReader.ReadToEndAsync());
+			}
+
+			return senceData;
 		}
 	}
 }

@@ -8,7 +8,8 @@ namespace VFVGAVFAF.src.Components
 {
 	class GoalReachedCom : IGameEventCom
 	{
-		public double TimeInbetweenRuns { get; set; }
+		public double TimeToComplete { get; set; }
+		public double Cooldown { get; set; }
 
 		public long EntID { get; set; }
 

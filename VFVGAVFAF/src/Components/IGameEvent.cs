@@ -8,8 +8,9 @@ namespace VFVGAVFAF.src.Components
 {
 	interface IGameEventCom : IComponent
 	{
-		double TimeInbetweenRuns { get; }
+		double TimeToComplete { get; }
 
+		double Cooldown { get; }
 
 		void Action();
 	}

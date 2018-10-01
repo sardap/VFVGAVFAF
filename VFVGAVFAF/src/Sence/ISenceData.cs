@@ -10,5 +10,7 @@ namespace VFVGAVFAF.src.Sence
 	{
 		IList<GameObjectFactory.GameObjects> ToCreate { get; }
 		IList<long> CreatedEntites { get; }
+
+		Task SaveFile(string fileName);
 	}
 }

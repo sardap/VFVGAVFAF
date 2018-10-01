@@ -13,7 +13,8 @@ namespace VFVGAVFAF.src.Components
 		ISenceData _nextSence;
 
 		public long EntID { get; set; }
-		public double TimeInbetweenRuns { get { return 0; } }
+		public double Cooldown { get; set; }
+		public double TimeToComplete { get { return 0; } }
 
 		public LoadMiniGameCom(long entID, ISenceManger senceManger, ISenceData senceData)
 		{

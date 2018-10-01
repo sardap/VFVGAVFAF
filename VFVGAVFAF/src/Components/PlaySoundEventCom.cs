@@ -13,7 +13,8 @@ namespace VFVGAVFAF.src.Components
 		private SoundManager _soundManager;
 		private string _song;
 
-		public double TimeInbetweenRuns { get; set; }
+		public double TimeToComplete { get; set; }
+		public double Cooldown { get; set; }
 
 		public long EntID { get; set; }
 
