@@ -8,6 +8,6 @@ namespace VFVGAVFAF.src
 {
 	interface IComponent
 	{
-		long EntID { get; }
+		long EntID { get; set; }
 	}
 }

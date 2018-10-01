@@ -101,7 +101,7 @@ namespace VFVGAVFAF.src
 				{
 					gameObject.AddComponent
 					(
-						new DamageCom(entID, EntityManager, _healthComID)
+						new DamageCom(EntityManager, _healthComID)
 						{
 							Damage = _damage,
 							TimeInbetweenRuns = 1
@@ -241,7 +241,10 @@ namespace VFVGAVFAF.src
 			gameObject.RegsiterToManager(colssionComID, ColssionManger);
 			_playerColsionCom = colssionComID;
 
-			var playerHPCom = gameObject.AddComponent(new HealthCom(entID, GameEvenetPostMaster, 100, 100, 100));
+			var playerHPCom = gameObject.AddComponent
+			(
+				new HealthCom(entID, GameEvenetPostMaster, 100, 100, 100)
+			);
 			gameObject.RegsiterToManager(playerHPCom, StepManager);
 			_healthComID = playerHPCom;
 

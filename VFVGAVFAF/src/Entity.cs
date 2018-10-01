@@ -109,8 +109,9 @@ namespace VFVGAVFAF.src
 		{
 			var id = _componentManager.CreateComponet(_entiyID, com);
 			_ownedComs.Add(id, typeof(ComT));
+			com.EntID = _entiyID;
 
-			if(!_ownedComsTypes.ContainsKey(typeof(ComT)))
+			if (!_ownedComsTypes.ContainsKey(typeof(ComT)))
 			{
 				_ownedComsTypes.TryAdd(typeof(ComT), new List<long>());
 			}

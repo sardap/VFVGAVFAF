@@ -31,8 +31,9 @@ namespace VFVGAVFAF.src
 
 			if(_counts[id] < numberOfInstances)
 			{
+				Console.WriteLine("ADDING POST ID{0} COUNTS:{1} TTC:{2}", id, _counts[id], gameEvenet.TimeInbetweenRuns);
 				_posts.Push(new PostData { TimeToComplete = gameEvenet.TimeInbetweenRuns, GameEventID = id});
-				_counts[id]++;
+				_counts.TryUpdate(id, _counts[id] + 1, _counts[id]);
 			}
 		}
 
@@ -40,9 +41,11 @@ namespace VFVGAVFAF.src
 		{
 			ConcurrentStack<IPostData> nextStack = new ConcurrentStack<IPostData>();
 
-			foreach(var post in _posts)
+			while(_posts.Count > 0)
 			{
+				_posts.TryPop(out IPostData post);
 				post.TimeToComplete -= deltaTime;
+				Console.WriteLine("ID{0}\tTIME LEFT:{1}", post.GameEventID, post.TimeToComplete);
 
 				if(post.TimeToComplete < 0)
 				{

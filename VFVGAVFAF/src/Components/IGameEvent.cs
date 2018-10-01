@@ -10,6 +10,7 @@ namespace VFVGAVFAF.src.Components
 	{
 		double TimeInbetweenRuns { get; }
 
+
 		void Action();
 	}
 }

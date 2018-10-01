@@ -45,7 +45,7 @@ namespace VFVGAVFAF.src.Components
 				{
 					if(ent.GetComponent<IGameEventCom>(gameEventID) is IColsionGameEventCom)
 					{
-						ent.GetComponent<IColsionGameEventCom>(gameEventID).ColliedWith.Push(new ColInfo(otherEntID));
+						ent.GetComponent<IColsionGameEventCom>(gameEventID).ColliedWith = new ColInfo(otherEntID);
 					}
 
 					_gameEvenetPostMaster.Add(gameEventID);

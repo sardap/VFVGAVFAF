@@ -12,29 +12,26 @@ namespace VFVGAVFAF.src.Components
 		private EntityManager _entityManager;
 		private long _healthComID;
 
-		public long EntID { get; }
-		public ConcurrentStack<IColInfo> ColliedWith { get; set; }
+		public long EntID { get; set; }
+		public IColInfo ColliedWith { get; set; }
 		public double TimeInbetweenRuns { get; set; }
 		public int Damage { get; set; }
 
-		public DamageCom(long entID, EntityManager entityManager, long healthComID)
+		public DamageCom(EntityManager entityManager, long healthComID)
 		{
 			_entityManager = entityManager;
 			_healthComID = healthComID;
-			ColliedWith = new ConcurrentStack<IColInfo>();
 		}
 
 		public void Action()
 		{
-			while(ColliedWith.Count > 0)
-			{
-				ColliedWith.TryPop(out IColInfo next);
-				var otherEnt = _entityManager.GetEntiy<GameObject>(next.EntID);
+			var otherEnt = _entityManager.GetEntiy<GameObject>(ColliedWith.EntID);
 
-				if (otherEnt.HasComType<IHealthCom>())
-				{
-					otherEnt.GetFirstComponent<IHealthCom>().HP += Damage;
-				}
+			if (otherEnt.HasComType<IHealthCom>())
+			{
+				var otherEntHPCom = otherEnt.GetFirstComponent<IHealthCom>();
+				Console.WriteLine("CUR HP {0}, AFTER DAMAGE {1}", otherEntHPCom.HP, otherEntHPCom.HP + Damage);
+				otherEntHPCom.HP += Damage;
 			}
 		}
 	}

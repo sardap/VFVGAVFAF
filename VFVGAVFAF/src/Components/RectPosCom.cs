@@ -41,7 +41,7 @@ namespace VFVGAVFAF.src.Components
 
 			foreach(var i in PostionConstrantComs)
 			{
-				result = result && ent.GetComponent<IPostionConstrantCom>(i).Check(Rectangle);
+				result = result && ent.GetComponent<IPostionConstrantCom>(i).Check(_rectangle);
 			}
 
 			if(!result)

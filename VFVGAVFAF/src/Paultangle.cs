@@ -18,9 +18,14 @@ namespace VFVGAVFAF.src
 		public double X { get { return Postion2D.X; } }
 		public double Y { get { return Postion2D.Y; } }
 
+		public double X1 { get { return X; } }
+		public double Y1 { get { return Y; } }
+		public double X2 { get { return X + Width; } }
+		public double Y2 { get { return Y + Height; } }
+
 		public double Top { get { return Postion2D.Y; } }
 
-		public double Bottom { get { return Postion2D.Y+ Height; } }
+		public double Bottom { get { return Postion2D.Y + Height; } }
 
 		public double Left { get { return Postion2D.X; } }
 
@@ -51,10 +56,13 @@ namespace VFVGAVFAF.src
 
 		public bool Intersects(Paultangle other)
 		{
-			return !(Left > other.Right ||
-			 other.Right < Left ||
-			 other.Top > Bottom ||
-			 other.Bottom < Top);
+			Paultangle RectA = this;
+			Paultangle RectB = other;
+
+			return RectA.X1 < RectB.X2 && 
+				RectA.X2 > RectB.X1 &&
+				RectA.Y1 < RectB.Y2 && 
+				RectA.Y2 > RectB.Y1;
 		}
 
 		public Rectangle ToMonoGameRectangle()

@@ -55,8 +55,11 @@ namespace VFVGAVFAF.src
 			{
 				foreach (var otherID in Retrieve(id))
 				{
-					var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
-					_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID);
+					if(id != otherID)
+					{
+						var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
+						_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID);
+					}
 				}
 			}
 

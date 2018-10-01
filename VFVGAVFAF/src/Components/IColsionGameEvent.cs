@@ -10,6 +10,6 @@ namespace VFVGAVFAF.src.Components
 {
 	interface IColsionGameEventCom : IGameEventCom
 	{
-		ConcurrentStack<IColInfo> ColliedWith { get; set; }
+		IColInfo ColliedWith { get; set; }
 	}
 }

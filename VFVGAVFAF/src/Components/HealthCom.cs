@@ -70,7 +70,7 @@ namespace VFVGAVFAF.src.Components
 		{
 			EntID = entID;
 			_gameEvenetPostMaster = gameEvenetPostMaster;
-			HP = HP;
+			HP = hp;
 			MaxHP = maxHP;
 			StartingHP = startingHP;
 			Evenets = new List<IHPTrigger>();
