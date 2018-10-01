@@ -38,3 +38,9 @@
 /processorParam:Quality=Best
 /build:Sounds/dmgt.wav
 
+#begin Sounds/player_respawn.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/player_respawn.wav
+

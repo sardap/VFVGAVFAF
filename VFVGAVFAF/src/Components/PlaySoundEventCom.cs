@@ -18,9 +18,8 @@ namespace VFVGAVFAF.src.Components
 
 		public long EntID { get; set; }
 
-		public PlaySoundEventCom(long entID, SoundManager soundManager, string song)
+		public PlaySoundEventCom(SoundManager soundManager, string song)
 		{
-			EntID = entID;
 			_song = song;
 			_soundManager = soundManager;
 		}

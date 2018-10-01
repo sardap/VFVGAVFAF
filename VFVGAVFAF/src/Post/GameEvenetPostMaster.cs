@@ -50,11 +50,15 @@ namespace VFVGAVFAF.src
 
 			foreach(var entry in _cooldownTable)
 			{
-				var id = entry.Key;
-				var cooldown = _cooldownTable[id];
-				var com = _componentManager.GetComponent<IGameEventCom>(id);
-				double nextValue = cooldown <= 0 ? com.Cooldown : _cooldownTable[id] - deltaTime;
-				_cooldownTable.TryUpdate(id, nextValue, _cooldownTable[id]);
+				if(entry.Value > 0)
+				{
+					var id = entry.Key;
+					var cooldown = _cooldownTable[id];
+					var com = _componentManager.GetComponent<IGameEventCom>(id);
+					double nextValue = cooldown <= 0 ? com.Cooldown : _cooldownTable[id] - deltaTime;
+					_cooldownTable.TryUpdate(id, nextValue, _cooldownTable[id]);
+					Console.WriteLine("ID:{0}\tCOOL DOWN:{1}", id, cooldown);
+				}
 			}
 
 			while (_posts.Count > 0)

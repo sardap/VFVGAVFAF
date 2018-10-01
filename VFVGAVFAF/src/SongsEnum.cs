@@ -9,5 +9,6 @@ namespace VFVGAVFAF.src
 	class Songs
 	{
 		public const string DAMAGE_TAKEN = "Sounds/dmgt";
+		public const string PLAYER_RESPAWN = "Sounds/player_respawn";
 	}
 }

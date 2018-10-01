@@ -58,9 +58,9 @@ namespace VFVGAVFAF.src
 			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle));
 			var rectRendCom = gameObject.AddComponent(new RectRendCom(entID, EntityManager, rectPos)
 			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK),
+				Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Blue),
 				SpriteBatch = SpriteBatch,
-				Color = Color.Red
+				Color = Color.Blue
 			});
 			gameObject.RegsiterToManager(rectRendCom, RenderManager);
 
@@ -142,7 +142,7 @@ namespace VFVGAVFAF.src
 			var rectRendConstrant = gameObject.AddComponent(
 				new RectOutlineRendCom(entID, EntityManager, rectConstBoxID)
 				{
-					Texture = TextureManager.GetTexture(Textures.BLOCK),
+					Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Green),
 					SpriteBatch = SpriteBatch,
 					Color = Color.Green,
 					LineWidth = 1
@@ -166,20 +166,9 @@ namespace VFVGAVFAF.src
 			));
 			var rectPosID = gameObject.AddComponent(rectPos);
 
-			var texture = TextureManager.GetTexture(Textures.BLOCK);
-			Color[] tcolor = new Color[texture.Width * texture.Height];
-			texture.GetData(tcolor);
-
-			for (int i = 0; i < tcolor.Length; i++)
-			{
-				tcolor[i].R = 255;
-			}
-
-			texture.SetData(tcolor);
-
 			var rectRend = new RectRendCom(entID, EntityManager, rectPosID)
 			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK),
+				Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Red),
 				SpriteBatch = SpriteBatch,
 				Color = Color.Red
 			};
@@ -227,7 +216,7 @@ namespace VFVGAVFAF.src
 
 			var rectRend = new RectRendCom(entID, EntityManager, rectPosID)
 			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK),
+				Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Black),
 				SpriteBatch = SpriteBatch,
 				Color = Color.Black
 			};
@@ -250,17 +239,18 @@ namespace VFVGAVFAF.src
 			_healthComID = playerHPCom;
 
 			var respwanComID = gameObject.AddComponent(new RespawnCom(entID, EntityManager, rectPosID));
+			var respawnSoundComID = gameObject.AddComponent(new PlaySoundEventCom(SoundManager, Songs.PLAYER_RESPAWN));
 
 			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
 				new HealthCom.HPOpTrigger()
 				{
 					Opreator = HealthCom.HPOps.Less,
 					Value = 0,
-					GameEvents = new List<long>() { respwanComID }
+					GameEvents = new List<long>() { respwanComID, respawnSoundComID }
 				}
 			);
 
-			var soundCom = gameObject.AddComponent(new PlaySoundEventCom(entID, SoundManager, Songs.DAMAGE_TAKEN));
+			var soundCom = gameObject.AddComponent(new PlaySoundEventCom(SoundManager, Songs.DAMAGE_TAKEN));
 
 			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
 				new HealthCom.HPChangeTrigger()
