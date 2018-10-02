@@ -13,6 +13,7 @@ namespace VFVGAVFAF.src
 
 		public ComponentManager ComponentManager { get; set;}
 
+
 		public void Render(double deltaTime)
 		{
 			foreach (var renderable in _renderList)

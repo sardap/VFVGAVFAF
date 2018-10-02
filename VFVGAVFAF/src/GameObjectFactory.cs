@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VFVGAVFAF.src.Components;
+using VFVGAVFAF.src.Json;
 using VFVGAVFAF.src.Managers;
+using VFVGAVFAF.src.Needs;
 using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src
@@ -18,7 +20,8 @@ namespace VFVGAVFAF.src
 		{
 			SqaurePlayer,
 			SqaureGoal,
-			EnemeySqaure
+			EnemeySqaure,
+			TestEntiy
 		}
 
 		private delegate long CreateGameObject();
@@ -31,8 +34,8 @@ namespace VFVGAVFAF.src
 		public InputManger InputManger { get; set; }
 		public ColssionComManger ColssionManger { get; set; }
 		public IStepManager StepManager { get; set; }
-		public TextureManager TextureManager { get; set; }
 		public SoundManager SoundManager { get; set; }
+		public TextureManager TextureManager { get; set; }
 		public ContentManager Content { get; set; }
 		public ISenceManger SenceManger { get; set; }
 		public SpriteBatch SpriteBatch { get; set; }
@@ -43,11 +46,65 @@ namespace VFVGAVFAF.src
 			_gameObjectCreators.Add(GameObjects.SqaurePlayer, new CreateGameObject(CreateSqaurePlayer));
 			_gameObjectCreators.Add(GameObjects.SqaureGoal, new CreateGameObject(CreateSqaureGoal));
 			_gameObjectCreators.Add(GameObjects.EnemeySqaure, new CreateGameObject(CreateEnemeySqaure));
+			_gameObjectCreators.Add(GameObjects.TestEntiy, new CreateGameObject(CreateTestSqaure));
 		}
 
 		public long CreateObjectOfType(GameObjects gameObjects)
 		{
 			return _gameObjectCreators[gameObjects]();
+		}
+
+		public long AddCreatedGameObject(EnityToJson jsonGameObject)
+		{
+			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
+			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+			jsonGameObject.Components.ForEach(com => 
+			{
+				AddressNeeds(com);
+				long id = gameObject.AddComponent(com);
+				RegsiterToMangers(gameObject, com, id);
+
+			});
+			return entID;
+		}
+
+		private void RegsiterToMangers(GameObject gameObject, IComponent component, long comID)
+		{
+			if (component is IRenderableComponent)
+			{
+				gameObject.RegsiterToManager(comID, RenderManager);
+			}
+
+			if (component is IContolerCom)
+			{
+				gameObject.RegsiterToManager(comID, InputManger);
+			}
+
+			if (component is ICollisionCom)
+			{
+				gameObject.RegsiterToManager(comID, ColssionManger);
+			}
+
+			if(component is IStepCom)
+			{
+				gameObject.RegsiterToManager(comID, StepManager);
+			}
+		}
+
+		private void AddressNeeds(IComponent component)
+		{
+			if (component is INeedEnityManger)
+			{
+				((INeedEnityManger)component).EntityManager = EntityManager;
+			}
+			if (component is INeedSpriteBatch)
+			{
+				((INeedSpriteBatch)component).SpriteBatch = SpriteBatch;
+			}
+			if (component is INeedTextureManager)
+			{
+				((INeedTextureManager)component).TextureManager = TextureManager;
+			}
 		}
 
 		private long CreateSqaure(Rectangle rectangle)
@@ -56,13 +113,35 @@ namespace VFVGAVFAF.src
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
 			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle));
-			var rectRendCom = gameObject.AddComponent(new RectRendCom(entID, EntityManager, rectPos)
+			var rectRendCom = gameObject.AddComponent(new RectRendCom(EntityManager, rectPos)
 			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Blue),
-				SpriteBatch = SpriteBatch,
-				Color = Color.Blue
+				TextureName = Textures.BLOCK,
+				Color = Color.Blue,
+				TextureManager = TextureManager,
+				SpriteBatch = SpriteBatch
 			});
 			gameObject.RegsiterToManager(rectRendCom, RenderManager);
+
+			return entID;
+		}
+
+		private long CreateTestSqaure()
+		{
+			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
+			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+
+			Rectangle rectangle = new Rectangle(0, 0, 100, 100);
+
+			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle));
+			var rectRendCom = gameObject.AddComponent(new RectRendCom(EntityManager, rectPos)
+			{
+				TextureName = Textures.BLOCK,
+				Color = Color.Black,
+				TextureManager = TextureManager,
+				SpriteBatch = SpriteBatch
+			});
+			gameObject.RegsiterToManager(rectRendCom, RenderManager);
+
 
 			return entID;
 		}
@@ -105,7 +184,7 @@ namespace VFVGAVFAF.src
 						{
 							Damage = _damage,
 							TimeToComplete = 0,
-							Cooldown = 1
+							Cooldown = 0.5
 						}
 					)
 				}
@@ -166,11 +245,12 @@ namespace VFVGAVFAF.src
 			));
 			var rectPosID = gameObject.AddComponent(rectPos);
 
-			var rectRend = new RectRendCom(entID, EntityManager, rectPosID)
+			var rectRend = new RectRendCom(EntityManager, rectPosID)
 			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Red),
-				SpriteBatch = SpriteBatch,
-				Color = Color.Red
+				TextureName = Textures.BLOCK,
+				Color = Color.Red,
+				TextureManager = TextureManager,
+				SpriteBatch = SpriteBatch
 			};
 			long rectRendID = gameObject.AddComponent(rectRend);
 			gameObject.RegsiterToManager(rectRendID, RenderManager);
@@ -214,11 +294,12 @@ namespace VFVGAVFAF.src
 			rectPos.PostionConstrantComs.Add(constrantID);
 			var rectPosID = gameObject.AddComponent(rectPos);
 
-			var rectRend = new RectRendCom(entID, EntityManager, rectPosID)
+			var rectRend = new RectRendCom(EntityManager, rectPosID)
 			{
-				Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Black),
-				SpriteBatch = SpriteBatch,
-				Color = Color.Black
+				TextureName = Textures.BLOCK,
+				Color = Color.Black,
+				TextureManager = TextureManager,
+				SpriteBatch = SpriteBatch
 			};
 			long rectRendID = gameObject.AddComponent(rectRend);
 			gameObject.RegsiterToManager(rectRendID, RenderManager);

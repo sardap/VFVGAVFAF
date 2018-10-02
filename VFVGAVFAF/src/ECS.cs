@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using VFVGAVFAF.src.Managers;
 using VFVGAVFAF.src.Sence;
+using Newtonsoft.Json;
+using VFVGAVFAF.src.Json;
+using System.IO;
 
 namespace VFVGAVFAF.src
 {
@@ -91,16 +94,53 @@ namespace VFVGAVFAF.src
 		{
 			ISenceData senceData = new SenceData();
 
+			//senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestEntiy);
+			/*
 			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
 
 			for (int i = 0; i < 4; i++)
 			{
 				senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
 			}
+			*/
 
 			senceData.SaveFile("sence.json");
 
+			JsonSerializerSettings _settings = new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.Auto
+			};
+
 			_senceManger.Load(Utils.LoadSenceDataFromFile("sence.json").GetAwaiter().GetResult());
+
+			EnityToJson jsonGameobject;
+			string jsonString;
+
+			if (false)
+			{
+				jsonGameobject = new EnityToJson();
+				jsonGameobject.PopluateFromEntiy(_entityManager.GetEntiy<GameObject>(0));
+
+				jsonString = JsonConvert.SerializeObject(jsonGameobject, typeof(EnityToJson), _settings);
+
+				using (StreamWriter streamWriter = new StreamWriter("entriy.json"))
+				{
+					streamWriter.Write(jsonString);
+				}
+			}
+			else
+			{
+				using (StreamReader streamReader = new StreamReader("entriy.json"))
+				{
+					jsonString = streamReader.ReadToEnd();
+				}
+			}
+			
+
+			jsonGameobject = JsonConvert.DeserializeObject<EnityToJson>(jsonString, _settings);
+
+			_gameObjectFactory.AddCreatedGameObject(jsonGameobject);
+
 		}
 	}
 }

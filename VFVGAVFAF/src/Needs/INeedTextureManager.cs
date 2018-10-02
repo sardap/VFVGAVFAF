@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src
+namespace VFVGAVFAF.src.Needs
 {
-	interface IComponent
+	interface INeedTextureManager
 	{
 		[JsonIgnore]
-		long EntID { get; set; }
+		TextureManager TextureManager { get; set; }
 	}
 }

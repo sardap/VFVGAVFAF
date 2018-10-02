@@ -4,24 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RectPosCom : IPostionComponet
+	class RectPosCom : IPostionComponet, INeedEnityManger
 	{
-		private Paultangle _rectangle = new Paultangle();
-		private EntityManager _entityManager;
 		private Paultangle _startingPostion;
+		public EntityManager EntityManager { get; set; }
 
+		public Paultangle Paultangle { get; set; }
 		public long EntID { get; set; }
+		[JsonIgnore]
+		public Paultangle Rectangle { get { return Paultangle; } }
 
 		public RectPosCom(long entID, EntityManager entityManager, Rectangle rectangle)
 		{
 			EntID = entID;
-			_entityManager = entityManager;
+			EntityManager = entityManager;
 			PostionConstrantComs = new List<long>();
-			_rectangle = new Paultangle(rectangle);
-			_startingPostion = new Paultangle(_rectangle);
+			Paultangle = new Paultangle(rectangle);
+			_startingPostion = new Paultangle(Paultangle);
+		}
+
+		public RectPosCom()
+		{
+			Paultangle = new Paultangle();
+			_startingPostion = new Paultangle(Paultangle);
 		}
 
 		public RectPosCom(long entID, EntityManager componentManager, Postion2D postion2D) : this(entID, componentManager, postion2D.ToRectangle(0, 0))
@@ -31,29 +40,29 @@ namespace VFVGAVFAF.src.Components
 
 		public void SetPostion(Postion2D postion2D)
 		{
-			var oldPostion = new Postion2D(_rectangle.Postion2D);
-			_rectangle.Postion2D.X = postion2D.X;
-			_rectangle.Postion2D.Y = postion2D.Y;
+			var oldPostion = new Postion2D(Paultangle.Postion2D);
+			Paultangle.Postion2D.X = postion2D.X;
+			Paultangle.Postion2D.Y = postion2D.Y;
 
 			bool result = true;
 
-			var ent = _entityManager.GetEntiy<GameObject>(EntID);
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
 
 			foreach(var i in PostionConstrantComs)
 			{
-				result = result && ent.GetComponent<IPostionConstrantCom>(i).Check(_rectangle);
+				result = result && ent.GetComponent<IPostionConstrantCom>(i).Check(Paultangle);
 			}
 
 			if(!result)
 			{
-				_rectangle.Postion2D.X = oldPostion.X;
-				_rectangle.Postion2D.Y = oldPostion.Y;
+				Paultangle.Postion2D.X = oldPostion.X;
+				Paultangle.Postion2D.Y = oldPostion.Y;
 			}
 		}
 
 		public Postion2D GetPostion()
 		{
-			return new Postion2D(_rectangle.Postion2D);
+			return new Postion2D(Paultangle.Postion2D);
 		}
 
 		public void ResetPostion()
@@ -63,6 +72,5 @@ namespace VFVGAVFAF.src.Components
 		
 		public List<long> PostionConstrantComs { get; set; }
 
-		public Paultangle Rectangle { get { return _rectangle; } }
 	}
 }

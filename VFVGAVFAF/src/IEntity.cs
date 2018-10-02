@@ -11,6 +11,8 @@ namespace VFVGAVFAF.src
 		int TypeID { get; }
 		long GetID { get; }
 
+		List<IComponent> GetComponents { get; }
+
 		void SetID(long id);
 
 		void UnregstierComsFromMangers();

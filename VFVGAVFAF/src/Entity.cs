@@ -49,6 +49,21 @@ namespace VFVGAVFAF.src
 			get { return typeof(T).GetHashCode(); }
 		}
 
+		public List<IComponent> GetComponents
+		{
+			get
+			{
+				var result = new List<IComponent>();
+
+				foreach(var entry in _ownedComs)
+				{
+					result.Add(GetComponent<IComponent>(entry.Key));
+				}
+
+				return result;
+			}
+		}
+
 		public void RegsiterToManager(long comID, IManger manger)
 		{
 			manger.Regsiter(comID);

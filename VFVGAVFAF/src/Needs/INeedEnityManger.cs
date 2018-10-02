@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src
+namespace VFVGAVFAF.src.Components
 {
-	interface IComponent
+	interface INeedEnityManger
 	{
 		[JsonIgnore]
-		long EntID { get; set; }
+		EntityManager EntityManager { get; set; }
 	}
 }

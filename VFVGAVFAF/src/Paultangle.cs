@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +16,25 @@ namespace VFVGAVFAF.src
 
 		public int Height { get; set; }
 
+		[JsonIgnore]
 		public double X { get { return Postion2D.X; } }
+		[JsonIgnore]
 		public double Y { get { return Postion2D.Y; } }
-
+		[JsonIgnore]
 		public double X1 { get { return X; } }
+		[JsonIgnore]
 		public double Y1 { get { return Y; } }
+		[JsonIgnore]
 		public double X2 { get { return X + Width; } }
+		[JsonIgnore]
 		public double Y2 { get { return Y + Height; } }
-
+		[JsonIgnore]
 		public double Top { get { return Postion2D.Y; } }
-
+		[JsonIgnore]
 		public double Bottom { get { return Postion2D.Y + Height; } }
-
+		[JsonIgnore]
 		public double Left { get { return Postion2D.X; } }
-
+		[JsonIgnore]
 		public double Right { get { return Postion2D.X + Width; } }
 
 		public Paultangle(double x, double y, int width, int height)
