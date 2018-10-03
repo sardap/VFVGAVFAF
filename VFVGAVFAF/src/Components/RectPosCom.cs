@@ -8,13 +8,15 @@ using Newtonsoft.Json;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RectPosCom : IPostionComponet, INeedEnityManger
+	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias
 	{
 		private Paultangle _startingPostion;
 		public EntityManager EntityManager { get; set; }
 
 		public Paultangle Paultangle { get; set; }
 		public long EntID { get; set; }
+		public string Alias { get; set; }
+
 		[JsonIgnore]
 		public Paultangle Rectangle { get { return Paultangle; } }
 

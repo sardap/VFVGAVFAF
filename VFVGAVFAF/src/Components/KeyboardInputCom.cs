@@ -7,23 +7,25 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class KeyboardInputCom : IContolerCom
+	class KeyboardInputCom : IContolerCom, INeedEnityManger
 	{
-		private EntityManager _entityManager;
-		private long _posComID;
-
 		public long EntID { get; set; }
+		public string RectPosAlais { get; set; }
+		public EntityManager EntityManager { get; set; }
 
-		public KeyboardInputCom(long entID, EntityManager entityManager, long posComID)
+		public KeyboardInputCom(long entID, EntityManager entityManager)
 		{
 			EntID = entID;
-			_posComID = posComID;
-			_entityManager = entityManager;
+			EntityManager = entityManager;
+		}
+
+		public KeyboardInputCom()
+		{
 		}
 
 		public void Update(double deltaTime)
 		{
-			var posCom = _entityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(_posComID);
+			var posCom = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(RectPosAlais);
 			var position = posCom.GetPostion();
 			var oldPostion = new Postion2D(position.X, position.Y);
 

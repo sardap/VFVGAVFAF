@@ -94,7 +94,7 @@ namespace VFVGAVFAF.src
 		{
 			ISenceData senceData = new SenceData();
 
-			//senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestEntiy);
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestEntiy);
 			/*
 			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
 
@@ -112,6 +112,7 @@ namespace VFVGAVFAF.src
 			};
 
 			_senceManger.Load(Utils.LoadSenceDataFromFile("sence.json").GetAwaiter().GetResult());
+			_senceManger.UnloadCurrent();
 
 			EnityToJson jsonGameobject;
 			string jsonString;
@@ -137,7 +138,7 @@ namespace VFVGAVFAF.src
 			}
 			
 
-			jsonGameobject = JsonConvert.DeserializeObject<EnityToJson>(jsonString, _settings);
+			 jsonGameobject = JsonConvert.DeserializeObject<EnityToJson>(jsonString, _settings);
 
 			_gameObjectFactory.AddCreatedGameObject(jsonGameobject);
 

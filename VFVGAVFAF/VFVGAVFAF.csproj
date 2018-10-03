@@ -57,6 +57,7 @@
     <Compile Include="src\Components\IColsionGameEvent.cs" />
     <Compile Include="src\Components\IGameEvent.cs" />
     <Compile Include="src\Components\IHealthCom.cs" />
+    <Compile Include="src\IHaveAlias.cs" />
     <Compile Include="src\Needs\INeedEnityManger.cs" />
     <Compile Include="src\Components\IPostionConstrantCom.cs" />
     <Compile Include="src\Components\ISoundEventCom.cs" />

@@ -12,11 +12,11 @@ namespace VFVGAVFAF.src.Components
 {
 	class RectRendCom : IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
 	{
-		private long _rectangleComponetID;
 		private TextureManager _textureManager;
 		private Texture2D _texture;
 
 		public long EntID { get; set; }
+		public string RectPosAlais { get; set; }
 		public EntityManager EntityManager { get; set; }
 		public TextureManager TextureManager
 		{
@@ -41,7 +41,6 @@ namespace VFVGAVFAF.src.Components
 		public RectRendCom(EntityManager entityManager, long rectangleComponetID)
 		{
 			EntityManager = entityManager;
-			_rectangleComponetID = rectangleComponetID;
 		}
 
 		public RectRendCom()
@@ -51,7 +50,7 @@ namespace VFVGAVFAF.src.Components
 
 		public void Render(double deltaTime)
 		{
-			var rect = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(_rectangleComponetID);
+			var rect = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(RectPosAlais);
 			SpriteBatch.Draw(_texture, rect.Rectangle.ToMonoGameRectangle(), Color);
 		}
 	}

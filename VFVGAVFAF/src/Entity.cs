@@ -13,6 +13,7 @@ namespace VFVGAVFAF.src
 		private Dictionary<long, IManger> _comMangers = new Dictionary<long, IManger>();
 		private Dictionary<long, Type> _ownedComs = new Dictionary<long, Type>();
 		private ConcurrentDictionary<Type, IList<long>> _ownedComsTypes = new ConcurrentDictionary<Type, IList<long>>();
+		private ConcurrentDictionary<string, long> _alaisTable = new ConcurrentDictionary<string, long>();
 
 		private bool _alreadySet = false;
 		private long _entiyID;
@@ -98,6 +99,11 @@ namespace VFVGAVFAF.src
 			return GetComponent<ComT>().First();
 		}
 
+		public ComT GetComponent<ComT>(string alais) where ComT : IComponent
+		{
+			return GetComponent<ComT>(_alaisTable[alais]);
+		}
+
 		public IList<ComT> GetComponent<ComT>() where ComT : IComponent
 		{
 			var result = new List<ComT>();
@@ -106,7 +112,8 @@ namespace VFVGAVFAF.src
 			foreach (var enty in _ownedComs)
 			{
 				var toFindType = typeof(ComT);
-				if (Utils.ImplementsInterface(enty.Value, toFindType))
+				var com = GetComponent<IComponent>(enty.Key);
+				if (com is ComT)
 				{
 					foundComs.Add(_componentManager.GetComponent<ComT>(enty.Key));
 				}
@@ -125,6 +132,11 @@ namespace VFVGAVFAF.src
 			var id = _componentManager.CreateComponet(_entiyID, com);
 			_ownedComs.Add(id, typeof(ComT));
 			com.EntID = _entiyID;
+
+			if(com is IHaveAlias)
+			{
+				_alaisTable.TryAdd(((IHaveAlias)com).Alias, id);
+			}
 
 			if (!_ownedComsTypes.ContainsKey(typeof(ComT)))
 			{

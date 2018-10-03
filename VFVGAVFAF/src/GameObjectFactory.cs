@@ -132,14 +132,25 @@ namespace VFVGAVFAF.src
 
 			Rectangle rectangle = new Rectangle(0, 0, 100, 100);
 
-			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle));
+			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle)
+			{
+				Alias = "pos"
+			});
 			var rectRendCom = gameObject.AddComponent(new RectRendCom(EntityManager, rectPos)
 			{
 				TextureName = Textures.BLOCK,
 				Color = Color.Black,
 				TextureManager = TextureManager,
+				RectPosAlais = "pos",
 				SpriteBatch = SpriteBatch
 			});
+
+			var inputCom = new KeyboardInputCom(entID, EntityManager)
+			{
+				RectPosAlais = "pos"
+			};
+			long inputComID = gameObject.AddComponent(inputCom);
+
 			gameObject.RegsiterToManager(rectRendCom, RenderManager);
 
 
@@ -304,7 +315,7 @@ namespace VFVGAVFAF.src
 			long rectRendID = gameObject.AddComponent(rectRend);
 			gameObject.RegsiterToManager(rectRendID, RenderManager);
 
-			var inputCom = new KeyboardInputCom(entID, EntityManager, rectPosID);
+			var inputCom = new KeyboardInputCom(entID, EntityManager);
 			long inputComID = gameObject.AddComponent(inputCom);
 			gameObject.RegsiterToManager(inputComID, InputManger);
 
