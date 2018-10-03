@@ -15,7 +15,7 @@ namespace VFVGAVFAF.src
 	{
 		public static bool AInsideB(Paultangle a, Paultangle b)
 		{
-			bool result = a.Right < b.Right && a.Left > b.Left && a.Top > b.Top && a.Bottom < b.Bottom;
+			bool result = a.Right < b.Right && a.Left > b.Left && a.Top >= b.Top && a.Bottom < b.Bottom;
 
 			return result;
 		}

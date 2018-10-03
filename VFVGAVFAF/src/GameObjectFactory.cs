@@ -158,9 +158,10 @@ namespace VFVGAVFAF.src
 				RectPosAlais = "pos",
 			});
 
-			gameObject.AddComponent(new KeyboardInputCom(entID, EntityManager)
+			gameObject.AddComponent(new RandomMovementContolerCom()
 			{
-				RectPosAlais = "pos"
+				RectPosAlais = "pos",
+				Speed = 5
 			});
 
 			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
