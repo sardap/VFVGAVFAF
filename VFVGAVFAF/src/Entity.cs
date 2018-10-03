@@ -50,15 +50,15 @@ namespace VFVGAVFAF.src
 			get { return typeof(T).GetHashCode(); }
 		}
 
-		public List<IComponent> GetComponents
+		public List<Tuple<long, IComponent>> GetComponents
 		{
 			get
 			{
-				var result = new List<IComponent>();
+				var result = new List<Tuple<long, IComponent>>();
 
 				foreach(var entry in _ownedComs)
 				{
-					result.Add(GetComponent<IComponent>(entry.Key));
+					result.Add(new Tuple<long, IComponent>(entry.Key, GetComponent<IComponent>(entry.Key)));
 				}
 
 				return result;

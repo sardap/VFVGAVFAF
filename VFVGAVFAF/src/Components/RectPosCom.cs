@@ -16,18 +16,11 @@ namespace VFVGAVFAF.src.Components
 		public Paultangle Paultangle { get; set; }
 		public long EntID { get; set; }
 		public string Alias { get; set; }
+		public List<string> PostionConstrantComs { get; set; }
+
 
 		[JsonIgnore]
 		public Paultangle Rectangle { get { return Paultangle; } }
-
-		public RectPosCom(long entID, EntityManager entityManager, Rectangle rectangle)
-		{
-			EntID = entID;
-			EntityManager = entityManager;
-			PostionConstrantComs = new List<long>();
-			Paultangle = new Paultangle(rectangle);
-			_startingPostion = new Paultangle(Paultangle);
-		}
 
 		public RectPosCom()
 		{
@@ -35,10 +28,16 @@ namespace VFVGAVFAF.src.Components
 			_startingPostion = new Paultangle(Paultangle);
 		}
 
-		public RectPosCom(long entID, EntityManager componentManager, Postion2D postion2D) : this(entID, componentManager, postion2D.ToRectangle(0, 0))
+		public RectPosCom(Rectangle rectangle)
 		{
+			PostionConstrantComs = new List<string>();
+			Paultangle = new Paultangle(rectangle);
+			_startingPostion = new Paultangle(Paultangle);
 		}
 
+		public RectPosCom(Postion2D postion2D) : this(postion2D.ToRectangle(0, 0))
+		{
+		}
 
 		public void SetPostion(Postion2D postion2D)
 		{
@@ -71,8 +70,5 @@ namespace VFVGAVFAF.src.Components
 		{
 			SetPostion(new Postion2D(100, 100));
 		}
-		
-		public List<long> PostionConstrantComs { get; set; }
-
 	}
 }

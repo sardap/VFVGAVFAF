@@ -43,7 +43,7 @@ namespace VFVGAVFAF.src
 
 		public GameObjectFactory()
 		{
-			_gameObjectCreators.Add(GameObjects.SqaurePlayer, new CreateGameObject(CreateSqaurePlayer));
+			//_gameObjectCreators.Add(GameObjects.SqaurePlayer, new CreateGameObject(CreateSqaurePlayer));
 			_gameObjectCreators.Add(GameObjects.SqaureGoal, new CreateGameObject(CreateSqaureGoal));
 			_gameObjectCreators.Add(GameObjects.EnemeySqaure, new CreateGameObject(CreateEnemeySqaure));
 			_gameObjectCreators.Add(GameObjects.TestEntiy, new CreateGameObject(CreateTestSqaure));
@@ -91,7 +91,7 @@ namespace VFVGAVFAF.src
 			}
 		}
 
-		private void AddressNeeds(IComponent component)
+		private T AddressNeeds<T>(T component) where T : IComponent
 		{
 			if (component is INeedEnityManger)
 			{
@@ -105,6 +105,17 @@ namespace VFVGAVFAF.src
 			{
 				((INeedTextureManager)component).TextureManager = TextureManager;
 			}
+
+			return component;
+		}
+
+		private void AddressNeedsAndMangers(GameObject gameObject)
+		{
+			gameObject.GetComponents.ForEach(i => 
+			{
+				AddressNeeds(i.Item2);
+				RegsiterToMangers(gameObject, i.Item2, i.Item1);
+			});
 		}
 
 		private long CreateSqaure(Rectangle rectangle)
@@ -112,14 +123,16 @@ namespace VFVGAVFAF.src
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
-			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle));
-			var rectRendCom = gameObject.AddComponent(new RectRendCom(EntityManager, rectPos)
+			var rectPos = gameObject.AddComponent(AddressNeeds(new RectPosCom(rectangle)));
+
+			var rectRendCom = gameObject.AddComponent(AddressNeeds(new RectRendCom()
 			{
 				TextureName = Textures.BLOCK,
 				Color = Color.Blue,
 				TextureManager = TextureManager,
 				SpriteBatch = SpriteBatch
-			});
+			}));
+
 			gameObject.RegsiterToManager(rectRendCom, RenderManager);
 
 			return entID;
@@ -132,27 +145,37 @@ namespace VFVGAVFAF.src
 
 			Rectangle rectangle = new Rectangle(0, 0, 100, 100);
 
-			var rectPos = gameObject.AddComponent(new RectPosCom(entID, EntityManager, rectangle)
+			gameObject.AddComponent(new RectPosCom(rectangle)
 			{
-				Alias = "pos"
+				Alias = "pos",
+				PostionConstrantComs = new List<string> { "gameBoundsConstrant" }
 			});
-			var rectRendCom = gameObject.AddComponent(new RectRendCom(EntityManager, rectPos)
+
+			gameObject.AddComponent(new RectRendCom()
 			{
 				TextureName = Textures.BLOCK,
 				Color = Color.Black,
-				TextureManager = TextureManager,
 				RectPosAlais = "pos",
-				SpriteBatch = SpriteBatch
 			});
 
-			var inputCom = new KeyboardInputCom(entID, EntityManager)
+			gameObject.AddComponent(new KeyboardInputCom(entID, EntityManager)
 			{
 				RectPosAlais = "pos"
-			};
-			long inputComID = gameObject.AddComponent(inputCom);
+			});
 
-			gameObject.RegsiterToManager(rectRendCom, RenderManager);
+			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
+			{
+				Alias = "gameBounds"
+			});
 
+			gameObject.AddComponent(new RectConstrantCom()
+			{
+				Alias = "gameBoundsConstrant",
+				RectPosAlais = "gameBounds",
+				Inside = true
+			});
+
+			AddressNeedsAndMangers(gameObject);
 
 			return entID;
 		}
@@ -166,6 +189,7 @@ namespace VFVGAVFAF.src
 
 		private long CreateEnemeySqaure()
 		{
+			/*
 			_nextRectSize = new Paultangle(Utils.RandomPostionInBounds(_bounds), 25, 25).ToMonoGameRectangle();
 
 			var entID = CreateSqaure(_nextRectSize);
@@ -214,10 +238,13 @@ namespace VFVGAVFAF.src
 			gameObject.RegsiterToManager(contID, InputManger);
 
 			return entID;
+			*/
+			throw new NotImplementedException();
 		}
 
 		private long CreateSqaureGoal()
 		{
+			/*
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
@@ -353,6 +380,8 @@ namespace VFVGAVFAF.src
 
 
 			return entID;
+			*/
+			throw new NotImplementedException();
 		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RectConstrantCom : IPostionConstrantCom
+	class RectConstrantCom : IPostionConstrantCom, INeedEnityManger, IHaveAlias
 	{
 		private delegate bool CheckCon(Paultangle a, Paultangle B);
 
@@ -17,27 +17,32 @@ namespace VFVGAVFAF.src.Components
 			Overlapping
 		}
 
-		private EntityManager _entityManager;
-		private long _constrantID;
+		public long EntID { get; set; }
+
+		public EntityManager EntityManager { get; set; }
+
+		public string RectPosAlais { get; set; }
 
 		public bool Inside { get; set; }
 
 		public CheckType Type { get; set; }
 
-		public long EntID { get; set; }
+		public string Alias { get; set; }
 
-		public RectConstrantCom(long entID, EntityManager entityManager, long constrantID)
+
+		public RectConstrantCom(string rectPosAlais)
 		{
-			EntID = entID;
-			_entityManager = entityManager;
-			_constrantID = constrantID;
+			RectPosAlais = rectPosAlais;
 		}
 
+		public RectConstrantCom()
+		{
+		}
 
 		public bool Check(Paultangle hitBox)
 		{
 			//TODO this is a brain fart i don't know the right way
-			var constrant = _entityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(_constrantID).Rectangle;
+			var constrant = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(RectPosAlais).Rectangle;
 
 			CheckCon d;
 

@@ -38,7 +38,7 @@ namespace VFVGAVFAF.src.Components
 
 		public string TextureName { get; set; }
 
-		public RectRendCom(EntityManager entityManager, long rectangleComponetID)
+		public RectRendCom(EntityManager entityManager)
 		{
 			EntityManager = entityManager;
 		}

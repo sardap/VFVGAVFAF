@@ -16,7 +16,9 @@ namespace VFVGAVFAF.src.Json
 
 		public void PopluateFromEntiy(IEntity entity)
 		{
-			Components = entity.GetComponents;
+			Components = new List<IComponent>();
+			var coms = entity.GetComponents;
+			coms.ForEach(i => Components.Add(i.Item2));
 		}
 	}
 }
