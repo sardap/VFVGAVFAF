@@ -92,9 +92,10 @@ namespace VFVGAVFAF.src
 
 		private void SetupPlayer()
 		{
-			ISenceData senceData = new SenceData();
+			SenceData senceData = new SenceData();
 
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestEntiy);
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestPlayer);
+			senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestEnemy);
 			/*
 			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
 
@@ -104,25 +105,30 @@ namespace VFVGAVFAF.src
 			}
 			*/
 
-			senceData.SaveFile("sence.json");
+			senceData.CreateGameObjects(_gameObjectFactory);
 
 			JsonSerializerSettings _settings = new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.Auto
 			};
 
-			_senceManger.Load(Utils.LoadSenceDataFromFile("sence.json").GetAwaiter().GetResult());
-			_senceManger.UnloadCurrent();
-
-			EnityToJson jsonGameobject;
+			JsonSence jsonGameobject;
 			string jsonString;
 
-			if (false)
+			if (true)
 			{
-				jsonGameobject = new EnityToJson();
-				jsonGameobject.PopluateFromEntiy(_entityManager.GetEntiy<GameObject>(0));
+				JsonSence enityToJsons = new JsonSence();
+				senceData.CreatedGameObjects.ForEach(i => enityToJsons.Entries.Add(
+					new JsonSence.Entry
+					{
+						EnityToJson = new EnityToJson(i),
+						Count = 1
+					}
+				));
 
-				jsonString = JsonConvert.SerializeObject(jsonGameobject, typeof(EnityToJson), _settings);
+				enityToJsons.Entries[1].Count = 3;
+
+				jsonString = JsonConvert.SerializeObject(enityToJsons, typeof(List<EnityToJson>), _settings);
 
 				using (StreamWriter streamWriter = new StreamWriter("entriy.json"))
 				{
@@ -137,10 +143,9 @@ namespace VFVGAVFAF.src
 				}
 			}
 			
+			jsonGameobject = JsonConvert.DeserializeObject<JsonSence>(jsonString, _settings);
 
-			 jsonGameobject = JsonConvert.DeserializeObject<EnityToJson>(jsonString, _settings);
-
-			_gameObjectFactory.AddCreatedGameObject(jsonGameobject);
+			jsonGameobject.Load(_gameObjectFactory);
 
 		}
 	}

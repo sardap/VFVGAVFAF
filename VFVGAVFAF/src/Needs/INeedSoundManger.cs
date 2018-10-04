@@ -1,16 +1,16 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src
 {
-	interface INeedSpriteBatch
+	interface INeedSoundManger
 	{
 		[JsonIgnore]
-		SpriteBatch SpriteBatch { get; set; }
+		SoundManager SoundManager { get; set; }
 	}
 }

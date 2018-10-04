@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Sence
 {
-	interface ISenceData
+	interface IFactorySenceData : ISenceData
 	{
-		List<GameObject> CreatedGameObjects { get; }
+		IList<GameObjectFactory.GameObjects> ToCreate { get; }
+
+		Task SaveFile(string fileName);
 	}
 }

@@ -79,6 +79,11 @@ namespace VFVGAVFAF.src
 			}
 		}
 
+		public long GetIdForAlais(string alais)
+		{
+			return _alaisTable[alais];
+		}
+
 		public ComT GetComponent<ComT>(long id) where ComT : IComponent
 		{
 			if(!_ownedComs.ContainsKey(id))

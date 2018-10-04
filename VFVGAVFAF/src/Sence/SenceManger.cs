@@ -10,6 +10,7 @@ namespace VFVGAVFAF.src.Sence
 	{
 		private EntityManager _entityManager;
 		private ISenceData _currentSence;
+		private List<long> _processedGameObjects = new List<long>();
 
 		public GameObjectFactory GameObjectFactory { get; set; }
 
@@ -36,15 +37,16 @@ namespace VFVGAVFAF.src.Sence
 
 		private void LoadSence(ISenceData senceData)
 		{
-			foreach(var toCreate in senceData.ToCreate)
+
+			foreach(var toCreate in senceData.CreatedGameObjects)
 			{
-				senceData.CreatedEntites.Add(GameObjectFactory.CreateObjectOfType(toCreate));
+				_processedGameObjects.Add(GameObjectFactory.AddCreatedGameObject(toCreate));
 			}
 		}
 
 		private void UnloadSence(ISenceData senceData)
 		{
-			foreach(var created in senceData.CreatedEntites)
+			foreach(var created in _processedGameObjects)
 			{
 				_entityManager.RegsiterToDestory(created);
 			}

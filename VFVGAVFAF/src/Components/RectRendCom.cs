@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VFVGAVFAF.src.Needs;
+using VFVGAVFAF.src;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class RectRendCom : IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
 	{
 		private TextureManager _textureManager;

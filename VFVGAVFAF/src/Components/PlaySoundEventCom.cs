@@ -8,26 +8,29 @@ using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src.Components
 {
-	class PlaySoundEventCom : ISoundEventCom
+	[Serializable]
+	class PlaySoundEventCom : ISoundEventCom, INeedSoundManger, IHaveAlias
 	{
-		private SoundManager _soundManager;
-		private string _song;
-
-		public double TimeToComplete { get; set; }
-		public double Cooldown { get; set; }
+		public string Song { get; set; }
 
 		public long EntID { get; set; }
 
-		public PlaySoundEventCom(SoundManager soundManager, string song)
+		public double TimeToComplete { get; set; }
+
+		public double Cooldown { get; set; }
+
+		public SoundManager SoundManager { get; set; }
+
+		public string Alias { get; set; }
+
+		public PlaySoundEventCom()
 		{
-			_song = song;
-			_soundManager = soundManager;
 		}
 
 		public void Action()
 		{
 			MediaPlayer.Volume = 1.0f;
-			_soundManager.GetSound(_song).Play();
+			SoundManager.GetSound(Song).Play();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace VFVGAVFAF.src.Components
 {
 	interface IColsionGameEventCom : IGameEventCom
 	{
+		[JsonIgnore]
 		IColInfo ColliedWith { get; set; }
 	}
 }

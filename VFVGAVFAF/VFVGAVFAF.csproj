@@ -58,6 +58,7 @@
     <Compile Include="src\Components\IGameEvent.cs" />
     <Compile Include="src\Components\IHealthCom.cs" />
     <Compile Include="src\IHaveAlias.cs" />
+    <Compile Include="src\Json\JsonSence.cs" />
     <Compile Include="src\Needs\INeedEnityManger.cs" />
     <Compile Include="src\Components\IPostionConstrantCom.cs" />
     <Compile Include="src\Components\ISoundEventCom.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="src\Json\EnityToJson.cs" />
     <Compile Include="src\Managers\ColssionComManger.cs" />
     <Compile Include="src\Managers\SoundManager.cs" />
+    <Compile Include="src\Needs\INeedPostMaster.cs" />
+    <Compile Include="src\Needs\INeedSoundManger.cs" />
     <Compile Include="src\Needs\INeedSpriteBatch.cs" />
     <Compile Include="src\Needs\INeedTextureManager.cs" />
     <Compile Include="src\Post\GameEvenetPostMaster.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="src\Post\IPostData.cs" />
     <Compile Include="src\Post\PostData.cs" />
     <Compile Include="src\QuadTree.cs" />
+    <Compile Include="src\Sence\ISenceData.cs" />
     <Compile Include="src\Sence\SenceData.cs" />
     <Compile Include="src\SongsEnum.cs" />
     <Compile Include="src\Textures.cs" />
@@ -106,7 +110,7 @@
     <Compile Include="src\Managers\RenderManager.cs" />
     <Compile Include="src\Managers\TextureManager.cs" />
     <Compile Include="src\Postion2D.cs" />
-    <Compile Include="src\Sence\ISenceData.cs" />
+    <Compile Include="src\Sence\IFactorySenceData.cs" />
     <Compile Include="src\Sence\ISenceManger.cs" />
     <Compile Include="src\Sence\RegsiteredElements.cs" />
     <Compile Include="src\Sence\SenceManger.cs" />

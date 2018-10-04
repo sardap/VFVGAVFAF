@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Needs
+namespace VFVGAVFAF.src
 {
 	interface INeedTextureManager
 	{

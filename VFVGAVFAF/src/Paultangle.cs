@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src
 {
+	[Serializable]
 	class Paultangle
 	{
 		public Postion2D Postion2D { get; set; }

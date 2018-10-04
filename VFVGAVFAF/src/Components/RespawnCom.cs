@@ -6,26 +6,25 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RespawnCom : IGameEventCom
+	[Serializable]
+	class RespawnCom : IGameEventCom, INeedEnityManger
 	{
-		private EntityManager _entityManger;
-		private long _posComID;
+		public EntityManager EntityManager { get; set; }
+		public string PosComAlais { get; set; }
 
 		public long EntID { get; set; }
 		public double TimeToComplete { get; set; }
 		public double Cooldown { get; set; }
+		public string Alias { get; set; }
 
-		public RespawnCom(long entID, EntityManager entityManger, long posComID)
+		public RespawnCom()
 		{
-			EntID = entID;
-			_posComID = posComID;
-			_entityManger = entityManger;
 		}
 
 		public void Action()
 		{
-			var ent = _entityManger.GetEntiy<GameObject>(EntID);
-			ent.GetComponent<IPostionComponet>(_posComID).ResetPostion();
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			ent.GetComponent<IPostionComponet>(PosComAlais).ResetPostion();
 			var healthCom = ent.GetFirstComponent<IHealthCom>();
 			healthCom.HP = healthCom.StartingHP;
 		}

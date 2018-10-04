@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class HealthCom : IHealthCom, IStepCom
+	[Serializable]
+	class HealthCom : IHealthCom, IStepCom, INeedPostMaster, INeedEnityManger
 	{
 		public enum HPOps
 		{
@@ -18,14 +19,14 @@ namespace VFVGAVFAF.src.Components
 		public interface IHPTrigger
 		{
 			bool Resolve(HealthCom healthCom);
-			IList<long> GameEvents { get; }
+			IList<string> GameEvents { get; }
 
 		}
 
 		public class HPChangeTrigger : IHPTrigger
 		{
 			private int _oldVal;
-			public IList<long> GameEvents { get; set; }
+			public IList<string> GameEvents { get; set; }
 
 			public bool Resolve(HealthCom healthCom)
 			{
@@ -39,7 +40,7 @@ namespace VFVGAVFAF.src.Components
 		{
 			public HPOps Opreator { get; set; }
 			public int Value { get; set; }
-			public IList<long> GameEvents { get; set; }
+			public IList<string> GameEvents { get; set; }
 
 			public bool Resolve(HealthCom healthCom)
 			{
@@ -57,7 +58,7 @@ namespace VFVGAVFAF.src.Components
 			}
 		}
 
-		private IGameEvenetPostMaster _gameEvenetPostMaster;
+		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
 		public long EntID { get; set; }
 		public int HP { get; set; }
@@ -66,15 +67,7 @@ namespace VFVGAVFAF.src.Components
 
 		public IList<IHPTrigger> Evenets { get; set; }
 
-		public HealthCom(long entID, IGameEvenetPostMaster gameEvenetPostMaster, int hp, int maxHP, int startingHP)
-		{
-			EntID = entID;
-			_gameEvenetPostMaster = gameEvenetPostMaster;
-			HP = hp;
-			MaxHP = maxHP;
-			StartingHP = startingHP;
-			Evenets = new List<IHPTrigger>();
-		}
+		public EntityManager EntityManager { get; set; }
 
 		public void Step(double deltaTime)
 		{
@@ -84,7 +77,7 @@ namespace VFVGAVFAF.src.Components
 				{
 					foreach(var gameEventID in hpTrigger.GameEvents)
 					{
-						_gameEvenetPostMaster.Add(gameEventID);
+						GameEvenetPostMaster.Add(EntityManager.GetEntiy<GameObject>(EntID).GetIdForAlais(gameEventID));
 					}
 				}
 			}

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class RandomMovementContolerCom : IContolerCom, INeedEnityManger
 	{
 

@@ -44,23 +44,33 @@ namespace VFVGAVFAF.src
 			return Random.NextDouble() * (maximum - minimum) + minimum;
 		}
 
-		public static Postion2D RandomPostionInBounds(Rectangle rectangle)
+		public static Postion2D RandomPostionInBounds(Paultangle rectangle)
 		{
 			double x = Random.NextDouble() * (rectangle.Right - rectangle.Left) + rectangle.Left;
 			double y = Random.NextDouble() * (rectangle.Bottom - rectangle.Top) + rectangle.Top;
 			return new Postion2D(x, y);
 		}
 
+		public static Paultangle RandomPostionInBounds(Paultangle bounds, Paultangle paultangle)
+		{
+			do
+			{
+				paultangle.Postion2D = RandomPostionInBounds(bounds);
+			} while (!AInsideB(paultangle, bounds));
+
+			return paultangle;
+		}
+
 		public static bool ImplementsInterface(Type subject, Type inter)
 		{
 			var subjectInterfaces = subject.GetInterfaces();
-			if(subjectInterfaces.Any(i => i == inter))
+			if (subjectInterfaces.Any(i => i == inter))
 			{
 				return true;
 			}
 			else
 			{
-				foreach(var type in subjectInterfaces)
+				foreach (var type in subjectInterfaces)
 				{
 					return ImplementsInterface(type, inter);
 				}
@@ -69,7 +79,7 @@ namespace VFVGAVFAF.src
 			}
 		}
 
-		public async static Task<ISenceData> LoadSenceDataFromFile(string file)
+		public async static Task<IFactorySenceData> LoadSenceDataFromFile(string file)
 		{
 			SenceData senceData = null;
 

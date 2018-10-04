@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src
 {
-	interface INeedSpriteBatch
+	interface INeedPostMaster
 	{
 		[JsonIgnore]
-		SpriteBatch SpriteBatch { get; set; }
+		IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 	}
 }

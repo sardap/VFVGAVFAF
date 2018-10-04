@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface IGameEventCom : IComponent
+	interface IGameEventCom : IComponent, IHaveAlias
 	{
 		double TimeToComplete { get; }
 

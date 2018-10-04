@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class DamageCom : IColsionGameEventCom
+	[Serializable]
+	class DamageCom : IColsionGameEventCom, INeedEnityManger
 	{
-		private EntityManager _entityManager;
-		private long _healthComID;
+		public EntityManager EntityManager { get; set; }
+		private string HealthComAlais { get; set; }
 
 		public long EntID { get; set; }
 		public IColInfo ColliedWith { get; set; }
 		public double TimeToComplete { get; set; }
 		public double Cooldown { get; set; }
 		public int Damage { get; set; }
+		public string Alias { get; set; }
 
-		public DamageCom(EntityManager entityManager, long healthComID)
+		public DamageCom()
 		{
-			_entityManager = entityManager;
-			_healthComID = healthComID;
 		}
 
 		public void Action()
 		{
-			var otherEnt = _entityManager.GetEntiy<GameObject>(ColliedWith.EntID);
+			var otherEnt = EntityManager.GetEntiy<GameObject>(ColliedWith.EntID);
 
 			if (otherEnt.HasComType<IHealthCom>())
 			{

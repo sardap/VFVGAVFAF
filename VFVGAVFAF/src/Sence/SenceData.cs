@@ -8,13 +8,27 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Sence
 {
-	class SenceData : ISenceData
+	class SenceData : IFactorySenceData
 	{
 		private List<GameObjectFactory.GameObjects> _toCreate = new List<GameObjectFactory.GameObjects>();
+		private List<GameObject> _createdGameObjects = new List<GameObject>();
 		private List<long> _entites = new List<long>();
 
 		public IList<GameObjectFactory.GameObjects> ToCreate { get { return _toCreate; } }
-		public IList<long> CreatedEntites { get { return _entites; } }
+		public List<GameObject> CreatedGameObjects { get { return _createdGameObjects; } }
+
+		public void Create(GameObjectFactory gameObjectFactory)
+		{
+
+		}
+
+		public void CreateGameObjects(GameObjectFactory gameObjectFactory)
+		{
+			foreach(var method in _toCreate)
+			{
+				_createdGameObjects.Add(gameObjectFactory.CreateObjectOfType(method));
+			}
+		}
 
 		public async Task SaveFile(string fileName)
 		{

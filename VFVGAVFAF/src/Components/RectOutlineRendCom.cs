@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class RectOutlineRendCom : IRenderableComponent
 	{
 		private long _rectangleComponetID;

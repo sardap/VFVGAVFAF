@@ -14,6 +14,11 @@ namespace VFVGAVFAF.src.Json
 		{
 		}
 
+		public EnityToJson(GameObject gameObject)
+		{
+			PopluateFromEntiy(gameObject);
+		}
+
 		public void PopluateFromEntiy(IEntity entity)
 		{
 			Components = new List<IComponent>();

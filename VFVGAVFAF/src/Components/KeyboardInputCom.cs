@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class KeyboardInputCom : IContolerCom, INeedEnityManger
 	{
 		public long EntID { get; set; }
 		public string RectPosAlais { get; set; }
 		public EntityManager EntityManager { get; set; }
+		public int Speed { get; set; }
 
 		public KeyboardInputCom(long entID, EntityManager entityManager)
 		{
@@ -31,16 +33,16 @@ namespace VFVGAVFAF.src.Components
 
 			var state = Keyboard.GetState();
 
-			float speed = 500 * (float)deltaTime;
+			float curSpeed = Speed * (float)deltaTime;
 
 			if (state.IsKeyDown(Keys.Right))
-				position.X += speed;
+				position.X += curSpeed;
 			if (state.IsKeyDown(Keys.Left))
-				position.X -= speed;
+				position.X -= curSpeed;
 			if (state.IsKeyDown(Keys.Up))
-				position.Y -= speed;
+				position.Y -= curSpeed;
 			if (state.IsKeyDown(Keys.Down))
-				position.Y += speed;
+				position.Y += curSpeed;
 
 			if(position.X != oldPostion.X || position.Y != oldPostion.Y)
 				posCom.SetPostion(position);

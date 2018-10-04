@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class RectConstrantCom : IPostionConstrantCom, INeedEnityManger, IHaveAlias
 	{
 		private delegate bool CheckCon(Paultangle a, Paultangle B);

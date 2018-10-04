@@ -7,16 +7,18 @@ using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class LoadMiniGameCom : IGameEventCom
 	{
 		ISenceManger _senceManger;
-		ISenceData _nextSence;
+		IFactorySenceData _nextSence;
 
 		public long EntID { get; set; }
 		public double Cooldown { get; set; }
 		public double TimeToComplete { get { return 0; } }
+		public string Alias { get; set; }
 
-		public LoadMiniGameCom(long entID, ISenceManger senceManger, ISenceData senceData)
+		public LoadMiniGameCom(long entID, ISenceManger senceManger, IFactorySenceData senceData)
 		{
 			EntID = entID;
 			_senceManger = senceManger;

@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using VFVGAVFAF.src.Components;
 using VFVGAVFAF.src.Json;
 using VFVGAVFAF.src.Managers;
-using VFVGAVFAF.src.Needs;
+using VFVGAVFAF.src;
 using VFVGAVFAF.src.Sence;
+using Newtonsoft.Json;
 
 namespace VFVGAVFAF.src
 {
@@ -21,10 +22,11 @@ namespace VFVGAVFAF.src
 			SqaurePlayer,
 			SqaureGoal,
 			EnemeySqaure,
-			TestEntiy
+			TestPlayer,
+			TestEnemy
 		}
 
-		private delegate long CreateGameObject();
+		private delegate GameObject CreateGameObject();
 
 		private Dictionary<GameObjects, CreateGameObject> _gameObjectCreators = new Dictionary<GameObjects, CreateGameObject>();
 
@@ -43,28 +45,37 @@ namespace VFVGAVFAF.src
 
 		public GameObjectFactory()
 		{
-			//_gameObjectCreators.Add(GameObjects.SqaurePlayer, new CreateGameObject(CreateSqaurePlayer));
-			_gameObjectCreators.Add(GameObjects.SqaureGoal, new CreateGameObject(CreateSqaureGoal));
-			_gameObjectCreators.Add(GameObjects.EnemeySqaure, new CreateGameObject(CreateEnemeySqaure));
-			_gameObjectCreators.Add(GameObjects.TestEntiy, new CreateGameObject(CreateTestSqaure));
+			_gameObjectCreators.Add(GameObjects.TestPlayer, new CreateGameObject(CreateTestSqaure));
+			_gameObjectCreators.Add(GameObjects.TestEnemy, new CreateGameObject(CreateTestEnemy));
 		}
 
-		public long CreateObjectOfType(GameObjects gameObjects)
+		public GameObject CreateObjectOfType(GameObjects gameObjects)
 		{
 			return _gameObjectCreators[gameObjects]();
 		}
 
+		public long AddCreatedGameObject(GameObject gameObject)
+		{
+			var entID = EntityManager.CreateEntity(gameObject);
+			AddressNeedsAndMangers(gameObject);
+			return entID;
+		}
+
 		public long AddCreatedGameObject(EnityToJson jsonGameObject)
 		{
+			JsonSerializerSettings settings = new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.Auto
+			};
+
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
-			jsonGameObject.Components.ForEach(com => 
+			jsonGameObject.Components.ForEach(i =>
 			{
-				AddressNeeds(com);
-				long id = gameObject.AddComponent(com);
-				RegsiterToMangers(gameObject, com, id);
-
+				var fuckyou = JsonConvert.SerializeObject(i, typeof(IComponent), settings);
+				gameObject.AddComponent(JsonConvert.DeserializeObject<IComponent>(fuckyou, settings));
 			});
+			AddressNeedsAndMangers(gameObject);
 			return entID;
 		}
 
@@ -97,13 +108,25 @@ namespace VFVGAVFAF.src
 			{
 				((INeedEnityManger)component).EntityManager = EntityManager;
 			}
+
 			if (component is INeedSpriteBatch)
 			{
 				((INeedSpriteBatch)component).SpriteBatch = SpriteBatch;
 			}
+
 			if (component is INeedTextureManager)
 			{
 				((INeedTextureManager)component).TextureManager = TextureManager;
+			}
+
+			if(component is INeedSoundManger)
+			{
+				((INeedSoundManger)component).SoundManager = SoundManager;
+			}
+
+			if(component is INeedPostMaster)
+			{
+				((INeedPostMaster)component).GameEvenetPostMaster = GameEvenetPostMaster;
 			}
 
 			return component;
@@ -115,6 +138,7 @@ namespace VFVGAVFAF.src
 			{
 				AddressNeeds(i.Item2);
 				RegsiterToMangers(gameObject, i.Item2, i.Item1);
+				i.Item2.EntID = gameObject.GetID;
 			});
 		}
 
@@ -138,10 +162,9 @@ namespace VFVGAVFAF.src
 			return entID;
 		}
 
-		private long CreateTestSqaure()
+		private GameObject CreateTestSqaure()
 		{
-			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+			var gameObject = new GameObject(ComponentManager);
 
 			Rectangle rectangle = new Rectangle(0, 0, 100, 100);
 
@@ -158,10 +181,10 @@ namespace VFVGAVFAF.src
 				RectPosAlais = "pos",
 			});
 
-			gameObject.AddComponent(new RandomMovementContolerCom()
+			gameObject.AddComponent(new KeyboardInputCom()
 			{
 				RectPosAlais = "pos",
-				Speed = 5
+				Speed = 500
 			});
 
 			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
@@ -176,9 +199,105 @@ namespace VFVGAVFAF.src
 				Inside = true
 			});
 
-			AddressNeedsAndMangers(gameObject);
+			gameObject.AddComponent(new PlaySoundEventCom()
+			{
+				Alias = "damageSound",
+				Song = Songs.DAMAGE_TAKEN
+			});
 
-			return entID;
+			gameObject.AddComponent(new PlaySoundEventCom()
+			{
+				Alias = "respawnSound",
+				Song = Songs.PLAYER_RESPAWN
+			});
+
+			gameObject.AddComponent(new HealthCom()
+			{
+				HP = 100,
+				StartingHP = 100,
+				MaxHP = 100,
+				Evenets = new List<HealthCom.IHPTrigger>()
+				{
+					new HealthCom.HPChangeTrigger
+					{
+						GameEvents = new List<string> { "damageSound" }
+					},
+					new HealthCom.HPOpTrigger
+					{
+						Opreator = HealthCom.HPOps.Less,
+						Value = 0,
+						GameEvents = new List<string> { "respawn", "respawnSound" }
+					}
+				}
+			});
+
+			gameObject.AddComponent(new RespawnCom()
+			{
+				Alias = "respawn",
+				PosComAlais = "pos"
+			});
+
+			gameObject.AddComponent(new RectCollisionCom()
+			{
+				RectPosAlais = "pos",
+			});
+
+			return gameObject;
+		}
+
+		private GameObject CreateTestEnemy()
+		{
+			var gameObject = new GameObject(ComponentManager);
+
+			Rectangle rectangle = new Rectangle(50, 50, 100, 100);
+
+			gameObject.AddComponent(new RectPosCom(rectangle)
+			{
+				Alias = "pos",
+				PostionConstrantComs = new List<string> { "gameBoundsConstrant" },
+				RandomStartPos = true
+			});
+
+			gameObject.AddComponent(new RectRendCom()
+			{
+				TextureName = Textures.BLOCK,
+				Color = Color.Aqua,
+				RectPosAlais = "pos",
+			});
+
+			gameObject.AddComponent(new RandomMovementContolerCom()
+			{
+				RectPosAlais = "pos",
+				Speed = 100
+			});
+
+			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
+			{
+				Alias = "gameBounds"
+			});
+
+			gameObject.AddComponent(new RectConstrantCom()
+			{
+				Alias = "gameBoundsConstrant",
+				RectPosAlais = "gameBounds",
+				Inside = true
+			});
+
+			gameObject.AddComponent(new DamageCom()
+			{
+				Alias = "damage",
+				Damage = -10,
+				TimeToComplete = 0,
+				Cooldown = 0.5
+			});
+
+			gameObject.AddComponent(new RectCollisionCom()
+			{
+				RectPosAlais = "pos",
+				GameEventComs = new List<string>() { "damage" }
+			});
+
+			return gameObject;
 		}
 
 		private long _healthComID;

@@ -8,15 +8,30 @@ using Newtonsoft.Json;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Serializable]
 	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias
 	{
 		private Paultangle _startingPostion;
+		private bool _randomStartPos = false;
 		public EntityManager EntityManager { get; set; }
 
 		public Paultangle Paultangle { get; set; }
 		public long EntID { get; set; }
 		public string Alias { get; set; }
 		public List<string> PostionConstrantComs { get; set; }
+		public bool RandomStartPos
+		{
+			get
+			{
+				return _randomStartPos;
+			}
+			set
+			{
+				if(value)
+					Paultangle = Utils.RandomPostionInBounds(new Paultangle(0, 0, 800, 600), Paultangle);
+				_randomStartPos = value;
+			}
+		}
 
 
 		[JsonIgnore]
