@@ -107,6 +107,8 @@ namespace VFVGAVFAF.src
 
 			senceData.CreateGameObjects(_gameObjectFactory);
 
+			senceData.CreatedGameObjects.Add(_gameObjectFactory.CreateMusicEnt());
+
 			JsonSerializerSettings _settings = new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.Auto
@@ -126,7 +128,7 @@ namespace VFVGAVFAF.src
 					}
 				));
 
-				enityToJsons.Entries[1].Count = 3;
+				enityToJsons.Entries[1].Count = 25;
 
 				jsonString = JsonConvert.SerializeObject(enityToJsons, typeof(List<EnityToJson>), _settings);
 

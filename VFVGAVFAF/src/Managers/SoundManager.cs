@@ -12,6 +12,7 @@ namespace VFVGAVFAF.src.Managers
 	class SoundManager
 	{
 		private IDictionary<string, SoundEffect> _soundEffects = new Dictionary<string, SoundEffect>();
+		private Song _song;
 
 		private ContentManager _content { get; set; }
 
@@ -29,6 +30,12 @@ namespace VFVGAVFAF.src.Managers
 			}
 
 			return _soundEffects[id];
+		}
+
+		public void PlaySong(string id)
+		{
+			_song = _content.Load<Song>(id);
+			MediaPlayer.Play(_song);
 		}
 	}
 }

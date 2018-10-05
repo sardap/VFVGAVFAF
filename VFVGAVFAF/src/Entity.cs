@@ -13,11 +13,12 @@ namespace VFVGAVFAF.src
 		private Dictionary<long, IManger> _comMangers = new Dictionary<long, IManger>();
 		private Dictionary<long, Type> _ownedComs = new Dictionary<long, Type>();
 		private ConcurrentDictionary<Type, IList<long>> _ownedComsTypes = new ConcurrentDictionary<Type, IList<long>>();
+
 		private ConcurrentDictionary<string, long> _alaisTable = new ConcurrentDictionary<string, long>();
+		private ConcurrentDictionary<long, bool> _enabledComs = new ConcurrentDictionary<long, bool>();
 
 		private bool _alreadySet = false;
 		private long _entiyID;
-		private bool _active;
 
 		public void SetID(long id)
 		{
@@ -84,11 +85,36 @@ namespace VFVGAVFAF.src
 			return _alaisTable[alais];
 		}
 
+		public bool ComEnabled(long id)
+		{
+			return _enabledComs[id];
+		}
+
+		public bool DisableCom(long id)
+		{
+			return _enabledComs.TryUpdate(id, false, true);
+		}
+
+		public bool ChangeEnableStateCom(long id, bool newState)
+		{
+			return _enabledComs.TryUpdate(id, newState, !newState);
+		}
+
+		public bool EnableCom(long id)
+		{
+			return _enabledComs.TryUpdate(id, true, false);
+		}
+
 		public ComT GetComponent<ComT>(long id) where ComT : IComponent
 		{
 			if(!_ownedComs.ContainsKey(id))
 			{
 				throw new KeyNotFoundException("Entiy does not own this com");
+			}
+
+			if(!_enabledComs[id])
+			{
+				throw new System.Exception("Cannot access disabled Com");
 			}
 
 			return _componentManager.GetComponent<ComT>(id);
@@ -118,7 +144,7 @@ namespace VFVGAVFAF.src
 			{
 				var toFindType = typeof(ComT);
 				var com = GetComponent<IComponent>(enty.Key);
-				if (com is ComT)
+				if (com is ComT && ComEnabled(enty.Key))
 				{
 					foundComs.Add(_componentManager.GetComponent<ComT>(enty.Key));
 				}
@@ -149,6 +175,7 @@ namespace VFVGAVFAF.src
 			}
 
 			_ownedComsTypes[typeof(ComT)].Add(id);
+			_enabledComs.TryAdd(id, true);
 
 			return id;
 		}
@@ -157,6 +184,7 @@ namespace VFVGAVFAF.src
 		{
 			_ownedComsTypes[typeof(ComT)].Remove(comID);
 			_ownedComs.Remove(comID);
+			_enabledComs.TryRemove(comID, out _);
 			return _componentManager.RemoveComponent(_entiyID, comID);
 		}
 

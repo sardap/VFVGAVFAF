@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src
 {
-	class Songs
+	class Music
 	{
-		public const string DAMAGE_TAKEN = "Sounds/dmgt";
-		public const string PLAYER_RESPAWN = "Sounds/player_respawn";
+		public const string FirstSong = "Music\\Kanonische29";
 	}
 }

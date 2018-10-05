@@ -34,5 +34,33 @@ namespace VFVGAVFAF.src
 		{
 			return new Rectangle((int)Math.Round(X), (int)Math.Round(Y), width, height);
 		}
+
+		public bool IsAt(Postion2D target)
+		{
+			return X == target.X && Y == target.Y;
+		}
+
+		public bool WithinRadius(Postion2D target, double radius)
+		{
+			var d = Math.Sqrt(Math.Pow((X - target.X), 2) + Math.Pow((Y - target.Y), 2));
+
+			return d <= radius;
+		}
+
+		public bool AtOrPast(Postion2D target)
+		{
+			return IsAt(target) || X > target.X || Y > target.Y;
+		}
+
+		public static Postion2D operator +(Postion2D a, Postion2D b)
+		{
+			return new Postion2D(a.X + b.X, a.Y + b.Y);
+		}
+
+		public static Postion2D operator *(Postion2D a, double b)
+		{
+			return new Postion2D(a.X * b, a.Y * b);
+		}
+
 	}
 }

@@ -142,6 +142,24 @@ namespace VFVGAVFAF.src
 			});
 		}
 
+		public GameObject CreateMusicEnt()
+		{
+			var ent = new GameObject(ComponentManager);
+
+			ent.AddComponent(new PlayMusicCom()
+			{
+				Alias = "music",
+				MusicName = Music.FirstSong
+			});
+
+			ent.AddComponent(new TriggerEvenetCom()
+			{
+				EventAlais = new List<string>() { "music" }
+			});
+
+			return ent;
+		}
+
 		private long CreateSqaure(Rectangle rectangle)
 		{
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
@@ -202,13 +220,13 @@ namespace VFVGAVFAF.src
 			gameObject.AddComponent(new PlaySoundEventCom()
 			{
 				Alias = "damageSound",
-				Song = Songs.DAMAGE_TAKEN
+				Song = Sounds.DAMAGE_TAKEN
 			});
 
 			gameObject.AddComponent(new PlaySoundEventCom()
 			{
 				Alias = "respawnSound",
-				Song = Songs.PLAYER_RESPAWN
+				Song = Sounds.PLAYER_RESPAWN
 			});
 
 			gameObject.AddComponent(new HealthCom()
@@ -249,7 +267,7 @@ namespace VFVGAVFAF.src
 		{
 			var gameObject = new GameObject(ComponentManager);
 
-			Rectangle rectangle = new Rectangle(50, 50, 100, 100);
+			Rectangle rectangle = new Rectangle(50, 50, 150, 50);
 
 			gameObject.AddComponent(new RectPosCom(rectangle)
 			{
@@ -265,10 +283,14 @@ namespace VFVGAVFAF.src
 				RectPosAlais = "pos",
 			});
 
-			gameObject.AddComponent(new RandomMovementContolerCom()
+			gameObject.AddComponent(new PatrolContorlerCom()
 			{
-				RectPosAlais = "pos",
-				Speed = 100
+				PosAlais = "pos",
+				Alias = "directionCom",
+				Radius = 30,
+				Speed = 100,
+				Start = new Postion2D(200, 0),
+				End = new Postion2D(200, 500)
 			});
 
 			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
