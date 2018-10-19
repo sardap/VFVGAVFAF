@@ -30,6 +30,15 @@ namespace VFVGAVFAF.src.Sence
 			}
 		}
 
+		public List<long> Load(GameObjectFactory gameObjectFactory)
+		{
+			var result = new List<long>();
+
+			_toCreate.ForEach(i => result.Add(gameObjectFactory.AddCreatedGameObject(gameObjectFactory.CreateObjectOfType(i))));
+
+			return result;
+		}
+
 		public async Task SaveFile(string fileName)
 		{
 			using (StreamWriter streamWriter = new StreamWriter(fileName))

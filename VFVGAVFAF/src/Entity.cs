@@ -51,6 +51,14 @@ namespace VFVGAVFAF.src
 			get { return typeof(T).GetHashCode(); }
 		}
 
+		public void KillYourself()
+		{
+			foreach(var entry in _ownedComs)
+			{
+				_componentManager.DeystroyComponent(GetID, entry.Key);
+			}
+		}
+
 		public List<Tuple<long, IComponent>> GetComponents
 		{
 			get

@@ -49,11 +49,16 @@ namespace VFVGAVFAF.src
 			{
 				DestroyEntity(_toDestroy.Pop());
 			}
+
+			var x = 0;
 		}
 
 		private void DestroyEntity(long id)
 		{
+			var ent = GetEntiy<GameObject>(id);
+			ent.KillYourself();
 			_nextIDs.Push(id);
+			Console.WriteLine("KILLING ENT ID:{0}", id);
 			IEntity entity = GetEntiy<IEntity>(id);
 			_entityTable.Remove(id);
 			entity.UnregstierComsFromMangers();

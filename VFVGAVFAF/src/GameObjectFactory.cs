@@ -45,8 +45,6 @@ namespace VFVGAVFAF.src
 
 		public GameObjectFactory()
 		{
-			_gameObjectCreators.Add(GameObjects.TestPlayer, new CreateGameObject(CreateTestSqaure));
-			_gameObjectCreators.Add(GameObjects.TestEnemy, new CreateGameObject(CreateTestEnemy));
 		}
 
 		public GameObject CreateObjectOfType(GameObjects gameObjects)
@@ -129,6 +127,11 @@ namespace VFVGAVFAF.src
 				((INeedPostMaster)component).GameEvenetPostMaster = GameEvenetPostMaster;
 			}
 
+			if (component is INeedSenceManger)
+			{
+				((INeedSenceManger)component).SenceManger = SenceManger;
+			}
+
 			return component;
 		}
 
@@ -142,94 +145,74 @@ namespace VFVGAVFAF.src
 			});
 		}
 
-		public GameObject CreateMusicEnt()
+		public List<IComponent> CreateMusicEnt()
 		{
-			var ent = new GameObject(ComponentManager);
+			var result = new List<IComponent>();
 
-			ent.AddComponent(new PlayMusicCom()
+			result.Add(new PlayMusicCom()
 			{
 				Alias = "music",
 				MusicName = Music.FirstSong
 			});
 
-			ent.AddComponent(new TriggerEvenetCom()
+			result.Add(new TriggerEvenetCom()
 			{
 				EventAlais = new List<string>() { "music" }
 			});
 
-			return ent;
+			return result;
 		}
 
-		private long CreateSqaure(Rectangle rectangle)
+		public List<IComponent> CreateTestSqaure()
 		{
-			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
-
-			var rectPos = gameObject.AddComponent(AddressNeeds(new RectPosCom(rectangle)));
-
-			var rectRendCom = gameObject.AddComponent(AddressNeeds(new RectRendCom()
-			{
-				TextureName = Textures.BLOCK,
-				Color = Color.Blue,
-				TextureManager = TextureManager,
-				SpriteBatch = SpriteBatch
-			}));
-
-			gameObject.RegsiterToManager(rectRendCom, RenderManager);
-
-			return entID;
-		}
-
-		private GameObject CreateTestSqaure()
-		{
-			var gameObject = new GameObject(ComponentManager);
+			var result = new List<IComponent>();
 
 			Rectangle rectangle = new Rectangle(0, 0, 100, 100);
 
-			gameObject.AddComponent(new RectPosCom(rectangle)
+			result.Add(new RectPosCom(rectangle)
 			{
 				Alias = "pos",
 				PostionConstrantComs = new List<string> { "gameBoundsConstrant" }
 			});
 
-			gameObject.AddComponent(new RectRendCom()
+			result.Add(new RectRendCom()
 			{
 				TextureName = Textures.BLOCK,
 				Color = Color.Black,
 				RectPosAlais = "pos",
 			});
 
-			gameObject.AddComponent(new KeyboardInputCom()
+			result.Add(new KeyboardInputCom()
 			{
 				RectPosAlais = "pos",
 				Speed = 500
 			});
 
-			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
+			result.Add(new RectPosCom(new Rectangle(0, 0, 800, 600))
 			{
 				Alias = "gameBounds"
 			});
 
-			gameObject.AddComponent(new RectConstrantCom()
+			result.Add(new RectConstrantCom()
 			{
 				Alias = "gameBoundsConstrant",
 				RectPosAlais = "gameBounds",
 				Inside = true
 			});
 
-			gameObject.AddComponent(new PlaySoundEventCom()
+			result.Add(new PlaySoundEventCom()
 			{
 				Alias = "damageSound",
 				Song = Sounds.DAMAGE_TAKEN
 			});
 
-			gameObject.AddComponent(new PlaySoundEventCom()
+			result.Add(new PlaySoundEventCom()
 			{
 				Alias = "respawnSound",
 				Song = Sounds.PLAYER_RESPAWN
 			});
 
-			gameObject.AddComponent(new HealthCom()
+			result.Add(new HealthCom()
 			{
 				HP = 100,
 				StartingHP = 100,
@@ -249,41 +232,41 @@ namespace VFVGAVFAF.src
 				}
 			});
 
-			gameObject.AddComponent(new RespawnCom()
+			result.Add(new RespawnCom()
 			{
 				Alias = "respawn",
 				PosComAlais = "pos"
 			});
 
-			gameObject.AddComponent(new RectCollisionCom()
+			result.Add(new RectCollisionCom()
 			{
 				RectPosAlais = "pos",
 			});
 
-			return gameObject;
+			return result;
 		}
 
-		private GameObject CreateTestEnemy()
+		public List<IComponent> CreateTestEnemy()
 		{
-			var gameObject = new GameObject(ComponentManager);
+			var result = new List<IComponent>();
 
 			Rectangle rectangle = new Rectangle(50, 50, 150, 50);
 
-			gameObject.AddComponent(new RectPosCom(rectangle)
+			result.Add(new RectPosCom(rectangle)
 			{
 				Alias = "pos",
 				PostionConstrantComs = new List<string> { "gameBoundsConstrant" },
 				RandomStartPos = true
 			});
 
-			gameObject.AddComponent(new RectRendCom()
+			result.Add(new RectRendCom()
 			{
 				TextureName = Textures.BLOCK,
 				Color = Color.Aqua,
 				RectPosAlais = "pos",
 			});
 
-			gameObject.AddComponent(new PatrolContorlerCom()
+			result.Add(new PatrolContorlerCom()
 			{
 				PosAlais = "pos",
 				Alias = "directionCom",
@@ -293,19 +276,19 @@ namespace VFVGAVFAF.src
 				End = new Postion2D(200, 500)
 			});
 
-			gameObject.AddComponent(new RectPosCom(new Rectangle(0, 0, 800, 600))
+			result.Add(new RectPosCom(new Rectangle(0, 0, 800, 600))
 			{
 				Alias = "gameBounds"
 			});
 
-			gameObject.AddComponent(new RectConstrantCom()
+			result.Add(new RectConstrantCom()
 			{
 				Alias = "gameBoundsConstrant",
 				RectPosAlais = "gameBounds",
 				Inside = true
 			});
 
-			gameObject.AddComponent(new DamageCom()
+			result.Add(new DamageCom()
 			{
 				Alias = "damage",
 				Damage = -10,
@@ -313,13 +296,13 @@ namespace VFVGAVFAF.src
 				Cooldown = 0.5
 			});
 
-			gameObject.AddComponent(new RectCollisionCom()
+			result.Add(new RectCollisionCom()
 			{
 				RectPosAlais = "pos",
 				GameEventComs = new List<string>() { "damage" }
 			});
 
-			return gameObject;
+			return result;
 		}
 
 		private long _healthComID;

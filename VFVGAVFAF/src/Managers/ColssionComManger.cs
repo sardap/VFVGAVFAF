@@ -23,7 +23,19 @@ namespace VFVGAVFAF.src.Managers
 
 		public void Check()
 		{
-			_quadTree.Process(_toCheck);
+			foreach(var id in _toCheck)
+			{
+				foreach(var otherID in _toCheck)
+				{
+					if(id != otherID)
+					{
+						var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
+						_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID);
+					}
+				}
+			}
+
+			//_quadTree.Process(_toCheck);
 		}
 
 		public void Regsiter(long comID)

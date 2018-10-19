@@ -8,6 +8,6 @@ namespace VFVGAVFAF.src.Sence
 {
 	interface ISenceData
 	{
-		List<GameObject> CreatedGameObjects { get; }
+		List<long> Load(GameObjectFactory gameObjectFactory);
 	}
 }

@@ -67,17 +67,19 @@ namespace VFVGAVFAF.src
 			};
 
 			_senceManger.GameObjectFactory = _gameObjectFactory;
+			_componentManager.PostMaster = _gameEvenetPostMaster;
 
 			SetupPlayer();
 		}
 
 		public void Step(double deltaTime)
 		{
+			_entityManager.Step();
+			_senceManger.Step();
 			_gameEvenetPostMaster.Step(deltaTime);
 			_inputManger.Update(deltaTime);
 			_colssionManger.Check();
 			_stepManager.Step(deltaTime);
-			_entityManager.Step();
 		}
 
 		public void Render(double deltaTime)
@@ -92,23 +94,6 @@ namespace VFVGAVFAF.src
 
 		private void SetupPlayer()
 		{
-			SenceData senceData = new SenceData();
-
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestPlayer);
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.TestEnemy);
-			/*
-			senceData.ToCreate.Add(GameObjectFactory.GameObjects.SqaurePlayer);
-
-			for (int i = 0; i < 4; i++)
-			{
-				senceData.ToCreate.Add(GameObjectFactory.GameObjects.EnemeySqaure);
-			}
-			*/
-
-			senceData.CreateGameObjects(_gameObjectFactory);
-
-			senceData.CreatedGameObjects.Add(_gameObjectFactory.CreateMusicEnt());
-
 			JsonSerializerSettings _settings = new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.Auto
@@ -117,18 +102,9 @@ namespace VFVGAVFAF.src
 			JsonSence jsonGameobject;
 			string jsonString;
 
-			if (true)
+			if (false)
 			{
 				JsonSence enityToJsons = new JsonSence();
-				senceData.CreatedGameObjects.ForEach(i => enityToJsons.Entries.Add(
-					new JsonSence.Entry
-					{
-						EnityToJson = new EnityToJson(i),
-						Count = 1
-					}
-				));
-
-				enityToJsons.Entries[1].Count = 25;
 
 				jsonString = JsonConvert.SerializeObject(enityToJsons, typeof(List<EnityToJson>), _settings);
 
@@ -147,8 +123,8 @@ namespace VFVGAVFAF.src
 			
 			jsonGameobject = JsonConvert.DeserializeObject<JsonSence>(jsonString, _settings);
 
-			jsonGameobject.Load(_gameObjectFactory);
-
+			_senceManger.Load(jsonGameobject);
+			//_senceManger.UnloadCurrent();
 		}
 	}
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src.Json
 {
-	class JsonSence
+	class JsonSence : ISenceData
 	{
 		public class Entry
 		{
@@ -22,15 +23,19 @@ namespace VFVGAVFAF.src.Json
 			Entries = new List<Entry>();
 		}
 
-		public void Load(GameObjectFactory gameObjectFactory)
+		public List<long> Load(GameObjectFactory gameObjectFactory)
 		{
+			var result = new List<long>();
+
 			foreach(var entry in Entries)
 			{
 				for(int i = 0; i < entry.Count; i++)
 				{
-					gameObjectFactory.AddCreatedGameObject(entry.EnityToJson);
+					result.Add(gameObjectFactory.AddCreatedGameObject(entry.EnityToJson));
 				}
-			}			
+			}
+
+			return result;
 		}
 	}
 }

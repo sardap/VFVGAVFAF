@@ -11,6 +11,8 @@ namespace VFVGAVFAF.src
 	{
 		void Add(long gameEvenetComID);
 
+		void UnregsiterCom(long id);
+
 		void Step(double deltaTime);
 	}
 }

@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src
 {
 	class ComponentManager
 	{
-		private ConcurrentDictionary<long, IComponent> _comTable = new ConcurrentDictionary<long, IComponent>();
-		private ConcurrentDictionary<long, List<IComponent>> _enityComponets = new ConcurrentDictionary<long, List<IComponent>>();
+		private Dictionary<long, IComponent> _comTable = new Dictionary<long, IComponent>();
+		private Dictionary<long, HashSet<long>> _enityComponets = new Dictionary<long, HashSet<long>>();
+		public IGameEvenetPostMaster PostMaster { get; set; }
 
 		private Stack<long> _nextIDS = new Stack<long>();
 		private long _lastOrderedID = 0;
@@ -18,6 +20,16 @@ namespace VFVGAVFAF.src
 		public ComponentManager()
 		{
 			_nextIDS.Push(_lastOrderedID);
+		}
+
+		public bool ComExists(long id)
+		{
+			return _comTable.ContainsKey(id);
+		}
+
+		public bool ComExistsAndOfType<T>(long id) where T : IComponent
+		{
+			return ComExists(id) && _comTable[id] is T;
 		}
 
 		public long CreateComponet<T>(long entiyID, T com) where T : IComponent
@@ -31,21 +43,16 @@ namespace VFVGAVFAF.src
 				_nextIDS.Push(_lastOrderedID);
 			}
 
-			_comTable.TryAdd(nextID, com);
+			_comTable.Add(nextID, com);
 
 			List<IComponent> components;
 
 			if (!_enityComponets.ContainsKey(entiyID))
 			{
-				_enityComponets.TryAdd(entiyID, new List<IComponent>());
-				components = _enityComponets[entiyID];
-			}
-			else
-			{
-				components = _enityComponets[entiyID];
+				_enityComponets.Add(entiyID, new HashSet<long>());
 			}
 
-			components.Add(_comTable[nextID]);
+			_enityComponets[entiyID].Add(nextID);
 
 			return nextID;
 		}
@@ -57,18 +64,22 @@ namespace VFVGAVFAF.src
 
 		public bool RemoveComponent(long entiyID, long comID)
 		{
-			_enityComponets[entiyID].Remove(_comTable[comID]);
+			_enityComponets[entiyID].Remove(comID);
 
 			return true;
 		}
 
-		public bool DeystroyComponent(long comID)
+		public bool DeystroyComponent(long entID, long comID)
 		{
 			var com = _comTable[comID];
 
-			_comTable.TryRemove(comID, out _);
+			_comTable.Remove(comID);
 
-			_nextIDS.Push(comID);
+			_enityComponets[entID].Remove(comID);
+
+			//_nextIDS.Push(comID);
+
+			PostMaster.UnregsiterCom(comID);
 
 			return true;
 		}

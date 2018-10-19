@@ -13,9 +13,9 @@ namespace VFVGAVFAF.src
 	{
 		public Postion2D Postion2D { get; set; }
 
-		public int Width { get; set; } 
+		public double Width { get; set; } 
 
-		public int Height { get; set; }
+		public double Height { get; set; }
 
 		[JsonIgnore]
 		public double X { get { return Postion2D.X; } }
@@ -38,14 +38,14 @@ namespace VFVGAVFAF.src
 		[JsonIgnore]
 		public double Right { get { return Postion2D.X + Width; } }
 
-		public Paultangle(double x, double y, int width, int height)
+		public Paultangle(double x, double y, double width, double height)
 		{
 			Postion2D = new Postion2D(x, y);
 			Width = width;
 			Height = height;
 		}
 
-		public Paultangle(Postion2D postion2D, int width, int height) : this(postion2D.X, postion2D.Y, width, height)
+		public Paultangle(Postion2D postion2D, double width, double height) : this(postion2D.X, postion2D.Y, width, height)
 		{
 		}
 
@@ -77,9 +77,9 @@ namespace VFVGAVFAF.src
 			return new Rectangle
 			(
 				(int)Math.Round(Postion2D.X), 
-				(int)Math.Round(Postion2D.Y), 
-				Width, 
-				Height
+				(int)Math.Round(Postion2D.Y),
+				(int)Math.Round(Width),
+				(int)Math.Round(Height)
 			);
 		}
 	}

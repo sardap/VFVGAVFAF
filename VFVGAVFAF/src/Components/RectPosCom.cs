@@ -83,7 +83,7 @@ namespace VFVGAVFAF.src.Components
 
 		public void ResetPostion()
 		{
-			SetPostion(new Postion2D(100, 100));
+			SetPostion(new Postion2D(5, 300));
 		}
 	}
 }

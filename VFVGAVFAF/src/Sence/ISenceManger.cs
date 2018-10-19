@@ -12,6 +12,10 @@ namespace VFVGAVFAF.src.Sence
 
 		void Load(ISenceData senceData);
 
+		void LoadFromFile(string fileName);
+
+		void Step();
+
 		void UnloadCurrent();
 	}
 }

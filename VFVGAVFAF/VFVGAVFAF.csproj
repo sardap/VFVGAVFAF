@@ -49,8 +49,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ColInfo.cs" />
+    <Compile Include="src\Components\ChangeSenceCom.cs" />
     <Compile Include="src\Components\EnableDisableCom.cs" />
     <Compile Include="src\Components\GoalReachedCom.cs" />
+    <Compile Include="src\Components\GrowRectCom.cs" />
     <Compile Include="src\Components\HealthCom.cs" />
     <Compile Include="src\Components\DamageCom.cs" />
     <Compile Include="src\Components\IColInfo.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="src\Managers\ColssionComManger.cs" />
     <Compile Include="src\Managers\SoundManager.cs" />
     <Compile Include="src\Needs\INeedPostMaster.cs" />
+    <Compile Include="src\Needs\INeedSenceManger.cs" />
     <Compile Include="src\Needs\INeedSoundManger.cs" />
     <Compile Include="src\Needs\INeedSpriteBatch.cs" />
     <Compile Include="src\Needs\INeedTextureManager.cs" />
