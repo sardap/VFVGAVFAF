@@ -10,21 +10,26 @@ namespace VFVGAVFAF.src
 {
 	class GameEvenetPostMaster : IGameEvenetPostMaster
 	{
-		struct STuple<T1, T2>
+		struct STuple
 		{
-			public STuple(T1 one, T2 two)
+			public STuple(long one, long two)
 			{
 				One = one;
 				Two = two;
 			}
 
-			public T1 One;
-			public T2 Two;
+			public long One;
+			public long Two;
+
+			public bool Ether(long other)
+			{
+				return One == other || Two == other;
+			}
 		}
 
 		private ComponentManager _componentManager;
-		private Dictionary<long, IPostData> _posts = new Dictionary<long, IPostData>();
-		private Dictionary<long, double> _cooldownTable = new Dictionary<long, double>();
+		private Dictionary<STuple, IPostData> _posts = new Dictionary<STuple, IPostData>();
+		private Dictionary<STuple, double> _cooldownTable = new Dictionary<STuple, double>();
 		private HashSet<long> _removedLastStep = new HashSet<long>();
 
 		public GameEvenetPostMaster(ComponentManager componentManager)
@@ -36,39 +41,71 @@ namespace VFVGAVFAF.src
 		{
 			_removedLastStep.Add(id);
 
-			_posts.Remove(id);
+			STuple? toRemove = null;
 
-			_cooldownTable.Remove(id);
+			foreach(var post in _posts)
+			{
+				if(post.Key.Ether(id))
+				{
+					toRemove = post.Key;
+					break;
+				}
+			}
+
+			if (toRemove != null)
+				_posts.Remove((STuple)toRemove);
+
+			toRemove = null;
+
+			foreach (var entry in _cooldownTable)
+			{
+				if(entry.Key.Ether(id))
+				{
+					toRemove = entry.Key;
+					break;
+				}
+			}
+
+			if(toRemove != null)
+				_cooldownTable.Remove((STuple)toRemove);
+		}
+
+		public void Add(long id, long otherID)
+		{
+			var key = new STuple(id, otherID);
+
+			var gameEvenet = _componentManager.GetComponent<IGameEventCom>(id);
+
+			if (!_cooldownTable.ContainsKey(key))
+			{
+				_cooldownTable.Add(key, 0);
+			}
+
+			if (_cooldownTable[key] <= 0)
+			{
+				Add(key, gameEvenet);
+				_cooldownTable[key] = gameEvenet.Cooldown;
+			}
 		}
 
 		public void Add(long id)
 		{
-			var gameEvenet = _componentManager.GetComponent<IGameEventCom>(id);
-
-			if (!_cooldownTable.ContainsKey(id))
-			{
-				_cooldownTable.Add(id, 0);
-			}
-
-			if(_cooldownTable[id] <= 0)
-			{
-				Add(id, gameEvenet);
-				_cooldownTable[id] = gameEvenet.Cooldown;
-			}
+			Add(id, long.MinValue);
 		}
 
 		public void Step(double deltaTime)
 		{
-			var nextPosts = new Dictionary<long, IPostData>();
-			var toChange = new Stack<KeyValuePair<long, double>>();
+			var nextPosts = new Dictionary<STuple, IPostData>();
+			var toChange = new Stack<KeyValuePair<STuple, double>>();
 
 			foreach (var entry in _cooldownTable)
 			{
-				var id = entry.Key;
-				var cooldown = _cooldownTable[id];
+				var key = entry.Key;
+				var id = key.One;
+				var cooldown = _cooldownTable[key];
 				var com = _componentManager.GetComponent<IGameEventCom>(id);
-				double nextValue = cooldown <= 0 ? com.Cooldown : _cooldownTable[id] - deltaTime;
-				toChange.Push(new KeyValuePair<long, double>(id, nextValue));
+				double nextValue = cooldown <= 0 ? com.Cooldown : _cooldownTable[key] - deltaTime;
+				toChange.Push(new KeyValuePair<STuple, double>(new STuple(key.One, key.Two), nextValue));
 			}
 
 			while(toChange.Count > 0)
@@ -78,22 +115,27 @@ namespace VFVGAVFAF.src
 				_cooldownTable[top.Key] = top.Value;
 			}
 
-			foreach (var post in _posts.Values)
+			foreach (var post in _posts)
 			{
-				if(!_removedLastStep.Contains(post.GameEventID))
-				{
-					post.TimeToComplete -= deltaTime;
-					Console.WriteLine("ID{0}\tTIME LEFT:{1}", post.GameEventID, post.TimeToComplete);
+				post.Value.TimeToComplete -= deltaTime;
+				Console.WriteLine("ID{0}\tTIME LEFT:{1}", post.Value.GameEventID, post.Value.TimeToComplete);
 
-					if (post.TimeToComplete <= 0)
+				if (post.Value.TimeToComplete <= 0)
+				{
+					Console.WriteLine("RUNNING ID: {0}", post.Value.GameEventID);
+
+					var com = _componentManager.GetComponent<IGameEventCom>(post.Value.GameEventID);
+
+					if (com is IColsionGameEventCom)
 					{
-						Console.WriteLine("RUNNING ID: {0}", post.GameEventID);
-						_componentManager.GetComponent<IGameEventCom>(post.GameEventID).Action();
+						((IColsionGameEventCom)com).ActiveID = post.Key.Two;
 					}
-					else
-					{
-						nextPosts.Add(post.GameEventID, post);
-					}
+
+					com.Action();
+				}
+				else
+				{
+					nextPosts.Add(post.Key, post.Value);
 				}
 			}
 
@@ -101,10 +143,10 @@ namespace VFVGAVFAF.src
 			_removedLastStep.Clear();
 		}
 
-		private void Add(long id, IGameEventCom gameEvenet)
+		private void Add(STuple key, IGameEventCom gameEvenet)
 		{
-			Console.WriteLine("ADDING POST ID{0} TTC:{1}", id, gameEvenet.TimeToComplete);
-			_posts.Add(id, new PostData { TimeToComplete = gameEvenet.TimeToComplete, GameEventID = id });
+			Console.WriteLine("ADDING POST ID{0} TTC:{1}", key.One, gameEvenet.TimeToComplete);
+			_posts.Add(key, new PostData { TimeToComplete = gameEvenet.TimeToComplete, GameEventID = key.One });
 		}
 	}
 }

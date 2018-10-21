@@ -11,6 +11,6 @@ namespace VFVGAVFAF.src.Components
 	{
 		Paultangle GetHitBox { get; }
 
-		void Check(long otherEntID, long otherID);
+		bool Check(long otherEntID, long otherID);
 	}
 }

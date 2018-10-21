@@ -23,6 +23,8 @@ namespace VFVGAVFAF.src.Managers
 
 		public void Check()
 		{
+			var colCount = 0;
+
 			foreach(var id in _toCheck)
 			{
 				foreach(var otherID in _toCheck)
@@ -30,12 +32,13 @@ namespace VFVGAVFAF.src.Managers
 					if(id != otherID)
 					{
 						var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
-						_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID);
+						if (_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID))
+							colCount++;
 					}
 				}
 			}
 
-			//_quadTree.Process(_toCheck);
+			//Console.WriteLine("COLLSIONS: {0}", colCount);
 		}
 
 		public void Regsiter(long comID)

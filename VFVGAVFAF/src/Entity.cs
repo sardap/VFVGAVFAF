@@ -95,7 +95,7 @@ namespace VFVGAVFAF.src
 
 		public bool ComEnabled(long id)
 		{
-			return _enabledComs[id];
+			return true;
 		}
 
 		public bool DisableCom(long id)

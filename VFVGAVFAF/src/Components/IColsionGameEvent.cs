@@ -12,6 +12,9 @@ namespace VFVGAVFAF.src.Components
 	interface IColsionGameEventCom : IGameEventCom
 	{
 		[JsonIgnore]
-		IColInfo ColliedWith { get; set; }
+		long ActiveID { get; set; }
+
+		[JsonIgnore]
+		Dictionary<long, IColInfo> ColliedWithTable { get; set; }
 	}
 }

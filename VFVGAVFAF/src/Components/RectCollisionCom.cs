@@ -32,25 +32,28 @@ namespace VFVGAVFAF.src.Components
 			GameEventComs = new List<string>();
 		}
 
-		public void Check(long otherEntID, long otherID)
+		public bool Check(long otherEntID, long otherID)
 		{
 			var ent = EntityManager.GetEntiy<GameObject>(EntID);
 			var hitBox = ent.GetComponent<RectPosCom>(RectPosAlais); // Safe
 			var otherEnt = EntityManager.GetEntiy<GameObject>(otherEntID);
 			var otherCom = otherEnt.GetComponent<ICollisionCom>(otherID); // Safe
 			var otherHitBox = otherCom.GetHitBox; // Not Safe
-			if (hitBox.Rectangle.Intersects(otherHitBox)) // Note Safe
+			var collied = hitBox.Rectangle.Intersects(otherHitBox);
+			if (collied) // Note Safe
 			{
 				foreach(var gameEventAlais in GameEventComs)
 				{
 					if(ent.GetComponent<IGameEventCom>(gameEventAlais) is IColsionGameEventCom)
 					{
-						ent.GetComponent<IColsionGameEventCom>(gameEventAlais).ColliedWith = new ColInfo(otherEntID);
+						ent.GetComponent<IColsionGameEventCom>(gameEventAlais).ColliedWithTable[otherCom.EntID] = new ColInfo(otherEntID);
 					}
 
-					GameEvenetPostMaster.Add(ent.GetIdForAlais(gameEventAlais));
+					GameEvenetPostMaster.Add(ent.GetIdForAlais(gameEventAlais), otherCom.EntID);
 				}
 			}
+
+			return collied;
 		}
 	}
 }
