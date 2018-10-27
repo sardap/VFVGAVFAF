@@ -41,6 +41,7 @@ namespace VFVGAVFAF.src
 		public ContentManager Content { get; set; }
 		public ISenceManger SenceManger { get; set; }
 		public SpriteBatch SpriteBatch { get; set; }
+		public FontManger FontManger { get; set; }
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
 		public GameObjectFactory()
@@ -130,6 +131,11 @@ namespace VFVGAVFAF.src
 			if (component is INeedSenceManger)
 			{
 				((INeedSenceManger)component).SenceManger = SenceManger;
+			}
+
+			if(component is INeedFontManager)
+			{
+				((INeedFontManager)component).FontManger = FontManger;
 			}
 
 			return component;

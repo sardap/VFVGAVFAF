@@ -50,3 +50,10 @@
 /processorParam:Quality=Best
 /build:Music/Kanonische29.mp3
 
+#begin Fonts/Russian.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Russian.spritefont
+

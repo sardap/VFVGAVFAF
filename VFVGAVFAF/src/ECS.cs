@@ -11,6 +11,7 @@ using VFVGAVFAF.src.Sence;
 using Newtonsoft.Json;
 using VFVGAVFAF.src.Json;
 using System.IO;
+using VFVGAVFAF.src.Components;
 
 namespace VFVGAVFAF.src
 {
@@ -22,6 +23,7 @@ namespace VFVGAVFAF.src
 		private InputManger _inputManger;
 		private ColssionComManger _colssionManger;
 		private TextureManager _textureManager;
+		private FontManger _fontManger;
 		private SoundManager _soundManager;
 		private GameObjectFactory _gameObjectFactory;
 		private ISenceManger _senceManger;
@@ -48,6 +50,10 @@ namespace VFVGAVFAF.src
 			{
 				Content = Content
 			};
+			_fontManger = new FontManger
+			{
+				Content = Content
+			};
 			_soundManager = new SoundManager(Content);
 			_senceManger = new SenceManger(_entityManager);
 			_stepManager = new StepManager() { ComponentManager = _componentManager };
@@ -62,6 +68,7 @@ namespace VFVGAVFAF.src
 				ColssionManger = _colssionManger,
 				StepManager = _stepManager,
 				TextureManager = _textureManager,
+				FontManger = _fontManger,
 				SoundManager = _soundManager,
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,

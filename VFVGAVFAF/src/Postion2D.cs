@@ -30,6 +30,11 @@ namespace VFVGAVFAF.src
 			Y = y;
 		}
 
+		public Vector2 ToVector()
+		{
+			return new Vector2((float)X, (float)Y);
+		}
+
 		public Rectangle ToRectangle(int width, int height)
 		{
 			return new Rectangle((int)Math.Round(X), (int)Math.Round(Y), width, height);

@@ -11,7 +11,7 @@ namespace VFVGAVFAF.src
 {
 	class TextureManager
 	{
-		private Dictionary<string, Dictionary<Color, Texture2D>> _textures = new Dictionary<string, Dictionary<Color, Texture2D>>();
+		private Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
 
 		public ContentManager Content { get; set; }
 
@@ -19,28 +19,22 @@ namespace VFVGAVFAF.src
 		{
 			if (!_textures.ContainsKey(name))
 			{
-				_textures.Add(name, new Dictionary<Color, Texture2D>());
-				_textures[name].Add(Color.Black, Content.Load<Texture2D>(name));
-			}
+				_textures.Add(name, Content.Load<Texture2D>(name));
 
-			if(!_textures[name].ContainsKey(color))
-			{
-				var texture = _textures[name].First().Value;
+				var texture = _textures[name];
 				Color[] tcolor = new Color[texture.Width * texture.Height];
 				texture.GetData(tcolor);
 
 				for (int i = 0; i < tcolor.Length; i++)
 				{
-					tcolor[i].R = color.R;
-					tcolor[i].G = color.G;
-					tcolor[i].B = color.B;
+					tcolor[i].R = 255;
+					tcolor[i].G = 255;
+					tcolor[i].B = 255;
 				}
 				texture.SetData(tcolor);
-
-				_textures[name].Add(color, texture);
 			}
 
-			return _textures[name][color];
+			return _textures[name];
 		}
 	}
 }
