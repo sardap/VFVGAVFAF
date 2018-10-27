@@ -57,8 +57,6 @@ namespace VFVGAVFAF.src
 			{
 				_componentManager.DeystroyComponent(GetID, entry.Key);
 			}
-
-			_componentManager.RemoveEnt(_entiyID);
 		}
 
 		public List<Tuple<long, IComponent>> GetComponents
@@ -97,7 +95,7 @@ namespace VFVGAVFAF.src
 
 		public bool ComEnabled(long id)
 		{
-			return true;
+			return _enabledComs[id];
 		}
 
 		public bool DisableCom(long id)

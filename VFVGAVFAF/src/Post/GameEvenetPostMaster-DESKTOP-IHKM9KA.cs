@@ -41,29 +41,33 @@ namespace VFVGAVFAF.src
 		{
 			_removedLastStep.Add(id);
 
-			List<STuple> toRemove = new List<STuple>();
+			STuple? toRemove = null;
 
 			foreach(var post in _posts)
 			{
 				if(post.Key.Ether(id))
 				{
-					toRemove.Add(post.Key);
+					toRemove = post.Key;
+					break;
 				}
 			}
 
-			Utils.RemoveAll(_posts, toRemove);
+			if (toRemove != null)
+				_posts.Remove((STuple)toRemove);
 
-			toRemove = new List<STuple>();
+			toRemove = null;
 
 			foreach (var entry in _cooldownTable)
 			{
 				if(entry.Key.Ether(id))
 				{
-					toRemove.Add(entry.Key);
+					toRemove = entry.Key;
+					break;
 				}
 			}
 
-			Utils.RemoveAll(_cooldownTable, toRemove);
+			if(toRemove != null)
+				_cooldownTable.Remove((STuple)toRemove);
 		}
 
 		public void Add(long id, long otherID)
@@ -119,15 +123,7 @@ namespace VFVGAVFAF.src
 				if (post.Value.TimeToComplete <= 0)
 				{
 					Console.WriteLine("RUNNING ID: {0}", post.Value.GameEventID);
-
-					var com = _componentManager.GetComponent<IGameEventCom>(post.Value.GameEventID);
-
-					if (com is IColsionGameEventCom)
-					{
-						((IColsionGameEventCom)com).ActiveID = post.Key.Two;
-					}
-
-					com.Action();
+					_componentManager.GetComponent<IGameEventCom>(post.Value.GameEventID).Action();
 				}
 				else
 				{

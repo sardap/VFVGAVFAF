@@ -33,8 +33,11 @@ namespace VFVGAVFAF.src
 
 		public void Initialse()
 		{
-			_entityManager = new EntityManager();
 			_componentManager = new ComponentManager();
+			_entityManager = new EntityManager()
+			{
+				ComponentManager = _componentManager
+			};
 			_renderManager = new RenderManager()
 			{
 				ComponentManager = _componentManager

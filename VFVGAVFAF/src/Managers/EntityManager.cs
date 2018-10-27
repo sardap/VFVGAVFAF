@@ -14,6 +14,8 @@ namespace VFVGAVFAF.src
 		private Stack<long> _toDestroy = new Stack<long>();
 		private long _lastOrderedID = 0;
 
+		public ComponentManager ComponentManager { get; set; }
+
 		public EntityManager()
 		{
 			_nextIDs.Push(_lastOrderedID);
@@ -45,12 +47,21 @@ namespace VFVGAVFAF.src
 
 		public void Step()
 		{
-			while(_toDestroy.Count > 0)
+			bool fuckyou = false;
+
+			while (_toDestroy.Count > 0)
 			{
+				fuckyou = true;
 				DestroyEntity(_toDestroy.Pop());
 			}
 
-			var x = 0;
+			if (fuckyou)
+			{
+				if (_entityTable.Count == 0)
+				{
+					var x = 0;
+				}
+			}
 		}
 
 		private void DestroyEntity(long id)

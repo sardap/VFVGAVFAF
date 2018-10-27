@@ -90,5 +90,14 @@ namespace VFVGAVFAF.src
 
 			return senceData;
 		}
+
+		public static void RemoveAll<K, V>(Dictionary<K, V> dict, IEnumerable<K> toRemove)
+		{
+			foreach(var i in toRemove)
+			{
+				dict.Remove(i);
+			}
+		}
+
 	}
 }

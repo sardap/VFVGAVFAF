@@ -69,6 +69,13 @@ namespace VFVGAVFAF.src
 			return true;
 		}
 
+		public bool RemoveEnt(long entID)
+		{
+			_enityComponets.Remove(entID);
+
+			return true;
+		}
+
 		public bool DeystroyComponent(long entID, long comID)
 		{
 			var com = _comTable[comID];
