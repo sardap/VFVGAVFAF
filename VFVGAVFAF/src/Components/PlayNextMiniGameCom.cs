@@ -7,25 +7,22 @@ using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src.Components
 {
-	class GoalReachedCom : IGameEventCom, INeedMinigameManger
+	class PlayNextMiniGameCom: IGameEventCom, INeedMinigameManger
 	{
 		public long EntID { get; set; }
-
 		public string Alias { get; set; }
-		public double TimeToComplete { get; set; }
-		public double Cooldown { get; set; }
+
+		public double TimeToComplete { get; }
+
+		public double Cooldown { get; }
 
 		public MinigameManger MinigameManger { get; set; }
-		
 
-		public GoalReachedCom(long entID)
-		{
-			EntID = entID;
-		}
 
 		public void Action()
 		{
 			MinigameManger.PlayNext();
 		}
+
 	}
 }

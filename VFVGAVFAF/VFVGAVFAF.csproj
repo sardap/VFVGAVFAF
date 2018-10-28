@@ -48,7 +48,16 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Centerhorizontal.cs" />
+    <Compile Include="src\CenterOperator.cs" />
+    <Compile Include="src\CenterVertical.cs" />
     <Compile Include="src\ColInfo.cs" />
+    <Compile Include="src\Components\CenterCom.cs" />
+    <Compile Include="src\Components\GameBoundsCom.cs" />
+    <Compile Include="src\Components\GetSize.cs" />
+    <Compile Include="src\Components\IHaveHitBox.cs" />
+    <Compile Include="src\Components\IRunOnceCom.cs" />
+    <Compile Include="src\Components\PlayNextMiniGameCom.cs" />
     <Compile Include="src\Components\Postion2DCom.cs" />
     <Compile Include="src\Components\ChangeSenceCom.cs" />
     <Compile Include="src\Components\EnableDisableCom.cs" />
@@ -66,9 +75,11 @@
     <Compile Include="src\Components\PatrolContorlerCom.cs" />
     <Compile Include="src\Components\TextCom.cs" />
     <Compile Include="src\Components\TriggerEvenetCom.cs" />
+    <Compile Include="src\GameInfo.cs" />
     <Compile Include="src\IHaveAlias.cs" />
     <Compile Include="src\Json\JsonSence.cs" />
     <Compile Include="src\Components\FontRendCom.cs" />
+    <Compile Include="src\Managers\MinigameManger.cs" />
     <Compile Include="src\Needs\INeedFontManager.cs" />
     <Compile Include="src\Music.cs" />
     <Compile Include="src\Needs\INeedEnityManger.cs" />
@@ -85,6 +96,8 @@
     <Compile Include="src\Json\EnityToJson.cs" />
     <Compile Include="src\Managers\ColssionComManger.cs" />
     <Compile Include="src\Managers\SoundManager.cs" />
+    <Compile Include="src\Needs\INeedGameInfo.cs" />
+    <Compile Include="src\Needs\INeedMinigameManger.cs" />
     <Compile Include="src\Needs\INeedPostMaster.cs" />
     <Compile Include="src\Needs\INeedSenceManger.cs" />
     <Compile Include="src\Needs\INeedSoundManger.cs" />
@@ -196,6 +209,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

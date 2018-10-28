@@ -99,5 +99,38 @@ namespace VFVGAVFAF.src
 			}
 		}
 
+		public static List<T> RemoveAll<T>(List<T> target, List<T> toRemove)
+		{
+			foreach(var i in toRemove)
+			{
+				target.Remove(i);
+			}
+
+			return target;
+		}
+
+		public static T RandomEntry<T>(IEnumerable<T> list)
+		{
+			int i = 0;
+			int toGet = Random.Next(list.Count());
+
+			foreach(var entry in list)
+			{
+				if(i == toGet)
+				{
+					return entry;
+				}
+
+				i++;
+			}
+
+			throw new System.Exception();
+		}
+
+		public static double FindCenter(double bounds, double pos)
+		{
+			return Math.Floor(bounds / 2) - Math.Floor(pos / 2);
+		}
+
 	}
 }

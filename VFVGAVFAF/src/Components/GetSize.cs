@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface ICollisionCom : IComponent, IHaveHitBoxCom
+	interface IGetSizeCom: IComponent
 	{
-		bool Check(long otherEntID, long otherID);
+		Vector2 Size();
 	}
 }

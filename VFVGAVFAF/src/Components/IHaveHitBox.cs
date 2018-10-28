@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface ICollisionCom : IComponent, IHaveHitBoxCom
+	interface IHaveHitBoxCom: IComponent
 	{
-		bool Check(long otherEntID, long otherID);
+		[JsonIgnore]
+		Paultangle GetHitBox { get; }
 	}
 }

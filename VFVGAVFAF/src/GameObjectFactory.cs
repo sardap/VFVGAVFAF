@@ -43,6 +43,8 @@ namespace VFVGAVFAF.src
 		public SpriteBatch SpriteBatch { get; set; }
 		public FontManger FontManger { get; set; }
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
+		public GameInfo GameInfo { get; set; }
+		public MinigameManger MinigameManger { get; set; }
 
 		public GameObjectFactory()
 		{
@@ -136,6 +138,16 @@ namespace VFVGAVFAF.src
 			if(component is INeedFontManager)
 			{
 				((INeedFontManager)component).FontManger = FontManger;
+			}
+
+			if (component is INeedGameInfo)
+			{
+				((INeedGameInfo)component).GameInfo = GameInfo;
+			}
+
+			if (component is INeedMinigameManger)
+			{
+				((INeedMinigameManger)component).MinigameManger = MinigameManger;
 			}
 
 			return component;

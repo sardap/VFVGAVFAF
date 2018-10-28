@@ -10,13 +10,14 @@ using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src.Components
 {
-	class FontRendCom : IRenderableComponent, INeedSpriteBatch, INeedEnityManger, INeedFontManager
+	class FontRendCom : IRenderableComponent, INeedSpriteBatch, INeedEnityManger, INeedFontManager, IGetSizeCom, IHaveAlias
 	{
 		public long EntID { get; set; }
 
 		private FontManger _fontManger;
 		private SpriteFont _font;
 
+		public string Alias { get; set; }
 		public string TextAlais { get; set; }
 		public string PostionAlais { get; set; }
 		public string FontName { get; set; }
@@ -38,6 +39,11 @@ namespace VFVGAVFAF.src.Components
 		public SpriteBatch SpriteBatch { get; set; }
 		public EntityManager EntityManager { get; set; }
 
+		public Vector2 Size()
+		{
+			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<TextCom>(TextAlais).Text;
+			return _font.MeasureString(text);
+		}
 
 		public void Render(double deltaTime)
 		{

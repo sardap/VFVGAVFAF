@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace VFVGAVFAF.src.Components
 {
 	[Serializable]
-	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias
+	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias, IGetSizeCom
 	{
 		private Paultangle _startingPostion;
 		private bool _randomStartPos = false;
@@ -53,6 +53,12 @@ namespace VFVGAVFAF.src.Components
 		public RectPosCom(Postion2D postion2D) : this(postion2D.ToRectangle(0, 0))
 		{
 		}
+
+		public Vector2 Size()
+		{
+			return new Postion2D(Paultangle.Width, Paultangle.Height).ToVector();
+		}
+
 
 		public void SetPostion(Postion2D postion2D)
 		{

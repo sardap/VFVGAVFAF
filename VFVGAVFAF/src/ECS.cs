@@ -29,11 +29,13 @@ namespace VFVGAVFAF.src
 		private ISenceManger _senceManger;
 		private IStepManager _stepManager;
 		private IGameEvenetPostMaster _gameEvenetPostMaster;
+		private GameInfo _gameInfo;
+		private MinigameManger _minigameManger;
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
 
-		public void Initialse()
+		public void Initialse(GraphicsDeviceManager graphics)
 		{
 			_componentManager = new ComponentManager();
 			_entityManager = new EntityManager()
@@ -58,6 +60,16 @@ namespace VFVGAVFAF.src
 			_senceManger = new SenceManger(_entityManager);
 			_stepManager = new StepManager() { ComponentManager = _componentManager };
 			_gameEvenetPostMaster = new GameEvenetPostMaster(_componentManager);
+			_gameInfo = new GameInfo(graphics);
+			_minigameManger = new MinigameManger()
+			{
+				SenceManger = _senceManger,
+				MinigameFiles = new List<string>()
+				{
+					"entriy.json"
+				}
+			};
+
 
 			_gameObjectFactory = new GameObjectFactory
 			{
@@ -70,10 +82,12 @@ namespace VFVGAVFAF.src
 				TextureManager = _textureManager,
 				FontManger = _fontManger,
 				SoundManager = _soundManager,
+				MinigameManger = _minigameManger,
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,
 				Content = Content,
-				GameEvenetPostMaster = _gameEvenetPostMaster
+				GameEvenetPostMaster = _gameEvenetPostMaster,
+				GameInfo = _gameInfo
 			};
 
 			_senceManger.GameObjectFactory = _gameObjectFactory;
@@ -104,6 +118,9 @@ namespace VFVGAVFAF.src
 
 		private void SetupPlayer()
 		{
+			_minigameManger.PlayNext();
+
+			/*
 			JsonSerializerSettings _settings = new JsonSerializerSettings
 			{
 				TypeNameHandling = TypeNameHandling.Auto
@@ -135,6 +152,7 @@ namespace VFVGAVFAF.src
 
 			_senceManger.Load(jsonGameobject);
 			//_senceManger.UnloadCurrent();
+			*/
 		}
 	}
 }

@@ -30,6 +30,11 @@ namespace VFVGAVFAF.src
 			Y = y;
 		}
 
+		public Postion2D(Vector2 vector2): this(vector2.X, vector2.Y)
+		{
+
+		}
+
 		public Vector2 ToVector()
 		{
 			return new Vector2((float)X, (float)Y);

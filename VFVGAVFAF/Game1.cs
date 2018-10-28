@@ -30,13 +30,14 @@ namespace VFVGAVFAF
         /// </summary>
         protected override void Initialize()
         {
-			_ecs = new ECS();
 			graphics.SynchronizeWithVerticalRetrace = false;
 			IsFixedTimeStep = false;
 
 			graphics.PreferredBackBufferWidth = 800;  // set this value to the desired width of your window
 			graphics.PreferredBackBufferHeight = 600;   // set this value to the desired height of your window
 			graphics.ApplyChanges();
+
+			_ecs = new ECS();
 
 			base.Initialize();
         }
@@ -53,7 +54,7 @@ namespace VFVGAVFAF
 			_ecs.SpriteBatch = spriteBatch;
 			_ecs.Content = Content;
 			_font = Content.Load<SpriteFont>("Fonts/score");
-			_ecs.Initialse();
+			_ecs.Initialse(graphics);
 		}
 
 		/// <summary>
