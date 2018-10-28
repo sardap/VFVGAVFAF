@@ -31,6 +31,7 @@ namespace VFVGAVFAF.src
 		private IGameEvenetPostMaster _gameEvenetPostMaster;
 		private GameInfo _gameInfo;
 		private MinigameManger _minigameManger;
+		private EntiyBlueprintManger _entiyBlueprintManger;
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
@@ -66,10 +67,21 @@ namespace VFVGAVFAF.src
 				SenceManger = _senceManger,
 				MinigameFiles = new List<string>()
 				{
-					"entriy.json"
+					//@"Minigames\Game1.json"
+					@"Minigames\Game2.json"
 				}
 			};
 
+			JsonSerializerSettings settings = new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.Auto
+			};
+
+			_entiyBlueprintManger =  JsonConvert.DeserializeObject<EntiyBlueprintManger>
+			(
+				Utils.ReadEntireFile(@"Minigames\EntiyList.json"),
+				settings
+			);
 
 			_gameObjectFactory = new GameObjectFactory
 			{
@@ -85,6 +97,7 @@ namespace VFVGAVFAF.src
 				MinigameManger = _minigameManger,
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,
+				EntiyBlueprintManger = _entiyBlueprintManger,
 				Content = Content,
 				GameEvenetPostMaster = _gameEvenetPostMaster,
 				GameInfo = _gameInfo

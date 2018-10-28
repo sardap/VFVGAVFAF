@@ -11,6 +11,7 @@ namespace VFVGAVFAF.src.Managers
 	{
 		private List<string> _played = new List<string>();
 		private List<string> _active = new List<string>();
+		private string _loaded = null;
 
 		public List<string> MinigameFiles = new List<string>();
 
@@ -26,10 +27,17 @@ namespace VFVGAVFAF.src.Managers
 
 			_played.Add(next);
 
-			if(_played.Count >= MinigameFiles.Count)
+			_loaded = next;
+
+			if (_played.Count >= MinigameFiles.Count)
 			{
 				_played.Clear();
 			}
+		}
+
+		public void PlayAgain()
+		{
+			SenceManger.LoadFromFile(_loaded);
 		}
 	}
 }

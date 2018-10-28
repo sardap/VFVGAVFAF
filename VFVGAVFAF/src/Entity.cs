@@ -20,6 +20,8 @@ namespace VFVGAVFAF.src
 		private bool _alreadySet = false;
 		private long _entiyID;
 
+		public List<string> Tags { get; set; }
+
 		public void SetID(long id)
 		{
 			if(_alreadySet)

@@ -1,0 +1,199 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "player"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":5.0,
+                                "Y":300.0
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                            "gameBoundsConstrant"
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Actions":{
+                            "32":"gun"
+                        },
+                        "speed":300
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":0.0,
+                                "Y":0.0
+                            },
+                            "Width":800,
+                            "Height":600
+                        },
+                        "Alias":"gameBounds",
+                        "PostionConstrantComs":[
+
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
+                        "RectPosAlais":"gameBounds",
+                        "Inside":true,
+                        "Type":0,
+                        "Alias":"gameBoundsConstrant"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/dmgt",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"damageSound"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/player_respawn",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"respawnSound"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.ResetSenceCom, VFVGAVFAF",
+                        "Alias":"change"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":9,
+                        "MaxHP":9,
+                        "StartingHP":9,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
+                                "GameEvents":[
+                                    "damageSound"
+                                ]
+                            },
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
+                                "Opreator":2,
+                                "Value":0,
+                                "GameEvents":[
+                                    "respawn",
+                                    "respawnSound",
+                                    "change"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RespawnCom, VFVGAVFAF",
+                        "PosComAlais":"pos",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"respawn"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":[
+
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
+                        "Alias":"gun",
+                        "BulletBlueprint":"player_bullet",
+                        "PostionAlais":"pos",
+                        "TimeToComplete":0,
+                        "Cooldown":0.3
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":700,
+                                "Y":0
+                            },
+                            "Width":50,
+                            "Height":100
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":139,
+                            "G":39,
+                            "R":19,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"pos",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GoalReachedCom, VFVGAVFAF",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "Alias":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":[
+                            "goal_reached"
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+    ]
+}

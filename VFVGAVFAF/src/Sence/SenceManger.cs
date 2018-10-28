@@ -57,6 +57,12 @@ namespace VFVGAVFAF.src.Sence
 			Load(jsonGameobject);
 		}
 
+		public void AddToProcessed(long id)
+		{
+			_processedGameObjects.Add(id);
+		}
+
+
 		public void Step()
 		{
 			if(_load)

@@ -16,6 +16,8 @@ namespace VFVGAVFAF.src.Sence
 
 		void Step();
 
+		void AddToProcessed(long id);
+
 		void UnloadCurrent();
 	}
 }

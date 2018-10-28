@@ -10,13 +10,29 @@ namespace VFVGAVFAF.src.Json
 	{
 		public List<IComponent> Components { get; set; }
 
+		public List<string> Tags { get; set; }
+
 		public EnityToJson()
 		{
+			Tags = new List<string>();
 		}
 
 		public EnityToJson(GameObject gameObject)
 		{
 			PopluateFromEntiy(gameObject);
+		}
+
+		public T GetbyAlais<T>(string alais)where T : IHaveAlias
+		{
+			foreach(var com in Components)
+			{
+				if(com is IHaveAlias && ((IHaveAlias)com).Alias == alais)
+				{
+					return (T)com;
+				}
+			}
+
+			throw new KeyNotFoundException();
 		}
 
 		public void PopluateFromEntiy(IEntity entity)

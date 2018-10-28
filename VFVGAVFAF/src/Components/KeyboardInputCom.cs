@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 namespace VFVGAVFAF.src.Components
 {
 	[Serializable]
-	class KeyboardInputCom : IContolerCom, INeedEnityManger
+	class KeyboardInputCom : IContolerCom, INeedEnityManger, INeedPostMaster
 	{
 		public long EntID { get; set; }
 		public string RectPosAlais { get; set; }
 		public EntityManager EntityManager { get; set; }
 		public int Speed { get; set; }
+		public Dictionary<Keys, string> Actions { get; set; }
+
+		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
+
 
 		public KeyboardInputCom(long entID, EntityManager entityManager)
 		{
@@ -23,11 +27,13 @@ namespace VFVGAVFAF.src.Components
 
 		public KeyboardInputCom()
 		{
+			Actions = new Dictionary<Keys, string>();
 		}
 
 		public void Update(double deltaTime)
 		{
-			var posCom = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(RectPosAlais);
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			var posCom = ent.GetComponent<IPostionComponet>(RectPosAlais);
 			var position = posCom.GetPostion();
 			var oldPostion = new Postion2D(position.X, position.Y);
 
@@ -46,6 +52,14 @@ namespace VFVGAVFAF.src.Components
 
 			if(position.X != oldPostion.X || position.Y != oldPostion.Y)
 				posCom.SetPostion(position);
+
+			foreach(var entry in Actions)
+			{
+				if (state.IsKeyDown(entry.Key))
+				{
+					GameEvenetPostMaster.Add(ent.GetIdForAlais(entry.Value));
+				}
+			}
 		}
 	}
 }

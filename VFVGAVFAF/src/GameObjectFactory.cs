@@ -45,6 +45,7 @@ namespace VFVGAVFAF.src
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 		public GameInfo GameInfo { get; set; }
 		public MinigameManger MinigameManger { get; set; }
+		public EntiyBlueprintManger EntiyBlueprintManger { get; set; }
 
 		public GameObjectFactory()
 		{
@@ -71,12 +72,17 @@ namespace VFVGAVFAF.src
 
 			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
 			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+
+			gameObject.Tags = jsonGameObject.Tags;
+
 			jsonGameObject.Components.ForEach(i =>
 			{
-				var fuckyou = JsonConvert.SerializeObject(i, typeof(IComponent), settings);
-				gameObject.AddComponent(JsonConvert.DeserializeObject<IComponent>(fuckyou, settings));
+				var jsonString = JsonConvert.SerializeObject(i, typeof(IComponent), settings);
+				gameObject.AddComponent(JsonConvert.DeserializeObject<IComponent>(jsonString, settings));
 			});
+
 			AddressNeedsAndMangers(gameObject);
+
 			return entID;
 		}
 
@@ -149,6 +155,17 @@ namespace VFVGAVFAF.src
 			{
 				((INeedMinigameManger)component).MinigameManger = MinigameManger;
 			}
+
+			if (component is INeedBlueprintManger)
+			{
+				((INeedBlueprintManger)component).EntiyBlueprintManger = EntiyBlueprintManger;
+			}
+
+			if (component is INeedGamesObjectFactory)
+			{
+				((INeedGamesObjectFactory)component).GameObjectFactory = this;
+			}
+
 
 			return component;
 		}

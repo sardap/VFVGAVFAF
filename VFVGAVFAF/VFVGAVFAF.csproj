@@ -55,11 +55,13 @@
     <Compile Include="src\Components\CenterCom.cs" />
     <Compile Include="src\Components\GameBoundsCom.cs" />
     <Compile Include="src\Components\GetSize.cs" />
+    <Compile Include="src\Components\GunCom.cs" />
     <Compile Include="src\Components\IHaveHitBox.cs" />
     <Compile Include="src\Components\IRunOnceCom.cs" />
+    <Compile Include="src\Components\MoveDirectionCom.cs" />
     <Compile Include="src\Components\PlayNextMiniGameCom.cs" />
     <Compile Include="src\Components\Postion2DCom.cs" />
-    <Compile Include="src\Components\ChangeSenceCom.cs" />
+    <Compile Include="src\Components\ResetSenceCom.cs" />
     <Compile Include="src\Components\EnableDisableCom.cs" />
     <Compile Include="src\Components\FontManger.cs" />
     <Compile Include="src\Components\GoalReachedCom.cs" />
@@ -79,7 +81,9 @@
     <Compile Include="src\IHaveAlias.cs" />
     <Compile Include="src\Json\JsonSence.cs" />
     <Compile Include="src\Components\FontRendCom.cs" />
+    <Compile Include="src\Managers\EntiyBlueprintManger.cs" />
     <Compile Include="src\Managers\MinigameManger.cs" />
+    <Compile Include="src\Needs\INeedBlueprintManger.cs" />
     <Compile Include="src\Needs\INeedFontManager.cs" />
     <Compile Include="src\Music.cs" />
     <Compile Include="src\Needs\INeedEnityManger.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="src\Managers\ColssionComManger.cs" />
     <Compile Include="src\Managers\SoundManager.cs" />
     <Compile Include="src\Needs\INeedGameInfo.cs" />
+    <Compile Include="src\Needs\INeedGamesObjectFactory.cs" />
     <Compile Include="src\Needs\INeedMinigameManger.cs" />
     <Compile Include="src\Needs\INeedPostMaster.cs" />
     <Compile Include="src\Needs\INeedSenceManger.cs" />

@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFVGAVFAF.src.Managers;
 using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src.Components
 {
-	class ChangeSenceCom : IGameEventCom, INeedSenceManger
+	class ResetSenceCom : IGameEventCom, INeedMinigameManger
 	{
 		public long EntID { get; set; }
 		public double TimeToComplete { get; set; }
 		public double Cooldown { get; set; }
 		public string Alias { get; set; }
-		public ISenceManger SenceManger { get; set; }
-		public string FileName { get; set; }
+		public MinigameManger MinigameManger { get; set; }
 
 		public void Action()
 		{
-			SenceManger.LoadFromFile(FileName);
+			MinigameManger.PlayAgain();
 		}
 	}
 }

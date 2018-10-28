@@ -1,0 +1,49 @@
+{  
+    "Blueprints":{  
+        "player_bullet":{  
+            "Components":[  
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                    "Paultangle":{
+                        "Postion2D":{
+                            "X":0,
+                            "Y":0
+                        },
+                        "Width":10,
+                        "Height":10
+                    },
+                    "Alias":"pos",
+                    "PostionConstrantComs":[
+
+                    ],
+                    "RandomStartPos":false
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
+                    "PostionAlais":"pos",
+                    "Direction":{
+                        "X":500,
+                        "Y":0
+                    }
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                    "RectPosAlais":"pos",
+                    "Color":{
+                        "B":0,
+                        "G":0,
+                        "R":0,
+                        "A":255
+                    },
+                    "TextureName":"Images/player"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                    "RectPosAlais":"pos",
+                    "GameEventComs":[
+                    ]
+                }
+            ]
+        }
+    }
+}

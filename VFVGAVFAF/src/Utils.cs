@@ -79,16 +79,14 @@ namespace VFVGAVFAF.src
 			}
 		}
 
-		public async static Task<IFactorySenceData> LoadSenceDataFromFile(string file)
+		public static string ReadEntireFile(string fileName)
 		{
-			SenceData senceData = null;
-
-			using (StreamReader streamReader = new StreamReader(file))
+			using (StreamReader streamReader = new StreamReader(fileName))
 			{
-				senceData = JsonConvert.DeserializeObject<SenceData>(await streamReader.ReadToEndAsync());
+				return streamReader.ReadToEnd();
 			}
 
-			return senceData;
+			throw new FileLoadException();
 		}
 
 		public static void RemoveAll<K, V>(Dictionary<K, V> dict, IEnumerable<K> toRemove)
@@ -101,12 +99,14 @@ namespace VFVGAVFAF.src
 
 		public static List<T> RemoveAll<T>(List<T> target, List<T> toRemove)
 		{
+			var result = target.ToList();
+
 			foreach(var i in toRemove)
 			{
-				target.Remove(i);
+				result.Remove(i);
 			}
 
-			return target;
+			return result;
 		}
 
 		public static T RandomEntry<T>(IEnumerable<T> list)
