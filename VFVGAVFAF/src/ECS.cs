@@ -77,6 +77,21 @@ namespace VFVGAVFAF.src
 				TypeNameHandling = TypeNameHandling.Auto
 			};
 
+			var shithead = new RectCollisionCom();
+			shithead.GameEventComs = new Dictionary<string, List<string>>()
+				{
+					{
+						"Fuck",
+						new List<string>()
+						{
+							"Shit",
+							"Fuck"
+						}
+					}
+				};
+
+			var fuckyou = JsonConvert.SerializeObject(shithead, settings);
+
 			_entiyBlueprintManger =  JsonConvert.DeserializeObject<EntiyBlueprintManger>
 			(
 				Utils.ReadEntireFile(@"Minigames\EntiyList.json"),

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
@@ -16,7 +17,7 @@ namespace VFVGAVFAF.src.Components
 
 		public string RectPosAlais { get; set; }
 		public long EntID { get; set; }
-		public List<string> GameEventComs { get; set; }
+		public Dictionary<string, List<string>> GameEventComs { get; set; }
 
 		[JsonIgnore]
 		public Paultangle GetHitBox
@@ -29,7 +30,7 @@ namespace VFVGAVFAF.src.Components
 
 		public RectCollisionCom()
 		{
-			GameEventComs = new List<string>();
+			GameEventComs = new Dictionary<string, List<string>>();
 		}
 
 		public bool Check(long otherEntID, long otherID)
@@ -42,14 +43,21 @@ namespace VFVGAVFAF.src.Components
 			var collied = hitBox.Rectangle.Intersects(otherHitBox);
 			if (collied) // Note Safe
 			{
-				foreach(var gameEventAlais in GameEventComs)
+				foreach(var entry in GameEventComs)
 				{
-					if(ent.GetComponent<IGameEventCom>(gameEventAlais) is IColsionGameEventCom)
+					if(otherEnt.Tags.Any(i => Regex.IsMatch(entry.Key, i)))
 					{
-						ent.GetComponent<IColsionGameEventCom>(gameEventAlais).ColliedWithTable[otherCom.EntID] = new ColInfo(otherEntID);
-					}
+						foreach(var id in entry.Value)
+						{
+							if (ent.GetComponent<IGameEventCom>(id) is IColsionGameEventCom)
+							{
+								ent.GetComponent<IColsionGameEventCom>(id).ColliedWithTable[otherCom.EntID] = new ColInfo(otherEntID);
+							}
 
-					GameEvenetPostMaster.Add(ent.GetIdForAlais(gameEventAlais), otherCom.EntID);
+							GameEvenetPostMaster.Add(ent.GetIdForAlais(id), otherCom.EntID);
+						}
+						
+					}
 				}
 			}
 

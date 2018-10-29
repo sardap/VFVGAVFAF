@@ -61,6 +61,7 @@
     <Compile Include="src\Components\MoveDirectionCom.cs" />
     <Compile Include="src\Components\PlayNextMiniGameCom.cs" />
     <Compile Include="src\Components\Postion2DCom.cs" />
+    <Compile Include="src\Components\PostionTrigerCom.cs" />
     <Compile Include="src\Components\ResetSenceCom.cs" />
     <Compile Include="src\Components\EnableDisableCom.cs" />
     <Compile Include="src\Components\FontManger.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="src\Components\IHealthCom.cs" />
     <Compile Include="src\Components\PlayMusicCom.cs" />
     <Compile Include="src\Components\PatrolContorlerCom.cs" />
+    <Compile Include="src\Components\SelfDestructionCom.cs" />
     <Compile Include="src\Components\TextCom.cs" />
     <Compile Include="src\Components\TriggerEvenetCom.cs" />
     <Compile Include="src\GameInfo.cs" />

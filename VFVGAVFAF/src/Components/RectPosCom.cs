@@ -9,16 +9,22 @@ using Newtonsoft.Json;
 namespace VFVGAVFAF.src.Components
 {
 	[Serializable]
-	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias, IGetSizeCom
+	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias, IGetSizeCom, IHaveHitBoxCom
 	{
 		private Paultangle _startingPostion;
 		private bool _randomStartPos = false;
 		public EntityManager EntityManager { get; set; }
 
 		public Paultangle Paultangle { get; set; }
+
 		public long EntID { get; set; }
+
 		public string Alias { get; set; }
+
+		public Paultangle GetHitBox { get { return Paultangle; } }
+
 		public List<string> PostionConstrantComs { get; set; }
+
 		public bool RandomStartPos
 		{
 			get

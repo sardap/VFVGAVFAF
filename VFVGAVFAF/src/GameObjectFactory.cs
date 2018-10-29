@@ -334,7 +334,7 @@ namespace VFVGAVFAF.src
 			result.Add(new RectCollisionCom()
 			{
 				RectPosAlais = "pos",
-				GameEventComs = new List<string>() { "damage" }
+				GameEventComs = new Dictionary<string, List<string>>() { { "Fuckyou", new List<string>() { "damage" } } }
 			});
 
 			return result;

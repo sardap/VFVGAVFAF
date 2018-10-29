@@ -1,6 +1,7 @@
 {  
     "Blueprints":{  
-        "player_bullet":{  
+        "player_bullet":{
+            "Tags":["bullet"], 
             "Components":[  
                 {
                     "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
@@ -14,7 +15,6 @@
                     },
                     "Alias":"pos",
                     "PostionConstrantComs":[
-
                     ],
                     "RandomStartPos":false
                 },
@@ -40,7 +40,31 @@
                 {
                     "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                     "RectPosAlais":"pos",
-                    "GameEventComs":[
+                    "GameEventComs":{
+                    }
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                    "Alias":"game_bounds"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
+                    "RectPosAlais":"game_bounds",
+                    "Inside":false,
+                    "Type":0,
+                    "Alias":"game_bounds_constrant"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
+                    "Alias":"self_destcut",
+                    "TimeToComplete":0
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.PostionTrigerCom, VFVGAVFAF",
+                    "HitBoxAlais":"pos",
+                    "ConstrantAlais":"game_bounds_constrant",
+                    "GameEvents":[
+                        "self_destcut"
                     ]
                 }
             ]
