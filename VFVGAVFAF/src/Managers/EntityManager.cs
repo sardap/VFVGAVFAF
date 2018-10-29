@@ -16,9 +16,12 @@ namespace VFVGAVFAF.src
 
 		public ComponentManager ComponentManager { get; set; }
 
+		public List<IRegsterForEntDest> NotifyDest { get; set; }
+
 		public EntityManager()
 		{
 			_nextIDs.Push(_lastOrderedID);
+			NotifyDest = new List<IRegsterForEntDest>();
 		}
 
 		public long CreateEntity(IEntity entity)
@@ -66,13 +69,18 @@ namespace VFVGAVFAF.src
 
 		private void DestroyEntity(long id)
 		{
-			var ent = GetEntiy<GameObject>(id);
-			ent.KillYourself();
-			_nextIDs.Push(id);
-			Console.WriteLine("KILLING ENT ID:{0}", id);
-			IEntity entity = GetEntiy<IEntity>(id);
-			_entityTable.Remove(id);
-			entity.UnregstierComsFromMangers();
+			if (_entityTable.ContainsKey(id))
+			{
+				var ent = GetEntiy<GameObject>(id);
+				ent.KillYourself();
+				_nextIDs.Push(id);
+				Console.WriteLine("KILLING ENT ID:{0}", id);
+				IEntity entity = GetEntiy<IEntity>(id);
+				_entityTable.Remove(id);
+				entity.UnregstierComsFromMangers();
+
+				NotifyDest.ForEach(i => i.Notfiy(id));
+			}
 		}
 	}
 }

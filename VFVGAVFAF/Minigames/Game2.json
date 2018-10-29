@@ -127,7 +127,7 @@
                         "BulletBlueprint":"player_bullet",
                         "PostionAlais":"pos",
                         "TimeToComplete":0,
-                        "Cooldown":0.3
+                        "Cooldown":0.2
                     }
                 ]
             },
@@ -195,5 +195,95 @@
             },
             "Count":1
         },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "enemy"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":500,
+                                "Y":200
+                            },
+                            "Width":50,
+                            "Height":100
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
+                        "Alias":"self_destcut",
+                        "TimeToComplete":0
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/dmgt",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"damage_sound"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":20,
+                        "MaxHP":20,
+                        "StartingHP":20,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
+                                "Opreator":2,
+                                "Value":0,
+                                "GameEvents":[
+                                    "damage_sound",
+                                    "self_destcut"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
+                        "Alias":"directionCom",
+                        "TriggeredAtTarget":[
+
+                        ],
+                        "Start":{
+                            "X":400,
+                            "Y":500
+                        },
+                        "End":{
+                            "X":400,
+                            "Y":1
+                        },
+                        "speed":200,
+                        "Radius":30.0,
+                        "PosAlais":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        }
     ]
 }

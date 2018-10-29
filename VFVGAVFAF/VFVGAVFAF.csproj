@@ -80,6 +80,7 @@
     <Compile Include="src\Components\TextCom.cs" />
     <Compile Include="src\Components\TriggerEvenetCom.cs" />
     <Compile Include="src\GameInfo.cs" />
+    <Compile Include="src\IRegsterForEntDest.cs" />
     <Compile Include="src\IHaveAlias.cs" />
     <Compile Include="src\Json\JsonSence.cs" />
     <Compile Include="src\Components\FontRendCom.cs" />

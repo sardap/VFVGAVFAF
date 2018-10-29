@@ -33,7 +33,10 @@ namespace VFVGAVFAF.src.Managers
 					{
 						var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
 						if (_componentManager.GetComponent<ICollisionCom>(id).Check(otherEntID, otherID))
+						{
+							Console.WriteLine("COLLSION BETWEEN {0} and {1}", id, otherID);
 							colCount++;
+						}
 					}
 				}
 			}

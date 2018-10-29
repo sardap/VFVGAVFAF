@@ -34,10 +34,18 @@ namespace VFVGAVFAF.src.Components
 
 		public void Action()
 		{
-			var postionCom = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(PostionAlais);
+			var postionCom = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IHaveHitBoxCom>(PostionAlais);
+
+			var shooterHitbox = postionCom.GetHitBox;
 
 			var nextEntry = EntiyBlueprintManger.Get(BulletBlueprint);
-			nextEntry.GetbyAlais<RectPosCom>("pos").Paultangle.Postion2D = new Postion2D(postionCom.GetPostion());
+			var hitbox = nextEntry.GetbyAlais<RectPosCom>("pos").Paultangle;
+			hitbox.Postion2D = 
+				new Postion2D
+				(
+					shooterHitbox.Right, 
+					(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
+				);
 
 			SenceManger.AddToProcessed(GameObjectFactory.AddCreatedGameObject(nextEntry));
 		}

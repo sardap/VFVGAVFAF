@@ -27,7 +27,7 @@ namespace VFVGAVFAF.src.Components
 			var constrantCom = ent.GetComponent<IPostionConstrantCom>(ConstrantAlais);
 			var hitbox = ent.GetComponent<IHaveHitBoxCom>(HitBoxAlais).GetHitBox;
 
-			Console.WriteLine("CONSTRANT {0}: {1}", ConstrantAlais, constrantCom.Check(hitbox));
+			//Console.WriteLine("CONSTRANT {0}: {1}", ConstrantAlais, constrantCom.Check(hitbox));
 			if (constrantCom.Check(hitbox))
 			{
 				GameEvents.ForEach(i => GameEvenetPostMaster.Add(ent.GetIdForAlais(i)));
