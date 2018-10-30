@@ -51,16 +51,24 @@
     <Compile Include="src\Centerhorizontal.cs" />
     <Compile Include="src\CenterOperator.cs" />
     <Compile Include="src\CenterVertical.cs" />
+    <Compile Include="src\CheckType.cs" />
     <Compile Include="src\ColInfo.cs" />
+    <Compile Include="src\Components\AssignStringValueCom.cs" />
+    <Compile Include="src\Components\AssignValueCom.cs" />
     <Compile Include="src\Components\CenterCom.cs" />
+    <Compile Include="src\Components\DoubleValueChangeListnerCom.cs" />
+    <Compile Include="src\Components\DoubleValueCom.cs" />
     <Compile Include="src\Components\GameBoundsCom.cs" />
     <Compile Include="src\Components\GetSize.cs" />
     <Compile Include="src\Components\GunCom.cs" />
     <Compile Include="src\Components\IHaveHitBox.cs" />
+    <Compile Include="src\Components\IntervalTriggerCom.cs" />
     <Compile Include="src\Components\IRunOnceCom.cs" />
+    <Compile Include="src\Components\IValueCom.cs" />
     <Compile Include="src\Components\MoveDirectionCom.cs" />
     <Compile Include="src\Components\PlayNextMiniGameCom.cs" />
     <Compile Include="src\Components\Postion2DCom.cs" />
+    <Compile Include="src\Components\PostionTagConstrant.cs" />
     <Compile Include="src\Components\PostionTrigerCom.cs" />
     <Compile Include="src\Components\ResetSenceCom.cs" />
     <Compile Include="src\Components\EnableDisableCom.cs" />
@@ -78,6 +86,8 @@
     <Compile Include="src\Components\PatrolContorlerCom.cs" />
     <Compile Include="src\Components\SelfDestructionCom.cs" />
     <Compile Include="src\Components\TextCom.cs" />
+    <Compile Include="src\Components\ValueChangeListnerCom.cs" />
+    <Compile Include="src\Components\ValueUpdateCom.cs" />
     <Compile Include="src\Components\TriggerEvenetCom.cs" />
     <Compile Include="src\GameInfo.cs" />
     <Compile Include="src\IRegsterForEntDest.cs" />
@@ -151,6 +161,7 @@
     <Compile Include="src\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Extended.1.1.0\lib\portable-net45+win8+wpa81\MonoGame.Extended.dll</HintPath>
     </Reference>

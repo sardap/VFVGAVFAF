@@ -11,6 +11,8 @@ namespace VFVGAVFAF.src
 		int TypeID { get; }
 		long GetID { get; }
 
+		List<string> Tags { get; }
+
 		List<Tuple<long, IComponent>> GetComponents { get; }
 
 		void SetID(long id);

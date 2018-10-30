@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class TextCom: IHaveAlias, IComponent, IValueCom<string>
+	class DoubleValueCom : IValueCom<double>, IHaveAlias
 	{
-		public long EntID { get; set; }
+		public long EntID { get; set;}
+
+		public double Value { get; set; }
 
 		public string Alias { get; set; }
-
-		public string Value { get; set; }
 	}
 }

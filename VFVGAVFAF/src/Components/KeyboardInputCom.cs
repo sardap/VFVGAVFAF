@@ -14,7 +14,7 @@ namespace VFVGAVFAF.src.Components
 		public string RectPosAlais { get; set; }
 		public EntityManager EntityManager { get; set; }
 		public int Speed { get; set; }
-		public Dictionary<Keys, string> Actions { get; set; }
+		public Dictionary<Keys, List<string>> Actions { get; set; }
 
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
@@ -27,7 +27,7 @@ namespace VFVGAVFAF.src.Components
 
 		public KeyboardInputCom()
 		{
-			Actions = new Dictionary<Keys, string>();
+			Actions = new Dictionary<Keys, List<string>>();
 		}
 
 		public void Update(double deltaTime)
@@ -57,7 +57,7 @@ namespace VFVGAVFAF.src.Components
 			{
 				if (state.IsKeyDown(entry.Key))
 				{
-					GameEvenetPostMaster.Add(ent.GetIdForAlais(entry.Value));
+					entry.Value.ForEach(i => GameEvenetPostMaster.Add(ent.GetIdForAlais(i)));
 				}
 			}
 		}

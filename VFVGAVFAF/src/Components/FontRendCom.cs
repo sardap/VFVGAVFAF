@@ -18,10 +18,17 @@ namespace VFVGAVFAF.src.Components
 		private SpriteFont _font;
 
 		public string Alias { get; set; }
+
 		public string TextAlais { get; set; }
+
 		public string PostionAlais { get; set; }
+
 		public string FontName { get; set; }
+
 		public Color Color { get; set; }
+
+		public float Scale { get; set; } 
+
 		public FontManger FontManger
 		{
 			get
@@ -41,15 +48,15 @@ namespace VFVGAVFAF.src.Components
 
 		public Vector2 Size()
 		{
-			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<TextCom>(TextAlais).Text;
-			return _font.MeasureString(text);
+			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<TextCom>(TextAlais).Value;
+			return _font.MeasureString(text) * Scale;
 		}
 
 		public void Render(double deltaTime)
 		{
 			var postion = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(PostionAlais).GetPostion();
-			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<TextCom>(TextAlais).Text;
-			SpriteBatch.DrawString(_font, text, postion.ToVector(), Color);
+			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<TextCom>(TextAlais).Value;
+			SpriteBatch.DrawString(_font, text, postion.ToVector(), Color, 0, new Vector2(), Scale, SpriteEffects.None, 0);
 		}
 
 	}

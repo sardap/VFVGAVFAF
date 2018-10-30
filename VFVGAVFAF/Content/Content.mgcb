@@ -57,3 +57,21 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Russian.spritefont
 
+#begin Sounds/enemey_damage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/enemey_damage.wav
+
+#begin Sounds/enmey_die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/enmey_die.wav
+
+#begin Sounds/gun_shot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gun_shot.wav
+

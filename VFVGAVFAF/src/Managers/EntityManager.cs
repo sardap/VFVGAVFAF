@@ -50,21 +50,25 @@ namespace VFVGAVFAF.src
 
 		public void Step()
 		{
-			bool fuckyou = false;
-
 			while (_toDestroy.Count > 0)
 			{
-				fuckyou = true;
 				DestroyEntity(_toDestroy.Pop());
 			}
+		}
 
-			if (fuckyou)
+		public List<long> GetAllEntsWithTag(string tag)
+		{
+			var result = new List<long>();
+
+			foreach(var entry in _entityTable)
 			{
-				if (_entityTable.Count == 0)
+				if(entry.Value.Tags.Any(i => i == tag))
 				{
-					var x = 0;
+					result.Add(entry.Value.GetID);
 				}
 			}
+
+			return result;
 		}
 
 		private void DestroyEntity(long id)

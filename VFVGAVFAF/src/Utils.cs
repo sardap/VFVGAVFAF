@@ -132,5 +132,33 @@ namespace VFVGAVFAF.src
 			return Math.Floor(bounds / 2) - Math.Floor(pos / 2);
 		}
 
+		private delegate bool CheckCon(Paultangle a, Paultangle B);
+
+		public static bool Check(Paultangle a, Paultangle b, CheckType type, bool inside)
+		{
+			CheckCon d;
+
+			switch (type)
+			{
+				case CheckType.Contains:
+					d = new CheckCon(Utils.AInsideB);
+					break;
+				case CheckType.Overlapping:
+					d = new CheckCon(Utils.AOverlapB);
+					break;
+				default:
+					throw new NotImplementedException();
+			}
+
+			bool result;
+
+			if (inside)
+				result = d(a, b);
+			else
+				result = !d(a, b);
+
+			return result;
+		}
+
 	}
 }

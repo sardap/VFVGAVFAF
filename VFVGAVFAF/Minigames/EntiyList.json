@@ -21,10 +21,8 @@
                 {
                     "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
                     "PostionAlais":"pos",
-                    "Direction":{
-                        "X":800,
-                        "Y":0
-                    }
+                    "Direction":3,
+                    "Speed":500
                 },
                 {
                     "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
@@ -50,6 +48,90 @@
                     "GameEventComs":{
                         "enemy":[
                             "damage",
+                            "self_destcut"
+                        ],
+                        "wall":[
+                            "self_destcut"
+                        ]
+                    }
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                    "Alias":"game_bounds"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
+                    "RectPosAlais":"game_bounds",
+                    "Inside":false,
+                    "Type":0,
+                    "Alias":"game_bounds_constrant"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
+                    "Alias":"self_destcut",
+                    "TimeToComplete":0
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.PostionTrigerCom, VFVGAVFAF",
+                    "HitBoxAlais":"pos",
+                    "ConstrantAlais":"game_bounds_constrant",
+                    "GameEvents":[
+                        "self_destcut"
+                    ]
+                }
+            ]
+        },
+        "enemy_bullet":{
+            "Tags":["bullet"], 
+            "Components":[  
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                    "Paultangle":{
+                        "Postion2D":{
+                            "X":0,
+                            "Y":0
+                        },
+                        "Width":10,
+                        "Height":10
+                    },
+                    "Alias":"pos",
+                    "PostionConstrantComs":[
+                    ],
+                    "RandomStartPos":false
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
+                    "PostionAlais":"pos",
+                    "Direction":2,
+                    "Speed":800
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                    "RectPosAlais":"pos",
+                    "Color":{
+                        "B":0,
+                        "G":0,
+                        "R":0,
+                        "A":255
+                    },
+                    "TextureName":"Images/player"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
+                    "Alias":"damage",
+                    "Damage":-10,
+                    "TimeToComplete":0,
+                    "Cooldown":0
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                    "RectPosAlais":"pos",
+                    "GameEventComs":{
+                        "player":[
+                            "damage",
+                            "self_destcut"
+                        ],
+                        "wall":[
                             "self_destcut"
                         ]
                     }

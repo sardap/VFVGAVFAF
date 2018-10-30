@@ -10,14 +10,6 @@ namespace VFVGAVFAF.src.Components
 	[Serializable]
 	class RectConstrantCom : IPostionConstrantCom, INeedEnityManger, IHaveAlias
 	{
-		private delegate bool CheckCon(Paultangle a, Paultangle B);
-
-		public enum CheckType
-		{
-			Contains,
-			Overlapping
-		}
-
 		public long EntID { get; set; }
 
 		public bool LastResult { get; set; }
@@ -49,27 +41,7 @@ namespace VFVGAVFAF.src.Components
 			//TODO this is a brain fart i don't know the right way
 			var constrant = ent.GetComponent<IHaveHitBoxCom>(RectPosAlais).GetHitBox;
 
-			CheckCon d;
-
-			switch (Type)
-			{
-				case CheckType.Contains:
-					d = new CheckCon(Utils.AInsideB);
-					break;
-				case CheckType.Overlapping:
-					d = new CheckCon(Utils.AOverlapB);
-					break;
-				default:
-					throw new NotImplementedException();
-			}
-
-			bool result;
-
-			if (Inside)
-				result = d(hitBox, constrant);
-			else
-				result = !d(hitBox, constrant);
-
+			var result = Utils.Check(hitBox, constrant, Type, Inside);
 
 			LastResult = result;
 

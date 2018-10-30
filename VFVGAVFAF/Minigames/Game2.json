@@ -19,7 +19,8 @@
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
-                            "gameBoundsConstrant"
+                            "game_bound_constrant",
+                            "wall_constrant"
                         ],
                         "RandomStartPos":false
                     },
@@ -35,10 +36,25 @@
                         "TextureName":"Images/player"
                     },
                     {
+                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
+                        "Alias":"gun",
+                        "BulletBlueprint":"player_bullet",
+                        "PostionAlais":"pos",
+                        "TimeToComplete":0,
+                        "Cooldown":0.2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/gun_shot",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.2,
+                        "Alias":"gun_shot"
+                    },
+                    {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "Actions":{
-                            "32":"gun"
+                            "32":["gun", "gun_shot"]
                         },
                         "speed":300
                     },
@@ -63,7 +79,14 @@
                         "RectPosAlais":"gameBounds",
                         "Inside":true,
                         "Type":0,
-                        "Alias":"gameBoundsConstrant"
+                        "Alias":"game_bound_constrant"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PostionTagConstrant, VFVGAVFAF",
+                        "Alias":"wall_constrant",
+                        "Tag":"wall",
+                        "Inside":false,
+                        "Type":1
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
@@ -120,20 +143,13 @@
                         "GameEventComs":{
 
                         }
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
-                        "Alias":"gun",
-                        "BulletBlueprint":"player_bullet",
-                        "PostionAlais":"pos",
-                        "TimeToComplete":0,
-                        "Cooldown":0.2
                     }
                 ]
             },
             "Count":1
         },
         {
+            "Tags":["goal"],
             "EnityToJson":{
                 "Components":[
                     {
@@ -155,9 +171,9 @@
                         "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "Color":{
-                            "B":139,
-                            "G":39,
-                            "R":19,
+                            "B":30,
+                            "G":105,
+                            "R":210,
                             "A":255
                         },
                         "TextureName":"Images/player"
@@ -208,8 +224,8 @@
                                 "X":500,
                                 "Y":200
                             },
-                            "Width":50,
-                            "Height":100
+                            "Width":40,
+                            "Height":40
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
@@ -228,35 +244,6 @@
                         "TextureName":"Images/player"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
-                        "Alias":"self_destcut",
-                        "TimeToComplete":0
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/dmgt",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"damage_sound"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
-                        "HP":20,
-                        "MaxHP":20,
-                        "StartingHP":20,
-                        "Evenets":[
-                            {
-                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
-                                "Opreator":2,
-                                "Value":0,
-                                "GameEvents":[
-                                    "damage_sound",
-                                    "self_destcut"
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
                         "Alias":"directionCom",
                         "TriggeredAtTarget":[
@@ -268,18 +255,350 @@
                         },
                         "End":{
                             "X":400,
-                            "Y":1
+                            "Y":200
                         },
                         "speed":200,
                         "Radius":30.0,
                         "PosAlais":"pos"
                     },
                     {
+                        "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
+                        "Alias":"self_destcut",
+                        "TimeToComplete":0
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/enmey_die",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"enmey_die"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/enemey_damage",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"enemey_damage"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":20,
+                        "MaxHP":20,
+                        "StartingHP":20,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
+                                "GameEvents":[
+                                    "enmey_die"
+                                ]
+                            },
+                            {
+                                
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
+                                "Opreator":2,
+                                "Value":0,
+                                "GameEvents":[
+                                    "enemey_damage",
+                                    "self_destcut"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.5,
+                        "Damage":-10,
+                        "Alias":"damage"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/gun_shot",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.2,
+                        "Alias":"gun_shot"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
+                        "Alias":"gun",
+                        "BulletBlueprint":"enemy_bullet",
+                        "PostionAlais":"pos",
+                        "TimeToComplete":0,
+                        "Cooldown":0.2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
+                        "Cooldown":0.01,
+                        "EventAlais":["gun", "gun_shot"]
+                    },
+                    {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "GameEventComs":{
-
+                            "player":["damage"]
                         }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "wall"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":100,
+                                "Y":100
+                            },
+                            "Width":70,
+                            "Height":200
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":169,
+                            "G":169,
+                            "R":169,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":0,
+                        "MaxHP":0,
+                        "StartingHP":0,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
+                                "GameEvents":[
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "wall"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":300,
+                                "Y":400
+                            },
+                            "Width":20,
+                            "Height":50
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":169,
+                            "G":169,
+                            "R":169,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":9,
+                        "MaxHP":9,
+                        "StartingHP":9,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
+                                "GameEvents":[
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "timer"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":500
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"count_down_value",
+                        "Value":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"count_down_value_updater",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-1,
+                        "ValueAlais":"count_down_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":""
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"update_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"count_down_value",
+                        "TargetAlais":"text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
+                        "Cooldown":1,
+                        "EventAlais":[
+                            "count_down_value_updater",
+                            "update_text"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":2.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GoalReachedCom, VFVGAVFAF",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "Alias":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"count_down_value",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":0,
+                                "Value":0,
+                                "GameEvents":[
+                                    "goal_reached"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"SEIZE THE MEANS OF PRODUCTION"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
                     }
                 ]
             },
