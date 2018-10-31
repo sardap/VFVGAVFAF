@@ -513,6 +513,67 @@
             "Count":1
         },
         {
+            "Tags":["goal"],
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":700,
+                                "Y":300
+                            },
+                            "Width":50,
+                            "Height":100
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":34,
+                            "G":139,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"pos",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "BlueprintName":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player": ["goal_reached"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
             "EnityToJson":{
                 "Tags":[
                     "timer"
