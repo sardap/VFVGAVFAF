@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,28 @@ namespace VFVGAVFAF.src.Components
 	class PatrolContorlerCom : IContolerCom, INeedEnityManger, INeedPostMaster, IHaveAlias
 	{
 		private bool _movingTowardsEnd = true;
+		private bool _firstTime = true;
 
 		public long EntID { get; set; }
-		public EntityManager EntityManager { get; set; }
-		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
+
 		public string Alias { get; set; }
+
 		public List<string> TriggeredAtTarget { get; set; }
+
+		[JsonIgnore]
 		public Postion2D Start { get; set; }
+
 		public Postion2D End { get; set; }
+
 		public long Speed { get; set; }
+
 		public double Radius { get; set; }
+
 		public string PosAlais { get; set; }
+
+		public EntityManager EntityManager { get; set; }
+
+		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
 		public PatrolContorlerCom()
 		{
@@ -34,9 +46,14 @@ namespace VFVGAVFAF.src.Components
 			var target = _movingTowardsEnd ? End : Start;
 			var curInc = IncrmnetForPoint(curPos, target, deltaTime);
 
+			if (_firstTime)
+			{
+				Start = curPos;
+				_firstTime = false;
+			}
+
 			curPos += curInc;
 			posCom.SetPostion(curPos);
-
 
 			if (curPos.WithinRadius(target, Radius))
 			{

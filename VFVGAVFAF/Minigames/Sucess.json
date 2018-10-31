@@ -1,0 +1,228 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"SUCCESS COMRADE"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            },
+                            {
+                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"THE STATE WILL NOT FORGET THIS"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF",
+                            },
+                            {
+                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IncremnetPostionCom, VFVGAVFAF",
+                        "Alias":"setup_postion_below_title",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "PostionAlais":"pos",
+                        "IncrmenetChange":{
+                            "X":0,
+                            "Y":50
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "EventAlais":["setup_postion_below_title"]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "timer"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":500
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"count_down_value",
+                        "Value":3
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"count_down_value_updater",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-1,
+                        "ValueAlais":"count_down_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":""
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"update_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"count_down_value",
+                        "TargetAlais":"text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
+                        "Cooldown":1,
+                        "EventAlais":[
+                            "count_down_value_updater",
+                            "update_text"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":2.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GoalReachedCom, VFVGAVFAF",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "Alias":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"count_down_value",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":2,
+                                "Value":0,
+                                "GameEvents":[
+                                    "goal_reached"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        }
+    ]
+}

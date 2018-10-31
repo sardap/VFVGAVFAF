@@ -16,6 +16,7 @@ namespace VFVGAVFAF.src.Sence
 		private List<long> _processedGameObjects = new List<long>();
 		private bool _load = false;
 		private int _numReloads;
+		private List<IPassValue> _toPass = new List<IPassValue>();
 
 		public GameObjectFactory GameObjectFactory { get; set; }
 
@@ -55,6 +56,15 @@ namespace VFVGAVFAF.src.Sence
 			JsonSence jsonGameobject = JsonConvert.DeserializeObject<JsonSence>(jsonString, settings);
 
 			Load(jsonGameobject);
+
+			_toPass.Clear();
+		}
+
+		public void LoadFromFile(string fileName, List<IPassValue> passedValues)
+		{
+			LoadFromFile(fileName);
+
+			_toPass = passedValues;
 		}
 
 		public void AddToProcessed(long id)
@@ -79,7 +89,7 @@ namespace VFVGAVFAF.src.Sence
 
 		private void LoadSence(ISenceData senceData)
 		{
-			_processedGameObjects.AddRange(senceData.Load(GameObjectFactory));
+			_processedGameObjects.AddRange(senceData.Load(GameObjectFactory, _toPass));
 		}
 
 		private void UnloadSence(ISenceData senceData)

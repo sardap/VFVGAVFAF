@@ -10,6 +10,6 @@ namespace VFVGAVFAF.src
 	interface INeedBlueprintManger
 	{
 		[JsonIgnore]
-		EntiyBlueprintManger EntiyBlueprintManger { get; set; }
+		BlueprintManger EntiyBlueprintManger { get; set; }
 	}
 }

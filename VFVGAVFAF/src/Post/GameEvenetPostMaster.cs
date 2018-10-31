@@ -125,6 +125,7 @@ namespace VFVGAVFAF.src
 					if (com is IColsionGameEventCom)
 					{
 						((IColsionGameEventCom)com).ActiveID = post.Key.Two;
+						Console.WriteLine("ACTIVE ID SET {0}", com);
 					}
 
 					com.Action();

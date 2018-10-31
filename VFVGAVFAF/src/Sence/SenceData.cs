@@ -30,7 +30,7 @@ namespace VFVGAVFAF.src.Sence
 			}
 		}
 
-		public List<long> Load(GameObjectFactory gameObjectFactory)
+		public List<long> Load(GameObjectFactory gameObjectFactory, List<IPassValue> passValues)
 		{
 			var result = new List<long>();
 

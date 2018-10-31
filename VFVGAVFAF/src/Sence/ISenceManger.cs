@@ -14,6 +14,8 @@ namespace VFVGAVFAF.src.Sence
 
 		void LoadFromFile(string fileName);
 
+		void LoadFromFile(string fileName, List<IPassValue> passedValues);
+
 		void Step();
 
 		void AddToProcessed(long id);

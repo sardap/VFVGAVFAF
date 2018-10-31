@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class DoubleValueCom : IValueCom<double>, IHaveAlias
+	class DoubleValueCom : IValueCom<double>
 	{
 		public long EntID { get; set;}
 

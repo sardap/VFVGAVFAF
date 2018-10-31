@@ -25,7 +25,7 @@ namespace VFVGAVFAF.src.Components
 
 		public GameObjectFactory GameObjectFactory { get; set; }
 
-		public EntiyBlueprintManger EntiyBlueprintManger { get; set; }
+		public BlueprintManger EntiyBlueprintManger { get; set; }
 
 		public EntityManager EntityManager { get; set; }
 
@@ -47,7 +47,7 @@ namespace VFVGAVFAF.src.Components
 					(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
 				);
 
-			SenceManger.AddToProcessed(GameObjectFactory.AddCreatedGameObject(nextEntry));
+			SenceManger.AddToProcessed(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
 		}
 	}
 }

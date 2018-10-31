@@ -45,7 +45,7 @@ namespace VFVGAVFAF.src
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 		public GameInfo GameInfo { get; set; }
 		public MinigameManger MinigameManger { get; set; }
-		public EntiyBlueprintManger EntiyBlueprintManger { get; set; }
+		public BlueprintManger BlueprintManger { get; set; }
 
 		public GameObjectFactory()
 		{
@@ -63,7 +63,7 @@ namespace VFVGAVFAF.src
 			return entID;
 		}
 
-		public long AddCreatedGameObject(EnityToJson jsonGameObject)
+		public long AddCreatedGameObject(EnityToJson jsonGameObject, List<IPassValue> passedValues)
 		{
 			JsonSerializerSettings settings = new JsonSerializerSettings
 			{
@@ -78,10 +78,26 @@ namespace VFVGAVFAF.src
 			jsonGameObject.Components.ForEach(i =>
 			{
 				var jsonString = JsonConvert.SerializeObject(i, typeof(IComponent), settings);
-				gameObject.AddComponent(JsonConvert.DeserializeObject<IComponent>(jsonString, settings));
+				var com = JsonConvert.DeserializeObject<IComponent>(jsonString, settings);
+
+				if(com is LoadComBlueprintCom)
+				{
+					com = BlueprintManger.GetCom(((LoadComBlueprintCom)com).BlueprintName);
+				}
+
+				gameObject.AddComponent(com);
 			});
 
 			AddressNeedsAndMangers(gameObject);
+
+			var ent = EntityManager.GetEntiy<GameObject>(entID);
+
+			foreach(var entry in passedValues)
+			{
+				dynamic dCom = ent.GetComponent<IComponent>(entry.TargetAlais);
+				dCom.Value = entry.DValue;
+			}
+
 
 			return entID;
 		}
@@ -158,7 +174,7 @@ namespace VFVGAVFAF.src
 
 			if (component is INeedBlueprintManger)
 			{
-				((INeedBlueprintManger)component).EntiyBlueprintManger = EntiyBlueprintManger;
+				((INeedBlueprintManger)component).EntiyBlueprintManger = BlueprintManger;
 			}
 
 			if (component is INeedGamesObjectFactory)

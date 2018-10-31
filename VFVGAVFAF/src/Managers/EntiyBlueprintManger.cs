@@ -8,21 +8,29 @@ using VFVGAVFAF.src.Json;
 
 namespace VFVGAVFAF.src
 {
-	class EntiyBlueprintManger
+	class BlueprintManger
 	{
-		public Dictionary<string, EnityToJson> Blueprints { get; set; }
+		private JsonSerializerSettings _settings = new JsonSerializerSettings
+		{
+			TypeNameHandling = TypeNameHandling.Auto
+		};
+
+		public Dictionary<string, EnityToJson> EntiyBlueprints { get; set; }
+		public Dictionary<string, IComponent> ComBlueprints { get; set; }
 
 		public EnityToJson Get(string name)
 		{
-			var settings = new JsonSerializerSettings
-			{
-				TypeNameHandling = TypeNameHandling.Auto
-			};
+			var blueprint = EntiyBlueprints[name];
+			var jsonString = JsonConvert.SerializeObject(blueprint, _settings);
 
-			var blueprint = Blueprints[name];
-			var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(blueprint, settings);
+			return JsonConvert.DeserializeObject<EnityToJson>(jsonString, _settings);
+		}
 
-			return Newtonsoft.Json.JsonConvert.DeserializeObject<EnityToJson>(jsonString, settings);
+		public IComponent GetCom(string name)
+		{
+			var blueprint = ComBlueprints[name];
+			var jsonString = JsonConvert.SerializeObject(blueprint, typeof(IComponent), _settings);
+			return JsonConvert.DeserializeObject<IComponent>(jsonString, _settings);
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface IValueCom<T>: IComponent
+	interface IValueCom<T>: IComponent, IHaveAlias
 	{
 		T Value { get; set; }
 	}

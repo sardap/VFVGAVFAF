@@ -9,14 +9,18 @@ namespace VFVGAVFAF.src.Components
 {
 	class PlayMusicCom : IGameEventCom, INeedSoundManger
 	{
-		public SoundManager SoundManager { get; set; }
 
 		public long EntID { get; set; }
-		public double TimeToComplete { get; }
-		public double Cooldown { get; }
+
 		public string Alias { get; set; }
+
+		public double TimeToComplete { get; }
+
+		public double Cooldown { get; }
+
 		public string MusicName { get; set; }
 
+		public SoundManager SoundManager { get; set; }
 
 		public void Action()
 		{

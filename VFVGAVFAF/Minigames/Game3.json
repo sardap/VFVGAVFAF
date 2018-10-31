@@ -36,25 +36,9 @@
                         "TextureName":"Images/player"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
-                        "Alias":"gun",
-                        "BulletBlueprint":"player_bullet",
-                        "PostionAlais":"pos",
-                        "TimeToComplete":0,
-                        "Cooldown":0.2
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/gun_shot",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.2,
-                        "Alias":"gun_shot"
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "Actions":{
-                            "32":["gun", "gun_shot"]
                         },
                         "speed":300
                     },
@@ -138,137 +122,15 @@
                         "Alias":"respawn"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "GameEventComs":{
-
-                        }
-                    }
-                ]
-            },
-            "Count":1
-        },
-         {
-            "EnityToJson":{
-                "Tags":[
-                    "enemy"
-                ],
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":400,
-                                "Y":100
-                            },
-                            "Width":40,
-                            "Height":40
-                        },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
-                            "A":255
-                        },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
-                        "Alias":"directionCom",
-                        "TriggeredAtTarget":[
-
-                        ],
-                        "End":{
-                            "X":400,
-                            "Y":400
-                        },
-                        "speed":200,
-                        "Radius":30.0,
-                        "PosAlais":"pos"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
-                        "Alias":"self_destcut",
-                        "TimeToComplete":0
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/enmey_die",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"enmey_die"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/enemey_damage",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"enemey_damage"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
-                        "HP":20,
-                        "MaxHP":20,
-                        "StartingHP":20,
-                        "Evenets":[
-                            {
-                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
-                                "GameEvents":[
-                                    "enmey_die"
-                                ]
-                            },
-                            {
-                                
-                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
-                                "Opreator":2,
-                                "Value":0,
-                                "GameEvents":[
-                                    "enemey_damage",
-                                    "self_destcut"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/gun_shot",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.2,
-                        "Alias":"gun_shot"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
-                        "Alias":"gun",
-                        "BulletBlueprint":"enemy_bullet",
-                        "PostionAlais":"pos",
-                        "TimeToComplete":0,
-                        "Cooldown":0.2
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
-                        "Cooldown":0.01,
-                        "EventAlais":["gun", "gun_shot"]
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "BlueprintName":"goal_reached"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "GameEventComs":{
-                            "player":["damage"]
+                            "enemy":["goal_reached"],
+                            "death_trap":["respawnSound", "failure_reached"]
                         }
                     }
                 ]
@@ -285,11 +147,11 @@
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{
-                                "X":400,
-                                "Y":400
+                                "X":700,
+                                "Y":300
                             },
-                            "Width":40,
-                            "Height":40
+                            "Width":70,
+                            "Height":50
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
@@ -313,11 +175,15 @@
                         "TriggeredAtTarget":[
 
                         ],
-                        "End":{
-                            "X":400,
-                            "Y":700
+                        "Start":{
+                            "X":700,
+                            "Y":350
                         },
-                        "speed":200,
+                        "End":{
+                            "X":0,
+                            "Y":300
+                        },
+                        "speed":70,
                         "Radius":30.0,
                         "PosAlais":"pos"
                     },
@@ -342,9 +208,9 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
-                        "HP":20,
-                        "MaxHP":20,
-                        "StartingHP":20,
+                        "HP":100,
+                        "MaxHP":100,
+                        "StartingHP":100,
                         "Evenets":[
                             {
                                 "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
@@ -365,17 +231,10 @@
                         ]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
                         "Song":"Sounds/gun_shot",
                         "TimeToComplete":0.0,
-                        "Cooldown":0.2,
+                        "Cooldown":0.0,
                         "Alias":"gun_shot"
                     },
                     {
@@ -384,18 +243,17 @@
                         "BulletBlueprint":"enemy_bullet",
                         "PostionAlais":"pos",
                         "TimeToComplete":0,
-                        "Cooldown":0.2
+                        "Cooldown":0.0
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
-                        "Cooldown":0.01,
+                        "Cooldown":1,
                         "EventAlais":["gun", "gun_shot"]
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "GameEventComs":{
-                            "player":["damage"]
                         }
                     }
                 ]
@@ -413,9 +271,9 @@
                         "Paultangle":{
                             "Postion2D":{
                                 "X":100,
-                                "Y":100
+                                "Y":30
                             },
-                            "Width":70,
+                            "Width":200,
                             "Height":200
                         },
                         "Alias":"pos",
@@ -468,10 +326,10 @@
                         "Paultangle":{
                             "Postion2D":{
                                 "X":300,
-                                "Y":400
+                                "Y":450
                             },
-                            "Width":20,
-                            "Height":50
+                            "Width":200,
+                            "Height":200
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
@@ -491,9 +349,9 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
-                        "HP":9,
-                        "MaxHP":9,
-                        "StartingHP":9,
+                        "HP":0,
+                        "MaxHP":0,
+                        "StartingHP":0,
                         "Evenets":[
                             {
                                 "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
@@ -512,6 +370,104 @@
             },
             "Count":1
         },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "wall"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":150,
+                                "Y":360
+                            },
+                            "Width":20,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":169,
+                            "G":169,
+                            "R":169,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":0,
+                        "MaxHP":0,
+                        "StartingHP":0,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
+                                "GameEvents":[
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":[
+                    "death_trap"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":400,
+                                "Y":250
+                            },
+                            "Width":50,
+                            "Height":50
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":128,
+                            "G":128,
+                            "R":255,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+
         {
             "EnityToJson":{
                 "Tags":[
@@ -595,6 +551,10 @@
                         "BlueprintName":"goal_reached"
                     },
                     {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
                         "ToWatchAlais":"count_down_value",
                         "Triggers":[
@@ -603,7 +563,7 @@
                                 "Opreator":0,
                                 "Value":0,
                                 "GameEvents":[
-                                    "goal_reached"
+                                    "failure_reached"
                                 ]
                             }
                         ]
@@ -626,7 +586,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"SEIZE THE MEANS OF PRODUCTION"
+                        "Value":"STOP THE RECTANGLE"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",

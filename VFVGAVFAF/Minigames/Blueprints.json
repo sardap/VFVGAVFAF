@@ -1,5 +1,5 @@
 {  
-    "Blueprints":{  
+    "EntiyBlueprints":{  
         "player_bullet":{
             "Tags":["bullet"], 
             "Components":[  
@@ -47,10 +47,9 @@
                     "RectPosAlais":"pos",
                     "GameEventComs":{
                         "enemy":[
-                            "damage",
-                            "self_destcut"
+                            "damage"
                         ],
-                        "wall":[
+                        "wall|player":[
                             "self_destcut"
                         ]
                     }
@@ -161,6 +160,117 @@
                     ]
                 }
             ]
+        },
+        "tank_bullet":{
+            "Tags":["bullet"], 
+            "Components":[  
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                    "Paultangle":{
+                        "Postion2D":{
+                            "X":0,
+                            "Y":0
+                        },
+                        "Width":30,
+                        "Height":10
+                    },
+                    "Alias":"pos",
+                    "PostionConstrantComs":[
+                    ],
+                    "RandomStartPos":false
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
+                    "PostionAlais":"pos",
+                    "Direction":2,
+                    "Speed":200
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                    "RectPosAlais":"pos",
+                    "Color":{
+                        "B":0,
+                        "G":0,
+                        "R":0,
+                        "A":255
+                    },
+                    "TextureName":"Images/player"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
+                    "Alias":"damage",
+                    "Damage":-10,
+                    "TimeToComplete":0,
+                    "Cooldown":0
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                    "RectPosAlais":"pos",
+                    "GameEventComs":{
+                        "player":[
+                            "damage",
+                            "self_destcut"
+                        ],
+                        "wall":[
+                            "self_destcut"
+                        ]
+                    }
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                    "Alias":"game_bounds"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
+                    "RectPosAlais":"game_bounds",
+                    "Inside":false,
+                    "Type":0,
+                    "Alias":"game_bounds_constrant"
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
+                    "Alias":"self_destcut",
+                    "TimeToComplete":0
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.PostionTrigerCom, VFVGAVFAF",
+                    "HitBoxAlais":"pos",
+                    "ConstrantAlais":"game_bounds_constrant",
+                    "GameEvents":[
+                        "self_destcut"
+                    ]
+                }
+            ]
         }
+    },
+    "ComBlueprints":
+    {
+        "goal_reached":{
+            "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+            "Alias":"goal_reached",
+            "TimeToComplete":0,
+            "Cooldown":0,
+            "NextSence":"Minigames\\Sucess.json",
+            "ToPass":[
+            ]
+        },
+        "failure_reached":
+        {
+            "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+            "Alias":"failure_reached",
+            "TimeToComplete":0,
+            "Cooldown":0,
+            "NextSence":"Minigames\\Failue.json",
+            "ToPass":[
+            ]
+        },
+        "reset_minigame":
+        {
+            "$type":"VFVGAVFAF.src.Components.ResetSenceCom, VFVGAVFAF",
+            "Alias":"reset_minigame",
+            "TimeToComplete":0.0,
+            "CoolDown":0.0
+        }
+
     }
 }

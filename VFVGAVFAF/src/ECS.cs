@@ -31,7 +31,7 @@ namespace VFVGAVFAF.src
 		private IGameEvenetPostMaster _gameEvenetPostMaster;
 		private GameInfo _gameInfo;
 		private MinigameManger _minigameManger;
-		private EntiyBlueprintManger _entiyBlueprintManger;
+		private BlueprintManger _entiyBlueprintManger;
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
@@ -68,7 +68,10 @@ namespace VFVGAVFAF.src
 				MinigameFiles = new List<string>()
 				{
 					//@"Minigames\Game1.json"
-					@"Minigames\Game2.json"
+					@"Minigames\Game2.json",
+					@"Minigames\Game3.json",
+					@"Minigames\Game4.json",
+					@"Minigames\Game5.json"
 				}
 			};
 
@@ -77,24 +80,9 @@ namespace VFVGAVFAF.src
 				TypeNameHandling = TypeNameHandling.Auto
 			};
 
-			var shithead = new RectCollisionCom();
-			shithead.GameEventComs = new Dictionary<string, List<string>>()
-				{
-					{
-						"Fuck",
-						new List<string>()
-						{
-							"Shit",
-							"Fuck"
-						}
-					}
-				};
-
-			var fuckyou = JsonConvert.SerializeObject(shithead, settings);
-
-			_entiyBlueprintManger =  JsonConvert.DeserializeObject<EntiyBlueprintManger>
+			_entiyBlueprintManger =  JsonConvert.DeserializeObject<BlueprintManger>
 			(
-				Utils.ReadEntireFile(@"Minigames\EntiyList.json"),
+				Utils.ReadEntireFile(@"Minigames\Blueprints.json"),
 				settings
 			);
 
@@ -112,7 +100,7 @@ namespace VFVGAVFAF.src
 				MinigameManger = _minigameManger,
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,
-				EntiyBlueprintManger = _entiyBlueprintManger,
+				BlueprintManger = _entiyBlueprintManger,
 				Content = Content,
 				GameEvenetPostMaster = _gameEvenetPostMaster,
 				GameInfo = _gameInfo

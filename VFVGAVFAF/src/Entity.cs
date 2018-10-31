@@ -11,11 +11,12 @@ namespace VFVGAVFAF.src
 	{
 		private ComponentManager _componentManager;
 		private Dictionary<long, IManger> _comMangers = new Dictionary<long, IManger>();
+		private Dictionary<long, IManger> _disalbedComMangers = new Dictionary<long, IManger>();
 		private Dictionary<long, Type> _ownedComs = new Dictionary<long, Type>();
 		private ConcurrentDictionary<Type, IList<long>> _ownedComsTypes = new ConcurrentDictionary<Type, IList<long>>();
 
 		private ConcurrentDictionary<string, long> _alaisTable = new ConcurrentDictionary<string, long>();
-		private ConcurrentDictionary<long, bool> _enabledComs = new ConcurrentDictionary<long, bool>();
+		private Dictionary<long, bool> _enabledComs = new Dictionary<long, bool>();
 
 		private bool _alreadySet = false;
 		private long _entiyID;
@@ -102,19 +103,24 @@ namespace VFVGAVFAF.src
 			return true;
 		}
 
-		public bool DisableCom(long id)
+		public bool ToggleCom(long id)
 		{
-			return _enabledComs.TryUpdate(id, false, true);
-		}
+			_enabledComs[id] = !_enabledComs[id];
 
-		public bool ChangeEnableStateCom(long id, bool newState)
-		{
-			return _enabledComs.TryUpdate(id, newState, !newState);
-		}
+			if(!_enabledComs[id])
+			{
+				_disalbedComMangers.Add(id, _comMangers[id]);
+				_comMangers[id].UnRegsiter(id);
+				_comMangers.Remove(id);
+			}
+			else
+			{
+				_comMangers.Add(id, _disalbedComMangers[id]);
+				_comMangers[id].Regsiter(id);
+				_disalbedComMangers.Remove(id);
+			}
 
-		public bool EnableCom(long id)
-		{
-			return _enabledComs.TryUpdate(id, true, false);
+			return _enabledComs[id];
 		}
 
 		public ComT GetComponent<ComT>(long id) where ComT : IComponent
@@ -187,7 +193,7 @@ namespace VFVGAVFAF.src
 			}
 
 			_ownedComsTypes[typeof(ComT)].Add(id);
-			_enabledComs.TryAdd(id, true);
+			_enabledComs.Add(id, true);
 
 			return id;
 		}
@@ -196,7 +202,7 @@ namespace VFVGAVFAF.src
 		{
 			_ownedComsTypes[typeof(ComT)].Remove(comID);
 			_ownedComs.Remove(comID);
-			_enabledComs.TryRemove(comID, out _);
+			_enabledComs.Remove(comID);
 			return _componentManager.RemoveComponent(_entiyID, comID);
 		}
 

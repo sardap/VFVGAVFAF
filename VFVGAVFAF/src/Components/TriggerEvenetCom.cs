@@ -11,9 +11,13 @@ namespace VFVGAVFAF.src.Components
 		private bool _ran = false;
 
 		public long EntID { get; set; }
-		public EntityManager EntityManager { get; set; }
-		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
+
 		public List<string> EventAlais { get; set; }
+
+		public EntityManager EntityManager { get; set; }
+
+		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
+
 
 		public TriggerEvenetCom()
 		{
