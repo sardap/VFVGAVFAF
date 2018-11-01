@@ -36,7 +36,7 @@ namespace VFVGAVFAF.src.Components
 		{
 			var postionCom = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IHaveHitBoxCom>(PostionAlais);
 
-			var shooterHitbox = postionCom.GetHitBox;
+			var shooterHitbox = postionCom.HitBox;
 
 			var nextEntry = EntiyBlueprintManger.Get(BulletBlueprint);
 			var hitbox = nextEntry.GetbyAlais<RectPosCom>("pos").Paultangle;

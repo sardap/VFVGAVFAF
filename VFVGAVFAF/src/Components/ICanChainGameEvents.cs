@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface IContolerCom: IComponent
+	interface ICanChainGameEvents: IComponent, INeedPostMaster, INeedEnityManger
 	{
-		void Update(double deltaTime);
+		List<string> EventAlias { get; set; }
 	}
 }

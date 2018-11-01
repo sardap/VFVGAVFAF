@@ -91,7 +91,7 @@ namespace VFVGAVFAF.src
 
 		public void Step(double deltaTime)
 		{
-			var nextPosts = new Dictionary<STuple, IPostData>();
+			var nextChanges = new Dictionary<STuple, IPostData>();
 			var toChange = new Stack<KeyValuePair<STuple, double>>();
 
 			foreach (var entry in _cooldownTable)
@@ -111,38 +111,44 @@ namespace VFVGAVFAF.src
 				_cooldownTable[top.Key] = top.Value;
 			}
 
-			foreach (var post in _posts)
+			Dictionary<STuple, IPostData> postsCopy = new Dictionary<STuple, IPostData>();
+
+			postsCopy = _posts.ToList().ToDictionary(i => i.Key, i => i.Value);
+
+			foreach (var entry in postsCopy)
 			{
-				post.Value.TimeToComplete -= deltaTime;
-				Console.WriteLine("ID{0}\tTIME LEFT:{1}", post.Value.GameEventID, post.Value.TimeToComplete);
 
-				if (post.Value.TimeToComplete <= 0)
+				var value = entry.Value;
+				var key = entry.Key;
+
+				value.TimeToComplete -= deltaTime;
+				Console.WriteLine("ID{0}\tTIME LEFT:{1}", value.GameEventID, value.TimeToComplete);
+
+				if (value.TimeToComplete <= 0)
 				{
-					Console.WriteLine("RUNNING ID: {0}", post.Value.GameEventID);
 
-					var com = _componentManager.GetComponent<IGameEventCom>(post.Value.GameEventID);
+					var com = _componentManager.GetComponent<IGameEventCom>(value.GameEventID);
 
 					if (com is IColsionGameEventCom)
 					{
-						((IColsionGameEventCom)com).ActiveID = post.Key.Two;
+						((IColsionGameEventCom)com).ActiveID = key.Two;
 						Console.WriteLine("ACTIVE ID SET {0}", com);
 					}
 
+					Console.WriteLine("RUNNING ID: {0} COM TYPE {1}", value.GameEventID, com);
+
 					com.Action();
-				}
-				else
-				{
-					nextPosts.Add(post.Key, post.Value);
+
+					_posts.Remove(key);
 				}
 			}
 
-			_posts = nextPosts;
 			_removedLastStep.Clear();
 		}
 
 		private void Add(STuple key, IGameEventCom gameEvenet)
 		{
-			Console.WriteLine("ADDING POST ID{0} TTC:{1}", key.One, gameEvenet.TimeToComplete);
+			Console.WriteLine("ADDING POST TO POSTS ID:{0} TTC:{1}", key.One, gameEvenet.TimeToComplete);
 			_posts.Add(key, new PostData { TimeToComplete = gameEvenet.TimeToComplete, GameEventID = key.One });
 		}
 	}

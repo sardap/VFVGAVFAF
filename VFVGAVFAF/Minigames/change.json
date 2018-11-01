@@ -3,67 +3,33 @@
     "Entries":[
         {
             "EnityToJson":{
-                "Tags":[
-                    "game",
-                    "player"
-                ],
                 "Components":[
                     {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":5.0,
-                                "Y":300.0
-                            },
-                            "Width":30,
-                            "Height":30
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
                         },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                            "game_bound_constrant",
-                        ],
-                        "RandomStartPos":false
+                        "Alias":"pos"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"PREPARE NEXT MISSION INCOMING COMRADE"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
                         "Color":{
                             "B":0,
                             "G":0,
                             "R":255,
                             "A":255
                         },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Actions":{
-                        },
-                        "speed":50
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"game_bound_constrant"
+                        "FontName":"Fonts/Russian"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
@@ -72,12 +38,15 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
                         "RunsRemaining":1,
-                        "SizeGetterAlais":"pos",
+                        "SizeGetterAlais":"rend",
                         "BoundsAlais":"game_bounds",
                         "PostionAlais":"pos",
                         "CenterOperations":[
                             {
                                 "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            },
+                            {
+                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
                             }
                         ]
                     }
@@ -88,7 +57,6 @@
         {
             "EnityToJson":{
                 "Tags":[
-                    "game",
                     "timer"
                 ],
                 "Components":[
@@ -107,7 +75,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
                         "Alias":"count_down_value",
-                        "Value":6
+                        "Value":3
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
@@ -120,7 +88,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"5"
+                        "Value":"3"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
@@ -147,7 +115,7 @@
                         "Color":{
                             "B":0,
                             "G":0,
-                            "R":255,
+                            "R":0,
                             "A":255
                         },
                         "FontName":"Fonts/Russian"
@@ -165,9 +133,10 @@
                         ]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "Alias":"goal_reached",
-                        "BlueprintName":"goal_reached"
+                        "$type":"VFVGAVFAF.src.Components.GoalReachedCom, VFVGAVFAF",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "Alias":"goal_reached"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
@@ -175,61 +144,11 @@
                         "Triggers":[
                             {
                                 "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
-                                "Opreator":2,
-                                "Value":0,
+                                "Opreator":0,
+                                "Value":-1,
                                 "GameEvents":[
                                     "goal_reached"
                                 ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
-                        "Postion2D":{
-                            "X":0,
-                            "Y":50
-                        },
-                        "Alias":"pos"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
-                        "Alias":"text",
-                        "Value":"FIND THE FOOD COMRADE"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
-                        "Alias":"rend",
-                        "PostionAlais":"pos",
-                        "TextAlais":"text",
-                        "Scale":1,
-                        "Color":{
-                            "B":0,
-                            "G":0,
-                            "R":0,
-                            "A":255
-                        },
-                        "FontName":"Fonts/Russian"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
-                        "Alias":"game_bounds"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
-                        "RunsRemaining":1,
-                        "SizeGetterAlais":"rend",
-                        "BoundsAlais":"game_bounds",
-                        "PostionAlais":"pos",
-                        "CenterOperations":[
-                            {
-                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
                             }
                         ]
                     }

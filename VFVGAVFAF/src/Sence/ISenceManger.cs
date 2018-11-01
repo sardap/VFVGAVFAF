@@ -21,5 +21,7 @@ namespace VFVGAVFAF.src.Sence
 		void AddToProcessed(long id);
 
 		void UnloadCurrent();
+
+		void OverlayFromFile(string filename, List<IPassValue> passedValues);
 	}
 }

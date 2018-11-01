@@ -185,13 +185,13 @@ namespace VFVGAVFAF.src
 			double horizontalMidpoint = _bounds.Y + (_bounds.Height / 2);
 
 			// Object can completely fit within the top quadrants
-			bool topQuadrant = (pRect.GetHitBox.Y < horizontalMidpoint && pRect.GetHitBox.Y + pRect.GetHitBox.Height < horizontalMidpoint);
+			bool topQuadrant = (pRect.HitBox.Y < horizontalMidpoint && pRect.HitBox.Y + pRect.HitBox.Height < horizontalMidpoint);
 
 			// Object can completely fit within the bottom quadrants
-			bool bottomQuadrant = (pRect.GetHitBox.Y > horizontalMidpoint);
+			bool bottomQuadrant = (pRect.HitBox.Y > horizontalMidpoint);
 
 			// Object can completely fit within the left quadrants
-			if (pRect.GetHitBox.X < verticalMidpoint && pRect.GetHitBox.X + pRect.GetHitBox.Width < verticalMidpoint)
+			if (pRect.HitBox.X < verticalMidpoint && pRect.HitBox.X + pRect.HitBox.Width < verticalMidpoint)
 			{
 				if (topQuadrant)
 				{
@@ -203,7 +203,7 @@ namespace VFVGAVFAF.src
 				}
 			}
 			// Object can completely fit within the right quadrants
-			else if (pRect.GetHitBox.X > verticalMidpoint)
+			else if (pRect.HitBox.X > verticalMidpoint)
 			{
 				if (topQuadrant)
 				{

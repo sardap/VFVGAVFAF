@@ -16,7 +16,7 @@ namespace VFVGAVFAF.src
 		};
 
 		public Dictionary<string, EnityToJson> EntiyBlueprints { get; set; }
-		public Dictionary<string, IComponent> ComBlueprints { get; set; }
+		public Dictionary<string, List<IComponent>> ComBlueprints { get; set; }
 
 		public EnityToJson Get(string name)
 		{
@@ -26,11 +26,11 @@ namespace VFVGAVFAF.src
 			return JsonConvert.DeserializeObject<EnityToJson>(jsonString, _settings);
 		}
 
-		public IComponent GetCom(string name)
+		public List<IComponent> GetComs(string name)
 		{
 			var blueprint = ComBlueprints[name];
-			var jsonString = JsonConvert.SerializeObject(blueprint, typeof(IComponent), _settings);
-			return JsonConvert.DeserializeObject<IComponent>(jsonString, _settings);
+			var jsonString = JsonConvert.SerializeObject(blueprint, typeof(List<IComponent>), _settings);
+			return JsonConvert.DeserializeObject<List<IComponent>>(jsonString, _settings);
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace VFVGAVFAF.src.Components
 		public Dictionary<string, List<string>> GameEventComs { get; set; }
 
 		[JsonIgnore]
-		public Paultangle GetHitBox
+		public Paultangle HitBox
 		{
 			get
 			{
@@ -39,7 +39,7 @@ namespace VFVGAVFAF.src.Components
 			var hitBox = ent.GetComponent<RectPosCom>(RectPosAlais); // Safe
 			var otherEnt = EntityManager.GetEntiy<GameObject>(otherEntID);
 			var otherCom = otherEnt.GetComponent<ICollisionCom>(otherID); // Safe
-			var otherHitBox = otherCom.GetHitBox; // Not Safe
+			var otherHitBox = otherCom.HitBox; // Not Safe
 			var collied = hitBox.Rectangle.Intersects(otherHitBox);
 			if (collied) // Note Safe
 			{

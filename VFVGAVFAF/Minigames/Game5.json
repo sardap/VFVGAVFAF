@@ -3,7 +3,7 @@
     "Entries":[
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "player"
                 ],
                 "Components":[
@@ -67,6 +67,7 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
                         "BlueprintName":"failure_reached"
                     },
                     {
@@ -82,7 +83,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -130,7 +131,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -172,7 +173,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -246,7 +247,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -320,7 +321,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -394,7 +395,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -468,7 +469,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -542,7 +543,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -616,7 +617,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -690,7 +691,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -764,7 +765,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -838,7 +839,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -912,7 +913,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -986,7 +987,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1060,7 +1061,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1134,7 +1135,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1208,7 +1209,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1282,7 +1283,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1356,7 +1357,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1430,7 +1431,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1504,7 +1505,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1578,7 +1579,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1652,7 +1653,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1726,7 +1727,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1800,7 +1801,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1874,7 +1875,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -1948,7 +1949,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -2022,7 +2023,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -2096,7 +2097,7 @@
         },
          {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -2170,7 +2171,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -2244,7 +2245,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -2318,7 +2319,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -2391,7 +2392,7 @@
             "Count":1
         },
         {
-            "Tags":["goal"],
+            "Tags":["game","goal"],
             "EnityToJson":{
                 "Components":[
                     {
@@ -2427,6 +2428,7 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
                         "BlueprintName":"goal_reached"
                     },
                     {
@@ -2442,7 +2444,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "timer"
                 ],
                 "Components":[
@@ -2520,6 +2522,7 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
                         "BlueprintName":"failure_reached"
                     },
                     {

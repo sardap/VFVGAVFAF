@@ -3,7 +3,7 @@
     "Entries":[
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "player"
                 ],
                 "Components":[
@@ -96,14 +96,8 @@
                         "Alias":"damageSound"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/player_respawn",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"respawnSound"
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
                         "BlueprintName":"failure_reached"
                     },
                     {
@@ -124,7 +118,6 @@
                                 "Value":0,
                                 "GameEvents":[
                                     "respawn",
-                                    "respawnSound",
                                     "failure_reached"
                                 ]
                             }
@@ -150,7 +143,7 @@
         },
          {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -277,7 +270,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -404,7 +397,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -413,10 +406,10 @@
                         "Paultangle":{
                             "Postion2D":{
                                 "X":100,
-                                "Y":100
+                                "Y":0
                             },
                             "Width":70,
-                            "Height":200
+                            "Height":300
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
@@ -459,7 +452,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -513,7 +506,7 @@
             "Count":1
         },
         {
-            "Tags":["goal"],
+            "Tags":["game","goal"],
             "EnityToJson":{
                 "Components":[
                     {
@@ -560,6 +553,7 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
                         "BlueprintName":"goal_reached"
                     },
                     {
@@ -575,7 +569,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+                "Tags":["game",
                     "timer"
                 ],
                 "Components":[
@@ -594,7 +588,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
                         "Alias":"count_down_value",
-                        "Value":10
+                        "Value":9
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
@@ -607,7 +601,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":""
+                        "Value":"9"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
@@ -653,7 +647,8 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "BlueprintName":"goal_reached"
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
@@ -664,7 +659,7 @@
                                 "Opreator":0,
                                 "Value":0,
                                 "GameEvents":[
-                                    "goal_reached"
+                                    "failure_reached"
                                 ]
                             }
                         ]

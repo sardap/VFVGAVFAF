@@ -1,0 +1,441 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "EnityToJson":{
+                "Tags":["game",
+                    "wealth"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
+                        "RectPosAlais":"box_one",
+                        "Actions":{
+                            "32":["goal_reached"]
+                        },
+                        "speed":0
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":100,
+                                "Y":200
+                            },
+                            "Width":200,
+                            "Height":200
+                        },
+                        "Alias":"box_one",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"box_one",
+                        "TextureName":"Images/player",
+                        "LineWidth":10,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AreaClickedCom, VFVGAVFAF",
+                        "HitBoxAlias":"box_one",
+                        "Events":["change_left_money_down", "left_money_update", "change_right_money_up", "right_money_update"],
+                        "MouseState":2,
+                        "MouseButton":0
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AreaClickedCom, VFVGAVFAF",
+                        "HitBoxAlias":"box_one",
+                        "Events":["change_left_money_up", "left_money_update", "change_right_money_down", "right_money_update"],
+                        "MouseState":2,
+                        "MouseButton":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":140,
+                            "Y":290
+                        },
+                        "Alias":"left_money_pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"left_money_text",
+                        "Value":"900"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"left_money_rend",
+                        "PostionAlais":"left_money_pos",
+                        "TextAlais":"left_money_text",
+                        "Scale":2,
+                        "Color":{
+                            "B":0,
+                            "G":223,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Value":900,
+                        "Alias":"left_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"left_money_update",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"left_money",
+                        "TargetAlais":"left_money_text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"change_left_money_up",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":100,
+                        "ValueAlais":"left_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"change_left_money_down",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-100,
+                        "ValueAlais":"left_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":495,
+                                "Y":200
+                            },
+                            "Width":200,
+                            "Height":200
+                        },
+                        "Alias":"right_box",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"right_box",
+                        "TextureName":"Images/player",
+                        "LineWidth":10,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AreaClickedCom, VFVGAVFAF",
+                        "HitBoxAlias":"right_box",
+                        "Events":["change_left_money_down", "left_money_update", "change_right_money_up", "right_money_update"],
+                        "MouseState":2,
+                        "MouseButton":0
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AreaClickedCom, VFVGAVFAF",
+                        "HitBoxAlias":"right_box",
+                        "Events":["change_left_money_up", "left_money_update", "change_right_money_down", "right_money_update"],
+                        "MouseState":2,
+                        "MouseButton":2
+                    },
+
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":540,
+                            "Y":290
+                        },
+                        "Alias":"right_money_pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"right_money_text",
+                        "Value":"100"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"right_money_rend",
+                        "PostionAlais":"right_money_pos",
+                        "TextAlais":"right_money_text",
+                        "Scale":2,
+                        "Color":{
+                            "B":0,
+                            "G":223,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Value":100,
+                        "Alias":"right_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"right_money_update",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"right_money",
+                        "TargetAlais":"right_money_text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"change_right_money_up",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":100,
+                        "ValueAlais":"right_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"change_right_money_down",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-100,
+                        "ValueAlais":"right_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"right_money_update",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"right_money",
+                        "TargetAlais":"right_money_text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"change_right_money",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":100,
+                        "ValueAlais":"right_money"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"right_money",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":0,
+                                "Value":-100,
+                                "GameEvents":[
+                                    "failure_reached"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"left_money",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":0,
+                                "Value":-100,
+                                "GameEvents":[
+                                    "failure_reached"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"right_money",
+                        "Alias":"sucess_right_watch",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":0,
+                                "Value":600,
+                                "GameEvents":[
+                                    "goal_reached"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["game",
+                    "timer"
+                ],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":500
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"count_down_value",
+                        "Value":5
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"count_down_value_updater",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-1,
+                        "ValueAlais":"count_down_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"5"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"update_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"count_down_value",
+                        "TargetAlais":"text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
+                        "Alias":"timer_interval_trigger",
+                        "Cooldown":1,
+                        "EventAlais":[
+                            "count_down_value_updater",
+                            "update_text"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":2.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"count_down_value",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":2,
+                                "Value":0,
+                                "GameEvents":[
+                                    "failure_reached"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["game","text"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"Redistribute the wealth"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        }
+    ]
+}

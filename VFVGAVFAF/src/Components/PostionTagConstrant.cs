@@ -29,7 +29,7 @@ namespace VFVGAVFAF.src.Components
 					Utils.Check
 					(
 						hitBox, 
-						EntityManager.GetEntiy<GameObject>(i).GetComponent<IHaveHitBoxCom>("pos").GetHitBox, 
+						EntityManager.GetEntiy<GameObject>(i).GetComponent<IHaveHitBoxCom>("pos").HitBox, 
 						Type, 
 						Inside
 					)

@@ -27,14 +27,17 @@ namespace VFVGAVFAF.src.Json
 		public List<long> Load(GameObjectFactory gameObjectFactory, List<IPassValue> passValues)
 		{
 			var result = new List<long>();
-
+			
 			foreach(var entry in Entries)
 			{
-				var toPass = passValues.FindAll(i => entry.EnityToJson.Tags.Any(j => Regex.IsMatch(j, i.Tag)));
-
-				for(int i = 0; i < entry.Count; i++)
+				if(gameObjectFactory.VaildToAdd(entry.EnityToJson))
 				{
-					result.Add(gameObjectFactory.AddCreatedGameObject(entry.EnityToJson, toPass));
+					var toPass = passValues.FindAll(i => entry.EnityToJson.Tags.Any(j => Regex.IsMatch(j, i.Tag)));
+
+					for (int i = 0; i < entry.Count; i++)
+					{
+						result.Add(gameObjectFactory.AddCreatedGameObject(entry.EnityToJson, toPass));
+					}
 				}
 			}
 

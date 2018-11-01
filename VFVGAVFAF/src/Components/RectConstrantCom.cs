@@ -39,7 +39,7 @@ namespace VFVGAVFAF.src.Components
 		{
 			var ent = EntityManager.GetEntiy<GameObject>(EntID);
 			//TODO this is a brain fart i don't know the right way
-			var constrant = ent.GetComponent<IHaveHitBoxCom>(RectPosAlais).GetHitBox;
+			var constrant = ent.GetComponent<IHaveHitBoxCom>(RectPosAlais).HitBox;
 
 			var result = Utils.Check(hitBox, constrant, Type, Inside);
 

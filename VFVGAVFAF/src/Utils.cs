@@ -8,6 +8,7 @@ using VFVGAVFAF.src.Sence;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src
 {
@@ -91,7 +92,7 @@ namespace VFVGAVFAF.src
 
 		public static void RemoveAll<K, V>(Dictionary<K, V> dict, IEnumerable<K> toRemove)
 		{
-			foreach(var i in toRemove)
+			foreach (var i in toRemove)
 			{
 				dict.Remove(i);
 			}
@@ -101,7 +102,7 @@ namespace VFVGAVFAF.src
 		{
 			var result = target.ToList();
 
-			foreach(var i in toRemove)
+			foreach (var i in toRemove)
 			{
 				result.Remove(i);
 			}
@@ -114,9 +115,9 @@ namespace VFVGAVFAF.src
 			int i = 0;
 			int toGet = Random.Next(list.Count());
 
-			foreach(var entry in list)
+			foreach (var entry in list)
 			{
-				if(i == toGet)
+				if (i == toGet)
 				{
 					return entry;
 				}
@@ -158,6 +159,43 @@ namespace VFVGAVFAF.src
 				result = !d(a, b);
 
 			return result;
+		}
+
+		public static void PushRange<T>(Stack<T> stack, IEnumerable<T> toAdd)
+		{
+			foreach(var entry in toAdd)
+			{
+				stack.Push(entry);
+			}
+		}
+
+		public static MangersEnum MangerToMangerEnum(IManger manger)
+		{
+			if(manger is RenderManager)
+			{
+				return MangersEnum.RenderManger;
+			}
+			if (manger is ColssionComManger)
+			{
+				return MangersEnum.CollsionManger;
+			}
+			if (manger is StepManager)
+			{
+				return MangersEnum.StepManger;
+			}
+			if (manger is InputManger)
+			{
+				return MangersEnum.InputManger;
+			}
+
+			throw new NotImplementedException();
+		}
+
+		public static T RandomElement<T>(IEnumerable<T> set)
+		{
+			var index = Random.Next(set.Count() - 1);
+
+			return set.ToList()[index];
 		}
 
 	}

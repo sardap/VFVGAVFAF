@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFVGAVFAF.src.Components
+namespace VFVGAVFAF.src
 {
-	interface IContolerCom: IComponent
+	enum MangersEnum
 	{
-		void Update(double deltaTime);
+		RenderManger = 0,
+		InputManger = 1,
+		CollsionManger = 2,
+		StepManger = 3,
 	}
 }

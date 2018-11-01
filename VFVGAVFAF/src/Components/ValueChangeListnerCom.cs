@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class ValueChangeListnerCom<T> : IStepCom, INeedEnityManger, INeedPostMaster where T : IComparable<T>, IComparable
+	class ValueChangeListnerCom<T> : IStepCom, INeedEnityManger, INeedPostMaster, IResolveBool, IHaveAlias where T : IComparable<T>, IComparable
 	{
 		public enum Ops
 		{
@@ -61,6 +61,8 @@ namespace VFVGAVFAF.src.Components
 
 		public long EntID { get; set; }
 
+		public string Alias { get; set; }
+
 		public string ToWatchAlais { get; set; }
 
 		public IList<ITrigger> Triggers { get; set; }
@@ -72,6 +74,14 @@ namespace VFVGAVFAF.src.Components
 		public ValueChangeListnerCom()
 		{
 			Triggers = new List<ITrigger>();
+		}
+
+		public bool Resolve()
+		{
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			var valCom = ent.GetComponent<IValueCom<T>>(ToWatchAlais);
+
+			return Triggers.All(i => i.Resolve(valCom.Value));
 		}
 
 		public void Step(double deltaTime)

@@ -17,8 +17,12 @@ namespace VFVGAVFAF.src.Components
 		private Texture2D _texture;
 
 		public long EntID { get; set; }
+
 		public string RectPosAlais { get; set; }
+
 		public EntityManager EntityManager { get; set; }
+
+		[JsonIgnore]
 		public TextureManager TextureManager
 		{
 			get
@@ -39,14 +43,9 @@ namespace VFVGAVFAF.src.Components
 
 		public string TextureName { get; set; }
 
-		public RectRendCom(EntityManager entityManager)
-		{
-			EntityManager = entityManager;
-		}
-
 		public RectRendCom()
 		{
-
+			int x = 0;
 		}
 
 		public void Render(double deltaTime)

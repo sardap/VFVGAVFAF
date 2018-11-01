@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +9,46 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	[Serializable]
-	class RectOutlineRendCom : IRenderableComponent
+	class RectOutlineRendCom : IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
 	{
-		private long _rectangleComponetID;
-		private EntityManager _entityManager;
+		private TextureManager _textureManager;
+		private Texture2D _texture;
 
 		public long EntID { get; set; }
 
-		public Texture2D Texture { get; set; }
-		public SpriteBatch SpriteBatch { get; set; }
+		public string HitBoxAlias { get; set; }
+
+		public string TextureName { get; set; }
+
 		public Color Color { get; set; }
+
 		public int LineWidth { get; set; }
 
-		public RectOutlineRendCom(long entID, EntityManager entityManager, long rectangleComponetID)
+		[JsonIgnore]
+		public TextureManager TextureManager
 		{
-			EntID = entID;
-			_entityManager = entityManager;
-			_rectangleComponetID = rectangleComponetID;
+			get
+			{
+				return _textureManager;
+			}
+			set
+			{
+				_textureManager = value;
+				_texture = _textureManager.GetTexture(TextureName, Color);
+			}
 		}
+
+		public SpriteBatch SpriteBatch { get; set; }
+
+		public EntityManager EntityManager { get; set; }
 
 		public void Render(double deltaTime)
 		{
-			var rectangle = _entityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(_rectangleComponetID).Rectangle.ToMonoGameRectangle();
-			SpriteBatch.Draw(Texture, new Rectangle(rectangle.X, rectangle.Y, LineWidth, rectangle.Height + LineWidth), Color);
-			SpriteBatch.Draw(Texture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + LineWidth, LineWidth), Color);
-			SpriteBatch.Draw(Texture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, LineWidth, rectangle.Height + LineWidth), Color);
-			SpriteBatch.Draw(Texture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + LineWidth, LineWidth), Color);
+			var rectangle = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<RectPosCom>(HitBoxAlias).Paultangle.ToMonoGameRectangle();
+			SpriteBatch.Draw(_texture, new Rectangle(rectangle.X, rectangle.Y, LineWidth, rectangle.Height + LineWidth), Color);
+			SpriteBatch.Draw(_texture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width + LineWidth, LineWidth), Color);
+			SpriteBatch.Draw(_texture, new Rectangle(rectangle.X + rectangle.Width, rectangle.Y, LineWidth, rectangle.Height + LineWidth), Color);
+			SpriteBatch.Draw(_texture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height, rectangle.Width + LineWidth, LineWidth), Color);
 		}
 	}
 }

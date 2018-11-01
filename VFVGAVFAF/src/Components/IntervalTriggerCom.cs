@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class IntervalTriggerCom : IStepCom, INeedEnityManger, INeedPostMaster
+	class IntervalTriggerCom : IStepCom, INeedEnityManger, INeedPostMaster, IHaveAlias
 	{
 		private double _timeRemaing = 0d;
 
@@ -14,14 +14,15 @@ namespace VFVGAVFAF.src.Components
 
 		public double Cooldown { get; set; }
 
+		public string Alias { get; set; }
+
 		public List<string> EventAlais { get; set; }
 
 		public EntityManager EntityManager { get; set; }
 
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
-
-		public void Step(double deltaTime)
+		virtual public void Step(double deltaTime)
 		{
 			_timeRemaing -= deltaTime;
 

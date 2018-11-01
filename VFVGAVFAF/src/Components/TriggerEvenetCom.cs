@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class TriggerEvenetCom : IComponent, INeedPostMaster, IStepCom, INeedEnityManger
+	class TriggerEvenetCom : IComponent, INeedPostMaster, IStepCom, INeedEnityManger, IRunXTimesCom
 	{
 		private bool _ran = false;
 
 		public long EntID { get; set; }
+
+		public long RunsRemaining { get { return 0; } set { } }
 
 		public List<string> EventAlais { get; set; }
 

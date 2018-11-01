@@ -91,5 +91,10 @@ namespace VFVGAVFAF.src
 			return true;
 		}
 
+		public HashSet<long> GetAllComIDForEnt(long entID)
+		{
+			return _enityComponets[entID];
+		}
+
 	}
 }

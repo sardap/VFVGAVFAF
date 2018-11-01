@@ -3,7 +3,7 @@
     "Entries":[
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "player"
                 ],
                 "Components":[
@@ -80,14 +80,8 @@
                         "Alias":"damageSound"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/player_respawn",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"respawnSound"
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
                         "BlueprintName":"failure_reached"
                     },
                     {
@@ -108,7 +102,6 @@
                                 "Value":0,
                                 "GameEvents":[
                                     "respawn",
-                                    "respawnSound",
                                     "failure_reached"
                                 ]
                             }
@@ -123,6 +116,7 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
                         "BlueprintName":"goal_reached"
                     },
                     {
@@ -139,7 +133,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "enemy"
                 ],
                 "Components":[
@@ -262,7 +256,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -317,7 +311,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -372,7 +366,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "wall"
                 ],
                 "Components":[
@@ -427,7 +421,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "death_trap"
                 ],
                 "Components":[
@@ -470,7 +464,7 @@
 
         {
             "EnityToJson":{
-                "Tags":[
+               "Tags":["game",
                     "timer"
                 ],
                 "Components":[
@@ -548,10 +542,12 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
                         "BlueprintName":"goal_reached"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
                         "BlueprintName":"failure_reached"
                     },
                     {

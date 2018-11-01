@@ -46,6 +46,7 @@ namespace VFVGAVFAF.src
 		public GameInfo GameInfo { get; set; }
 		public MinigameManger MinigameManger { get; set; }
 		public BlueprintManger BlueprintManger { get; set; }
+		public MouseManger MouseManger { get; set; }
 
 		public GameObjectFactory()
 		{
@@ -63,6 +64,14 @@ namespace VFVGAVFAF.src
 			return entID;
 		}
 
+		public bool VaildToAdd(EnityToJson jsonGameObject)
+		{
+			return jsonGameObject.InstanceLimt == null || 
+				!EntityManager.InstanceCount.ContainsKey(jsonGameObject.Alias) ||
+				EntityManager.InstanceCount.ContainsKey(jsonGameObject.Alias) && 
+				EntityManager.InstanceCount[jsonGameObject.Alias] < jsonGameObject.InstanceLimt;
+		}
+
 		public long AddCreatedGameObject(EnityToJson jsonGameObject, List<IPassValue> passedValues)
 		{
 			JsonSerializerSettings settings = new JsonSerializerSettings
@@ -70,8 +79,15 @@ namespace VFVGAVFAF.src
 				TypeNameHandling = TypeNameHandling.Auto
 			};
 
-			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
+			var gameObject = new GameObject(ComponentManager);
+
+			if (jsonGameObject.Alias != null)
+			{
+				gameObject.Alias = jsonGameObject.Alias;
+			}
+					
+			var entID = EntityManager.CreateEntity(gameObject);
+			gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
 			gameObject.Tags = jsonGameObject.Tags;
 
@@ -79,11 +95,6 @@ namespace VFVGAVFAF.src
 			{
 				var jsonString = JsonConvert.SerializeObject(i, typeof(IComponent), settings);
 				var com = JsonConvert.DeserializeObject<IComponent>(jsonString, settings);
-
-				if(com is LoadComBlueprintCom)
-				{
-					com = BlueprintManger.GetCom(((LoadComBlueprintCom)com).BlueprintName);
-				}
 
 				gameObject.AddComponent(com);
 			});
@@ -182,6 +193,10 @@ namespace VFVGAVFAF.src
 				((INeedGamesObjectFactory)component).GameObjectFactory = this;
 			}
 
+			if (component is INeedMouseManger)
+			{
+				((INeedMouseManger)component).MouseManger = MouseManger;
+			}
 
 			return component;
 		}

@@ -15,7 +15,7 @@ namespace VFVGAVFAF.src.Components
 
 		public GameInfo GameInfo { get; set; }
 
-		public Paultangle GetHitBox
+		public Paultangle HitBox
 		{
 			get
 			{

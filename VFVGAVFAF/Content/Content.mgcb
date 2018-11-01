@@ -75,3 +75,105 @@
 /processorParam:Quality=Best
 /build:Sounds/gun_shot.wav
 
+#begin Sounds/failure_line_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_1.wav
+
+#begin Sounds/failure_line_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_2.wav
+
+#begin Sounds/failure_line_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_3.wav
+
+#begin Sounds/failure_line_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_4.wav
+
+#begin Sounds/failure_line_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_5.wav
+
+#begin Sounds/failure_line_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_6.wav
+
+#begin Sounds/failure_line_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/failure_line_7.wav
+
+#begin Sounds/sucess_line_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_1.wav
+
+#begin Sounds/sucess_line_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_2.wav
+
+#begin Sounds/sucess_line_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_3.wav
+
+#begin Sounds/sucess_line_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_4.wav
+
+#begin Sounds/sucess_line_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_5.wav
+
+#begin Sounds/sucess_line_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_6.wav
+
+#begin Sounds/sucess_line_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_7.wav
+
+#begin Sounds/sucess_line_8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_8.wav
+
+#begin Sounds/sucess_line_9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_9.wav
+
+#begin Sounds/sucess_line_10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/sucess_line_10.wav
+

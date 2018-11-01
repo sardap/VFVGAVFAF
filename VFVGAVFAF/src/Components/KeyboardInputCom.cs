@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 namespace VFVGAVFAF.src.Components
 {
 	[Serializable]
-	class KeyboardInputCom : IContolerCom, INeedEnityManger, INeedPostMaster
+	class KeyboardInputCom: IContolerCom, INeedEnityManger, INeedPostMaster
 	{
 		public long EntID { get; set; }
+
 		public string RectPosAlais { get; set; }
+
 		public EntityManager EntityManager { get; set; }
+
 		public int Speed { get; set; }
+
 		public Dictionary<Keys, List<string>> Actions { get; set; }
 
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }

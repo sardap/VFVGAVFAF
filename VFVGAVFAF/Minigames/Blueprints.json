@@ -49,7 +49,7 @@
                         "enemy":[
                             "damage"
                         ],
-                        "wall|player":[
+                        "wall|enemy":[
                             "self_destcut"
                         ]
                     }
@@ -162,7 +162,7 @@
             ]
         },
         "tank_bullet":{
-            "Tags":["bullet"], 
+            "Tags":["bullet"],
             "Components":[  
                 {
                     "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
@@ -241,36 +241,136 @@
                     ]
                 }
             ]
+        },
+        "goal_reached":{
+            "Tags":["end"], 
+            "Alias":"end",
+            "InstanceLimt":1,
+            "Components":[
+                {
+                    "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                    "EventAlais":["goal_reached", "swap_sence", "freeze"]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                    "Alias":"freeze",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "MatchPattern":"game",
+                    "Mangers":[
+                        1, 2, 3
+                    ]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.OverlaySenceCom, VFVGAVFAF",
+                    "Alias":"goal_reached",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "FileName":"Minigames\\Sucess.json",
+                    "PassValues":[],
+                    "EventAlias":[]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+                    "Alias":"swap_sence",
+                    "TimeToComplete":2,
+                    "Cooldown":0,
+                    "NextSence":"Minigames\\change.json",
+                    "ToPass":[
+                    ]
+                }
+            ]
+        },
+        "failure_reached":{
+            "Tags":["end"],
+            "Alias":"end",
+            "InstanceLimt":1,
+            "Components":[
+                {
+                    "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                    "EventAlais":["failure_reached", "swap_sence", "freeze"]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                    "Alias":"freeze",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "MatchPattern":"game",
+                    "Mangers":[
+                        1, 2, 3
+                    ]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.OverlaySenceCom, VFVGAVFAF",
+                    "Alias":"failure_reached",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "FileName":"Minigames\\Failue.json",
+                    "PassValues":[],
+                    "EventAlias":[]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+                    "Alias":"swap_sence",
+                    "TimeToComplete":2,
+                    "Cooldown":0,
+                    "NextSence":"Minigames\\change.json",
+                    "ToPass":[
+                    ]
+                }
+            ]
         }
     },
     "ComBlueprints":
     {
-        "goal_reached":{
-            "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
-            "Alias":"goal_reached",
-            "TimeToComplete":0,
-            "Cooldown":0,
-            "NextSence":"Minigames\\Sucess.json",
-            "ToPass":[
-            ]
-        },
-        "failure_reached":
-        {
-            "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
-            "Alias":"failure_reached",
-            "TimeToComplete":0,
-            "Cooldown":0,
-            "NextSence":"Minigames\\Failue.json",
-            "ToPass":[
-            ]
-        },
+        "goal_reached":[
+            {
+                "$type":"VFVGAVFAF.src.Components.OverlaySenceCom, VFVGAVFAF",
+                "Alias":"goal_reached",
+                "TimeToComplete":0,
+                "Cooldown":0,
+                "FileName":"Minigames\\Sucess.json",
+                "PassValues":[],
+                "EventAlias":["swap_sence_a"]
+            },
+            {
+                "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+                "Alias":"swap_sence_a",
+                "TimeToComplete":0.5,
+                "Cooldown":0,
+                "NextSence":"Minigames\\change.json",
+                "ToPass":[
+                ]
+            }
+        ],
+        "failure_reached":[
+            {
+                "$type":"VFVGAVFAF.src.Components.OverlaySenceCom, VFVGAVFAF",
+                "Alias":"failure_reached",
+                "TimeToComplete":0,
+                "Cooldown":0,
+                "FileName":"Minigames\\Failue.json",
+                "PassValues":[],
+                "EventAlias":["swap_sence_b"]
+            },
+            {
+                "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+                "Alias":"swap_sence_b",
+                "TimeToComplete":0.5,
+                "Cooldown":0,
+                "NextSence":"Minigames\\change.json",
+                "ToPass":[
+                ]
+            }
+        ],
         "reset_minigame":
-        {
-            "$type":"VFVGAVFAF.src.Components.ResetSenceCom, VFVGAVFAF",
-            "Alias":"reset_minigame",
-            "TimeToComplete":0.0,
-            "CoolDown":0.0
-        }
-
+        [
+            {
+                "$type":"VFVGAVFAF.src.Components.ResetSenceCom, VFVGAVFAF",
+                "Alias":"reset_minigame",
+                "TimeToComplete":0.0,
+                "CoolDown":0.0
+            }
+        ]
     }
 }

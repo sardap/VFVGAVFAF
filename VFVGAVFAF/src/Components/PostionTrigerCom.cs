@@ -25,7 +25,7 @@ namespace VFVGAVFAF.src.Components
 			var ent = EntityManager.GetEntiy<GameObject>(EntID);
 
 			var constrantCom = ent.GetComponent<IPostionConstrantCom>(ConstrantAlais);
-			var hitbox = ent.GetComponent<IHaveHitBoxCom>(HitBoxAlais).GetHitBox;
+			var hitbox = ent.GetComponent<IHaveHitBoxCom>(HitBoxAlais).HitBox;
 
 			//Console.WriteLine("CONSTRANT {0}: {1}", ConstrantAlais, constrantCom.Check(hitbox));
 			if (constrantCom.Check(hitbox))

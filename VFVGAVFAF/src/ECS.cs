@@ -32,12 +32,15 @@ namespace VFVGAVFAF.src
 		private GameInfo _gameInfo;
 		private MinigameManger _minigameManger;
 		private BlueprintManger _entiyBlueprintManger;
+		private MouseManger _mouseManger;
+		private ISenceManger
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
 
 		public void Initialse(GraphicsDeviceManager graphics)
 		{
+			_mouseManger = new MouseManger();
 			_componentManager = new ComponentManager();
 			_entityManager = new EntityManager()
 			{
@@ -71,7 +74,9 @@ namespace VFVGAVFAF.src
 					@"Minigames\Game2.json",
 					@"Minigames\Game3.json",
 					@"Minigames\Game4.json",
-					@"Minigames\Game5.json"
+					@"Minigames\Game5.json",
+					@"Minigames\Game6.json",
+					@"Minigames\Game7.json"
 				}
 			};
 
@@ -101,6 +106,7 @@ namespace VFVGAVFAF.src
 				SpriteBatch = SpriteBatch,
 				SenceManger = _senceManger,
 				BlueprintManger = _entiyBlueprintManger,
+				MouseManger = _mouseManger,
 				Content = Content,
 				GameEvenetPostMaster = _gameEvenetPostMaster,
 				GameInfo = _gameInfo
@@ -114,6 +120,7 @@ namespace VFVGAVFAF.src
 
 		public void Step(double deltaTime)
 		{
+			_mouseManger.Step();
 			_entityManager.Step();
 			_senceManger.Step();
 			_gameEvenetPostMaster.Step(deltaTime);

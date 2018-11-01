@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFVGAVFAF.src.Managers;
 
-namespace VFVGAVFAF.src.Components
+namespace VFVGAVFAF.src
 {
-	interface IHaveHitBoxCom: IComponent
+	interface INeedMouseManger
 	{
 		[JsonIgnore]
-		Paultangle HitBox { get; }
+		MouseManger MouseManger { get; set; }
 	}
 }

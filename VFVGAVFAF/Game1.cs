@@ -39,6 +39,8 @@ namespace VFVGAVFAF
 
 			_ecs = new ECS();
 
+			IsMouseVisible = true;
+
 			base.Initialize();
         }
 

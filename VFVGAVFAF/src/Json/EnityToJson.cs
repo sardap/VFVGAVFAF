@@ -12,6 +12,10 @@ namespace VFVGAVFAF.src.Json
 
 		public List<string> Tags { get; set; }
 
+		public string Alias { get; set; }
+
+		public long? InstanceLimt { get; set; }
+
 		public EnityToJson()
 		{
 			Tags = new List<string>();

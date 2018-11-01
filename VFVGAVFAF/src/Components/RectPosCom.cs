@@ -21,7 +21,7 @@ namespace VFVGAVFAF.src.Components
 
 		public string Alias { get; set; }
 
-		public Paultangle GetHitBox { get { return Paultangle; } }
+		public Paultangle HitBox { get { return Paultangle; } }
 
 		public List<string> PostionConstrantComs { get; set; }
 

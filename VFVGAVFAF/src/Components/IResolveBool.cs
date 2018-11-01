@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	interface IContolerCom: IComponent
+	interface IResolveBool: IComponent
 	{
-		void Update(double deltaTime);
+		bool Resolve();
 	}
 }

@@ -31,7 +31,7 @@ namespace VFVGAVFAF.src.Components
 				var ent = EntityManager.GetEntiy<GameObject>(EntID);
 				var size = ent.GetComponent<IGetSizeCom>(SizeGetterAlais).Size();
 				var postionCom = ent.GetComponent<IPostionComponet>(PostionAlais);
-				var bounds = ent.GetComponent<IHaveHitBoxCom>(BoundsAlais).GetHitBox;
+				var bounds = ent.GetComponent<IHaveHitBoxCom>(BoundsAlais).HitBox;
 
 				var newPos = postionCom.GetPostion();
 

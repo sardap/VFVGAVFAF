@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VFVGAVFAF.src.Sence;
+using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src.Components
 {
-	class SwapWithSenceCom: IGameEventCom,  INeedSenceManger
+	class FreezeCom: IGameEventCom, INeedEnityManger
 	{
 		public long EntID { get; set; }
 
@@ -17,15 +17,15 @@ namespace VFVGAVFAF.src.Components
 
 		public double Cooldown { get; set; }
 
-		public string NextSence { get; set; }
+		public string MatchPattern { get; set; }
 
-		public List<IPassValue> ToPass { get; set; }
+		public List<MangersEnum> Mangers { get; set; }
 
-		public ISenceManger SenceManger { get; set; }
+		public EntityManager EntityManager { get; set; }
 
 		public void Action()
 		{
-			SenceManger.LoadFromFile(NextSence, ToPass);
+			EntityManager.Freeze(MatchPattern, Mangers);
 		}
 	}
 }

@@ -82,5 +82,10 @@ namespace VFVGAVFAF.src
 				(int)Math.Round(Height)
 			);
 		}
+
+		public bool Conatins(Postion2D postion2D)
+		{
+			return postion2D.X > X && postion2D.X < Right & postion2D.Y > Y && postion2D.Y < Bottom;
+		}
 	}
 }

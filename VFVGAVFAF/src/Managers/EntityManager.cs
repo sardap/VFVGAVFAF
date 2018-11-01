@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src
@@ -14,6 +15,8 @@ namespace VFVGAVFAF.src
 		private Stack<long> _toDestroy = new Stack<long>();
 		private long _lastOrderedID = 0;
 
+		public Dictionary<string, long> InstanceCount = new Dictionary<string, long>();
+
 		public ComponentManager ComponentManager { get; set; }
 
 		public List<IRegsterForEntDest> NotifyDest { get; set; }
@@ -22,6 +25,11 @@ namespace VFVGAVFAF.src
 		{
 			_nextIDs.Push(_lastOrderedID);
 			NotifyDest = new List<IRegsterForEntDest>();
+		}
+
+		public void Freeze(string matchPattern, List<MangersEnum> types)
+		{
+			GetEntsForPatern(matchPattern).ForEach(i => i.Freeze(types));
 		}
 
 		public long CreateEntity(IEntity entity)
@@ -35,6 +43,17 @@ namespace VFVGAVFAF.src
 
 			_entityTable.Add(newID, entity);
 			entity.SetID(newID);
+
+			if(entity.Alias != null)
+			{
+				if (!InstanceCount.ContainsKey(entity.Alias))
+				{
+					InstanceCount.Add(entity.Alias, 0);
+				}
+
+				InstanceCount[entity.Alias]++;
+			}
+
 			return newID;
 		}
 
@@ -71,11 +90,32 @@ namespace VFVGAVFAF.src
 			return result;
 		}
 
+		private List<IEntity> GetEntsForPatern(string matchPattern)
+		{
+			var result = new List<IEntity>();
+
+			foreach(var entry in _entityTable)
+			{
+				if (entry.Value.Tags.Any(i => Regex.IsMatch(i, matchPattern)))
+				{
+					result.Add(entry.Value);
+				}
+			}
+
+			return result;
+		}
+
 		private void DestroyEntity(long id)
 		{
 			if (_entityTable.ContainsKey(id))
 			{
 				var ent = GetEntiy<GameObject>(id);
+
+				if (ent.Alias != null)
+				{
+					InstanceCount[ent.Alias]--;
+				}
+
 				ent.KillYourself();
 				_nextIDs.Push(id);
 				Console.WriteLine("KILLING ENT ID:{0}", id);

@@ -10,8 +10,10 @@ namespace VFVGAVFAF.src
 	class Entity<T> : IEntity
 	{
 		private ComponentManager _componentManager;
+
 		private Dictionary<long, IManger> _comMangers = new Dictionary<long, IManger>();
 		private Dictionary<long, IManger> _disalbedComMangers = new Dictionary<long, IManger>();
+
 		private Dictionary<long, Type> _ownedComs = new Dictionary<long, Type>();
 		private ConcurrentDictionary<Type, IList<long>> _ownedComsTypes = new ConcurrentDictionary<Type, IList<long>>();
 
@@ -23,16 +25,17 @@ namespace VFVGAVFAF.src
 
 		public List<string> Tags { get; set; }
 
-		public void SetID(long id)
+		public long GetID
 		{
-			if(_alreadySet)
-			{
-				throw new System.Exception("Already set ID");
-			}
-
-			_entiyID = id;
-			_alreadySet = true;
+			get { return _entiyID; }
 		}
+
+		public int TypeID
+		{
+			get { return typeof(T).GetHashCode(); }
+		}
+
+		public string Alias { get; set; }
 
 		public Entity(ComponentManager componentManager)
 		{
@@ -44,14 +47,15 @@ namespace VFVGAVFAF.src
 			UnregstierComsFromMangers();
 		}
 
-		public long GetID
+		public void SetID(long id)
 		{
-			get { return _entiyID; }
-		}
+			if (_alreadySet)
+			{
+				throw new System.Exception("Already set ID");
+			}
 
-		public int TypeID
-		{
-			get { return typeof(T).GetHashCode(); }
+			_entiyID = id;
+			_alreadySet = true;
 		}
 
 		public void KillYourself()
@@ -103,24 +107,64 @@ namespace VFVGAVFAF.src
 			return true;
 		}
 
+		public void EnableCom(long id)
+		{
+			if(_disalbedComMangers.ContainsKey(id))
+			{
+				_comMangers.Add(id, _disalbedComMangers[id]);
+				_comMangers[id].Regsiter(id);
+				_disalbedComMangers.Remove(id);
+			}
+		}
+
+		public void DisableCom(long id)
+		{
+			if(_comMangers.ContainsKey(id))
+			{
+				_disalbedComMangers.Add(id, _comMangers[id]);
+				_comMangers[id].UnRegsiter(id);
+				_comMangers.Remove(id);
+			}
+		}
+
+		public void DisableCom(long id, List<MangersEnum> types)
+		{
+			if (_comMangers.ContainsKey(id) && types.Any(i => i == Utils.MangerToMangerEnum(_comMangers[id])))
+			{
+				DisableCom(id);
+			}
+		}
+
 		public bool ToggleCom(long id)
 		{
 			_enabledComs[id] = !_enabledComs[id];
 
 			if(!_enabledComs[id])
 			{
-				_disalbedComMangers.Add(id, _comMangers[id]);
-				_comMangers[id].UnRegsiter(id);
-				_comMangers.Remove(id);
+				DisableCom(id);
 			}
 			else
 			{
-				_comMangers.Add(id, _disalbedComMangers[id]);
-				_comMangers[id].Regsiter(id);
-				_disalbedComMangers.Remove(id);
+				EnableCom(id);
 			}
 
 			return _enabledComs[id];
+		}
+
+		public void Freeze(List<MangersEnum> types)
+		{
+			var allComs = new List<long>();
+
+			foreach (var entry in _componentManager.GetAllComIDForEnt(_entiyID))
+			{
+				DisableCom(entry, types);
+			}
+
+		}
+
+		public void Defrost()
+		{
+
 		}
 
 		public ComT GetComponent<ComT>(long id) where ComT : IComponent
@@ -184,7 +228,8 @@ namespace VFVGAVFAF.src
 
 			if(com is IHaveAlias)
 			{
-				_alaisTable.TryAdd(((IHaveAlias)com).Alias, id);
+				if(((IHaveAlias)com).Alias != null)
+					_alaisTable.TryAdd(((IHaveAlias)com).Alias, id);
 			}
 
 			if (!_ownedComsTypes.ContainsKey(typeof(ComT)))
