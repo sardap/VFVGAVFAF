@@ -29,7 +29,7 @@ namespace VFVGAVFAF.src.Components
 		{
 			var nextEntry = EntiyBlueprintManger.Get(BlueprintName);
 
-			SenceManger.AddToProcessed(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
+			SenceManger.AddProcessedToMain(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
 		}
 	}
 }

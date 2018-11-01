@@ -33,7 +33,6 @@ namespace VFVGAVFAF.src
 		private MinigameManger _minigameManger;
 		private BlueprintManger _entiyBlueprintManger;
 		private MouseManger _mouseManger;
-		private ISenceManger
 
 		public SpriteBatch SpriteBatch { get; set; }
 		public ContentManager Content { get; set; }
@@ -71,12 +70,14 @@ namespace VFVGAVFAF.src
 				MinigameFiles = new List<string>()
 				{
 					//@"Minigames\Game1.json"
-					@"Minigames\Game2.json",
+					@"Minigames\Game2.json"
+/*
 					@"Minigames\Game3.json",
 					@"Minigames\Game4.json",
 					@"Minigames\Game5.json",
 					@"Minigames\Game6.json",
 					@"Minigames\Game7.json"
+					*/
 				}
 			};
 

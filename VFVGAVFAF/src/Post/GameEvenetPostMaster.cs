@@ -122,7 +122,7 @@ namespace VFVGAVFAF.src
 				var key = entry.Key;
 
 				value.TimeToComplete -= deltaTime;
-				Console.WriteLine("ID{0}\tTIME LEFT:{1}", value.GameEventID, value.TimeToComplete);
+				//Console.WriteLine("ID{0}\tTIME LEFT:{1}", value.GameEventID, value.TimeToComplete);
 
 				if (value.TimeToComplete <= 0)
 				{

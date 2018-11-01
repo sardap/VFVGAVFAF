@@ -21,9 +21,9 @@ namespace VFVGAVFAF.src.Managers
 		{
 			_active = Utils.RemoveAll(MinigameFiles, _played);
 
-			var next = Utils.RandomEntry(_active);
+			var next = Utils.RandomElement(_active);
 
-			SenceManger.LoadFromFile(next);
+			SenceManger.LoadMainFile(next, new List<IPassValue>());
 
 			_played.Add(next);
 
@@ -37,7 +37,7 @@ namespace VFVGAVFAF.src.Managers
 
 		public void PlayAgain()
 		{
-			SenceManger.LoadFromFile(_loaded);
+			SenceManger.LoadMainFile(_loaded, new List<IPassValue>());
 		}
 	}
 }

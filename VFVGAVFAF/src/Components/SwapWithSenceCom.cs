@@ -25,7 +25,7 @@ namespace VFVGAVFAF.src.Components
 
 		public void Action()
 		{
-			SenceManger.LoadFromFile(NextSence, ToPass);
+			SenceManger.LoadMainFile(NextSence, ToPass);
 		}
 	}
 }

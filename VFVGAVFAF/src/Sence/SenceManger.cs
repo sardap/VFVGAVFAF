@@ -16,14 +16,82 @@ namespace VFVGAVFAF.src.Sence
 			TypeNameHandling = TypeNameHandling.Auto
 		};
 
+		private class Sence
+		{
+			private SenceManger _senceManger;
+
+			private ISenceData _currentSence;
+			private ISenceData _overlay;
+			private bool _load = false;
+			private bool _overlayLoad = false;
+
+			public List<long> ProcessedGameObjects = new List<long>();
+			public List<IPassValue> ToPass = new List<IPassValue>();
+			public List<IPassValue> ToPassOverlay = new List<IPassValue>();
+
+			public Sence(SenceManger senceManger)
+			{
+				_senceManger = senceManger;
+			}
+
+			public void Load(ISenceData senceData)
+			{
+				if (_currentSence != null)
+				{
+					UnloadSence();
+				}
+
+				_currentSence = senceData;
+				_load = true;
+			}
+
+			public void Step()
+			{
+				if(_overlayLoad)
+				{
+					LoadSence(_overlay, ToPassOverlay);
+					_overlayLoad = false;
+				}
+
+				if (_load)
+				{
+					LoadSence(_currentSence, ToPass);
+					_load = false;
+				}
+			}
+
+			public void UnloadCurrent()
+			{
+				UnloadSence();
+			}
+
+			public void ApplyOverlay(ISenceData overlay, List<IPassValue> toPass)
+			{
+				_overlay = overlay;
+				_overlayLoad = true;
+				ToPassOverlay = toPass;
+			}
+
+			private void UnloadSence()
+			{
+				foreach (var created in ProcessedGameObjects)
+				{
+					_senceManger._entityManager.RegsiterToDestory(created);
+				}
+
+				ProcessedGameObjects.Clear();
+			}
+
+			private void LoadSence(ISenceData senceData, List<IPassValue> passValues)
+			{
+				ProcessedGameObjects.AddRange(senceData.Load(_senceManger.GameObjectFactory, passValues));
+			}
+		}
+
 		private EntityManager _entityManager;
-		private ISenceData _currentSence;
-		private List<long> _processedGameObjects = new List<long>();
-		private bool _load = false;
-		private bool _overlay = false;
-		private int _numReloads;
+		private Sence _main;
+		private Sence _overlay;
 		private string _fileNameOverlay = "";
-		private List<IPassValue> _toPass = new List<IPassValue>();
 		private List<IPassValue> _toPassToOverlay = new List<IPassValue>();
 
 		public GameObjectFactory GameObjectFactory { get; set; }
@@ -31,94 +99,44 @@ namespace VFVGAVFAF.src.Sence
 		public SenceManger(EntityManager entityManager)
 		{
 			_entityManager = entityManager;
+			_main = new Sence(this);
+			_overlay = new Sence(this);
 		}
 
-		public void Load(ISenceData senceData)
+		public void LoadMain(ISenceData senceData)
 		{
-			_numReloads++;
-			Console.WriteLine("RELOAD {0}", _numReloads);
-
-			if (_currentSence != null)
-			{
-				UnloadCurrent();
-			}
-
-			_currentSence = senceData;
-			_load = true;
+			_main.Load(senceData);
 		}
 
-		public void LoadFromFile(string fileName)
+		public void LoadMainFile(string fileName, List<IPassValue> passedValues)
 		{
-			string jsonString;
+			LoadMain(GetJsonSenceFromFile(fileName));
 
-			using (StreamReader streamReader = new StreamReader(fileName))
-			{
-				jsonString = streamReader.ReadToEnd();
-			}
-
-			JsonSence jsonGameobject = JsonConvert.DeserializeObject<JsonSence>(jsonString, _settings);
-
-			Load(jsonGameobject);
-
-			_toPass.Clear();
+			_main.ToPass = passedValues;
 		}
 
-		public void LoadFromFile(string fileName, List<IPassValue> passedValues)
+		public void AddProcessedToMain(long id)
 		{
-			LoadFromFile(fileName);
-
-			_toPass = passedValues;
-		}
-
-		public void AddToProcessed(long id)
-		{
-			_processedGameObjects.Add(id);
+			_main.ProcessedGameObjects.Add(id);
 		}
 
 		public void Step()
 		{
-			if(_load)
-			{
-				LoadSence(_currentSence, _toPass);
-				_load = false;
-			}
-
-			if(_overlay)
-			{
-				LoadSence(LoadFile(_fileNameOverlay), _toPassToOverlay);
-				_overlay = false;
-			}
+			_main.Step();
 		}
 
-		public void UnloadCurrent()
+		public void UnloadMain()
 		{
-			UnloadSence(_currentSence);
+			_main.UnloadCurrent();
+			_overlay.UnloadCurrent();
 		}
 
-		public void OverlayFromFile(string fileName, List<IPassValue> passedValues)
+		public void OverlayFileMain(string fileName, List<IPassValue> passedValues)
 		{
-			_fileNameOverlay = fileName;
-			_toPassToOverlay = passedValues;
-			_overlay = true;
+			_main.ApplyOverlay(GetJsonSenceFromFile(fileName), passedValues);
 		}
 
-
-		private void LoadSence(ISenceData senceData, List<IPassValue> passValues)
-		{
-			_processedGameObjects.AddRange(senceData.Load(GameObjectFactory, passValues));
-		}
-
-		private void UnloadSence(ISenceData senceData)
-		{
-			foreach(var created in _processedGameObjects)
-			{
-				_entityManager.RegsiterToDestory(created);
-			}
-
-			_processedGameObjects.Clear();
-		}
-
-		private JsonSence LoadFile(string fileName)
+		private JsonSence GetJsonSenceFromFile(string fileName)
 		{
 			string jsonString;
 
@@ -127,11 +145,10 @@ namespace VFVGAVFAF.src.Sence
 				jsonString = streamReader.ReadToEnd();
 			}
 
-			var jsonSence = JsonConvert.DeserializeObject<JsonSence>(jsonString, _settings);
+			JsonSence jsonSence = JsonConvert.DeserializeObject<JsonSence>(jsonString, _settings);
 
 			return jsonSence;
 		}
-
 
 	}
 }

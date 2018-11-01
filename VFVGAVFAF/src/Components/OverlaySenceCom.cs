@@ -40,7 +40,7 @@ namespace VFVGAVFAF.src.Components
 				GameEvenetPostMaster.Add(EntityManager.GetEntiy<GameObject>(EntID).GetIdForAlais(i))
 			);
 
-			SenceManger.OverlayFromFile(FileName, PassValues);
+			SenceManger.OverlayFileMain(FileName, PassValues);
 			_ran = true;
 		}
 	}

@@ -47,7 +47,7 @@ namespace VFVGAVFAF.src.Components
 					(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
 				);
 
-			SenceManger.AddToProcessed(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
+			SenceManger.AddProcessedToMain(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
 		}
 	}
 }

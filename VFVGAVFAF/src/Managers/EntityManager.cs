@@ -118,7 +118,7 @@ namespace VFVGAVFAF.src
 
 				ent.KillYourself();
 				_nextIDs.Push(id);
-				Console.WriteLine("KILLING ENT ID:{0}", id);
+				System.Diagnostics.Debug.WriteLine("KILLING ENT ID:{0}", id);
 				IEntity entity = GetEntiy<IEntity>(id);
 				_entityTable.Remove(id);
 				entity.UnregstierComsFromMangers();

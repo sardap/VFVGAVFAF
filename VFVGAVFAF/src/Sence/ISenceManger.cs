@@ -10,18 +10,14 @@ namespace VFVGAVFAF.src.Sence
 	{
 		GameObjectFactory GameObjectFactory { get; set; }
 
-		void Load(ISenceData senceData);
+		void LoadMain(ISenceData senceData);
 
-		void LoadFromFile(string fileName);
-
-		void LoadFromFile(string fileName, List<IPassValue> passedValues);
+		void LoadMainFile(string fileName, List<IPassValue> passedValues);
 
 		void Step();
 
-		void AddToProcessed(long id);
+		void AddProcessedToMain(long id);
 
-		void UnloadCurrent();
-
-		void OverlayFromFile(string filename, List<IPassValue> passedValues);
+		void OverlayFileMain(string filename, List<IPassValue> passedValues);
 	}
 }

@@ -56,12 +56,12 @@ namespace VFVGAVFAF.src.Components
 			if (otherEnt.HasComType<IHealthCom>())
 			{
 				var otherEntHPCom = otherEnt.GetFirstComponent<IHealthCom>();
-				Console.WriteLine("CUR HP {0}, AFTER DAMAGE {1}", otherEntHPCom.HP, otherEntHPCom.HP + Damage);
+				System.Diagnostics.Debug.WriteLine("CUR HP {0}, AFTER DAMAGE {1}", otherEntHPCom.HP, otherEntHPCom.HP + Damage);
 				otherEntHPCom.HP += Damage;
 			}
 			else
 			{
-				Console.WriteLine("ENT: {0} NO HEALTH COM", ColliedWithTable[ActiveID].EntID);
+				System.Diagnostics.Debug.WriteLine("ENT: {0} NO HEALTH COM", ColliedWithTable[ActiveID].EntID);
 			}
 		}
 	}
