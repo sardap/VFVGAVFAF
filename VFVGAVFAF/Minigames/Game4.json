@@ -175,8 +175,8 @@
                         "Triggers":[
                             {
                                 "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
-                                "Opreator":2,
-                                "Value":0,
+                                "Opreator":0,
+                                "Value":-1,
                                 "GameEvents":[
                                     "goal_reached"
                                 ]

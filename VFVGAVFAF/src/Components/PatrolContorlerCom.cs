@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class PatrolContorlerCom : IContolerCom, INeedEnityManger, INeedPostMaster, IHaveAlias
+	class PatrolContorlerCom: IContolerCom, INeedEnityManger, INeedPostMaster, IHaveAlias
 	{
 		private bool _movingTowardsEnd = true;
 		private bool _firstTime = true;
@@ -44,7 +44,7 @@ namespace VFVGAVFAF.src.Components
 			var posCom = ent.GetComponent<IPostionComponet>(PosAlais);
 			var curPos = posCom.GetPostion();
 			var target = _movingTowardsEnd ? End : Start;
-			var curInc = IncrmnetForPoint(curPos, target, deltaTime);
+			var curInc = Utils.IncrmnetForPoint(curPos, target, deltaTime, Speed);
 
 			if (_firstTime)
 			{
@@ -60,17 +60,6 @@ namespace VFVGAVFAF.src.Components
 				TriggeredAtTarget.ForEach(i => GameEvenetPostMaster.Add(ent.GetIdForAlais(i)));
 				_movingTowardsEnd = !_movingTowardsEnd;
 			}
-		}
-
-		private Postion2D IncrmnetForPoint(Postion2D curPos, Postion2D target, double deltaTime)
-		{
-			var distance = Math.Sqrt(Math.Pow(target.X - curPos.X, 2) + Math.Pow(target.Y - curPos.Y, 2));
-			var directionX = (target.X - curPos.X) / distance;
-			var directionY = (target.Y - curPos.Y) / distance;
-
-			var result = new Postion2D(directionX * Speed * deltaTime, directionY * Speed * deltaTime);
-
-			return result;
 		}
 	}
 }

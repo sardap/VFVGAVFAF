@@ -117,18 +117,10 @@
                                 "Opreator":2,
                                 "Value":0,
                                 "GameEvents":[
-                                    "respawn",
                                     "failure_reached"
                                 ]
                             }
                         ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RespawnCom, VFVGAVFAF",
-                        "PosComAlais":"pos",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"respawn"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
@@ -657,7 +649,7 @@
                             {
                                 "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
                                 "Opreator":0,
-                                "Value":0,
+                                "Value":-1,
                                 "GameEvents":[
                                     "failure_reached"
                                 ]

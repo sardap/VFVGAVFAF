@@ -72,9 +72,16 @@
     <Compile Include="src\Components\AssignValueCom.cs" />
     <Compile Include="src\Components\CenterCom.cs" />
     <Compile Include="src\Components\AreaClickedCom.cs" />
+    <Compile Include="src\Components\CirclePostionCom.cs" />
+    <Compile Include="src\Components\CircleRendCom.cs" />
+    <Compile Include="src\Components\FollowCom.cs" />
+    <Compile Include="src\Components\FreezeComCom.cs" />
+    <Compile Include="src\Components\MeltCom.cs" />
     <Compile Include="src\Components\FreezeCom.cs" />
     <Compile Include="src\Components\ICanChainGameEvents.cs" />
     <Compile Include="src\Components\IResolveBool.cs" />
+    <Compile Include="src\Components\MeltComCom.cs" />
+    <Compile Include="src\Components\MoveToPointCom.cs" />
     <Compile Include="src\Components\OverlaySenceCom.cs" />
     <Compile Include="src\Components\PlayRandomSoundEvenetCom.cs" />
     <Compile Include="src\Components\ToggleComCom.cs" />
@@ -97,6 +104,7 @@
     <Compile Include="src\Components\ResetSenceCom.cs" />
     <Compile Include="src\Components\TriggerIfResolved.cs" />
     <Compile Include="src\Components\TriggredIntervalTriggerCom.cs" />
+    <Compile Include="src\Components\UpdateFollowerCount.cs" />
     <Compile Include="src\Managers\FontManger.cs" />
     <Compile Include="src\Components\GoalReachedCom.cs" />
     <Compile Include="src\Components\GrowRectCom.cs" />

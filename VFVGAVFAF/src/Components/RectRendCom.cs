@@ -10,8 +10,7 @@ using VFVGAVFAF.src;
 
 namespace VFVGAVFAF.src.Components
 {
-	[Serializable]
-	class RectRendCom : IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
+	class RectRendCom: IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
 	{
 		private TextureManager _textureManager;
 		private Texture2D _texture;

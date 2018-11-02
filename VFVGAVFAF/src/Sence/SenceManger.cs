@@ -92,7 +92,9 @@ namespace VFVGAVFAF.src.Sence
 		private Sence _main;
 		private Sence _overlay;
 		private string _fileNameOverlay = "";
+		private Dictionary<string, Sence> _otherSences = new Dictionary<string, Sence>();
 		private List<IPassValue> _toPassToOverlay = new List<IPassValue>();
+
 
 		public GameObjectFactory GameObjectFactory { get; set; }
 
@@ -123,6 +125,11 @@ namespace VFVGAVFAF.src.Sence
 		public void Step()
 		{
 			_main.Step();
+			
+			foreach(var entry in _otherSences)
+			{
+				entry.Value.Step();
+			}
 		}
 
 		public void UnloadMain()
@@ -134,6 +141,34 @@ namespace VFVGAVFAF.src.Sence
 		public void OverlayFileMain(string fileName, List<IPassValue> passedValues)
 		{
 			_main.ApplyOverlay(GetJsonSenceFromFile(fileName), passedValues);
+		}
+
+
+		public void Load(string name, ISenceData senceData)
+		{
+			if(!_otherSences.ContainsKey(name))
+			{
+				_otherSences.Add(name, new Sence(this));
+			}
+
+			_otherSences[name].Load(senceData);
+		}
+
+		public void LoadFile(string name, string fileName, List<IPassValue> passedValues)
+		{
+			Load(name, GetJsonSenceFromFile(fileName));
+
+			_otherSences[name].ToPass = passedValues;
+		}
+
+		public void AddProcessedTo(string name, long id)
+		{
+			_otherSences[name].ProcessedGameObjects.Add(id);
+		}
+
+		public void Overlay(string name, string fileName, List<IPassValue> passValues)
+		{
+			_otherSences[name].ApplyOverlay(GetJsonSenceFromFile(fileName), passValues);
 		}
 
 		private JsonSence GetJsonSenceFromFile(string fileName)

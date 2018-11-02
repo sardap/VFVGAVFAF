@@ -1,0 +1,62 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "EnityToJson":{
+                "Tags":["background"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlayMusicCom, VFVGAVFAF",
+                        "Alias":"background_music",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "MusicName":"Music//background_music_1"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["background_music"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":0
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                        "Alias":"pause",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "MatchPattern":"game",
+                        "Mangers":[
+                            1, 2, 3
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltCom, VFVGAVFAF",
+                        "Alias":"unpause",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "MatchPattern":"game",
+                        "Mangers":[
+                            1, 2, 3
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Actions":{
+                            "80":["pause"],
+                            "76":["unpause"]
+                        },
+                        "speed":0
+                    }
+                ]
+            },
+            "Count":1
+        }
+    ]
+}

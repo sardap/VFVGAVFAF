@@ -127,6 +127,16 @@ namespace VFVGAVFAF.src
 			}
 		}
 
+		public void EnableCom(long id, List<MangersEnum> types)
+		{
+			if (_disalbedComMangers.ContainsKey(id))
+			{
+				_comMangers.Add(id, _disalbedComMangers[id]);
+				_comMangers[id].Regsiter(id);
+				_disalbedComMangers.Remove(id);
+			}
+		}
+
 		public void DisableCom(long id, List<MangersEnum> types)
 		{
 			if (_comMangers.ContainsKey(id) && types.Any(i => i == Utils.MangerToMangerEnum(_comMangers[id])))
@@ -159,12 +169,16 @@ namespace VFVGAVFAF.src
 			{
 				DisableCom(entry, types);
 			}
-
 		}
 
-		public void Defrost()
+		public void Melt(List<MangersEnum> types)
 		{
+			var allComs = new List<long>();
 
+			foreach (var entry in _componentManager.GetAllComIDForEnt(_entiyID))
+			{
+				EnableCom(entry, types);
+			}
 		}
 
 		public ComT GetComponent<ComT>(long id) where ComT : IComponent

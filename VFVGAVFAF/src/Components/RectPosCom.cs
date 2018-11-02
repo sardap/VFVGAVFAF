@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RectPosCom : IPostionComponet, INeedEnityManger, IHaveAlias, IGetSizeCom, IHaveHitBoxCom
+	class RectPosCom: IPostionComponet, INeedEnityManger, IHaveAlias, IGetSizeCom, IHaveHitBoxCom
 	{
 		private Paultangle _startingPostion;
 		private bool _randomStartPos = false;

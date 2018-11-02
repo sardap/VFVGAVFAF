@@ -9,7 +9,6 @@ namespace VFVGAVFAF.src.Components
 {
 	class PlayMusicCom : IGameEventCom, INeedSoundManger
 	{
-
 		public long EntID { get; set; }
 
 		public string Alias { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,11 @@ namespace VFVGAVFAF.src
 		public Postion2D(Vector2 vector2): this(vector2.X, vector2.Y)
 		{
 
+		}
+
+		public Point2 ToPoint2()
+		{
+			return new Point2((float) X, (float) Y);
 		}
 
 		public Vector2 ToVector()

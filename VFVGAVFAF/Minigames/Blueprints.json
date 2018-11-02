@@ -1,7 +1,7 @@
 {  
     "EntiyBlueprints":{  
         "player_bullet":{
-            "Tags":["bullet"], 
+            "Tags":["bullet", "game"], 
             "Components":[  
                 {
                     "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
@@ -81,7 +81,7 @@
             ]
         },
         "enemy_bullet":{
-            "Tags":["bullet"], 
+            "Tags":["bullet", "game"], 
             "Components":[  
                 {
                     "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
@@ -162,7 +162,7 @@
             ]
         },
         "tank_bullet":{
-            "Tags":["bullet"],
+            "Tags":["bullet", "game"],
             "Components":[  
                 {
                     "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
@@ -306,6 +306,45 @@
                     "TimeToComplete":0,
                     "Cooldown":0,
                     "FileName":"Minigames\\Failue.json",
+                    "PassValues":[],
+                    "EventAlias":[]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+                    "Alias":"swap_sence",
+                    "TimeToComplete":2,
+                    "Cooldown":0,
+                    "NextSence":"Minigames\\change.json",
+                    "ToPass":[
+                    ]
+                }
+            ]
+        },
+        "goal_reached_bad":{
+            "Tags":["end"],
+            "Alias":"end",
+            "InstanceLimt":1,
+            "Components":[
+                {
+                    "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                    "EventAlais":["goal_reached", "swap_sence", "freeze"]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                    "Alias":"freeze",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "MatchPattern":"game",
+                    "Mangers":[
+                        1, 2, 3
+                    ]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.OverlaySenceCom, VFVGAVFAF",
+                    "Alias":"goal_reached",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "FileName":"Minigames\\Sucess_bad.json",
                     "PassValues":[],
                     "EventAlias":[]
                 },

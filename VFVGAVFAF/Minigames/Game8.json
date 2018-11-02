@@ -1,0 +1,951 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "EnityToJson":{
+               "Tags":["game","red_sqaure"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":0,
+                                "Y":0
+                            },
+                            "Width":150,
+                            "Height":150
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":139,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"pos",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            },
+                            {
+                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
+                            }
+
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","player"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":5.0,
+                                "Y":300.0
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                            "game_bound_constrant",
+                            "wall_constrant"
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Actions":{
+                        },
+                        "speed":300
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
+                        "RectPosAlais":"game_bounds",
+                        "Inside":true,
+                        "Type":0,
+                        "Alias":"game_bound_constrant"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PostionTagConstrant, VFVGAVFAF",
+                        "Alias":"wall_constrant",
+                        "Tag":"wall",
+                        "Inside":false,
+                        "Type":1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"comrades_following_value",
+                        "Value":0
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.UpdateFollowerCount, VFVGAVFAF",
+                        "Alias":"comrades_following_updater",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":1,
+                        "ValueAlais":"comrades_following_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "comrade":["comrades_following_updater"]
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"comrades_following_value",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":0,
+                                "Value":7,
+                                "GameEvents":[
+                                    "goal_reached"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":100,
+                                "Y":300
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                        "speed":400,
+                        "Radius":70
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":200,
+                                "Y":50
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                       "speed":400,
+                        "Radius":100
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":500,
+                                "Y":120
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                       "speed":400,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":450,
+                                "Y":500
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                       "speed":400,
+                        "Radius":40
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":200,
+                                "Y":500
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                       "speed":400,
+                        "Radius":70
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":550,
+                                "Y":300
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                       "speed":400,
+                        "Radius":30
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","comrade"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":0,
+                                "Y":570
+                            },
+                            "Width":30,
+                            "Height":30
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":400,
+                            "Y":300
+                        },
+                       "speed":400,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["melt"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","timer"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":500
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"count_down_value",
+                        "Value":6
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"count_down_value_updater",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-1,
+                        "ValueAlais":"count_down_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"5"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
+                        "Alias":"update_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"count_down_value",
+                        "TargetAlais":"text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
+                        "Cooldown":1,
+                        "EventAlais":[
+                            "count_down_value_updater",
+                            "update_text"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":2.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
+                        "ToWatchAlais":"count_down_value",
+                        "Triggers":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
+                                "Opreator":0,
+                                "Value":-1,
+                                "GameEvents":[
+                                    "failure_reached"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"UNITE THE PROLETARIAT"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        }
+    ]
+}

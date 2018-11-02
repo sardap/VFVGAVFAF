@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class DoubleValueUpdateCom: IGameEventCom, INeedEnityManger
+	class FreezeComCom: IGameEventCom, INeedEnityManger
 	{
 		public long EntID { get; set; }
 
@@ -16,19 +16,16 @@ namespace VFVGAVFAF.src.Components
 
 		public double Cooldown { get; set; }
 
-		public double IncmrenetChange { get; set; }
+		public List<string> ToFreezeAlias { get; set; }
 
-		public string ValueAlais { get; set; }
+		public List<MangersEnum> Mangers { get; set; }
 
 		public EntityManager EntityManager { get; set; }
 
-		public virtual void Action()
+		public void Action()
 		{
 			var ent = EntityManager.GetEntiy<GameObject>(EntID);
-			var com = ent.GetComponent<DoubleValueCom>(ValueAlais);
-
-			com.Value += IncmrenetChange;
-
+			ToFreezeAlias.ForEach(i => ent.DisableCom(ent.GetIdForAlais(i), Mangers));
 		}
 	}
 }

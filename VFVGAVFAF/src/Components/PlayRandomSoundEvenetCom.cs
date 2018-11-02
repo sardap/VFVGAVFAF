@@ -25,6 +25,5 @@ namespace VFVGAVFAF.src.Components
 		{
 			SoundManager.GetSound(Utils.RandomElement(Sounds)).Play();
 		}
-
 	}
 }

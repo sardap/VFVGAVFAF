@@ -24,6 +24,6 @@ namespace VFVGAVFAF.src
 
 		void Freeze(List<MangersEnum> types);
 
-		void Defrost();
+		void Melt(List<MangersEnum> types);
 	}
 }

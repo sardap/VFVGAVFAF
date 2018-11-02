@@ -11,7 +11,6 @@
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"box_one",
                         "Actions":{
-                            "32":["goal_reached"]
                         },
                         "speed":0
                     },
@@ -374,8 +373,8 @@
                         "Triggers":[
                             {
                                 "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
-                                "Opreator":2,
-                                "Value":0,
+                                "Opreator":0,
+                                "Value":-1,
                                 "GameEvents":[
                                     "failure_reached"
                                 ]

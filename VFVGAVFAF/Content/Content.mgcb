@@ -177,3 +177,9 @@
 /processorParam:Quality=Best
 /build:Sounds/sucess_line_10.wav
 
+#begin Music/background_music_1.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/background_music_1.ogg
+

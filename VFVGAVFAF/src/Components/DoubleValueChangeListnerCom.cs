@@ -11,6 +11,5 @@ namespace VFVGAVFAF.src.Components
 		public class DoubleOpTrigger : OpTrigger { }
 
 		public class DoubleChangeTrigger : ChangeTrigger { }
-
 	}
 }

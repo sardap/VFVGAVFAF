@@ -25,7 +25,9 @@ namespace VFVGAVFAF.src.Managers
 		{
 			var colCount = 0;
 
-			foreach(var id in _toCheck)
+			//_quadTree.Process(_toCheck);
+
+			foreach (var id in _toCheck)
 			{
 				foreach(var otherID in _toCheck)
 				{

@@ -32,6 +32,11 @@ namespace VFVGAVFAF.src
 			GetEntsForPatern(matchPattern).ForEach(i => i.Freeze(types));
 		}
 
+		public void Melt(string matchPattern, List<MangersEnum> types)
+		{
+			GetEntsForPatern(matchPattern).ForEach(i => i.Melt(types));
+		}
+
 		public long CreateEntity(IEntity entity)
 		{
 			long newID = _nextIDs.Pop();

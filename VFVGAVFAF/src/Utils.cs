@@ -180,5 +180,16 @@ namespace VFVGAVFAF.src
 			return set.ToList()[index];
 		}
 
+		public static Postion2D IncrmnetForPoint(Postion2D curPos, Postion2D target, double deltaTime, double speed)
+		{
+			var distance = Math.Sqrt(Math.Pow(target.X - curPos.X, 2) + Math.Pow(target.Y - curPos.Y, 2));
+			var directionX = (target.X - curPos.X) / distance;
+			var directionY = (target.Y - curPos.Y) / distance;
+
+			var result = new Postion2D(directionX * speed * deltaTime, directionY * speed * deltaTime);
+
+			return result;
+		}
+
 	}
 }
