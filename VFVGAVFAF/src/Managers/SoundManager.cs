@@ -13,15 +13,29 @@ namespace VFVGAVFAF.src.Managers
 	{
 		private IDictionary<string, SoundEffect> _soundEffects = new Dictionary<string, SoundEffect>();
 		private Song _song;
+		private Settings _settings;
 
 		private ContentManager _content { get; set; }
 
-		public SoundManager(ContentManager content)
+		public SoundManager(ContentManager content, Settings settings)
 		{
 			_content = content;
+			_settings = settings;
 		}
 
-		public SoundEffect GetSound(string id)
+		public void PlaySong(string id)
+		{
+			MediaPlayer.Volume = _settings.MusicLevel;
+			_song = _content.Load<Song>(id);
+			MediaPlayer.Play(_song);
+		}
+
+		public void PlaySound(string id)
+		{
+			GetSound(id).Play(_settings.VFXLevel, _settings.Pitch, 0);
+		}
+
+		private SoundEffect GetSound(string id)
 		{
 			if (!_soundEffects.ContainsKey(id))
 			{
@@ -32,10 +46,5 @@ namespace VFVGAVFAF.src.Managers
 			return _soundEffects[id];
 		}
 
-		public void PlaySong(string id)
-		{
-			_song = _content.Load<Song>(id);
-			MediaPlayer.Play(_song);
-		}
 	}
 }

@@ -29,8 +29,7 @@ namespace VFVGAVFAF.src.Components
 
 		public void Action()
 		{
-			MediaPlayer.Volume = 1.0f;
-			SoundManager.GetSound(Song).Play();
+			SoundManager.PlaySound(Song);
 		}
 	}
 }

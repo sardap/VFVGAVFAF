@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,11 +59,12 @@ namespace VFVGAVFAF.src.Managers
 
 		public Postion2D Postion { get { return _postion2D; } }
 
-		public void Step()
+		public void Step(Matrix matrixScale)
 		{
 			var mouseState = Mouse.GetState();
+			var mousePosition = new Vector2(mouseState.X, mouseState.Y);
 
-			_postion2D = new Postion2D(mouseState.Position.X, mouseState.Position.Y);
+			_postion2D = new Postion2D(Vector2.Transform(mousePosition, Matrix.Invert(matrixScale)));
 
 			foreach (var key in ButtonStates.Keys.ToArray())
 			{

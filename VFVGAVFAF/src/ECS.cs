@@ -34,8 +34,31 @@ namespace VFVGAVFAF.src
 		private BlueprintManger _entiyBlueprintManger;
 		private MouseManger _mouseManger;
 
+		public Settings Settings;
+
+		public Matrix ScaleMatrix { get; set; }
+
 		public SpriteBatch SpriteBatch { get; set; }
+
 		public ContentManager Content { get; set; }
+
+		public void InitiliseSettings()
+		{
+			var fileName = @"Minigames\Settings.json";
+
+			if (!File.Exists(fileName))
+			{
+				using (StreamWriter writer = new StreamWriter(fileName))
+				{
+					writer.Write(JsonConvert.SerializeObject(new Settings(), typeof(Settings), Utils.JsonSettings));
+				}
+			}
+
+			using (StreamReader reader = new StreamReader(fileName))
+			{
+				Settings = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), Utils.JsonSettings);
+			}
+		}
 
 		public void Initialse(GraphicsDeviceManager graphics)
 		{
@@ -59,7 +82,7 @@ namespace VFVGAVFAF.src
 			{
 				Content = Content
 			};
-			_soundManager = new SoundManager(Content);
+			_soundManager = new SoundManager(Content, Settings);
 			_senceManger = new SenceManger(_entityManager);
 			_stepManager = new StepManager() { ComponentManager = _componentManager };
 			_gameEvenetPostMaster = new GameEvenetPostMaster(_componentManager);
@@ -117,11 +140,12 @@ namespace VFVGAVFAF.src
 			_componentManager.PostMaster = _gameEvenetPostMaster;
 
 			SetupPlayer();
+			SetupResoultion();
 		}
 
 		public void Step(double deltaTime)
 		{
-			_mouseManger.Step();
+			_mouseManger.Step(ScaleMatrix);
 			_entityManager.Step();
 			_senceManger.Step();
 			_gameEvenetPostMaster.Step(deltaTime);
@@ -178,6 +202,14 @@ namespace VFVGAVFAF.src
 			_senceManger.Load(jsonGameobject);
 			//_senceManger.UnloadCurrent();
 			*/
+		}
+
+		private void SetupResoultion()
+		{
+			var scaleX = (float)Settings.Width / GameInfo.VIRTUAL_WIDTH;
+			var scaleY = (float)Settings.Height / GameInfo.VIRTUAL_HEIGHT;
+			ScaleMatrix = Matrix.CreateScale(scaleX, scaleY, 1.0f);
+
 		}
 	}
 }

@@ -10,7 +10,6 @@ namespace VFVGAVFAF.src.Components
 	{
 		public long EntID { get; set; }
 
-
 		public string Alias { get; set; }
 
 		public GameInfo GameInfo { get; set; }

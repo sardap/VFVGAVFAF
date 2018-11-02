@@ -23,7 +23,7 @@ namespace VFVGAVFAF.src.Components
 
 		public void Action()
 		{
-			SoundManager.GetSound(Utils.RandomElement(Sounds)).Play();
+			SoundManager.PlaySound(Utils.RandomElement(Sounds));
 		}
 	}
 }

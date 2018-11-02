@@ -10,10 +10,7 @@ namespace VFVGAVFAF.src
 {
 	class BlueprintManger
 	{
-		private JsonSerializerSettings _settings = new JsonSerializerSettings
-		{
-			TypeNameHandling = TypeNameHandling.Auto
-		};
+		private JsonSerializerSettings _settings = Utils.JsonSettings;
 
 		public Dictionary<string, EnityToJson> EntiyBlueprints { get; set; }
 		public Dictionary<string, List<IComponent>> ComBlueprints { get; set; }

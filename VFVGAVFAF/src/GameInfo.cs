@@ -10,6 +10,9 @@ namespace VFVGAVFAF.src
 {
 	class GameInfo
 	{
+		public const int VIRTUAL_WIDTH = 800;
+		public const int VIRTUAL_HEIGHT = 600;
+
 		private GraphicsDeviceManager _graphics = null;
 
 		public GameInfo(GraphicsDeviceManager graphics)
@@ -19,7 +22,7 @@ namespace VFVGAVFAF.src
 
 		public Paultangle GetBounds()
 		{
-			return new Paultangle(_graphics.GraphicsDevice.Viewport.Bounds);
+			return new Paultangle(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		}
 
 

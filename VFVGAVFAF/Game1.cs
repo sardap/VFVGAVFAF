@@ -33,11 +33,12 @@ namespace VFVGAVFAF
 			graphics.SynchronizeWithVerticalRetrace = false;
 			IsFixedTimeStep = false;
 
-			graphics.PreferredBackBufferWidth = 800;  // set this value to the desired width of your window
-			graphics.PreferredBackBufferHeight = 600;   // set this value to the desired height of your window
-			graphics.ApplyChanges();
-
 			_ecs = new ECS();
+			_ecs.InitiliseSettings();
+
+			graphics.PreferredBackBufferWidth = _ecs.Settings.Width;  // set this value to the desired width of your window
+			graphics.PreferredBackBufferHeight = _ecs.Settings.Height;   // set this value to the desired height of your window
+			graphics.ApplyChanges();
 
 			IsMouseVisible = true;
 
@@ -91,8 +92,7 @@ namespace VFVGAVFAF
         {
             GraphicsDevice.Clear(Color.White);
 
-
-			spriteBatch.Begin();
+			spriteBatch.Begin(transformMatrix: _ecs.ScaleMatrix);
 			_ecs.Render(gameTime.ElapsedGameTime.TotalSeconds);
 
 			var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -104,8 +104,6 @@ namespace VFVGAVFAF
 			spriteBatch.DrawString(_font, fps, new Vector2(1, 1), Color.Red);
 
 			spriteBatch.End();
-
-
 
 			base.Draw(gameTime);
         }

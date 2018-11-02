@@ -14,6 +14,11 @@ namespace VFVGAVFAF.src
 {
 	static class Utils
 	{
+		public static JsonSerializerSettings JsonSettings = new JsonSerializerSettings
+		{
+			TypeNameHandling = TypeNameHandling.Auto
+		};
+		
 		public static bool AInsideB(Paultangle a, Paultangle b)
 		{
 			bool result = a.Right < b.Right && a.Left > b.Left && a.Top >= b.Top && a.Bottom < b.Bottom;

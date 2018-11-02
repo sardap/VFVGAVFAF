@@ -168,6 +168,7 @@
     <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\Sence\ISenceData.cs" />
     <Compile Include="src\Sence\SenceData.cs" />
+    <Compile Include="src\Settings.cs" />
     <Compile Include="src\Sounds.cs" />
     <Compile Include="src\Components\SwapWithSenceCom.cs" />
     <Compile Include="src\Textures.cs" />
