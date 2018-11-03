@@ -9,7 +9,7 @@
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{
-                                "X":300,
+                                "X":200,
                                 "Y":-10
                             },
                             "Width":210,
@@ -35,7 +35,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
                         "Postion2D":{
-                            "X":317,
+                            "X":217,
                             "Y":300
                         },
                         "Alias":"font_post"
@@ -64,21 +64,64 @@
             "Count":1
         },
         {
+            "Tags":["game", "defector_goal", "kills player"],
             "EnityToJson":{
-               "Tags":["game","player"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{
-                                "X":600,
-                                "Y":100
+                                "X":0,
+                                "Y":0
                             },
-                            "Width":30,
-                            "Height":30
+                            "Width":180,
+                            "Height":600
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player|defector":["failure_reached"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","player"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PostionTagConstrant, VFVGAVFAF",
+                        "Alias":"wall_constrant",
+                        "Tag":"wall",
+                        "Inside":false,
+                        "Type":1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":600,
+                                "Y":300
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                            "wall_constrant"
                         ],
                         "RandomStartPos":false
                     },
@@ -89,73 +132,6 @@
                             "B":0,
                             "G":0,
                             "R":255,
-                            "A":255
-                        },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
-                        "Alias":"gun",
-                        "Cooldown":0.1,
-                        "TimeToComplete":0,
-                        "BulletBlueprint":"deploy_wall",
-                        "PostionAlais":"pos",
-                        "ExitDirection":2
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "Alias":"failure_reached",
-                        "BlueprintName":"failure_reached"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Speed":300,
-                        "Actions":[
-                            {
-                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
-                                "Key":32, 
-                                "State":1,
-                                "GameEvents":["gun"]
-                            },
-                            {
-                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
-                                "Key" :82, 
-                                "State": 1,
-                                "GameEvents":["failure_reached"]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
-               "Tags":["game","east"],
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":600,
-                                "Y":300
-                            },
-                            "Width":10,
-                            "Height":10
-                        },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
                             "A":255
                         },
                         "TextureName":"Images/player"
@@ -173,23 +149,963 @@
                         }
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
-                        "Alias":"move_to_point_contoler",
-                        "PostionAlias":"pos",
-                        "TriggeredAtTarget":[
-                        ],
-                        "Target":{
-                            "X":100,
-                            "Y":300
-                        },
-                        "speed":200,
-                        "ObstaclePattern":"wall",
-                        "PathUpdateInterval":1
+                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
+                        "Alias":"gun",
+                        "Cooldown":0,
+                        "TimeToComplete":0,
+                        "BulletBlueprint":"deploy_wall",
+                        "PostionAlais":"pos",
+                        "ExitDirection":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "GameEventComs":{
+                            "player":["failure_reached"]
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Speed":350,
+                        "Actions":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                "Key":32, 
+                                "State":2,
+                                "GameEvents":["gun"]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":880,
+                                "Y":100
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":100
+                        },
+                        "speed":100,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":100
+                        },
+                       "speed":100,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":1000,
+                                "Y":320
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":320
+                        },
+                        "speed":110,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":320
+                        },
+                       "speed":110,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":1500,
+                                "Y":500
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":500
+                        },
+                        "speed":200,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":500
+                        },
+                       "speed":200,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":1000,
+                                "Y":100
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":250
+                        },
+                        "speed":170,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":250
+                        },
+                       "speed":170,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":1000,
+                                "Y":500
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":350
+                        },
+                        "speed":300,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":350
+                        },
+                       "speed":300,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":2000,
+                                "Y":370
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":370
+                        },
+                        "speed":150,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":370
+                        },
+                       "speed":150,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","defector"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":2000,
+                                "Y":130
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointPathfindingCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":170,
+                            "Y":130
+                        },
+                        "speed":500,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":0.1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_start",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                            "melt", "defect_freeze"
+                        ],
+                        "Target":{
+                            "X":700,
+                            "Y":130
+                        },
+                       "speed":500,
+                        "Radius":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"start_freezes",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"defect_freeze",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToFreezeAlias":["move_to_start"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltComCom, VFVGAVFAF",
+                        "Alias":"melt",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "ToMeltAlias":["move_to_point_contoler"],
+                        "Mangers":[1, 2, 3]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["start_freezes"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                            "player":["start_freezes", "defect_freeze"]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","westner"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":100,
+                                "Y":100
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
+                        "Alias":"directionCom",
+                        "TriggeredAtTarget":[
+
+                        ],
+                        "End":{
+                            "X":120,
+                            "Y":400
+                        },
+                        "speed":70,
+                        "Radius":30.0,
+                        "PosAlais":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":169,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+               "Tags":["game","westner"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":60,
+                                "Y":450
+                            },
+                            "Width":20,
+                            "Height":20
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
+                        "Alias":"directionCom",
+                        "TriggeredAtTarget":[
+
+                        ],
+                        "End":{
+                            "X":60,
+                            "Y":100
+                        },
+                        "speed":70,
+                        "Radius":30.0,
+                        "PosAlais":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":169,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
                         }
                     }
                 ]
@@ -268,7 +1184,7 @@
         },
         {
             "EnityToJson":{
-               "Tags":["game","timer"],
+               "Tags":["game","timer", "goal_trigger"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
@@ -285,7 +1201,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
                         "Alias":"count_down_value",
-                        "Value":1000
+                        "Value":10
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
@@ -298,7 +1214,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"1000"
+                        "Value":"9"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
@@ -344,8 +1260,8 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "Alias":"failure_reached",
-                        "BlueprintName":"failure_reached"
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
@@ -356,7 +1272,7 @@
                                 "Opreator":0,
                                 "Value":-1,
                                 "GameEvents":[
-                                    "failure_reached"
+                                    "goal_reached"
                                 ]
                             }
                         ]

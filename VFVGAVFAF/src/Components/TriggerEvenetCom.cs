@@ -20,7 +20,6 @@ namespace VFVGAVFAF.src.Components
 
 		public IGameEvenetPostMaster GameEvenetPostMaster { get; set; }
 
-
 		public TriggerEvenetCom()
 		{
 			EventAlais = new List<string>();

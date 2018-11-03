@@ -65,8 +65,8 @@ namespace VFVGAVFAF.src.Pathfinding
 			{
 				int left = Math.Max((int)Math.Floor(paultangle.Left / CELL_SIZE), 0);
 				int top = Math.Max((int)Math.Floor(paultangle.Top / CELL_SIZE), 0);
-				int right = Math.Min((int)Math.Floor(paultangle.Right / CELL_SIZE), GRID_WIDTH - 1);
-				int bottom = Math.Min((int)Math.Floor(paultangle.Bottom / CELL_SIZE), GRID_HEIGHT - 1);
+				int right = Math.Min((int)Math.Floor(paultangle.Right / CELL_SIZE), GRID_WIDTH);
+				int bottom = Math.Min((int)Math.Floor(paultangle.Bottom / CELL_SIZE), GRID_HEIGHT);
 
 				_idCellMap.Add(id, new List<CellPostion>());
 
@@ -80,6 +80,17 @@ namespace VFVGAVFAF.src.Pathfinding
 					}
 				}
 			}
+		}
+
+		public void Remove(long id, List<string> tags)
+		{
+			foreach(var cellPostion in _idCellMap[id])
+			{
+				var cell = Cells[cellPostion.Y][cellPostion.X];
+				cell.Conatins.Remove(id);
+			}
+
+			throw new NotImplementedException();
 		}
 
 		public List<CellPostion> GetNeighbors(CellPostion cellPostion, string matchPattern)

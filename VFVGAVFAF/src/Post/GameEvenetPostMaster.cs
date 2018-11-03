@@ -117,7 +117,6 @@ namespace VFVGAVFAF.src
 
 			foreach (var entry in postsCopy)
 			{
-
 				var value = entry.Value;
 				var key = entry.Key;
 
@@ -148,8 +147,11 @@ namespace VFVGAVFAF.src
 
 		private void Add(STuple key, IGameEventCom gameEvenet)
 		{
-			Console.WriteLine("ADDING POST TO POSTS ID:{0} TTC:{1}", key.One, gameEvenet.TimeToComplete);
-			_posts.Add(key, new PostData { TimeToComplete = gameEvenet.TimeToComplete, GameEventID = key.One });
+			if(!_posts.ContainsKey(key))
+			{
+				Console.WriteLine("ADDING POST TO POSTS ID:{0} TTC:{1}", key.One, gameEvenet.TimeToComplete);
+				_posts.Add(key, new PostData { TimeToComplete = gameEvenet.TimeToComplete, GameEventID = key.One });
+			}
 		}
 	}
 }

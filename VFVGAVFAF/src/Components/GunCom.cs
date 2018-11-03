@@ -56,14 +56,14 @@ namespace VFVGAVFAF.src.Components
 				case DirectionTypes.Left:
 					nextPostion = new Postion2D
 					(
-						shooterHitbox.Left,
+						shooterHitbox.Left - hitbox.Width - 2,
 						(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
 					);
 					break;
 				case DirectionTypes.Right:
 					nextPostion = new Postion2D
 					(
-						shooterHitbox.Right,
+						shooterHitbox.Right - hitbox.Width + 3,
 						(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
 					);
 					break;

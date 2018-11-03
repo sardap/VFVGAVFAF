@@ -252,8 +252,8 @@
                             "X":0,
                             "Y":0
                         },
-                        "Width":10,
-                        "Height":150
+                        "Width":20,
+                        "Height":100
                     },
                     "Alias":"pos",
                     "PostionConstrantComs":[

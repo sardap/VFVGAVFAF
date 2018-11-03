@@ -83,6 +83,7 @@
     <Compile Include="src\Components\IResolveBool.cs" />
     <Compile Include="src\Components\MeltComCom.cs" />
     <Compile Include="src\Components\MoveToPointCom.cs" />
+    <Compile Include="src\Components\MoveToPointPathfindingCom.cs" />
     <Compile Include="src\Components\OverlaySenceCom.cs" />
     <Compile Include="src\Components\PlayRandomSoundEvenetCom.cs" />
     <Compile Include="src\Components\ToggleComCom.cs" />
