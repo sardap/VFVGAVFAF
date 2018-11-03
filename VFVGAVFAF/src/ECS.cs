@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using VFVGAVFAF.src.Json;
 using System.IO;
 using VFVGAVFAF.src.Components;
+using VFVGAVFAF.src.Pathfinding;
 
 namespace VFVGAVFAF.src
 {
@@ -34,6 +35,7 @@ namespace VFVGAVFAF.src
 		private BlueprintManger _entiyBlueprintManger;
 		private MouseManger _mouseManger;
 		private KeyboardInputManger _keyboardInputManger;
+		private Grid _grid;
 
 		public Settings Settings;
 
@@ -75,7 +77,8 @@ namespace VFVGAVFAF.src
 				ComponentManager = _componentManager
 			};
 			_inputManger = new InputManger(_componentManager);
-			_colssionManger = new ColssionComManger(_componentManager, _entityManager);
+			_grid = new Grid();
+			_colssionManger = new ColssionComManger(_componentManager, _entityManager, _grid);
 			_textureManager = new TextureManager
 			{
 				Content = Content
@@ -120,6 +123,7 @@ namespace VFVGAVFAF.src
 				settings
 			);
 
+
 			_gameObjectFactory = new GameObjectFactory
 			{
 				ComponentManager = _componentManager,
@@ -139,6 +143,7 @@ namespace VFVGAVFAF.src
 				KeyboardInputManger = _keyboardInputManger,
 				Content = Content,
 				GameEvenetPostMaster = _gameEvenetPostMaster,
+				Grid = _grid,
 				GameInfo = _gameInfo
 			};
 

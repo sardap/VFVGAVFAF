@@ -14,15 +14,16 @@ namespace VFVGAVFAF.src.Managers
 	{
 		private IList<long> _toCheck = new List<long>();
 		private QuadTree _quadTree;
-		private Grid _grid = new Grid();
+		private Grid _grid;
 
 		private ComponentManager _componentManager { get; set; }
 		private EntityManager _entityManager { get; set; }
 
-		public ColssionComManger(ComponentManager componentManager, EntityManager entityManager)
+		public ColssionComManger(ComponentManager componentManager, EntityManager entityManager, Grid grid)
 		{
 			_componentManager = componentManager;
 			_entityManager = entityManager;
+			_grid = grid;
 			_quadTree = new QuadTree(_componentManager, 0, new Microsoft.Xna.Framework.Rectangle(0, 0, 300, 600));
 		}
 
@@ -38,16 +39,6 @@ namespace VFVGAVFAF.src.Managers
 				_grid.Insert(com.HitBox, id, ent.Tags);
 			}
 
-			var agent = new Paultangle(590, 300, 10, 30);
-			var target = new Paultangle(10, 300, 10, 10);
-
-			_grid.Insert(agent, -1, new List<string>{"agent"});
-			_grid.Insert(target, -2, new List<string>{"target"});
-
-			var path = new AStarSerach().FindPath(_grid, agent.Postion2D, target.Postion2D, "wall");
-
-			//_quadTree.Process(_toCheck);
-
 			var colCount = 0;
 
 			foreach (var id in _toCheck)
@@ -61,7 +52,7 @@ namespace VFVGAVFAF.src.Managers
 						var otherEntID = _componentManager.GetComponent<ICollisionCom>(otherID).EntID;
 						if (com.Check(otherEntID, otherID))
 						{
-							System.Diagnostics.Debug.WriteLine("COLLSION BETWEEN {0} and {1}", id, otherID);
+							//System.Diagnostics.Debug.WriteLine("COLLSION BETWEEN {0} and {1}", id, otherID);
 							colCount++;
 						}
 					}

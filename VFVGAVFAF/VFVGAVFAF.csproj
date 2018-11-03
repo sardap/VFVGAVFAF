@@ -153,6 +153,7 @@
     <Compile Include="src\Managers\SoundManager.cs" />
     <Compile Include="src\Needs\INeedGameInfo.cs" />
     <Compile Include="src\Needs\INeedGamesObjectFactory.cs" />
+    <Compile Include="src\Needs\INeedGrid.cs" />
     <Compile Include="src\Needs\INeedKeyboardInputManger.cs" />
     <Compile Include="src\Needs\INeedMinigameManger.cs" />
     <Compile Include="src\Needs\INeedMouseManger.cs" />

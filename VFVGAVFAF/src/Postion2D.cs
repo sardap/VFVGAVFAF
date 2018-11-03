@@ -68,6 +68,11 @@ namespace VFVGAVFAF.src
 			return IsAt(target) || X > target.X || Y > target.Y;
 		}
 
+		public override string ToString()
+		{
+			return string.Format("X = {0} Y = {1}", X, Y);
+		}
+
 		public static Postion2D operator +(Postion2D a, Postion2D b)
 		{
 			return new Postion2D(a.X + b.X, a.Y + b.Y);

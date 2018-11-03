@@ -131,6 +131,72 @@
             "Count":1
         },
         {
+            "EnityToJson":{
+               "Tags":["game","east"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":600,
+                                "Y":300
+                            },
+                            "Width":10,
+                            "Height":10
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":255,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":2,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MoveToPointCom, VFVGAVFAF",
+                        "Alias":"move_to_point_contoler",
+                        "PostionAlias":"pos",
+                        "TriggeredAtTarget":[
+                        ],
+                        "Target":{
+                            "X":100,
+                            "Y":300
+                        },
+                        "speed":200,
+                        "ObstaclePattern":"wall",
+                        "PathUpdateInterval":1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
             "Tags":["game", "text"],
             "EnityToJson":{
                 "Components":[

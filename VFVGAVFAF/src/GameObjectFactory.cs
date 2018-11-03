@@ -12,6 +12,7 @@ using VFVGAVFAF.src.Managers;
 using VFVGAVFAF.src;
 using VFVGAVFAF.src.Sence;
 using Newtonsoft.Json;
+using VFVGAVFAF.src.Pathfinding;
 
 namespace VFVGAVFAF.src
 {
@@ -48,6 +49,7 @@ namespace VFVGAVFAF.src
 		public BlueprintManger BlueprintManger { get; set; }
 		public MouseManger MouseManger { get; set; }
 		public KeyboardInputManger KeyboardInputManger { get; set; }
+		public Grid Grid { get; set; }
 
 		public GameObjectFactory()
 		{
@@ -204,6 +206,10 @@ namespace VFVGAVFAF.src
 				((INeedKeyboardInputManger)component).KeyboardInputManger = KeyboardInputManger;
 			}
 
+			if (component is INeedGrid)
+			{
+				((INeedGrid)component).Grid = Grid;
+			}
 
 			return component;
 		}

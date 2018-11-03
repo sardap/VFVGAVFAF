@@ -52,7 +52,8 @@ namespace VFVGAVFAF.src.Pathfinding
 			}
 
 			result.Reverse();
-			result.Remove(result[0]);
+			if(result.Count > 0)
+				result.Remove(result[0]);
 			result.Add(end);
 
 			return result;
@@ -122,7 +123,7 @@ namespace VFVGAVFAF.src.Pathfinding
 				closedSet.Add(subTreeRoot);
 			}
 
-			return new List<Postion2D>();
+			return grid.Transform(ConsturctPath(agent, meta));
 		}
 	}
 }

@@ -11,10 +11,10 @@ namespace VFVGAVFAF.src.Pathfinding
 		public int Y;
 		public int X;
 
-		public CellPostion(int a, int b)
+		public CellPostion(int y, int x)
 		{
-			Y = a;
-			X = b;
+			Y = y;
+			X = x;
 		}
 
 		public bool Equals(CellPostion other)

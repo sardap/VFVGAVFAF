@@ -42,12 +42,12 @@ namespace VFVGAVFAF.src.Pathfinding
 		{
 			int left = Math.Max((int)Math.Floor(postion2D.X / CELL_SIZE), 0);
 			int top = Math.Max((int)Math.Floor(postion2D.Y / CELL_SIZE), 0);
-			return new CellPostion(left, top);
+			return new CellPostion(top, left);
 		}
 
 		public Postion2D Transform(CellPostion cellPostion)
 		{
-			double left =cellPostion.X * CELL_SIZE;
+			double left = cellPostion.X * CELL_SIZE;
 			double top = cellPostion.Y * CELL_SIZE;
 			return new Postion2D(left, top);
 		}
@@ -58,7 +58,6 @@ namespace VFVGAVFAF.src.Pathfinding
 			cellPostions.ForEach(i => result.Add(Transform(i)));
 			return result;
 		}
-
 
 		public void Insert(Paultangle paultangle, long id, List<string> tags)
 		{
