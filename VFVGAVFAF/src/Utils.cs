@@ -193,15 +193,23 @@ namespace VFVGAVFAF.src
 			return set.ToList()[index];
 		}
 
-		public static Postion2D IncrmnetForPoint(Postion2D curPos, Postion2D target, double deltaTime, double speed)
+		public static Postion2D IncrmnetForPoint(Postion2D start, Postion2D target, double deltaTime, double speed)
 		{
-			var distance = Math.Sqrt(Math.Pow(target.X - curPos.X, 2) + Math.Pow(target.Y - curPos.Y, 2));
-			var directionX = (target.X - curPos.X) / distance;
-			var directionY = (target.Y - curPos.Y) / distance;
+			var startVec = start.ToVector();
+			var targetVec = target.ToVector();
 
-			var result = new Postion2D(directionX * speed * deltaTime, directionY * speed * deltaTime);
+			float distance = Vector2.Distance(startVec, targetVec);
+			var direction = Vector2.Normalize(targetVec - startVec);
 
-			return result;
+			var inc = direction * (float)speed * (float)deltaTime;
+
+			while (Vector2.Distance(startVec, inc + startVec) >= distance)
+			{
+				speed -= 0.1;
+				inc = direction * (float)speed * (float)deltaTime;
+			}
+
+			return new Postion2D(inc);
 		}
 
 	}
