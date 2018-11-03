@@ -9,13 +9,15 @@ namespace VFVGAVFAF.src.Components
 {
 	class PlayRandomSoundEvenetCom: ISoundEventCom, INeedSoundManger
 	{
+		private bool _playing;
+
 		public long EntID { get; set; }
 
 		public string Alias { get; set; }
 
-		public double TimeToComplete { get; }
+		public double TimeToComplete { get; set; }
 
-		public double Cooldown { get; }
+		public double Cooldown { get; set; }
 
 		public List<string> Sounds { get; set; }
 

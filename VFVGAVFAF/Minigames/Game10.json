@@ -163,10 +163,27 @@
                         "BlueprintName":"failure_reached"
                     },
                     {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/enmey_die",
+                        "TimeToComplete":0.0,
+                        "Cooldown":1,
+                        "Alias":"enmey_die"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlayRandomSoundEvenetCom, VFVGAVFAF",
+                        "Alias":"play_stop_sound",
+                        "TimeToComplete":0,
+                        "Cooldown":3,
+                        "Sounds":[
+                            "Sounds//stop_1", "Sounds//stop_2", "Sounds//stop_3" 
+                        ]
+                    },
+                    {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "GameEventComs":{
-                            "player":["failure_reached"]
+                            "player":["failure_reached"],
+                            "defector":["enmey_die", "play_stop_sound"]
                         }
                     },
                     {

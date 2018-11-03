@@ -183,3 +183,21 @@
 /processorParam:Quality=Best
 /build:Music/background_music_1.ogg
 
+#begin Sounds/stop_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/stop_1.wav
+
+#begin Sounds/stop_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/stop_2.wav
+
+#begin Sounds/stop_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/stop_3.wav
+
