@@ -62,16 +62,6 @@ namespace VFVGAVFAF.src
 					}
 				}
 			}
-
-			/*
-			Parallel.ForEach(collisions, id => 
-			{
-				foreach (var otherID in Retrieve(id))
-				{
-					_componentManager.GetComponent<ICollisionCom>(id).Check(otherID);
-				}
-			});
-			*/
 		}
 
 		private void Clear()

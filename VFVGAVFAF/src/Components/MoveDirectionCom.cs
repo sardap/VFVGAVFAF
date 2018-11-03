@@ -8,14 +8,6 @@ namespace VFVGAVFAF.src.Components
 {
 	class MoveDirectionCom: IContolerCom, IComponent, INeedEnityManger
 	{
-		public enum DirectionTypes
-		{
-			Up = 0,
-			Down = 1,
-			Left = 2,
-			Right = 3
-		}
-
 		public long EntID { get; set; }
 
 		public string PostionAlais { get; set; }

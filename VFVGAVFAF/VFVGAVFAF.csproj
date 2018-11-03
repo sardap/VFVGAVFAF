@@ -76,6 +76,7 @@
     <Compile Include="src\Components\CircleRendCom.cs" />
     <Compile Include="src\Components\FollowCom.cs" />
     <Compile Include="src\Components\FreezeComCom.cs" />
+    <Compile Include="src\Components\GetPathCom.cs" />
     <Compile Include="src\Components\MeltCom.cs" />
     <Compile Include="src\Components\FreezeCom.cs" />
     <Compile Include="src\Components\ICanChainGameEvents.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="src\Components\TriggerIfResolved.cs" />
     <Compile Include="src\Components\TriggredIntervalTriggerCom.cs" />
     <Compile Include="src\Components\UpdateFollowerCount.cs" />
+    <Compile Include="src\Direction.cs" />
     <Compile Include="src\Managers\FontManger.cs" />
     <Compile Include="src\Components\GoalReachedCom.cs" />
     <Compile Include="src\Components\GrowRectCom.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="src\Json\JsonSence.cs" />
     <Compile Include="src\Components\FontRendCom.cs" />
     <Compile Include="src\Managers\EntiyBlueprintManger.cs" />
+    <Compile Include="src\Managers\KeyboardInputManger.cs" />
     <Compile Include="src\Managers\MangersEnum.cs" />
     <Compile Include="src\Managers\MinigameManger.cs" />
     <Compile Include="src\Managers\MouseState.cs" />
@@ -150,6 +153,7 @@
     <Compile Include="src\Managers\SoundManager.cs" />
     <Compile Include="src\Needs\INeedGameInfo.cs" />
     <Compile Include="src\Needs\INeedGamesObjectFactory.cs" />
+    <Compile Include="src\Needs\INeedKeyboardInputManger.cs" />
     <Compile Include="src\Needs\INeedMinigameManger.cs" />
     <Compile Include="src\Needs\INeedMouseManger.cs" />
     <Compile Include="src\Needs\INeedPostMaster.cs" />
@@ -158,6 +162,11 @@
     <Compile Include="src\Needs\INeedSpriteBatch.cs" />
     <Compile Include="src\Needs\INeedTextureManager.cs" />
     <Compile Include="src\PassValue.cs" />
+    <Compile Include="src\Pathfinding\AStarSerach.cs" />
+    <Compile Include="src\Pathfinding\Cell.cs" />
+    <Compile Include="src\Pathfinding\CellPostion.cs" />
+    <Compile Include="src\Pathfinding\Grid.cs" />
+    <Compile Include="src\Pathfinding\ISearch.cs" />
     <Compile Include="src\Post\GameEvenetPostMaster.cs" />
     <Compile Include="src\Post\IGameEvenetPostMaster.cs" />
     <Compile Include="src\Managers\IStepManager.cs" />
@@ -207,8 +216,11 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Priority Queue, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.1.1\lib\net45\Priority Queue.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />

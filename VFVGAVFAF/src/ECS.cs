@@ -33,6 +33,7 @@ namespace VFVGAVFAF.src
 		private MinigameManger _minigameManger;
 		private BlueprintManger _entiyBlueprintManger;
 		private MouseManger _mouseManger;
+		private KeyboardInputManger _keyboardInputManger;
 
 		public Settings Settings;
 
@@ -63,6 +64,7 @@ namespace VFVGAVFAF.src
 		public void Initialse(GraphicsDeviceManager graphics)
 		{
 			_mouseManger = new MouseManger();
+			_keyboardInputManger = new KeyboardInputManger();
 			_componentManager = new ComponentManager();
 			_entityManager = new EntityManager()
 			{
@@ -73,7 +75,7 @@ namespace VFVGAVFAF.src
 				ComponentManager = _componentManager
 			};
 			_inputManger = new InputManger(_componentManager);
-			_colssionManger = new ColssionComManger(_componentManager);
+			_colssionManger = new ColssionComManger(_componentManager, _entityManager);
 			_textureManager = new TextureManager
 			{
 				Content = Content
@@ -93,6 +95,7 @@ namespace VFVGAVFAF.src
 				MinigameFiles = new List<string>()
 				{
 					//@"Minigames\Game1.json"
+					/*
 					@"Minigames\Game2.json",
 					@"Minigames\Game3.json",
 					@"Minigames\Game4.json",
@@ -100,7 +103,9 @@ namespace VFVGAVFAF.src
 					@"Minigames\Game6.json",
 					@"Minigames\Game7.json",
 					@"Minigames\Game8.json",
-					@"Minigames\Game9.json"
+					@"Minigames\Game9.json",
+					*/
+					@"Minigames\Game10.json"
 				}
 			};
 
@@ -131,6 +136,7 @@ namespace VFVGAVFAF.src
 				SenceManger = _senceManger,
 				BlueprintManger = _entiyBlueprintManger,
 				MouseManger = _mouseManger,
+				KeyboardInputManger = _keyboardInputManger,
 				Content = Content,
 				GameEvenetPostMaster = _gameEvenetPostMaster,
 				GameInfo = _gameInfo
@@ -146,6 +152,7 @@ namespace VFVGAVFAF.src
 		public void Step(double deltaTime)
 		{
 			_mouseManger.Step(ScaleMatrix);
+			_keyboardInputManger.Step();
 			_entityManager.Step();
 			_senceManger.Step();
 			_gameEvenetPostMaster.Step(deltaTime);

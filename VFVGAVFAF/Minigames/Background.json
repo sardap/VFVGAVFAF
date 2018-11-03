@@ -48,11 +48,21 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                            "80":["pause"],
-                            "76":["unpause"]
-                        },
-                        "speed":0
+                        "speed":0,
+                        "Actions":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                "Key":80, 
+                                "State":1,
+                                "GameEvents":["pause"]
+                            },
+                            {
+                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                "Key":76, 
+                                "State":1,
+                                "GameEvents":["unpause"]
+                            }
+                        ]
                     }
                 ]
             },

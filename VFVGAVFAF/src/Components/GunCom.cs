@@ -23,6 +23,8 @@ namespace VFVGAVFAF.src.Components
 
 		public double Cooldown { get; set; }
 
+		public DirectionTypes ExitDirection { get; set; }
+
 		public GameObjectFactory GameObjectFactory { get; set; }
 
 		public BlueprintManger EntiyBlueprintManger { get; set; }
@@ -40,12 +42,36 @@ namespace VFVGAVFAF.src.Components
 
 			var nextEntry = EntiyBlueprintManger.Get(BulletBlueprint);
 			var hitbox = nextEntry.GetbyAlais<RectPosCom>("pos").Paultangle;
-			hitbox.Postion2D = 
-				new Postion2D
-				(
-					shooterHitbox.Right, 
-					(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
-				);
+
+			Postion2D nextPostion;
+
+			switch(ExitDirection)
+			{
+				case DirectionTypes.Up:
+					throw new NotImplementedException();
+					break;
+				case DirectionTypes.Down:
+					throw new NotImplementedException();
+					break;
+				case DirectionTypes.Left:
+					nextPostion = new Postion2D
+					(
+						shooterHitbox.Left,
+						(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
+					);
+					break;
+				case DirectionTypes.Right:
+					nextPostion = new Postion2D
+					(
+						shooterHitbox.Right,
+						(shooterHitbox.Y + shooterHitbox.Height / 2) - hitbox.Height / 2
+					);
+					break;
+				default:
+					throw new NotImplementedException();
+			}
+
+			hitbox.Postion2D = nextPostion;
 
 			SenceManger.AddProcessedToMain(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
 		}

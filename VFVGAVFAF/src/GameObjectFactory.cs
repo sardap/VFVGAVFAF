@@ -47,6 +47,7 @@ namespace VFVGAVFAF.src
 		public MinigameManger MinigameManger { get; set; }
 		public BlueprintManger BlueprintManger { get; set; }
 		public MouseManger MouseManger { get; set; }
+		public KeyboardInputManger KeyboardInputManger { get; set; }
 
 		public GameObjectFactory()
 		{
@@ -197,6 +198,12 @@ namespace VFVGAVFAF.src
 			{
 				((INeedMouseManger)component).MouseManger = MouseManger;
 			}
+
+			if (component is INeedKeyboardInputManger)
+			{
+				((INeedKeyboardInputManger)component).KeyboardInputManger = KeyboardInputManger;
+			}
+
 
 			return component;
 		}

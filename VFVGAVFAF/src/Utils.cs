@@ -148,6 +148,14 @@ namespace VFVGAVFAF.src
 			return result;
 		}
 
+		public static void AddRange<T>(ISet<T> set, IEnumerable<T> toAdd)
+		{
+			foreach (var entry in toAdd)
+			{
+				set.Add(entry);
+			}
+		}
+
 		public static void PushRange<T>(Stack<T> stack, IEnumerable<T> toAdd)
 		{
 			foreach(var entry in toAdd)
