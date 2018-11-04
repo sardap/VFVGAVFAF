@@ -43,4 +43,9 @@ namespace VFVGAVFAF.src.Components
 			target.Value = newVaule;
 		}
 	}
+
+	class AssignDoubleToStringValueCom : AssignValueCom<double, string> { }
+
+	class AssignIntToStringValueCom : AssignValueCom<int, string> { }
+
 }

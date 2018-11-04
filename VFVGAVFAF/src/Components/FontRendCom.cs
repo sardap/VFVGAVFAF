@@ -10,7 +10,7 @@ using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src.Components
 {
-	class FontRendCom : IRenderableComponent, INeedSpriteBatch, INeedEnityManger, INeedFontManager, IGetSizeCom, IHaveAlias
+	class FontRendCom : IRenderableComponent, INeedSpriteBatch, INeedEnityManger, INeedFontManager, IGetSizeCom, IHaveAlias, IHaveHitBoxCom
 	{
 		public long EntID { get; set; }
 
@@ -42,15 +42,26 @@ namespace VFVGAVFAF.src.Components
 			}
 		}
 
-
 		public SpriteBatch SpriteBatch { get; set; }
+
 		public EntityManager EntityManager { get; set; }
+
+		public Paultangle HitBox
+		{
+			get
+			{
+				var size = Size();
+				var postion = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(PostionAlais).GetPostion();
+				return new Paultangle(postion.X, postion.Y, size.X, size.Y);
+			}
+		}
 
 		public Vector2 Size()
 		{
 			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<TextCom>(TextAlais).Value;
 			return _font.MeasureString(text) * Scale;
 		}
+
 
 		public void Render(double deltaTime)
 		{

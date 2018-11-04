@@ -30,6 +30,11 @@ namespace VFVGAVFAF.src.Managers
 			MediaPlayer.Play(_song);
 		}
 
+		public void StopSong()
+		{
+			MediaPlayer.Stop();
+		}
+
 		public void PlaySound(string id)
 		{
 			GetSound(id).Play(_settings.VFXLevel, _settings.Pitch, 0);

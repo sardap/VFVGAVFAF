@@ -53,13 +53,13 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "Alias":"goal_reached_bad",
-                        "BlueprintName":"goal_reached_bad"
+                        "Alias":"failure_reached_nuke",
+                        "BlueprintName":"failure_reached_nuke"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.AreaClickedCom, VFVGAVFAF",
                         "HitBoxAlias":"pos",
-                        "Events":["goal_reached_bad"],
+                        "Events":["failure_reached_nuke"],
                         "MouseState":2,
                         "MouseButton":0
                     },
@@ -170,8 +170,8 @@
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "Alias":"failure_reached",
-                        "BlueprintName":"failure_reached"
+                        "Alias":"goal_reached_nuke",
+                        "BlueprintName":"goal_reached_nuke"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
@@ -182,7 +182,7 @@
                                 "Opreator":0,
                                 "Value":-1,
                                 "GameEvents":[
-                                    "failure_reached"
+                                    "goal_reached_nuke"
                                 ]
                             }
                         ]

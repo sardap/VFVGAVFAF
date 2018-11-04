@@ -3,23 +3,6 @@
     "Entries":[
         {
             "EnityToJson":{
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
-                        "EventAlais":["stop_music"]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.StopMusicCom, VFVGAVFAF",
-                        "Alias":"stop_music",
-                        "TimeToComplete":0,
-                        "Cooldown":0
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
                 "Alias":"end_screen",
                 "InstanceLimt":1,    
                 "Components":[
@@ -34,17 +17,17 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"YOU HAVE FAILED THE PROLETARIAT"
+                        "Value":"OUR MISTAKE COMRADE"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
                         "Alias":"rend",
                         "PostionAlais":"pos",
                         "TextAlais":"text",
-                        "Scale":1,
+                        "Scale":2,
                         "Color":{
-                            "B":0,
-                            "G":255,
+                            "B":255,
+                            "G":0,
                             "R":0,
                             "A":255
                         },
@@ -71,11 +54,13 @@
                         "EventAlais":["play_end_sound"]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "$type":"VFVGAVFAF.src.Components.PlayRandomSoundEvenetCom, VFVGAVFAF",
                         "Alias":"play_end_sound",
                         "TimeToComplete":0,
                         "Cooldown":0,
-                        "Sound":"Sounds//game_failure"
+                        "Sounds":[
+                            "Sounds//sucess_line_1", "Sounds//sucess_line_2", "Sounds//sucess_line_3", "Sounds//sucess_line_4", "Sounds//sucess_line_5", "Sounds//sucess_line_6", "Sounds//sucess_line_7", 
+                        ]
                     }
                 ]
             },
@@ -97,17 +82,17 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"YOU WILL ALWAYS BE A SLAVE TO BOURGEOISIE"
+                        "Value":"RADAR ERROR COMRADE"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
                         "Alias":"rend",
                         "PostionAlais":"pos",
                         "TextAlais":"text",
-                        "Scale":0.7,
+                        "Scale":1.3,
                         "Color":{
-                            "B":0,
-                            "G":255,
+                            "B":255,
+                            "G":0,
                             "R":0,
                             "A":255
                         },

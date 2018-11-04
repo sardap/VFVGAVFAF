@@ -68,7 +68,7 @@
     <Compile Include="src\CenterVertical.cs" />
     <Compile Include="src\CheckType.cs" />
     <Compile Include="src\ColInfo.cs" />
-    <Compile Include="src\Components\AssignStringValueCom.cs" />
+    <Compile Include="src\Components\AlignLeftCom.cs" />
     <Compile Include="src\Components\AssignValueCom.cs" />
     <Compile Include="src\Components\BoolValueCom.cs" />
     <Compile Include="src\Components\CenterCom.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="src\Components\FollowCom.cs" />
     <Compile Include="src\Components\FreezeComCom.cs" />
     <Compile Include="src\Components\GetPathCom.cs" />
+    <Compile Include="src\Components\LivesValueCom.cs" />
     <Compile Include="src\Components\MeltCom.cs" />
     <Compile Include="src\Components\FreezeCom.cs" />
     <Compile Include="src\Components\ICanChainGameEvents.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="src\Components\MoveToPointPathfindingCom.cs" />
     <Compile Include="src\Components\OverlaySenceCom.cs" />
     <Compile Include="src\Components\PlayRandomSoundEvenetCom.cs" />
+    <Compile Include="src\Components\StopMusicCom.cs" />
     <Compile Include="src\Components\ToggleComCom.cs" />
     <Compile Include="src\Components\DoubleValueChangeListnerCom.cs" />
     <Compile Include="src\Components\DoubleValueCom.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="src\Needs\INeedSoundManger.cs" />
     <Compile Include="src\Needs\INeedSpriteBatch.cs" />
     <Compile Include="src\Needs\INeedTextureManager.cs" />
+    <Compile Include="src\Margin.cs" />
     <Compile Include="src\PassValue.cs" />
     <Compile Include="src\Pathfinding\AStarSerach.cs" />
     <Compile Include="src\Pathfinding\Cell.cs" />

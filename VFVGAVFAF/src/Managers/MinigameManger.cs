@@ -13,7 +13,6 @@ namespace VFVGAVFAF.src.Managers
 		private List<string> _played = new List<string>();
 		private List<string> _active = new List<string>();
 		private string _loaded = null;
-		private int _failures;
 
 		public List<string> MinigameFiles = new List<string>();
 
@@ -26,7 +25,15 @@ namespace VFVGAVFAF.src.Managers
 		public int FailuresAllowed { get; set; }
 
 		[JsonIgnore]
+		public int Failures { get; set; }
+
+		[JsonIgnore]
 		public ISenceManger SenceManger { get; set; }
+
+		public MinigameManger()
+		{
+			Failures = 0;
+		}
 
 		public void PlayNext(bool lastGameResult)
 		{
@@ -36,10 +43,10 @@ namespace VFVGAVFAF.src.Managers
 			}
 			else if(_loaded != null)
 			{
-				_failures++;
+				Failures++;
 			}
 
-			if (_failures > FailuresAllowed)
+			if (Failures > FailuresAllowed)
 			{
 				PlayNext(FailureScreen);
 				return;

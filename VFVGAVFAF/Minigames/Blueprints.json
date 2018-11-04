@@ -369,7 +369,52 @@
                 }
             ]
         },
-        "goal_reached_bad":{
+        "goal_reached_nuke":{
+            "Tags":["end"],
+            "Alias":"end",
+            "InstanceLimt":1,
+            "Components":[
+                {
+                    "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                    "EventAlais":["failure_reached", "swap_sence", "freeze"]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                    "Alias":"freeze",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "MatchPattern":"game",
+                    "Mangers":[
+                        1, 2, 3
+                    ]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.OverlaySenceCom, VFVGAVFAF",
+                    "Alias":"failure_reached",
+                    "TimeToComplete":0,
+                    "Cooldown":0,
+                    "FileName":"Minigames\\Sucess_nuke.json",
+                    "PassValues":[],
+                    "EventAlias":[]
+                },
+                {
+                    "$type":"VFVGAVFAF.src.Components.SwapWithSenceCom, VFVGAVFAF",
+                    "Alias":"swap_sence",
+                    "TimeToComplete":2,
+                    "Cooldown":0,
+                    "NextSence":"Minigames\\change.json",
+                    "ToPass":[
+                        {
+                            "$type":"VFVGAVFAF.src.PassBool, VFVGAVFAF",
+                            "TargetAlais":"mingame_result",
+                            "TagMatchPattern":"changer",
+                            "Value":true
+                        }
+                    ]
+                }
+            ]
+        },
+        "failure_reached_nuke":{
             "Tags":["end"],
             "Alias":"end",
             "InstanceLimt":1,

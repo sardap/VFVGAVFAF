@@ -116,7 +116,7 @@
                         "RectPosAlais":"pos",
                         "Actions":[
                         ],
-                        "speed":300
+                        "speed":400
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",

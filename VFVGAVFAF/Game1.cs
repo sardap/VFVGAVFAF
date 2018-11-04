@@ -101,7 +101,7 @@ namespace VFVGAVFAF
 
 			var fps = string.Format("FPS: {0}", _frameCounter.AverageFramesPerSecond);
 
-			spriteBatch.DrawString(_font, fps, new Vector2(1, 1), Color.Red);
+			//spriteBatch.DrawString(_font, fps, new Vector2(1, 1), Color.Red);
 
 			spriteBatch.End();
 

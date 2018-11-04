@@ -12,8 +12,8 @@ namespace VFVGAVFAF.src.Components
 
 		public string Alias { get; set; }
 
-		public T Value { get { return DValue; } set { DValue = value; } }
+		public virtual T Value { get; set; }
 
-		public dynamic DValue { get; set; }
+		public dynamic DValue { get { return Value; } set { Value = value; } }
 	}
 }

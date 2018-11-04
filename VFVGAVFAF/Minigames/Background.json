@@ -67,6 +67,103 @@
                 ]
             },
             "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["background", "lives_left"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":20,
+                            "Y":20
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"lives_value_rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":0.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LivesValueCom, VFVGAVFAF",
+                        "Alias":"lives_left"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"3"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":20
+                        },
+                        "Alias":"lives_title_pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"lives_title",
+                        "Value":"Comrades Left:"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"lives_title_rend",
+                        "PostionAlais":"lives_title_pos",
+                        "TextAlais":"lives_title",
+                        "Scale":0.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":128,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AlignLeftCom, VFVGAVFAF",
+                        "Alias":"align_value",
+                        "PostionAlais":"pos",
+                        "ToAlignLeftOf":"lives_title_rend",
+                        "Margin":
+                        {
+                            "$type":"VFVGAVFAF.src.Margin, VFVGAVFAF",
+                            "Left":10
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.AssignIntToStringValueCom, VFVGAVFAF",
+                        "Alias":"update_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "SourceAlais":"lives_left",
+                        "TargetAlais":"text"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
+                        "Cooldown":1,
+                        "EventAlais":[
+                            "update_text"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "EventAlais":["align_value"]
+                    }
+                   
+                ]
+            },
+            "Count":1
         }
     ]
 }
