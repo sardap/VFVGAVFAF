@@ -10,7 +10,7 @@ namespace VFVGAVFAF.src
 	{
 		public Postion2D Calcaute(Paultangle bounds, Postion2D size)
 		{
-			return new Postion2D(Math.Floor(bounds.Width / 2) - Math.Floor(size.X / 2), 0);
+			return new Postion2D((bounds.Width / 2) - (size.X / 2), 0);
 		}
 
 	}

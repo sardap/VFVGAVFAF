@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
+	[Obsolete("Use game event Version", false)]
 	class CenterCom: IRunXTimesCom, INeedEnityManger
 	{
 		public long EntID { get; set; }

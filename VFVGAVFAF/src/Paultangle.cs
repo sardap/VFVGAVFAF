@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,11 @@ namespace VFVGAVFAF.src
 
 		public Paultangle() : this(new Postion2D(0, 0), 0, 0)
 		{
+		}
+
+		public RectangleF ToRectangleF()
+		{
+			return new RectangleF((float)X, (float)Y, (float)Width, (float)Height);
 		}
 
 		public bool Intersects(Paultangle other)

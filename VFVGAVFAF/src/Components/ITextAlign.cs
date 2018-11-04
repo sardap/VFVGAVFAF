@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class DoubleValueCom : ValueCom<double> { }
+	interface ITextAlign: IHaveAlias, IComponent
+	{
+		void Align();
+	}
 }

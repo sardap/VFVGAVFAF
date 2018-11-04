@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,16 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class DoubleValueUpdateCom: IGameEventCom, INeedEnityManger
+	interface IValueUpdateCom<T>: IComponent, IGameEventCom
+	{
+		[JsonRequired]
+		T IncmrenetChange { get; set; }
+
+		[JsonRequired]
+		string ValueAlais { get; set; }
+	}
+
+	class ValueUpdateCom<T>: IValueUpdateCom<T>, INeedEnityManger
 	{
 		public long EntID { get; set; }
 
@@ -16,7 +26,7 @@ namespace VFVGAVFAF.src.Components
 
 		public double Cooldown { get; set; }
 
-		public double IncmrenetChange { get; set; }
+		public T IncmrenetChange { get; set; }
 
 		public string ValueAlais { get; set; }
 
@@ -25,10 +35,11 @@ namespace VFVGAVFAF.src.Components
 		public virtual void Action()
 		{
 			var ent = EntityManager.GetEntiy<GameObject>(EntID);
-			var com = ent.GetComponent<DoubleValueCom>(ValueAlais);
+			var com = ent.GetComponent<IValueCom<T>>(ValueAlais);
 
-			com.Value += IncmrenetChange;
-
+			com.DValue += IncmrenetChange;
 		}
 	}
+
+	class DoubleValueUpdateCom : ValueUpdateCom<double> { }
 }

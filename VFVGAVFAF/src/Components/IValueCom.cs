@@ -13,7 +13,7 @@ namespace VFVGAVFAF.src.Components
 		dynamic DValue { get; set; }
 	}
 
-	interface IValueCom<T>: IComponent, IHaveAlias
+	interface IValueCom<T>: IValueCom
 	{
 		T Value { get; set; }
 	}

@@ -1,17 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VFVGAVFAF.src.Components;
-using VFVGAVFAF.src.Managers;
 
 namespace VFVGAVFAF.src.Components
 {
-	[Obsolete("Use font rend value com", false)]
-	class FontRendCom : IRenderableComponent, INeedSpriteBatch, INeedEnityManger, INeedFontManager, IGetSizeCom, IHaveAlias, IHaveHitBoxCom
+	class FontRendValueCom<T>: IRenderableComponent, INeedSpriteBatch, INeedEnityManger, INeedFontManager, IGetSizeCom, IHaveAlias, IHaveHitBoxCom
 	{
 		public long EntID { get; set; }
 
@@ -20,15 +18,19 @@ namespace VFVGAVFAF.src.Components
 
 		public string Alias { get; set; }
 
-		public string TextAlais { get; set; }
+		[JsonRequired]
+		public string ValueAlais { get; set; }
 
+		[JsonRequired]
 		public string PostionAlais { get; set; }
 
+		[JsonRequired]
 		public string FontName { get; set; }
 
-		public Color Color { get; set; }
+		[JsonRequired]
+		public string ColorAlias { get; set; }
 
-		public float Scale { get; set; } 
+		public float Scale { get; set; }
 
 		public FontManger FontManger
 		{
@@ -59,17 +61,25 @@ namespace VFVGAVFAF.src.Components
 
 		public Vector2 Size()
 		{
-			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IValueCom<string>>(TextAlais).Value;
+			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IValueCom<T>>(ValueAlais).Value.ToString();
 			return _font.MeasureString(text) * Scale;
 		}
 
 
 		public void Render(double deltaTime)
 		{
-			var postion = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IPostionComponet>(PostionAlais).GetPostion();
-			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IValueCom<string>>(TextAlais).Value;
-			SpriteBatch.DrawString(_font, text, postion.ToVector(), Color, 0, new Vector2(), Scale, SpriteEffects.None, 0);
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			var postion = ent.GetComponent<IPostionComponet>(PostionAlais).GetPostion();
+			var text = ent.GetComponent<IValueCom<T>>(ValueAlais).Value.ToString();
+			var color = ent.GetComponent<IValueCom<Color>>(ColorAlias).Value;
+			SpriteBatch.DrawString(_font, text, postion.ToVector(), color, 0, new Vector2(), Scale, SpriteEffects.None, 0);
 		}
 
+		Vector2 IGetSizeCom.Size()
+		{
+			throw new NotImplementedException();
+		}
 	}
+
+	class FontRendDoubleCom : FontRendValueCom<double> { }
 }

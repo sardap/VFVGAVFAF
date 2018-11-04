@@ -1,0 +1,377 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "Tags":["game", "test_timer"],
+            "EnityToJson":{
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":0,
+                                "Y":450
+                            },
+                            "Width":300,
+                            "Height":100
+                        },
+                        "Alias":"bar_pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"bar_pos",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"bar_pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"timer_max_value",
+                        "Value":1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
+                        "Alias":"decrement_max_timer_value",
+                        "TimeToComplete":0,
+                        "CoolDown":0,
+                        "IncmrenetChange":-0.01,
+                        "ValueAlais":"timer_max_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TimerCom, VFVGAVFAF",
+                        "Alias":"timer_value",
+                        "EndTimeAlias":"timer_max_value",
+                        "GameEvents":[
+                            "failure_reached"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.ColorValueCom, VFVGAVFAF",
+                        "Alias":"outline_color_value",
+                        "Value":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.ColorValueCom, VFVGAVFAF",
+                        "Alias":"bar_color_value",
+                        "Value":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RendTimerRectCom, VFVGAVFAF",
+                        "RectPosAlais":"bar_pos",
+                        "OutlineColorAlias":"outline_color_value",
+                        "BarColorAlias":"bar_color_value",
+                        "TimerValueAlias":"timer_value",
+                        "Thickness":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RandomTextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Values":[
+                            "UP", "DOWN", "LEFT", "RIGHT"
+                        ],
+                        "TextAlignAlias":[
+                            "text_center_com"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":350
+                        },
+                        "Alias":"text_pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"text_rend",
+                        "PostionAlais":"text_pos",
+                        "TextAlais":"text",
+                        "Scale":2.5,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterTextAlignCom, VFVGAVFAF",
+                        "Alias":"text_center_com",
+                        "SizeGetterAlais":"text_rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"text_pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.ResetTimerCom, VFVGAVFAF",
+                        "Alias":"reset_timer",
+                        "TimerAlias":"timer_value"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.KeyboardInputTextDepdentCom, VFVGAVFAF",
+                        "ValueAlias":"text",
+                        "Actions":{
+                            "UP":[
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":38, 
+                                    "State":2,
+                                    "GameEvents":["text", "decrement_max_timer_value", "reset_timer"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":40, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":37, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":39, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                }
+                            ],
+                            "DOWN":[
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":40, 
+                                    "State":2,
+                                    "GameEvents":["text", "decrement_max_timer_value", "reset_timer"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":38, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":37, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":39, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                }
+                            ],
+                            "LEFT":[
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":37, 
+                                    "State":2,
+                                    "GameEvents":["text", "decrement_max_timer_value", "reset_timer"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":40, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":38, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":39, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                }
+                            ],
+                            "RIGHT":[
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":39, 
+                                    "State":2,
+                                    "GameEvents":["text", "decrement_max_timer_value", "reset_timer"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":40, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":37, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                },
+                                {
+                                    "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                    "Key":38, 
+                                    "State":2,
+                                    "GameEvents":["failure_reached"]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["game","timer"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"timer_max_value",
+                        "Value":60
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TimerCom, VFVGAVFAF",
+                        "Alias":"timer_value",
+                        "EndTimeAlias":"timer_max_value",
+                        "GameEvents":[
+                            "goal_reached"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":230,
+                            "Y":200
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.ColorValueCom, VFVGAVFAF",
+                        "Alias":"text_color",
+                        "Value":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendDoubleCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "ValueAlais":"timer_value",
+                        "FontName":"Fonts/Russian",
+                        "ColorAlias":"text_color",
+                        "Scale":1
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterTextAlignCom, VFVGAVFAF",
+                        "Alias":"text_center_com",
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["game","text"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"DO AS THE COMMISSAR SAYS OR DIE"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        }
+    ]
+}

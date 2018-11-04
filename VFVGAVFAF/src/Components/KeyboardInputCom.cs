@@ -11,33 +11,8 @@ namespace VFVGAVFAF.src.Components
 {
 	class KeyboardInputCom: IContolerCom, INeedEnityManger, INeedPostMaster, INeedKeyboardInputManger
 	{
-		public class KeyboardTrigger
-		{
-			public Keys Key { get; set; }
 
-			public KeyStates State { get; set; }
-
-			public List<string> GameEvents { get; set; }
-
-			public KeyboardTrigger()
-			{
-			}
-
-			public bool Resolve(KeyboardInputManger keyboardInputManger)
-			{
-				switch (State)
-				{
-					case KeyStates.Up:
-						return !keyboardInputManger.KeyPressed[Key];
-					case KeyStates.Down:
-						return keyboardInputManger.KeyPressed[Key];
-					case KeyStates.Clicked:
-						return keyboardInputManger.KeyClicked[Key];
-				}
-
-				throw new NotImplementedException();
-			}
-		}
+		public class KeyboardTrigger : KeyboardAction { }
 
 		public long EntID { get; set; }
 
