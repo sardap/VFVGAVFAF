@@ -38,10 +38,11 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
                         "Alias":"gun",
+                        "TimeToComplete":0,
+                        "Cooldown":0.2,
                         "BulletBlueprint":"player_bullet",
                         "PostionAlais":"pos",
-                        "TimeToComplete":0,
-                        "Cooldown":0.2
+                        "ExitDirection":3
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
@@ -53,9 +54,14 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                            "32":["gun", "gun_shot"]
-                        },
+                        "Actions":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                "Key":32, 
+                                "State":1,
+                                "GameEvents":["gun", "gun_shot"]
+                            }
+                        ],
                         "speed":300
                     },
                     {

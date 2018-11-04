@@ -32,7 +32,7 @@ namespace VFVGAVFAF.src.Json
 			{
 				if(gameObjectFactory.VaildToAdd(entry.EnityToJson))
 				{
-					var toPass = passValues.FindAll(i => entry.EnityToJson.Tags.Any(j => Regex.IsMatch(j, i.Tag)));
+					var toPass = passValues.FindAll(i => entry.EnityToJson.Tags.Any(j => Regex.IsMatch(j, i.TagMatchPattern)));
 
 					for (int i = 0; i < entry.Count; i++)
 					{

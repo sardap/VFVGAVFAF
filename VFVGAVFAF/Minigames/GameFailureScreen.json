@@ -1,0 +1,70 @@
+{
+    "$type":"VFVGAVFAF.src.Json.JsonSence, VFVGAVFAF",
+    "Entries":[
+        {
+            "EnityToJson":{
+                "Alias":"end_screen",
+                "InstanceLimt":1,    
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":150
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"YOU HAVE FAILED THE PROLETARIAT\nALLOWING THE BOURGEOISE TO OPPRESSE US FOREVER"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":2,
+                        "Color":{
+                            "B":0,
+                            "G":128,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "EventAlais":["play_end_sound"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Alias":"play_end_sound",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "Sounds":[
+                            "Sounds//gameFailure"
+                        ]
+                    }
+                ]
+            },
+            "Count":1
+        }
+    ]
+}

@@ -33,6 +33,11 @@ namespace VFVGAVFAF.src.Components
 
 		public ISenceManger SenceManger { get; set; }
 
+		public GunCom()
+		{
+			ExitDirection = DirectionTypes.Left;
+		}
+
 
 		public void Action()
 		{

@@ -30,9 +30,14 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                            "70":["goal_reached"]
-                        },
+                        "Actions":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                "Key":70, 
+                                "State":2,
+                                "GameEvents":["goal_reached"]
+                            }
+                        ],
                         "speed":0
                     }
                 ]

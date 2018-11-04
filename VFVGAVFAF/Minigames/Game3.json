@@ -38,8 +38,8 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                        },
+                        "Actions":[
+                        ],
                         "speed":300
                     },
                     {
@@ -101,18 +101,10 @@
                                 "Opreator":2,
                                 "Value":0,
                                 "GameEvents":[
-                                    "respawn",
                                     "failure_reached"
                                 ]
                             }
                         ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RespawnCom, VFVGAVFAF",
-                        "PosComAlais":"pos",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"respawn"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
@@ -124,7 +116,7 @@
                         "RectPosAlais":"pos",
                         "GameEventComs":{
                             "enemy":["goal_reached"],
-                            "death_trap":["respawnSound", "failure_reached"]
+                            "death_trap":["failure_reached"]
                         }
                     }
                 ]

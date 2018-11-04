@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VFVGAVFAF.src.Managers;
+using Newtonsoft.Json.Linq;
 
 namespace VFVGAVFAF.src
 {
@@ -18,6 +19,25 @@ namespace VFVGAVFAF.src
 		{
 			TypeNameHandling = TypeNameHandling.Auto
 		};
+
+		public static void ExportToJsonFile<T>(T toExport, string fileName)
+		{
+			string jsonString = JsonConvert.SerializeObject(toExport, JsonSettings);
+
+			using (var streamWriter = new StreamWriter(fileName))
+			{
+				streamWriter.Write(JToken.Parse(jsonString).ToString(Formatting.Indented));
+			}
+		}
+
+		public static T GetFromJsonFile<T>(string fileName)
+		{
+			using (var streamReader = new StreamReader(fileName))
+			{
+				var jsonString = streamReader.ReadToEnd();
+				return JsonConvert.DeserializeObject<T>(jsonString, JsonSettings);
+			}
+		}
 		
 		public static bool AInsideB(Paultangle a, Paultangle b)
 		{

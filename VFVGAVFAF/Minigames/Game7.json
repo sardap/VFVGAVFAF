@@ -8,13 +8,6 @@
                 ],
                 "Components":[
                     {
-                        "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
-                        "RectPosAlais":"box_one",
-                        "Actions":{
-                        },
-                        "speed":0
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{

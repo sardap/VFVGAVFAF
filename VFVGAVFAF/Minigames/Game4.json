@@ -20,7 +20,7 @@
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
-                            "game_bound_constrant",
+                            "game_bound_constrant"
                         ],
                         "RandomStartPos":false
                     },
@@ -38,8 +38,8 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                        },
+                        "Actions":[
+                        ],
                         "speed":50
                     },
                     {

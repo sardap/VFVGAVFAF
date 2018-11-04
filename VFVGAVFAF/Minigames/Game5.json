@@ -43,15 +43,10 @@
                         "TextureName":"Images/player"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "BlueprintName":"reset_minigame"
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                            "82":["reset_minigame"]
-                        },
+                        "Actions":[
+                        ],
                         "speed":80
                     },
                     {

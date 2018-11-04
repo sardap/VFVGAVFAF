@@ -70,6 +70,7 @@
     <Compile Include="src\ColInfo.cs" />
     <Compile Include="src\Components\AssignStringValueCom.cs" />
     <Compile Include="src\Components\AssignValueCom.cs" />
+    <Compile Include="src\Components\BoolValueCom.cs" />
     <Compile Include="src\Components\CenterCom.cs" />
     <Compile Include="src\Components\AreaClickedCom.cs" />
     <Compile Include="src\Components\CirclePostionCom.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="src\Components\TriggerIfResolved.cs" />
     <Compile Include="src\Components\TriggredIntervalTriggerCom.cs" />
     <Compile Include="src\Components\UpdateFollowerCount.cs" />
+    <Compile Include="src\Components\ValueCom.cs" />
     <Compile Include="src\Direction.cs" />
     <Compile Include="src\Managers\FontManger.cs" />
     <Compile Include="src\Components\GoalReachedCom.cs" />

@@ -57,7 +57,7 @@
         {
             "EnityToJson":{
                 "Tags":[
-                    "timer"
+                    "timer", "changer"
                 ],
                 "Components":[
                     {
@@ -132,11 +132,17 @@
                             }
                         ]
                     },
+                   {
+                        "$type":"VFVGAVFAF.src.Components.BoolValueCom, VFVGAVFAF",
+                        "Alias":"mingame_result",
+                        "Value":false
+                    },        
                     {
                         "$type":"VFVGAVFAF.src.Components.GoalReachedCom, VFVGAVFAF",
                         "TimeToComplete":0,
                         "Cooldown":0,
-                        "Alias":"goal_reached"
+                        "Alias":"goal_reached",
+                        "GoalResultAlias":"mingame_result"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",

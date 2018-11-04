@@ -314,6 +314,12 @@
                     "Cooldown":0,
                     "NextSence":"Minigames\\change.json",
                     "ToPass":[
+                        {
+                            "$type":"VFVGAVFAF.src.PassBool, VFVGAVFAF",
+                            "TargetAlais":"mingame_result",
+                            "TagMatchPattern":"changer",
+                            "Value":true
+                        }
                     ]
                 }
             ]
@@ -353,6 +359,12 @@
                     "Cooldown":0,
                     "NextSence":"Minigames\\change.json",
                     "ToPass":[
+                        {
+                            "$type":"VFVGAVFAF.src.PassBool, VFVGAVFAF",
+                            "TargetAlais":"mingame_result",
+                            "TagMatchPattern":"changer",
+                            "Value":false
+                        }
                     ]
                 }
             ]
@@ -392,6 +404,12 @@
                     "Cooldown":0,
                     "NextSence":"Minigames\\change.json",
                     "ToPass":[
+                        {
+                            "$type":"VFVGAVFAF.src.PassBool, VFVGAVFAF",
+                            "TargetAlais":"mingame_result",
+                            "TagMatchPattern":"changer",
+                            "Value":false
+                        }
                     ]
                 }
             ]
@@ -416,6 +434,12 @@
                 "Cooldown":0,
                 "NextSence":"Minigames\\change.json",
                 "ToPass":[
+                    {
+                        "$type":"VFVGAVFAF.src.PassBool, VFVGAVFAF",
+                        "TargetAlais":"mingame_result",
+                        "TagMatchPattern":"changer",
+                        "Value":true
+                    }
                 ]
             }
         ],
@@ -436,6 +460,12 @@
                 "Cooldown":0,
                 "NextSence":"Minigames\\change.json",
                 "ToPass":[
+                    {
+                        "$type":"VFVGAVFAF.src.PassBool, VFVGAVFAF",
+                        "TargetAlais":"mingame_result",
+                        "TagMatchPattern":"changer",
+                        "Value":false
+                    }
                 ]
             }
         ],

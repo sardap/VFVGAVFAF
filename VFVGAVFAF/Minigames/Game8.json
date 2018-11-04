@@ -114,8 +114,8 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                        },
+                        "Actions":[
+                        ],
                         "speed":300
                     },
                     {

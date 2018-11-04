@@ -201,3 +201,9 @@
 /processorParam:Quality=Best
 /build:Sounds/stop_3.wav
 
+#begin Sounds/gameFailure.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/gameFailure.mp3
+

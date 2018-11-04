@@ -13,6 +13,7 @@ using VFVGAVFAF.src;
 using VFVGAVFAF.src.Sence;
 using Newtonsoft.Json;
 using VFVGAVFAF.src.Pathfinding;
+using System.Text.RegularExpressions;
 
 namespace VFVGAVFAF.src
 {
@@ -111,7 +112,6 @@ namespace VFVGAVFAF.src
 				dynamic dCom = ent.GetComponent<IComponent>(entry.TargetAlais);
 				dCom.Value = entry.DValue;
 			}
-
 
 			return entID;
 		}

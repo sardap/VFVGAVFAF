@@ -92,37 +92,15 @@ namespace VFVGAVFAF.src
 			_stepManager = new StepManager() { ComponentManager = _componentManager };
 			_gameEvenetPostMaster = new GameEvenetPostMaster(_componentManager);
 			_gameInfo = new GameInfo(graphics);
-			_minigameManger = new MinigameManger()
-			{
-				SenceManger = _senceManger,
-				MinigameFiles = new List<string>()
-				{
-					//@"Minigames\Game1.json"
-					/*
-					@"Minigames\Game2.json",
-					@"Minigames\Game3.json",
-					@"Minigames\Game4.json",
-					@"Minigames\Game5.json",
-					@"Minigames\Game6.json",
-					@"Minigames\Game7.json",
-					@"Minigames\Game8.json",
-					@"Minigames\Game9.json",
-					*/
-					@"Minigames\Game10.json"
-				}
-			};
 
-			JsonSerializerSettings settings = new JsonSerializerSettings
-			{
-				TypeNameHandling = TypeNameHandling.Auto
-			};
+			_minigameManger = Utils.GetFromJsonFile<MinigameManger>(@"Minigames\MinigameList.json");
+			_minigameManger.SenceManger = _senceManger;
 
 			_entiyBlueprintManger =  JsonConvert.DeserializeObject<BlueprintManger>
 			(
 				Utils.ReadEntireFile(@"Minigames\Blueprints.json"),
-				settings
+				Utils.JsonSettings
 			);
-
 
 			_gameObjectFactory = new GameObjectFactory
 			{
@@ -179,7 +157,7 @@ namespace VFVGAVFAF.src
 		private void SetupPlayer()
 		{
 			_senceManger.LoadFile("background", @"Minigames\Background.json", new List<IPassValue>());
-			_minigameManger.PlayNext();
+			_minigameManger.PlayNext(false);
 
 			/*
 			JsonSerializerSettings _settings = new JsonSerializerSettings

@@ -7,7 +7,7 @@ using VFVGAVFAF.src.Sence;
 
 namespace VFVGAVFAF.src.Components
 {
-	class SwapWithSenceCom: IGameEventCom,  INeedSenceManger
+	class SwapWithSenceCom: IGameEventCom,  INeedSenceManger, INeedEnityManger
 	{
 		public long EntID { get; set; }
 
@@ -23,8 +23,22 @@ namespace VFVGAVFAF.src.Components
 
 		public ISenceManger SenceManger { get; set; }
 
+		public EntityManager EntityManager { get; set; }
+
 		public void Action()
 		{
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+
+			for (int i = 0; i < ToPass.Count; i++)
+			{
+				if(ToPass[i] is INeedFromCom)
+				{
+					var com = ent.GetComponent<IValueCom>(((INeedFromCom)ToPass[i]).Alias);
+
+					((INeedFromCom)ToPass[i]).SetValue(com.DValue);
+				}
+			}
+
 			SenceManger.LoadMainFile(NextSence, ToPass);
 		}
 	}
