@@ -81,6 +81,7 @@
     <Compile Include="src\Components\FontRenderCom.cs" />
     <Compile Include="src\Components\FreezeComCom.cs" />
     <Compile Include="src\Components\GetPathCom.cs" />
+    <Compile Include="src\Components\IHaveStringFormat.cs" />
     <Compile Include="src\Components\ITextAlign.cs" />
     <Compile Include="src\Components\KeyboardInputDepdentCom.cs" />
     <Compile Include="src\Components\LivesValueCom.cs" />

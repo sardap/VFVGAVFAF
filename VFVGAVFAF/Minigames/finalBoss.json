@@ -53,6 +53,10 @@
                         "$type":"VFVGAVFAF.src.Components.TimerCom, VFVGAVFAF",
                         "Alias":"timer_value",
                         "EndTimeAlias":"timer_max_value",
+                        "Opreator":
+                        {
+                            "$type":"VFVGAVFAF.src.Components.TimerCom+CountUpOpreator, VFVGAVFAF"
+                        },
                         "GameEvents":[
                             "failure_reached"
                         ]
@@ -269,12 +273,17 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
                         "Alias":"timer_max_value",
-                        "Value":60
+                        "Value":20
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.TimerCom, VFVGAVFAF",
                         "Alias":"timer_value",
                         "EndTimeAlias":"timer_max_value",
+                        "Opreator":
+                        {
+                            "$type":"VFVGAVFAF.src.Components.TimerCom+CountDownOpreator, VFVGAVFAF"
+                        },
+                        "FormatString":"{0:0.00}",
                         "GameEvents":[
                             "goal_reached"
                         ]
@@ -282,7 +291,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
                         "Postion2D":{
-                            "X":230,
+                            "X":0,
                             "Y":200
                         },
                         "Alias":"pos"
@@ -304,7 +313,8 @@
                         "ValueAlais":"timer_value",
                         "FontName":"Fonts/Russian",
                         "ColorAlias":"text_color",
-                        "Scale":1
+                        "TextAlignAlias":["text_center_com"],
+                        "Scale":2
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.CenterTextAlignCom, VFVGAVFAF",

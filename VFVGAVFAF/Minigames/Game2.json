@@ -567,10 +567,35 @@
         },
         {
             "EnityToJson":{
-                "Tags":["game",
-                    "timer"
-                ],
+                "Tags":["game","timer"],
                 "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"timer_max_value",
+                        "Value":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TimerCom, VFVGAVFAF",
+                        "Alias":"timer_value",
+                        "EndTimeAlias":"timer_max_value",
+                        "Opreator":
+                        {
+                            "$type":"VFVGAVFAF.src.Components.TimerCom+CountDownOpreator, VFVGAVFAF"
+                        },
+                        "FormatString":"{0:0}",
+                        "GameEvents":[
+                            "failure_reached"
+                        ]
+                    },
                     {
                         "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
                         "Postion2D":{
@@ -580,85 +605,34 @@
                         "Alias":"pos"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
-                        "Alias":"game_bounds"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
-                        "Alias":"count_down_value",
-                        "Value":9
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DoubleValueUpdateCom, VFVGAVFAF",
-                        "Alias":"count_down_value_updater",
-                        "TimeToComplete":0,
-                        "CoolDown":0,
-                        "IncmrenetChange":-1,
-                        "ValueAlais":"count_down_value"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
-                        "Alias":"text",
-                        "Value":"9"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.AssignDoubleToStringValueCom, VFVGAVFAF",
-                        "Alias":"update_text",
-                        "TimeToComplete":0,
-                        "Cooldown":0,
-                        "SourceAlais":"count_down_value",
-                        "TargetAlais":"text"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.IntervalTriggerCom, VFVGAVFAF",
-                        "Cooldown":1,
-                        "EventAlais":[
-                            "count_down_value_updater",
-                            "update_text"
-                        ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
-                        "Alias":"rend",
-                        "PostionAlais":"pos",
-                        "TextAlais":"text",
-                        "Scale":2.5,
-                        "Color":{
+                        "$type":"VFVGAVFAF.src.Components.ColorValueCom, VFVGAVFAF",
+                        "Alias":"text_color",
+                        "Value":{
                             "B":0,
                             "G":0,
                             "R":255,
                             "A":255
-                        },
-                        "FontName":"Fonts/Russian"
+                        }
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
-                        "RunsRemaining":1,
+                        "$type":"VFVGAVFAF.src.Components.FontRendDoubleCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "ValueAlais":"timer_value",
+                        "FontName":"Fonts/Russian",
+                        "ColorAlias":"text_color",
+                        "TextAlignAlias":["text_center_com"],
+                        "Scale":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterTextAlignCom, VFVGAVFAF",
+                        "Alias":"text_center_com",
                         "SizeGetterAlais":"rend",
                         "BoundsAlais":"game_bounds",
                         "PostionAlais":"pos",
                         "CenterOperations":[
                             {
                                 "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
-                            }
-                        ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
-                        "Alias":"failure_reached",
-                        "BlueprintName":"failure_reached"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom, VFVGAVFAF",
-                        "ToWatchAlais":"count_down_value",
-                        "Triggers":[
-                            {
-                                "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
-                                "Opreator":0,
-                                "Value":-1,
-                                "GameEvents":[
-                                    "failure_reached"
-                                ]
                             }
                         ]
                     }

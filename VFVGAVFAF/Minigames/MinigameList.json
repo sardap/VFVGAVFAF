@@ -1,6 +1,6 @@
 {
   "MinigameFiles": [
-    "Minigames\\finalBoss.json"
+    "Minigames\\Game2.json"
   ],
   "FinalGame": "Minigames\\FinalBoss.json",
   "FinalScreen": "Minigames\\GameVictoryScreen.json",

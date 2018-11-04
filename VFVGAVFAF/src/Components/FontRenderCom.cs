@@ -32,6 +32,9 @@ namespace VFVGAVFAF.src.Components
 
 		public float Scale { get; set; }
 
+		public List<string> TextAlignAlias { get; set; }
+
+
 		public FontManger FontManger
 		{
 			get
@@ -59,25 +62,47 @@ namespace VFVGAVFAF.src.Components
 			}
 		}
 
-		public Vector2 Size()
+		public FontRendValueCom()
 		{
-			var text = EntityManager.GetEntiy<GameObject>(EntID).GetComponent<IValueCom<T>>(ValueAlais).Value.ToString();
-			return _font.MeasureString(text) * Scale;
+			TextAlignAlias = new List<string>();
 		}
 
+		public Vector2 Size()
+		{
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			var text = GetValueAsString(ent);
+			return _font.MeasureString(text) * Scale;
+		}
 
 		public void Render(double deltaTime)
 		{
 			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			TextAlignAlias.ForEach(i => ent.GetComponent<ITextAlign>(i).Align());
+
+			string text = GetValueAsString(ent);
+
 			var postion = ent.GetComponent<IPostionComponet>(PostionAlais).GetPostion();
-			var text = ent.GetComponent<IValueCom<T>>(ValueAlais).Value.ToString();
+
 			var color = ent.GetComponent<IValueCom<Color>>(ColorAlias).Value;
 			SpriteBatch.DrawString(_font, text, postion.ToVector(), color, 0, new Vector2(), Scale, SpriteEffects.None, 0);
 		}
 
-		Vector2 IGetSizeCom.Size()
+		private string GetValueAsString(GameObject ent)
 		{
-			throw new NotImplementedException();
+			string text;
+			var valueCom = ent.GetComponent<IValueCom<T>>(ValueAlais);
+
+			if (valueCom is IHaveFormatString)
+			{
+				text = string.Format(((IHaveFormatString)valueCom).FormatString, valueCom.Value);
+			}
+			else
+			{
+				text = valueCom.Value.ToString();
+			}
+
+			return text;
+
 		}
 	}
 

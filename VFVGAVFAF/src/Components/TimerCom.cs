@@ -7,9 +7,68 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class TimerCom: IStepCom, IHaveAlias, IValueCom<double>, IValueCom, INeedPostMaster, INeedEnityManger
+	class TimerCom: IStepCom, IHaveAlias, IValueCom<double>, IValueCom, INeedPostMaster, INeedEnityManger, IHaveFormatString
 	{
+		public interface IOpreator
+		{
+			void Initlise(TimerCom timerCom);
+
+			void Calclate(TimerCom timerCom, double deltaTime);
+
+			void Reset(TimerCom timerCom);
+
+			bool Finshed(TimerCom timerCom);
+		}
+
+		public class CountUpOpreator: IOpreator
+		{
+			public void Initlise(TimerCom timerCom)
+			{
+				timerCom._currentTime = 0;
+			}
+
+			public void Calclate(TimerCom timerCom, double deltaTime)
+			{
+				timerCom._currentTime += deltaTime;
+			}
+
+			public void Reset(TimerCom timerCom)
+			{
+				Initlise(timerCom);
+			}
+
+			public bool Finshed(TimerCom timerCom)
+			{
+				return timerCom._currentTime > timerCom.EndTime;
+			}
+		}
+
+		public class CountDownOpreator: IOpreator
+		{
+			public void Initlise(TimerCom timerCom)
+			{
+				timerCom._currentTime = timerCom.EndTime;
+			}
+
+			public void Calclate(TimerCom timerCom, double deltaTime)
+			{
+				timerCom._currentTime -= deltaTime;
+			}
+
+			public void Reset(TimerCom timerCom)
+			{
+				Initlise(timerCom);
+			}
+
+			public bool Finshed(TimerCom timerCom)
+			{
+				return timerCom._currentTime < 1;
+			}
+
+		}
+
 		private double _currentTime;
+		private bool _initslise = false;
 
 		public long EntID { get; set; }
 
@@ -19,6 +78,11 @@ namespace VFVGAVFAF.src.Components
 		public string EndTimeAlias { get; set; }
 
 		public List<string> GameEvents { get; set; }
+
+		[JsonRequired]
+		public IOpreator Opreator { get; set; }
+
+		public string FormatString { get; set; }
 
 		[JsonIgnore]
 		public double EndTime
@@ -38,21 +102,37 @@ namespace VFVGAVFAF.src.Components
 
 		public EntityManager EntityManager { get; set; }
 
+		public TimerCom()
+		{
+			FormatString = "{0:0.00}";
+		}
+
 		public void Step(double deltaTime)
 		{
-			_currentTime += deltaTime;
-
-			if(_currentTime > EndTime)
+			if(!_initslise)
 			{
-				_currentTime = 0;
-				var ent = EntityManager.GetEntiy<GameObject>(EntID);
-				GameEvents.ForEach(i => GameEvenetPostMaster.Add(ent.GetIdForAlais(i)));
+				_initslise = true;
+				Reset();
+			}
+
+			Opreator.Calclate(this, deltaTime);
+
+			if(Opreator.Finshed(this))
+			{
+				Opreator.Reset(this);
+				ExcuteEvents();
 			}
 		}
 
 		public void Reset()
 		{
-			_currentTime = 0;
+			Opreator.Reset(this);
+		}
+
+		private void ExcuteEvents()
+		{
+			var ent = EntityManager.GetEntiy<GameObject>(EntID);
+			GameEvents.ForEach(i => GameEvenetPostMaster.Add(ent.GetIdForAlais(i)));
 		}
 	}
 }
