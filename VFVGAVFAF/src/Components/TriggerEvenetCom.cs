@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class TriggerEvenetCom : IComponent, INeedPostMaster, IStepCom, INeedEnityManger, IRunXTimesCom
+	class TriggerEvenetCom: IComponent, INeedPostMaster, IStepCom, INeedEnityManger, IRunXTimesCom
 	{
 		private bool _ran = false;
 

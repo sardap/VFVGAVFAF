@@ -14,6 +14,7 @@ namespace VFVGAVFAF.src
 		private Stack<long> _nextIDs = new Stack<long>();
 		private Stack<long> _toDestroy = new Stack<long>();
 		private long _lastOrderedID = 0;
+		private Dictionary<string, long> _aliasTable = new Dictionary<string, long>();
 
 		public Dictionary<string, long> InstanceCount = new Dictionary<string, long>();
 
@@ -57,6 +58,9 @@ namespace VFVGAVFAF.src
 				}
 
 				InstanceCount[entity.Alias]++;
+
+				if(!_aliasTable.ContainsKey(entity.Alias))
+					_aliasTable.Add(entity.Alias, newID);
 			}
 
 			return newID;
@@ -66,6 +70,12 @@ namespace VFVGAVFAF.src
 		{
 			return (T)_entityTable[id];
 		}
+
+		public T GetEntiy<T>(string alias) where T : IEntity
+		{
+			return (T)_entityTable[_aliasTable[alias]];
+		}
+
 
 		public void RegsiterToDestory(long id)
 		{
@@ -119,6 +129,7 @@ namespace VFVGAVFAF.src
 				if (ent.Alias != null)
 				{
 					InstanceCount[ent.Alias]--;
+					_aliasTable.Remove(ent.Alias);
 				}
 
 				ent.KillYourself();

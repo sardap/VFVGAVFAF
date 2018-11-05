@@ -5,22 +5,21 @@
             "EnityToJson":{
                 "Components":[
                     {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/clapping",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.0,
+                        "Alias":"clapping"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "EventAlais":["clapping"]
+                    },
+                    {
                         "$type":"VFVGAVFAF.src.Components.StopMusicCom, VFVGAVFAF",
                         "Alias":"stop_music",
                         "TimeToComplete":0,
                         "Cooldown":0
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
-                        "Alias":"remove_ui",
-                        "TimeToComplete":0,
-                        "Cooldown":0,
-                        "MatchPattern":"ui",
-                        "Mangers":[0, 1, 2, 3]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
-                        "EventAlais":["stop_music", "remove_ui"]
                     }
                 ]
             },
@@ -42,7 +41,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"YOU HAVE FAILED THE PROLETARIAT"
+                        "Value":"YOU HAVE SAVED THE PROLETARIAT"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
@@ -52,8 +51,8 @@
                         "Scale":1,
                         "Color":{
                             "B":0,
-                            "G":255,
-                            "R":0,
+                            "G":0,
+                            "R":255,
                             "A":255
                         },
                         "FontName":"Fonts/Russian"
@@ -73,17 +72,6 @@
                                 "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
                             }
                         ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
-                        "EventAlais":["play_end_sound"]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Alias":"play_end_sound",
-                        "TimeToComplete":0,
-                        "Cooldown":0,
-                        "Sound":"Sounds//game_failure"
                     }
                 ]
             },
@@ -105,7 +93,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Value":"YOU WILL ALWAYS BE A SLAVE TO BOURGEOISIE"
+                        "Value":"YOU WILL NEVER BE FORGOTTEN COMRADE"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
@@ -115,8 +103,8 @@
                         "Scale":0.7,
                         "Color":{
                             "B":0,
-                            "G":255,
-                            "R":0,
+                            "G":0,
+                            "R":128,
                             "A":255
                         },
                         "FontName":"Fonts/Russian"

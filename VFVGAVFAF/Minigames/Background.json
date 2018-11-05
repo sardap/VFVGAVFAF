@@ -70,7 +70,7 @@
         },
         {
             "EnityToJson":{
-                "Tags":["background", "lives_left"],
+                "Tags":["background", "lives_left", "ui"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",

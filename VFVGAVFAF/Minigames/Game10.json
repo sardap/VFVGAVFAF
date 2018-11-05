@@ -189,7 +189,7 @@
                     {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Speed":350,
+                        "Speed":250,
                         "Actions":[
                             {
                                 "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
@@ -713,7 +713,7 @@
                             "X":170,
                             "Y":350
                         },
-                        "speed":300,
+                        "speed":200,
                         "ObstaclePattern":"wall",
                         "PathUpdateInterval":0.1
                     },
@@ -728,7 +728,7 @@
                             "X":700,
                             "Y":350
                         },
-                       "speed":300,
+                       "speed":200,
                         "Radius":10
                     },
                     {
@@ -945,7 +945,7 @@
                             "X":170,
                             "Y":130
                         },
-                        "speed":500,
+                        "speed":220,
                         "ObstaclePattern":"wall",
                         "PathUpdateInterval":0.1
                     },
@@ -960,7 +960,7 @@
                             "X":700,
                             "Y":130
                         },
-                       "speed":500,
+                       "speed":220,
                         "Radius":10
                     },
                     {
@@ -1327,7 +1327,7 @@
                             {
                                 "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
                                 "Opreator":0,
-                                "Value":-1,
+                                "Value":0,
                                 "GameEvents":[
                                     "goal_reached"
                                 ]

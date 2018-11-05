@@ -115,7 +115,14 @@ namespace VFVGAVFAF.src
 
 			postsCopy = _posts.ToList().ToDictionary(i => i.Key, i => i.Value);
 
-			foreach (var entry in postsCopy)
+			ProcessPosts(deltaTime, postsCopy);
+		}
+
+		private void ProcessPosts(double deltaTime, Dictionary<STuple, IPostData> posts)
+		{
+			var toRemove = new Stack<STuple>();
+
+			foreach (var entry in posts)
 			{
 				var value = entry.Value;
 				var key = entry.Key;
@@ -138,11 +145,36 @@ namespace VFVGAVFAF.src
 
 					com.Action();
 
-					_posts.Remove(key);
+					toRemove.Push(key);
 				}
 			}
 
-			_removedLastStep.Clear();
+			while(toRemove.Count > 0)
+			{
+				_posts.Remove(toRemove.Peek());
+				posts.Remove(toRemove.Pop());
+			}
+
+			foreach(var entry in _posts)
+			{
+				if(!posts.ContainsKey(entry.Key))
+				{
+					posts.Add(entry.Key, entry.Value);
+				}
+				else
+				{
+					posts.Remove(entry.Key);
+				}
+			}
+
+			if(posts.Count > 0)
+			{
+				Dictionary<STuple, IPostData> postsCopy = new Dictionary<STuple, IPostData>();
+
+				postsCopy = posts.ToList().ToDictionary(i => i.Key, i => i.Value);
+
+				ProcessPosts(deltaTime, postsCopy);
+			}
 		}
 
 		private void Add(STuple key, IGameEventCom gameEvenet)

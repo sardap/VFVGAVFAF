@@ -116,7 +116,9 @@
     <Compile Include="src\Components\PostionTagConstrant.cs" />
     <Compile Include="src\Components\PostionTrigerCom.cs" />
     <Compile Include="src\Components\ResetSenceCom.cs" />
+    <Compile Include="src\Components\TriggedEventTriggerCom.cs" />
     <Compile Include="src\Components\TriggerIfResolved.cs" />
+    <Compile Include="src\Components\TriggerOtherEntCom.cs" />
     <Compile Include="src\Components\TriggredIntervalTriggerCom.cs" />
     <Compile Include="src\Components\UpdateFollowerCount.cs" />
     <Compile Include="src\Components\ValueCom.cs" />

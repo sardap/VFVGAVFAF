@@ -3,25 +3,26 @@
     "Entries":[
         {
             "EnityToJson":{
+               "Tags":["game","player"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{
-                                "X":5.0,
-                                "Y":300.0
+                                "X":400,
+                                "Y":300
                             },
-                            "Width":10,
-                            "Height":10
+                            "Width":30,
+                            "Height":30
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
-                            "gameBoundsConstrant"
                         ],
                         "RandomStartPos":false
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "Alias":"rend_rect",
                         "RectPosAlais":"pos",
                         "Color":{
                             "B":0,
@@ -32,96 +33,123 @@
                         "TextureName":"Images/player"
                     },
                     {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "Alias":"rend_outline",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
+                        "Alias":"gun_shoot",
+                        "TimeToComplete":0,
+                        "Cooldown":1000,
+                        "BulletBlueprint":"player_bullet",
+                        "PostionAlais":"pos",
+                        "ExitDirection":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Alias":"gun_shot_sound",
+                        "TimeToComplete":0.0,
+                        "Cooldown":0.2,
+                        "Song":"Sounds/gun_shot"
+                    },
+                    {
                         "$type":"VFVGAVFAF.src.Components.KeyboardInputCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "Actions":{
-                            "82":"change"
-                        },
-                        "speed":300
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
+                        "Actions":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.KeyboardInputCom+KeyboardTrigger, VFVGAVFAF",
+                                "Key":32, 
+                                "State":2,
+                                "GameEvents":["gun_shoot", "gun_shot_sound", "commsiar_shoot", "hide_first_text", "show_2nd_text"]
+                            }
                         ],
-                        "RandomStartPos":false
+                        "speed":0
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"gameBoundsConstrant"
+                        "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                        "Alias":"hide_secound_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "MatchPattern":"secound_text",
+                        "Mangers":[0]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/dmgt",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"damageSound"
+                        "$type":"VFVGAVFAF.src.Components.TriggerOtherEntCom, VFVGAVFAF",
+                        "Alias":"commsiar_shoot",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "OtherEntAlias":"commisar",
+                        "EventAlais":["gun_shoot"]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
-                        "Song":"Sounds/player_respawn",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"respawnSound"
+                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "EventAlais":["hide_secound_text"]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.ResetSenceCom, VFVGAVFAF",
-                        "Alias":"change"
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"goal_reached",
+                        "BlueprintName":"goal_reached"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.GrowRectCom, VFVGAVFAF",
-                        "Rate":7,
-                        "RectPosAlais":"pos"
+                        "$type":"VFVGAVFAF.src.Components.TriggedEventTriggerCom, VFVGAVFAF",
+                        "Alias":"wait_1",
+                        "TimeToComplete":1,
+                        "EventAlais":["goal_reached"]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeComCom, VFVGAVFAF",
+                        "Alias":"freeze_player_render",
+                        "ToFreezeAlias":["rend_rect", "rend_outline"],
+                        "Mangers":[0]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FreezeCom, VFVGAVFAF",
+                        "Alias":"hide_first_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "MatchPattern":"first_text",
+                        "Mangers":[0]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.MeltCom, VFVGAVFAF",
+                        "Alias":"show_2nd_text",
+                        "TimeToComplete":0,
+                        "Cooldown":0,
+                        "MatchPattern":"secound_text",
+                        "Mangers":[0]
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
-                        "HP":9,
-                        "MaxHP":9,
-                        "StartingHP":9,
+                        "HP":1,
+                        "MaxHP":1,
+                        "StartingHP":1,
                         "Evenets":[
                             {
-                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
-                                "GameEvents":[
-                                    "damageSound"
-                                ]
-                            },
-                            {
+                                
                                 "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
                                 "Opreator":2,
                                 "Value":0,
                                 "GameEvents":[
-                                    "respawn",
-                                    "respawnSound",
-                                    "change"
+                                    "wait_1", "freeze_player_render"
                                 ]
                             }
                         ]
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.RespawnCom, VFVGAVFAF",
-                        "PosComAlais":"pos",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"respawn"
-                    },
-                    {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "GameEventComs":[
-
-                        ]
+                        "GameEventComs":{
+                        }
                     }
                 ]
             },
@@ -129,376 +157,20 @@
         },
         {
             "EnityToJson":{
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":1,
-                                "Y":1
-                            },
-                            "Width":150,
-                            "Height":50
-                        },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                            "gameBoundsConstrant"
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
-                            "A":255
-                        },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
-                        "Alias":"directionCom",
-                        "TriggeredAtTarget":[
-
-                        ],
-                        "Start":{
-                            "X":1,
-                            "Y":1
-                        },
-                        "End":{
-                            "X":1.0,
-                            "Y":500.0
-                        },
-                        "speed":200,
-                        "Radius":30.0,
-                        "PosAlais":"pos"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"gameBoundsConstrant"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "GameEventComs":[
-                            "damage"
-                        ]
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":50,
-                                "Y":1
-                            },
-                            "Width":150,
-                            "Height":50
-                        },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                            "gameBoundsConstrant"
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
-                            "A":255
-                        },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
-                        "Alias":"directionCom",
-                        "TriggeredAtTarget":[
-
-                        ],
-                        "Start":{
-                            "X":50,
-                            "Y":1
-                        },
-                        "End":{
-                            "X":50,
-                            "Y":500.0
-                        },
-                        "speed":200,
-                        "Radius":30.0,
-                        "PosAlais":"pos"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"gameBoundsConstrant"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "GameEventComs":[
-                            "damage"
-                        ]
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":400,
-                                "Y":1
-                            },
-                            "Width":150,
-                            "Height":50
-                        },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                            "gameBoundsConstrant"
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
-                            "A":255
-                        },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
-                        "Alias":"directionCom",
-                        "TriggeredAtTarget":[
-
-                        ],
-                        "Start":{
-                            "X":400,
-                            "Y":1
-                        },
-                        "End":{
-                            "X":400,
-                            "Y":500.0
-                        },
-                        "speed":200,
-                        "Radius":30.0,
-                        "PosAlais":"pos"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"gameBoundsConstrant"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "GameEventComs":[
-                            "damage"
-                        ]
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
-                "Components":[
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":400,
-                                "Y":500
-                            },
-                            "Width":50,
-                            "Height":50
-                        },
-                        "Alias":"pos",
-                        "PostionConstrantComs":[
-                            "gameBoundsConstrant"
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
-                            "A":255
-                        },
-                        "TextureName":"Images/player"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
-                        "Alias":"directionCom",
-                        "TriggeredAtTarget":[
-
-                        ],
-                        "Start":{
-                            "X":400,
-                            "Y":500
-                        },
-                        "End":{
-                            "X":400,
-                            "Y":1
-                        },
-                        "speed":200,
-                        "Radius":30.0,
-                        "PosAlais":"pos"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
-                        ],
-                        "RandomStartPos":false
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"gameBoundsConstrant"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "GameEventComs":[
-                            "damage"
-                        ]
-                    }
-                ]
-            },
-            "Count":1
-        },
-        {
-            "EnityToJson":{
+                "Tags":["game", "enemy"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{
                                 "X":300,
-                                "Y":400
+                                "Y":300
                             },
-                            "Width":50,
-                            "Height":50
+                            "Width":30,
+                            "Height":30
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
-                            "gameBoundsConstrant"
                         ],
                         "RandomStartPos":false
                     },
@@ -506,67 +178,60 @@
                         "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "Color":{
-                            "B":255,
-                            "G":0,
-                            "R":0,
+                            "B":25,
+                            "G":25,
+                            "R":200,
                             "A":255
                         },
                         "TextureName":"Images/player"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.PatrolContorlerCom, VFVGAVFAF",
-                        "Alias":"directionCom",
-                        "TriggeredAtTarget":[
-
-                        ],
-                        "Start":{
-                            "X":300,
-                            "Y":400
-                    },
-                        "End":{
-                            "X":400,
-                            "Y":200
-                        },
-                        "speed":500,
-                        "Radius":30.0,
-                        "PosAlais":"pos"
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
-                        "Paultangle":{
-                            "Postion2D":{
-                                "X":0.0,
-                                "Y":0.0
-                            },
-                            "Width":800,
-                            "Height":600
-                        },
-                        "Alias":"gameBounds",
-                        "PostionConstrantComs":[
-
-                        ],
-                        "RandomStartPos":false
+                        "$type":"VFVGAVFAF.src.Components.SelfDestructionCom, VFVGAVFAF",
+                        "Alias":"self_destcut",
+                        "TimeToComplete":0
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.RectConstrantCom, VFVGAVFAF",
-                        "RectPosAlais":"gameBounds",
-                        "Inside":true,
-                        "Type":0,
-                        "Alias":"gameBoundsConstrant"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.DamageCom, VFVGAVFAF",
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Song":"Sounds/enmey_die",
                         "TimeToComplete":0.0,
-                        "Cooldown":0.5,
-                        "Damage":-10,
-                        "Alias":"damage"
+                        "Cooldown":0.0,
+                        "Alias":"enmey_die"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":1,
+                        "MaxHP":1,
+                        "StartingHP":1,
+                        "Evenets":[
+                            {
+                                
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPOpTrigger, VFVGAVFAF",
+                                "Opreator":2,
+                                "Value":0,
+                                "GameEvents":[
+                                    "enmey_die",
+                                    "self_destcut"
+                                ]
+                            }
+                        ]
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
-                        "GameEventComs":[
-                            "damage"
-                        ]
+                        "GameEventComs":{
+                        }
                     }
                 ]
             },
@@ -574,16 +239,18 @@
         },
         {
             "EnityToJson":{
+                "Alias":"commisar",
+                "Tags":["game", "commisar"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
                         "Paultangle":{
                             "Postion2D":{
-                                "X":700,
-                                "Y":0
+                                "X":600,
+                                "Y":300
                             },
-                            "Width":50,
-                            "Height":100
+                            "Width":30,
+                            "Height":30
                         },
                         "Alias":"pos",
                         "PostionConstrantComs":[
@@ -594,40 +261,167 @@
                         "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
                         "RectPosAlais":"pos",
                         "Color":{
-                            "B":139,
-                            "G":39,
-                            "R":19,
+                            "B":25,
+                            "G":25,
+                            "R":255,
                             "A":255
                         },
                         "TextureName":"Images/player"
                     },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectOutlineRendCom, VFVGAVFAF",
+                        "HitBoxAlias":"pos",
+                        "TextureName":"Images/player",
+                        "LineWidth":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GunCom, VFVGAVFAF",
+                        "Alias":"gun_shoot",
+                        "TimeToComplete":1,
+                        "Cooldown":1000,
+                        "BulletBlueprint":"enemy_bullet",
+                        "PostionAlais":"pos",
+                        "ExitDirection":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.PlaySoundEventCom, VFVGAVFAF",
+                        "Alias":"gun_shot_sound",
+                        "TimeToComplete":1,
+                        "Cooldown":1000,
+                        "Song":"Sounds/gun_shot"
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["game","wall"],
+                "Components":[
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",
+                        "Paultangle":{
+                            "Postion2D":{
+                                "X":0,
+                                "Y":250
+                            },
+                            "Width":260,
+                            "Height":600
+                        },
+                        "Alias":"pos",
+                        "PostionConstrantComs":[
+                        ],
+                        "RandomStartPos":false
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectRendCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "Color":{
+                            "B":169,
+                            "G":169,
+                            "R":169,
+                            "A":255
+                        },
+                        "TextureName":"Images/player"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.HealthCom, VFVGAVFAF",
+                        "HP":0,
+                        "MaxHP":0,
+                        "StartingHP":0,
+                        "Evenets":[
+                            {
+                                "$type":"VFVGAVFAF.src.Components.HealthCom+HPChangeTrigger, VFVGAVFAF",
+                                "GameEvents":[
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
+                        "RectPosAlais":"pos",
+                        "GameEventComs":{
+                        }
+                    }
+                ]
+            },
+            "Count":1
+        },
+        {
+            "EnityToJson":{
+                "Tags":["game","timer"],
+                "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
                         "Alias":"game_bounds"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
-                        "RunsRemaining":1,
-                        "SizeGetterAlais":"pos",
+                        "$type":"VFVGAVFAF.src.Components.LoadComBlueprintCom, VFVGAVFAF",
+                        "Alias":"failure_reached",
+                        "BlueprintName":"failure_reached"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.DoubleValueCom, VFVGAVFAF",
+                        "Alias":"timer_max_value",
+                        "Value":10
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.TimerCom, VFVGAVFAF",
+                        "Alias":"timer_value",
+                        "EndTimeAlias":"timer_max_value",
+                        "Opreator":
+                        {
+                            "$type":"VFVGAVFAF.src.Components.TimerCom+CountDownOpreator, VFVGAVFAF"
+                        },
+                        "FormatString":"{0:0}",
+                        "GameEvents":[
+                            "failure_reached"
+                        ]
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":500
+                        },
+                        "Alias":"pos"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.ColorValueCom, VFVGAVFAF",
+                        "Alias":"text_color",
+                        "Value":{
+                            "B":0,
+                            "G":0,
+                            "R":255,
+                            "A":255
+                        }
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendDoubleCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "ValueAlais":"timer_value",
+                        "FontName":"Fonts/Russian",
+                        "ColorAlias":"text_color",
+                        "TextAlignAlias":["text_center_com"],
+                        "Scale":2
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterTextAlignCom, VFVGAVFAF",
+                        "Alias":"text_center_com",
+                        "SizeGetterAlais":"rend",
                         "BoundsAlais":"game_bounds",
                         "PostionAlais":"pos",
                         "CenterOperations":[
                             {
-                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
                             }
-                        ]
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.GoalReachedCom, VFVGAVFAF",
-                        "TimeToComplete":0,
-                        "Cooldown":0,
-                        "Alias":"goal_reached"
-                    },
-                    {
-                        "$type":"VFVGAVFAF.src.Components.RectCollisionCom, VFVGAVFAF",
-                        "RectPosAlais":"pos",
-                        "GameEventComs":[
-                            "goal_reached"
                         ]
                     }
                 ]
@@ -636,25 +430,27 @@
         },
         {
             "EnityToJson":{
+                "Tags":["game","text", "secound_text"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
                         "Postion2D":{
                             "X":0,
-                            "Y":0
+                            "Y":50
                         },
                         "Alias":"pos"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
                         "Alias":"text",
-                        "Text":"I love hyesoo"
+                        "Value":"GET SHOT"
                     },
                     {
                         "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
                         "Alias":"rend",
                         "PostionAlais":"pos",
                         "TextAlais":"text",
+                        "Scale":1,
                         "Color":{
                             "B":0,
                             "G":0,
@@ -675,9 +471,6 @@
                         "PostionAlais":"pos",
                         "CenterOperations":[
                             {
-                                "$type":"VFVGAVFAF.src.CenterVertical, VFVGAVFAF"
-                            },
-                            {
                                 "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
                             }
                         ]
@@ -688,18 +481,49 @@
         },
         {
             "EnityToJson":{
+                "Tags":["game","text", "first_text"],
                 "Components":[
                     {
-                        "$type":"VFVGAVFAF.src.Components.PlayMusicCom, VFVGAVFAF",
-                        "TimeToComplete":0.0,
-                        "Cooldown":0.0,
-                        "Alias":"music",
-                        "MusicName":"Music\\Kanonische29"
+                        "$type":"VFVGAVFAF.src.Components.Postion2DCom, VFVGAVFAF",
+                        "Postion2D":{
+                            "X":0,
+                            "Y":50
+                        },
+                        "Alias":"pos"
                     },
                     {
-                        "$type":"VFVGAVFAF.src.Components.TriggerEvenetCom, VFVGAVFAF",
-                        "EventAlais":[
-                            "music"
+                        "$type":"VFVGAVFAF.src.Components.TextCom, VFVGAVFAF",
+                        "Alias":"text",
+                        "Value":"SHOOT THE TRAITOR"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.FontRendCom, VFVGAVFAF",
+                        "Alias":"rend",
+                        "PostionAlais":"pos",
+                        "TextAlais":"text",
+                        "Scale":1,
+                        "Color":{
+                            "B":0,
+                            "G":0,
+                            "R":0,
+                            "A":255
+                        },
+                        "FontName":"Fonts/Russian"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.GameBoundsCom, VFVGAVFAF",
+                        "Alias":"game_bounds"
+                    },
+                    {
+                        "$type":"VFVGAVFAF.src.Components.CenterCom, VFVGAVFAF",
+                        "RunsRemaining":1,
+                        "SizeGetterAlais":"rend",
+                        "BoundsAlais":"game_bounds",
+                        "PostionAlais":"pos",
+                        "CenterOperations":[
+                            {
+                                "$type":"VFVGAVFAF.src.CenterHorizontal, VFVGAVFAF"
+                            }
                         ]
                     }
                 ]

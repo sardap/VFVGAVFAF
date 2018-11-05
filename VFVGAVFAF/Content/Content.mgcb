@@ -195,9 +195,15 @@
 /processorParam:Quality=Best
 /build:Sounds/game_failure.wav
 
-#begin Music/background_music_1.ogg
-/importer:OggImporter
+#begin Sounds/clapping.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clapping.wav
+
+#begin Music/background_music_1.mp3
+/importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Music/background_music_1.ogg
+/build:Music/background_music_1.mp3
 

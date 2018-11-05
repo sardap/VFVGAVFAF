@@ -39,6 +39,19 @@ namespace VFVGAVFAF.src.Json
 			throw new KeyNotFoundException();
 		}
 
+		public bool HasAlias(string alias)
+		{
+			foreach (var com in Components)
+			{
+				if (com is IHaveAlias && ((IHaveAlias)com).Alias == alias)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public void PopluateFromEntiy(IEntity entity)
 		{
 			Components = new List<IComponent>();

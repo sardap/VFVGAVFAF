@@ -10,12 +10,14 @@ using VFVGAVFAF.src;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RectRendCom: IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
+	class RectRendCom: IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager, IHaveAlias
 	{
 		private TextureManager _textureManager;
 		private Texture2D _texture;
 
 		public long EntID { get; set; }
+
+		public string Alias { get; set; }
 
 		public string RectPosAlais { get; set; }
 

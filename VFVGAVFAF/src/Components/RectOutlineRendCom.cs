@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class RectOutlineRendCom : IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager
+	class RectOutlineRendCom : IRenderableComponent, INeedEnityManger, INeedSpriteBatch, INeedTextureManager, IHaveAlias
 	{
 		private TextureManager _textureManager;
 		private Texture2D _texture;
 
 		public long EntID { get; set; }
+
+		public string Alias { get; set; }
+
 
 		public string HitBoxAlias { get; set; }
 

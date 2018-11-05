@@ -78,6 +78,12 @@ namespace VFVGAVFAF.src.Components
 
 			hitbox.Postion2D = nextPostion;
 
+			if(nextEntry.HasAlias("move_direction_com"))
+			{
+				var moveDirectionCom = nextEntry.GetbyAlais<MoveDirectionCom>("move_direction_com");
+				moveDirectionCom.Direction = ExitDirection;
+			}
+
 			SenceManger.AddProcessedToMain(GameObjectFactory.AddCreatedGameObject(nextEntry, new List<IPassValue>()));
 		}
 	}

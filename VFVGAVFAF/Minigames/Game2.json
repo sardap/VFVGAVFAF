@@ -141,9 +141,7 @@
         },
          {
             "EnityToJson":{
-                "Tags":["game",
-                    "enemy"
-                ],
+                "Tags":["game", "enemy"],
                 "Components":[
                     {
                         "$type":"VFVGAVFAF.src.Components.RectPosCom, VFVGAVFAF",

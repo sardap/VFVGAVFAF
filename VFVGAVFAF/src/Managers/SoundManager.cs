@@ -28,6 +28,7 @@ namespace VFVGAVFAF.src.Managers
 			MediaPlayer.Volume = _settings.MusicLevel;
 			_song = _content.Load<Song>(id);
 			MediaPlayer.Play(_song);
+			MediaPlayer.IsRepeating = true;
 		}
 
 		public void StopSong()

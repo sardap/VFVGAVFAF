@@ -2527,7 +2527,7 @@
                             {
                                 "$type":"VFVGAVFAF.src.Components.DoubleValueChangeListnerCom+DoubleOpTrigger, VFVGAVFAF",
                                 "Opreator":0,
-                                "Value":-1,
+                                "Value":0,
                                 "GameEvents":[
                                     "failure_reached"
                                 ]

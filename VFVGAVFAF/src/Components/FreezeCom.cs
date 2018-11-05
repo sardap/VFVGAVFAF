@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,10 @@ namespace VFVGAVFAF.src.Components
 
 		public double Cooldown { get; set; }
 
+		[JsonRequired]
 		public string MatchPattern { get; set; }
 
+		[JsonRequired]
 		public List<MangersEnum> Mangers { get; set; }
 
 		public EntityManager EntityManager { get; set; }

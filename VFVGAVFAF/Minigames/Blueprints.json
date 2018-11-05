@@ -20,6 +20,7 @@
                 },
                 {
                     "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
+                    "Alias":"move_direction_com",
                     "PostionAlais":"pos",
                     "Direction":3,
                     "Speed":500
@@ -100,6 +101,7 @@
                 },
                 {
                     "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
+                    "Alias":"move_direction_com",
                     "PostionAlais":"pos",
                     "Direction":2,
                     "Speed":800
@@ -181,6 +183,7 @@
                 },
                 {
                     "$type":"VFVGAVFAF.src.Components.MoveDirectionCom, VFVGAVFAF",
+                    "Alias":"move_direction_com",
                     "PostionAlais":"pos",
                     "Direction":2,
                     "Speed":200

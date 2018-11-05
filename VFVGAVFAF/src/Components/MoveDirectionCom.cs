@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace VFVGAVFAF.src.Components
 {
-	class MoveDirectionCom: IContolerCom, IComponent, INeedEnityManger
+	class MoveDirectionCom: IContolerCom, IComponent, INeedEnityManger, IHaveAlias
 	{
 		public long EntID { get; set; }
+
+		public string Alias { get; set; }
 
 		public string PostionAlais { get; set; }
 
