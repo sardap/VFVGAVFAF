@@ -70,9 +70,9 @@ namespace VFVGAVFAF.src
 
 		public bool VaildToAdd(EnityToJson jsonGameObject)
 		{
-			return jsonGameObject.InstanceLimt == null || 
+			return jsonGameObject.InstanceLimt == null ||
 				!EntityManager.InstanceCount.ContainsKey(jsonGameObject.Alias) ||
-				EntityManager.InstanceCount.ContainsKey(jsonGameObject.Alias) && 
+				EntityManager.InstanceCount.ContainsKey(jsonGameObject.Alias) &&
 				EntityManager.InstanceCount[jsonGameObject.Alias] < jsonGameObject.InstanceLimt;
 		}
 
@@ -89,7 +89,7 @@ namespace VFVGAVFAF.src
 			{
 				gameObject.Alias = jsonGameObject.Alias;
 			}
-					
+
 			var entID = EntityManager.CreateEntity(gameObject);
 			gameObject = EntityManager.GetEntiy<GameObject>(entID);
 
@@ -107,7 +107,7 @@ namespace VFVGAVFAF.src
 
 			var ent = EntityManager.GetEntiy<GameObject>(entID);
 
-			foreach(var entry in passedValues)
+			foreach (var entry in passedValues)
 			{
 				dynamic dCom = ent.GetComponent<IComponent>(entry.TargetAlais);
 				dCom.Value = entry.DValue;
@@ -133,7 +133,7 @@ namespace VFVGAVFAF.src
 				gameObject.RegsiterToManager(comID, ColssionManger);
 			}
 
-			if(component is IStepCom)
+			if (component is IStepCom)
 			{
 				gameObject.RegsiterToManager(comID, StepManager);
 			}
@@ -156,12 +156,12 @@ namespace VFVGAVFAF.src
 				((INeedTextureManager)component).TextureManager = TextureManager;
 			}
 
-			if(component is INeedSoundManger)
+			if (component is INeedSoundManger)
 			{
 				((INeedSoundManger)component).SoundManager = SoundManager;
 			}
 
-			if(component is INeedPostMaster)
+			if (component is INeedPostMaster)
 			{
 				((INeedPostMaster)component).GameEvenetPostMaster = GameEvenetPostMaster;
 			}
@@ -171,7 +171,7 @@ namespace VFVGAVFAF.src
 				((INeedSenceManger)component).SenceManger = SenceManger;
 			}
 
-			if(component is INeedFontManager)
+			if (component is INeedFontManager)
 			{
 				((INeedFontManager)component).FontManger = FontManger;
 			}
@@ -216,376 +216,12 @@ namespace VFVGAVFAF.src
 
 		private void AddressNeedsAndMangers(GameObject gameObject)
 		{
-			gameObject.GetComponents.ForEach(i => 
+			gameObject.GetComponents.ForEach(i =>
 			{
 				AddressNeeds(i.Item2);
 				RegsiterToMangers(gameObject, i.Item2, i.Item1);
 				i.Item2.EntID = gameObject.GetID;
 			});
-		}
-
-		public List<IComponent> CreateMusicEnt()
-		{
-			var result = new List<IComponent>();
-
-			result.Add(new PlayMusicCom()
-			{
-				Alias = "music",
-				MusicName = Music.FirstSong
-			});
-
-			result.Add(new TriggerEvenetCom()
-			{
-				EventAlais = new List<string>() { "music" }
-			});
-
-			return result;
-		}
-
-		public List<IComponent> CreateTestSqaure()
-		{
-			var result = new List<IComponent>();
-
-			Rectangle rectangle = new Rectangle(0, 0, 100, 100);
-
-			result.Add(new RectPosCom(rectangle)
-			{
-				Alias = "pos",
-				PostionConstrantComs = new List<string> { "gameBoundsConstrant" }
-			});
-
-			result.Add(new RectRendCom()
-			{
-				TextureName = Textures.BLOCK,
-				Color = Color.Black,
-				RectPosAlais = "pos",
-			});
-
-			result.Add(new KeyboardInputCom()
-			{
-				RectPosAlais = "pos",
-				Speed = 500
-			});
-
-			result.Add(new RectPosCom(new Rectangle(0, 0, 800, 600))
-			{
-				Alias = "gameBounds"
-			});
-
-			result.Add(new RectConstrantCom()
-			{
-				Alias = "gameBoundsConstrant",
-				RectPosAlais = "gameBounds",
-				Inside = true
-			});
-
-			result.Add(new PlaySoundEventCom()
-			{
-				Alias = "damageSound",
-				Song = Sounds.DAMAGE_TAKEN
-			});
-
-			result.Add(new PlaySoundEventCom()
-			{
-				Alias = "respawnSound",
-				Song = Sounds.PLAYER_RESPAWN
-			});
-
-			result.Add(new HealthCom()
-			{
-				HP = 100,
-				StartingHP = 100,
-				MaxHP = 100,
-				Evenets = new List<HealthCom.IHPTrigger>()
-				{
-					new HealthCom.HPChangeTrigger
-					{
-						GameEvents = new List<string> { "damageSound" }
-					},
-					new HealthCom.HPOpTrigger
-					{
-						Opreator = HealthCom.HPOps.Less,
-						Value = 0,
-						GameEvents = new List<string> { "respawn", "respawnSound" }
-					}
-				}
-			});
-
-			result.Add(new RespawnCom()
-			{
-				Alias = "respawn",
-				PosComAlais = "pos"
-			});
-
-			result.Add(new RectCollisionCom()
-			{
-				RectPosAlais = "pos",
-			});
-
-			return result;
-		}
-
-		public List<IComponent> CreateTestEnemy()
-		{
-			var result = new List<IComponent>();
-
-			Rectangle rectangle = new Rectangle(50, 50, 150, 50);
-
-			result.Add(new RectPosCom(rectangle)
-			{
-				Alias = "pos",
-				PostionConstrantComs = new List<string> { "gameBoundsConstrant" },
-				RandomStartPos = true
-			});
-
-			result.Add(new RectRendCom()
-			{
-				TextureName = Textures.BLOCK,
-				Color = Color.Aqua,
-				RectPosAlais = "pos",
-			});
-
-			result.Add(new PatrolContorlerCom()
-			{
-				PosAlais = "pos",
-				Alias = "directionCom",
-				Radius = 30,
-				Speed = 100,
-				Start = new Postion2D(200, 0),
-				End = new Postion2D(200, 500)
-			});
-
-			result.Add(new RectPosCom(new Rectangle(0, 0, 800, 600))
-			{
-				Alias = "gameBounds"
-			});
-
-			result.Add(new RectConstrantCom()
-			{
-				Alias = "gameBoundsConstrant",
-				RectPosAlais = "gameBounds",
-				Inside = true
-			});
-
-			result.Add(new DamageCom()
-			{
-				Alias = "damage",
-				Damage = -10,
-				TimeToComplete = 0,
-				Cooldown = 0.5
-			});
-
-			result.Add(new RectCollisionCom()
-			{
-				RectPosAlais = "pos",
-				GameEventComs = new Dictionary<string, List<string>>() { { "Fuckyou", new List<string>() { "damage" } } }
-			});
-
-			return result;
-		}
-
-		private long _healthComID;
-		private long _playerColsionCom;
-		private long _speed = 50;
-		private int _damage = -10;
-		private Rectangle _nextRectSize;
-		private Rectangle _bounds = new Rectangle(0, 0, 800, 600);
-
-		private long CreateEnemeySqaure()
-		{
-			/*
-			_nextRectSize = new Paultangle(Utils.RandomPostionInBounds(_bounds), 25, 25).ToMonoGameRectangle();
-
-			var entID = CreateSqaure(_nextRectSize);
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
-
-			var gameBoundsComID = gameObject.AddComponent(new RectPosCom(entID, EntityManager, _bounds));
-
-			var constrantID = gameObject.AddComponent(
-				new RectConstrantCom(entID, EntityManager, gameBoundsComID)
-				{
-					Inside = true
-				}
-			);
-
-			var posComID = gameObject.GetFirstComponentID<RectPosCom>();
-
-			var posCom = ComponentManager.GetComponent<RectPosCom>(posComID);
-			posCom.PostionConstrantComs.Add(constrantID);
-
-			var col = new RectCollisionCom(entID, EntityManager, GameEvenetPostMaster, posComID)
-			{
-				GameEventComs = new List<long>()
-				{
-					gameObject.AddComponent
-					(
-						new DamageCom(EntityManager, _healthComID)
-						{
-							Damage = _damage,
-							TimeToComplete = 0,
-							Cooldown = 0.5
-						}
-					)
-				}
-			};
-			var colID = gameObject.AddComponent(col);
-			gameObject.RegsiterToManager(colID, ColssionManger);
-
-			var contID = gameObject.AddComponent
-			(
-				new RandomMovementContolerCom(entID, EntityManager, posComID)
-				{
-					Speed = _speed
-				}
-			);
-
-			gameObject.RegsiterToManager(contID, InputManger);
-
-			return entID;
-			*/
-			throw new NotImplementedException();
-		}
-
-		private long CreateSqaureGoal()
-		{
-			/*
-			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
-
-			var rectConstBoxID = gameObject.AddComponent(
-				new RectPosCom(entID, EntityManager, new Rectangle(0, 0, 300, 600))
-			);
-
-			var screenBoundsID = gameObject.AddComponent(
-				new RectPosCom(entID, EntityManager, new Rectangle(0, 0, 400, 600))
-			);
-
-			var rectRendConstrant = gameObject.AddComponent(
-				new RectOutlineRendCom(entID, EntityManager, rectConstBoxID)
-				{
-					Texture = TextureManager.GetTexture(Textures.BLOCK, Color.Green),
-					SpriteBatch = SpriteBatch,
-					Color = Color.Green,
-					LineWidth = 1
-				}
-			);
-			gameObject.RegsiterToManager(rectRendConstrant, RenderManager);
-
-			var rectPos = new RectPosCom(entID, EntityManager, new Rectangle(300, 100, 20, 20));
-			rectPos.PostionConstrantComs.Add(gameObject.AddComponent(
-				new RectConstrantCom(entID, EntityManager, rectConstBoxID)
-				{
-					Inside = false,
-					Type = RectConstrantCom.CheckType.Overlapping
-				}
-			));
-			rectPos.PostionConstrantComs.Add(gameObject.AddComponent(
-				new RectConstrantCom(entID, EntityManager, screenBoundsID)
-				{
-					Inside = true
-				}
-			));
-			var rectPosID = gameObject.AddComponent(rectPos);
-
-			var rectRend = new RectRendCom(EntityManager, rectPosID)
-			{
-				TextureName = Textures.BLOCK,
-				Color = Color.Red,
-				TextureManager = TextureManager,
-				SpriteBatch = SpriteBatch
-			};
-			long rectRendID = gameObject.AddComponent(rectRend);
-			gameObject.RegsiterToManager(rectRendID, RenderManager);
-
-			long gameEvenetID = gameObject.AddComponent(new GoalReachedCom(entID));
-
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(entID, EntityManager, GameEvenetPostMaster, rectPosID)
-			{
-				GameEventComs = new List<long>() { gameEvenetID, gameObject.AddComponent(new LoadMiniGameCom(entID, SenceManger, new SenceData())) }
-			});
-			gameObject.RegsiterToManager(colssionComID, ColssionManger);
-
-			var goalContComID = gameObject.AddComponent
-			(
-				new RandomMovementContolerCom(entID, EntityManager, rectPosID)
-				{
-					Speed = 1000
-				}
-			);
-			gameObject.RegsiterToManager(goalContComID, InputManger);
-
-			return entID;
-		}
-
-		private long CreateSqaurePlayer()
-		{
-			var entID = EntityManager.CreateEntity(new GameObject(ComponentManager));
-			var gameObject = EntityManager.GetEntiy<GameObject>(entID);
-
-			var gameRectPosID = gameObject.AddComponent(new RectPosCom(entID, EntityManager, new Rectangle(0, 0, 800, 600)));
-
-			var constrantID = gameObject.AddComponent(
-			new RectConstrantCom(entID, EntityManager, gameRectPosID)
-			{
-				Inside = true
-			}
-			);
-
-			var rectPos = new RectPosCom(entID, EntityManager, new Rectangle(100, 100, 100, 100));
-
-			rectPos.PostionConstrantComs.Add(constrantID);
-			var rectPosID = gameObject.AddComponent(rectPos);
-
-			var rectRend = new RectRendCom(EntityManager, rectPosID)
-			{
-				TextureName = Textures.BLOCK,
-				Color = Color.Black,
-				TextureManager = TextureManager,
-				SpriteBatch = SpriteBatch
-			};
-			long rectRendID = gameObject.AddComponent(rectRend);
-			gameObject.RegsiterToManager(rectRendID, RenderManager);
-
-			var inputCom = new KeyboardInputCom(entID, EntityManager);
-			long inputComID = gameObject.AddComponent(inputCom);
-			gameObject.RegsiterToManager(inputComID, InputManger);
-
-			var colssionComID = gameObject.AddComponent(new RectCollisionCom(entID, EntityManager, GameEvenetPostMaster, rectPosID));
-			gameObject.RegsiterToManager(colssionComID, ColssionManger);
-			_playerColsionCom = colssionComID;
-
-			var playerHPCom = gameObject.AddComponent
-			(
-				new HealthCom(entID, GameEvenetPostMaster, 100, 100, 100)
-			);
-			gameObject.RegsiterToManager(playerHPCom, StepManager);
-			_healthComID = playerHPCom;
-
-			var respwanComID = gameObject.AddComponent(new RespawnCom(entID, EntityManager, rectPosID));
-			var respawnSoundComID = gameObject.AddComponent(new PlaySoundEventCom(SoundManager, Songs.PLAYER_RESPAWN));
-
-			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
-				new HealthCom.HPOpTrigger()
-				{
-					Opreator = HealthCom.HPOps.Less,
-					Value = 0,
-					GameEvents = new List<long>() { respwanComID, respawnSoundComID }
-				}
-			);
-
-			var soundCom = gameObject.AddComponent(new PlaySoundEventCom(SoundManager, Songs.DAMAGE_TAKEN));
-
-			ComponentManager.GetComponent<HealthCom>(playerHPCom).Evenets.Add(
-				new HealthCom.HPChangeTrigger()
-				{
-					GameEvents = new List<long>() { soundCom }
-				}
-			);
-
-
-			return entID;
-			*/
-			throw new NotImplementedException();
 		}
 	}
 }
